@@ -214,16 +214,23 @@ document.addEventListener("site:ready", function (e) {
     return '<div class="cert reveal"><strong>' + A.esc(c.code) + "</strong><span>" + A.esc(c.name) + "</span></div>";
   }).join("");
 
-  /* verify */
+  /* verify — โชว์บัตรตัวแทนจริงถ้ามี ไม่งั้นใช้ไอคอน */
+  var proof = s.business.authorizedProof
+    ? '<div class="verify__card"><img src="' + A.esc(s.business.authorizedProof) +
+        '" alt="บัตรตัวแทนจำหน่ายอย่างเป็นทางการ ' + A.esc(s.brand.name) + '" loading="lazy">' +
+        (s.business.distributorId ? '<span class="verify__id">รหัสตัวแทน ' + A.esc(s.business.distributorId) + "</span>" : "") +
+      "</div>"
+    : '<div class="verify__seal">🛡️</div>';
   A.$("#verify").innerHTML =
-    '<div class="verify__seal">🛡️</div><div>' +
-      "<h2 style='margin-bottom:4px'>ยืนยันการเป็นตัวแทนจำหน่าย</h2>" +
-      "<p style='margin:0;color:var(--ink-soft)'>เราจดทะเบียนถูกต้อง และได้รับแต่งตั้งจากผู้ผลิตโดยตรง คุณตรวจสอบเราได้ทุกข้อมูล</p>" +
+    proof + "<div>" +
+      "<span class='eyebrow'>ตรวจสอบได้จริง</span>" +
+      "<h2 style='margin:0 0 6px'>ตัวแทนจำหน่ายอย่างเป็นทางการ</h2>" +
+      "<p style='margin:0 0 6px;color:var(--ink-soft)'>เราจดทะเบียนถูกต้อง และได้รับการแต่งตั้งเป็นตัวแทนจำหน่ายโดยตรงจากบริษัทผู้ผลิต — ทุกข้อมูลตรวจสอบได้</p>" +
       "<dl>" +
         "<div><dt>ชื่อนิติบุคคล</dt><dd>" + A.esc(s.business.legalName) + "</dd></div>" +
-        "<div><dt>เลขทะเบียนพาณิชย์</dt><dd>" + A.esc(s.business.regNo) + "</dd></div>" +
         "<div><dt>เลขผู้เสียภาษี</dt><dd>" + A.esc(s.business.taxId) + "</dd></div>" +
         "<div><dt>โทรศัพท์</dt><dd>" + A.esc(s.contact.phone) + "</dd></div>" +
+        "<div><dt>เวลาทำการ</dt><dd>" + A.esc(s.contact.openHours) + "</dd></div>" +
       "</dl></div>";
 
   /* reviews */
