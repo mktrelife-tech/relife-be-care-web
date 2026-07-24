@@ -37,7 +37,7 @@ document.addEventListener("site:ready", function (e) {
     "<div class='co-grand'><span>ยอดที่ต้องชำระ</span><b>฿" + A.baht(grand) + "</b></div>";
 
   A.$("#coTrust").innerHTML =
-    "<span>✓ ของแท้ 100%</span><span>✓ " + A.esc(s.shipping.leadTime) + "</span><span>✓ เปลี่ยน/คืนได้ 7 วัน</span>";
+    "<span>✓ สินค้าตรงปก</span><span>✓ " + A.esc(s.shipping.leadTime) + "</span><span>✓ เปลี่ยน/คืนได้ 7 วัน</span>";
   A.$("#codTotal").textContent = "฿" + A.baht(grand);
 
   /* ---------- ข้อมูลบัญชีธนาคาร ---------- */

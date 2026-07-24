@@ -106,7 +106,7 @@
     } else if (s.promo && s.promo.active) {
       promoInner = "<span>" + esc(s.promo.text) + "</span>";
     } else {
-      promoInner = "<span>✓ ตัวแทนจำหน่ายอย่างเป็นทางการ · สินค้าของแท้ มีเลข อย. ทุกรายการ</span>";
+      promoInner = "<span>✓ ตัวแทนจำหน่ายอย่างเป็นทางการ · สินค้าตรงปก มีเลข อย. ทุกรายการ</span>";
     }
     const promo = '<div class="topbar__promo">' + promoInner +
       (s.promo && s.promo.active && s.promo.link
