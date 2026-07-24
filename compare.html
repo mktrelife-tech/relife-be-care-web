@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>เปรียบเทียบสินค้าทุกตัว — Hopeful Wellness</title>
+<meta name="description" content="ตารางเปรียบเทียบผลิตภัณฑ์เสริมอาหารทุกรายการ ราคา ปริมาณบรรจุ เลข อย. และเหมาะกับใคร ดูครบในหน้าเดียว">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@400;500;600;700&family=Prompt:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+<div id="site-header"></div>
+<div class="wrap crumb"><a href="index.html">หน้าแรก</a> / เปรียบเทียบสินค้า</div>
+
+<section class="section section--tight">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">ดูให้ครบก่อนตัดสินใจ</span>
+      <h1 style="font-size:clamp(1.8rem,4vw,2.6rem)">เปรียบเทียบทุกตัว ในหน้าเดียว</h1>
+      <p>เลื่อนตารางไปทางขวาเพื่อดูสินค้าทั้งหมด — บนมือถือใช้นิ้วปัดได้เลย</p>
+    </div>
+    <div class="table-scroll"><table class="compare" id="cmp"></table></div>
+    <p style="font-size:.85rem;color:var(--ink-faint);margin-top:16px">
+      ข้อมูลทั้งหมดอ้างอิงตามฉลากผลิตภัณฑ์ · ผลิตภัณฑ์เสริมอาหารไม่มีผลในการป้องกันหรือรักษาโรค
+    </p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap center">
+    <h2>ยังเลือกไม่ถูก?</h2>
+    <p style="color:var(--ink-soft);margin-bottom:24px">ตอบคำถาม 5 ข้อ แล้วให้เราแนะนำตัวที่ตรงกับคุณที่สุด</p>
+    <a class="btn btn--primary btn--lg" href="quiz.html">เริ่มแบบประเมิน</a>
+  </div>
+</section>
+
+<div id="site-footer"></div>
+<script src="assets/js/app.js"></script>
+<script>
+document.addEventListener("site:ready", function (e) {
+  var S = e.detail, A = window.App, P = S.products;
+  var rows = [
+    ["ราคา",        function (p) { return "<b style='color:var(--brand-dark)'>฿" + A.baht(p.price) + "</b>"; }],
+    ["ปริมาณบรรจุ", function (p) { return A.esc(p.unit); }],
+    ["เลข อย.",     function (p) { return A.esc(p.fda); }],
+    ["จุดเด่น",     function (p) { return A.esc(p.tagline); }],
+    ["เหมาะกับ",    function (p) { return A.esc(p.forWho); }],
+    ["วิธีทาน",     function (p) { return A.esc(p.howto); }],
+    ["",            function (p) { return '<a class="btn btn--primary btn--sm" href="p/' + A.esc(p.slug) + '.html">ดูรายละเอียด</a>'; }]
+  ];
+  A.$("#cmp").innerHTML =
+    "<thead><tr><th style='min-width:130px'></th>" +
+      P.map(function (p) { return "<th style='min-width:210px'>" + A.esc(p.name) + "</th>"; }).join("") +
+    "</tr></thead><tbody>" +
+      rows.map(function (r) {
+        return "<tr><th>" + r[0] + "</th>" + P.map(function (p) { return "<td>" + r[1](p) + "</td>"; }).join("") + "</tr>";
+      }).join("") +
+    "</tbody>";
+});
+</script>
+</body>
+</html>

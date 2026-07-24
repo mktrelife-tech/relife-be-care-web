@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ตัวไหนเหมาะกับคุณ — แบบประเมิน 1 นาที | Hopeful Wellness</title>
+<meta name="description" content="ตอบคำถามสั้น ๆ 5 ข้อ แล้วเราจะแนะนำผลิตภัณฑ์เสริมอาหารที่ตรงกับสิ่งที่คุณกำลังดูแลมากที่สุด ไม่ต้องกรอกเบอร์ ไม่ต้องสมัครสมาชิก">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@400;500;600;700&family=Prompt:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+<div id="site-header"></div>
+<div class="wrap crumb"><a href="index.html">หน้าแรก</a> / แบบประเมิน</div>
+
+<section class="section section--tight">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">ใช้เวลาไม่ถึง 1 นาที</span>
+      <h1 style="font-size:clamp(1.7rem,3.6vw,2.4rem)">ตัวไหนเหมาะกับคุณ?</h1>
+      <p>คำแนะนำนี้เป็นข้อมูลเบื้องต้นเพื่อช่วยเลือกผลิตภัณฑ์ ไม่ใช่คำวินิจฉัยทางการแพทย์</p>
+    </div>
+    <div class="quiz" id="quiz"></div>
+  </div>
+</section>
+
+<div id="site-footer"></div>
+<script src="assets/js/app.js"></script>
+<script>
+document.addEventListener("site:ready", function (e) {
+  var S = e.detail, A = window.App, box = A.$("#quiz");
+
+  /* แก้ไขคำถาม/น้ำหนักคะแนนได้ที่นี่ — slug ต้องตรงกับใน content/products.json */
+  var QS = [
+    { q: "คุณกำลังหาผลิตภัณฑ์ให้ใคร",
+      opts: [
+        { t: "คุณพ่อคุณแม่ / ผู้สูงอายุในบ้าน", s: { "beta-oil": 2, "beta-life": 2 } },
+        { t: "ตัวเอง อายุ 40 ปีขึ้นไป",        s: { "beta-oil": 2, "betax-plus": 1 } },
+        { t: "ตัวเอง อายุต่ำกว่า 40 ปี",        s: { "lab-farm": 2, "betaherb": 1 } },
+        { t: "คนในครอบครัวที่ทำงานหนัก",        s: { "lab-farm": 2, "betax-plus": 1 } }
+      ] },
+    { q: "เรื่องไหนที่คุณเป็นห่วงมากที่สุดตอนนี้",
+      opts: [
+        { t: "ผลตรวจไขมันในเลือด",       s: { "beta-oil": 3 } },
+        { t: "การทำงานของไต / ระบบขับของเสีย", s: { "beta-life": 3 } },
+        { t: "ป่วยง่าย ภูมิคุ้มกันตก",     s: { "lab-farm": 3 } },
+        { t: "อ่อนเพลีย ไม่มีแรง",         s: { "betax-plus": 2, "betaherb": 2 } }
+      ] },
+    { q: "พฤติกรรมการกินในชีวิตประจำวันเป็นแบบไหน",
+      opts: [
+        { t: "ชอบของทอด ของมัน",           s: { "beta-oil": 2 } },
+        { t: "กินเค็ม ดื่มน้ำน้อย",         s: { "beta-life": 2 } },
+        { t: "กินไม่ตรงเวลา อาหารไม่ครบหมู่", s: { "lab-farm": 1, "betax-plus": 2 } },
+        { t: "ดูแลเรื่องอาหารดีอยู่แล้ว",   s: { "betaherb": 1, "lab-farm": 1 } }
+      ] },
+    { q: "การนอนและความเครียดเป็นอย่างไร",
+      opts: [
+        { t: "นอนน้อย พักผ่อนไม่พอบ่อย ๆ", s: { "lab-farm": 2, "betax-plus": 1 } },
+        { t: "เครียดจากงานเป็นประจำ",       s: { "betaherb": 2, "lab-farm": 1 } },
+        { t: "นอนหลับดี ไม่ค่อยเครียด",     s: { "beta-oil": 1 } },
+        { t: "หลับ ๆ ตื่น ๆ ตอนกลางคืน",    s: { "betaherb": 2 } }
+      ] },
+    { q: "งบประมาณต่อเดือนที่สะดวก",
+      opts: [
+        { t: "ไม่เกิน 700 บาท",  s: { "betaherb": 2 } },
+        { t: "700 - 900 บาท",   s: { "betax-plus": 2, "lab-farm": 2 } },
+        { t: "900 บาทขึ้นไป",    s: { "beta-oil": 2, "beta-life": 2 } },
+        { t: "ไม่จำกัด ขอที่เหมาะที่สุด", s: {} }
+      ] }
+  ];
+
+  var step = 0, score = {};
+
+  function render() {
+    if (step >= QS.length) return result();
+    var q = QS[step];
+    box.innerHTML =
+      '<div class="quiz__bar"><i style="width:' + (step / QS.length * 100) + '%"></i></div>' +
+      "<p style='color:var(--ink-faint);font-size:.86rem;margin:0'>คำถามที่ " + (step + 1) + " จาก " + QS.length + "</p>" +
+      "<h2 style='font-size:clamp(1.2rem,2.6vw,1.6rem);margin:6px 0 0'>" + A.esc(q.q) + "</h2>" +
+      '<div class="quiz__opts">' + q.opts.map(function (o, i) {
+        return '<button class="quiz__opt" data-i="' + i + '">' + A.esc(o.t) + "</button>";
+      }).join("") + "</div>" +
+      (step > 0 ? '<button id="back" style="margin-top:18px;color:var(--ink-faint);font-size:.88rem">← ย้อนกลับ</button>' : "");
+
+    A.$$(".quiz__opt", box).forEach(function (b) {
+      b.addEventListener("click", function () {
+        var s = q.opts[+b.dataset.i].s || {};
+        Object.keys(s).forEach(function (k) { score[k] = (score[k] || 0) + s[k]; });
+        step++; render();
+      });
+    });
+    var back = A.$("#back");
+    if (back) back.addEventListener("click", function () { step--; score = {}; step = 0; render(); });
+  }
+
+  function result() {
+    var ranked = S.products.slice().sort(function (a, b) { return (score[b.slug] || 0) - (score[a.slug] || 0); });
+    var top = ranked[0], second = ranked[1];
+    box.innerHTML =
+      '<div class="quiz__bar"><i style="width:100%"></i></div>' +
+      "<span class='eyebrow'>คำแนะนำสำหรับคุณ</span>" +
+      "<h2 style='margin-bottom:4px'>" + A.esc(top.name) + "</h2>" +
+      "<p style='color:var(--ink-soft)'>" + A.esc(top.tagline) + "</p>" +
+      "<div style='display:grid;grid-template-columns:150px 1fr;gap:20px;align-items:center;background:var(--cream);border-radius:var(--r-lg);padding:18px;margin:20px 0'>" +
+        "<div>" + A.productImg(top) + "</div>" +
+        "<div><p style='margin:0 0 8px;font-size:.92rem'>" + A.esc(top.short) + "</p>" +
+          "<div class='price'>฿" + A.baht(top.price) + " <small>/ " + A.esc(top.unit) + "</small></div></div>" +
+      "</div>" +
+      "<div style='display:flex;gap:12px;flex-wrap:wrap'>" +
+        '<a class="btn btn--primary btn--lg" href="p/' + A.esc(top.slug) + '.html">ดูรายละเอียด</a>' +
+        '<button class="btn btn--ghost btn--lg" data-add="' + A.esc(top.slug) + '">ใส่ตะกร้าเลย</button>' +
+        '<a class="btn btn--line btn--lg" href="' + A.esc(S.site.contact.lineUrl) + '" target="_blank" rel="noopener">ปรึกษาก่อน</a>' +
+      "</div>" +
+      "<p style='margin-top:26px;font-size:.9rem;color:var(--ink-soft)'>ตัวเลือกรองที่น่าสนใจ: <a href='p/" + A.esc(second.slug) + ".html' style='color:var(--brand-dark);font-weight:600'>" + A.esc(second.name) + "</a></p>" +
+      "<p style='font-size:.82rem;color:var(--ink-faint);border-top:1px solid var(--sand);padding-top:16px;margin-top:20px'>" +
+        "คำแนะนำนี้อ้างอิงจากคำตอบของคุณเท่านั้น ไม่ใช่การวินิจฉัยทางการแพทย์ หากมีโรคประจำตัวหรือทานยาประจำ ควรปรึกษาแพทย์หรือเภสัชกรก่อนรับประทาน</p>" +
+      "<button id='again' style='margin-top:14px;color:var(--ink-faint);font-size:.88rem'>↺ ทำแบบประเมินใหม่</button>";
+    A.bindAddButtons(box);
+    A.$("#again").addEventListener("click", function () { step = 0; score = {}; render(); });
+  }
+
+  render();
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,10 @@
+# ให้ไฟล์ข้อความเป็น LF สม่ำเสมอ (Netlify build รันบน Linux)
+* text=auto eol=lf
+# ไฟล์ PowerShell ใช้บน Windows — คง CRLF
+*.ps1 text eol=crlf
+# ไฟล์ไบนารีไม่ต้องแปลง
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.webp binary
+*.ico binary

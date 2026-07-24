@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>บทความ — Hopeful Wellness</title>
+<meta name="description" content="บทความความรู้สุขภาพจาก Hopeful Wellness">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@400;500;600;700&family=Prompt:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+<div id="site-header"></div>
+<div class="wrap crumb"><a href="index.html">หน้าแรก</a> / <a href="articles.html">บทความ</a></div>
+
+<article class="section section--tight">
+  <div class="wrap" style="max-width:760px">
+    <div id="post"></div>
+    <div style="border-top:1px solid var(--sand);margin-top:40px;padding-top:24px">
+      <p style="font-size:.85rem;color:var(--ink-faint)">
+        บทความนี้มีวัตถุประสงค์เพื่อให้ความรู้ทั่วไปเท่านั้น ไม่ใช่คำแนะนำทางการแพทย์
+        หากมีข้อสงสัยเกี่ยวกับสุขภาพ ควรปรึกษาแพทย์หรือเภสัชกร
+      </p>
+    </div>
+  </div>
+</article>
+
+<section class="section section--sand">
+  <div class="wrap">
+    <div class="sec-head"><h2>บทความอื่น</h2></div>
+    <div class="articles" id="more"></div>
+  </div>
+</section>
+
+<div id="site-footer"></div>
+<script src="assets/js/app.js"></script>
+<script>
+document.addEventListener("site:ready", function (e) {
+  var S = e.detail, A = window.App;
+  var slug = new URLSearchParams(location.search).get("slug");
+  var a = S.articles.filter(function (x) { return x.slug === slug; })[0] || S.articles[0];
+  if (!a) { A.$("#post").innerHTML = "<p>ไม่พบบทความ</p>"; return; }
+
+  document.title = a.title + " — " + S.site.brand.name;
+  var md = document.querySelector('meta[name="description"]');
+  if (md) md.setAttribute("content", a.excerpt);
+
+  /* แปลง Markdown แบบง่าย (หัวข้อ / ตัวหนา / รายการ / ย่อหน้า) */
+  function mdToHtml(src) {
+    return String(src || "").split(/\n{2,}/).map(function (blk) {
+      blk = A.esc(blk.trim());
+      if (!blk) return "";
+      if (/^### /.test(blk)) return "<h3>" + blk.replace(/^### /, "") + "</h3>";
+      if (/^## /.test(blk))  return "<h2>" + blk.replace(/^## /, "") + "</h2>";
+      if (/^[-*] /m.test(blk)) {
+        return "<ul>" + blk.split("\n").map(function (l) {
+          return "<li>" + l.replace(/^[-*]\s*/, "") + "</li>";
+        }).join("") + "</ul>";
+      }
+      return "<p>" + blk.replace(/\n/g, "<br>") + "</p>";
+    }).join("").replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>");
+  }
+
+  A.$("#post").innerHTML =
+    "<span class='eyebrow'>" + A.esc(a.category) + "</span>" +
+    "<h1 style='font-size:clamp(1.7rem,3.8vw,2.5rem)'>" + A.esc(a.title) + "</h1>" +
+    "<p style='color:var(--ink-faint);font-size:.88rem'>เผยแพร่ " + A.esc(a.date) + "</p>" +
+    (a.cover ? '<img src="' + A.esc(a.cover) + '" alt="" style="border-radius:var(--r-lg);margin:22px 0">'
+             : '<div class="ph" style="aspect-ratio:16/9;margin:22px 0" data-label="ภาพปกบทความ 1200×675px"></div>') +
+    "<p style='font-size:1.08rem;color:var(--ink-soft)'>" + A.esc(a.excerpt) + "</p>" +
+    "<div style='font-size:1.02rem'>" + mdToHtml(a.body) + "</div>";
+
+  A.$("#more").innerHTML = S.articles.filter(function (x) { return x.slug !== a.slug; }).map(function (x) {
+    return '<a class="article-card" href="article.html?slug=' + encodeURIComponent(x.slug) + '">' +
+      '<div class="article-card__media"><div class="ph" style="height:100%" data-label="ภาพประกอบ"></div></div>' +
+      '<div class="article-card__body"><span class="article-card__cat">' + A.esc(x.category) + "</span>" +
+      "<h3>" + A.esc(x.title) + "</h3></div></a>";
+  }).join("");
+});
+</script>
+</body>
+</html>

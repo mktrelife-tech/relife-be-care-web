@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>การจัดส่ง การคืนสินค้า และนโยบายความเป็นส่วนตัว — Hopeful Wellness</title>
+<meta name="description" content="เงื่อนไขการสั่งซื้อ การจัดส่ง การคืนสินค้า และนโยบายความเป็นส่วนตัวตาม PDPA">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@400;500;600;700&family=Prompt:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+<div id="site-header"></div>
+<div class="wrap crumb"><a href="index.html">หน้าแรก</a> / นโยบาย</div>
+
+<section class="section section--tight">
+  <div class="wrap" style="max-width:800px">
+    <h1 style="font-size:clamp(1.7rem,3.6vw,2.4rem)">เงื่อนไขและนโยบาย</h1>
+
+    <h2 id="shipping">การจัดส่ง</h2>
+    <ul id="shipList"></ul>
+
+    <h2 id="payment">การชำระเงิน</h2>
+    <ul id="payList"></ul>
+    <table class="spec" id="bank"></table>
+
+    <h2 id="return">การเปลี่ยน / คืนสินค้า</h2>
+    <ul>
+      <li>สินค้าที่ยังไม่แกะซีล คืนได้ภายใน 7 วันนับจากวันที่ได้รับสินค้า</li>
+      <li>กรณีได้รับสินค้าผิด ชำรุด หรือใกล้หมดอายุผิดปกติ เราเปลี่ยนใหม่ให้ทันทีโดยไม่มีค่าใช้จ่าย</li>
+      <li>กรุณาถ่ายวิดีโอตอนแกะพัสดุไว้ เพื่อความรวดเร็วในการเคลม</li>
+      <li>ติดต่อแจ้งเรื่องทาง LINE พร้อมเลขออเดอร์และรูปถ่ายสินค้า</li>
+    </ul>
+
+    <h2 id="privacy">นโยบายความเป็นส่วนตัว (PDPA)</h2>
+    <p>เราเก็บข้อมูลของคุณเท่าที่จำเป็นต่อการจัดส่งสินค้าและติดต่อกลับเท่านั้น ได้แก่ ชื่อ เบอร์โทรศัพท์ และที่อยู่จัดส่ง</p>
+    <ul>
+      <li>เว็บไซต์นี้เป็นเว็บไซต์แบบสถิต ไม่มีการเก็บข้อมูลของคุณลงฐานข้อมูลของเว็บ ข้อมูลที่คุณกรอกจะถูกส่งผ่านแอป LINE โดยตรงถึงทีมงาน</li>
+      <li>สินค้าที่คุณใส่ในตะกร้าถูกเก็บไว้ในเบราว์เซอร์ของคุณเองเท่านั้น (localStorage) ไม่ถูกส่งไปที่ใด</li>
+      <li>เราไม่ขายหรือส่งต่อข้อมูลของคุณให้บุคคลที่สามเพื่อการตลาด</li>
+      <li>คุณมีสิทธิ์ขอดู แก้ไข หรือขอให้ลบข้อมูลของคุณได้ โดยแจ้งมาที่ช่องทางติดต่อของเรา</li>
+      <li>[[ หากติดตั้ง Facebook Pixel หรือ Google Analytics ต้องระบุเพิ่มตรงนี้ว่ามีการใช้คุกกี้เพื่อการวิเคราะห์และโฆษณา ]]</li>
+    </ul>
+
+    <h2>ข้อจำกัดความรับผิดชอบ</h2>
+    <p id="disc" style="color:var(--ink-soft)"></p>
+    <p style="color:var(--ink-soft)">
+      ข้อมูลบนเว็บไซต์นี้มีวัตถุประสงค์เพื่อให้ความรู้ทั่วไปเกี่ยวกับผลิตภัณฑ์เท่านั้น
+      ไม่ใช่คำแนะนำทางการแพทย์ และไม่สามารถใช้ทดแทนการปรึกษาแพทย์หรือเภสัชกรได้
+      ผู้ที่มีโรคประจำตัว สตรีมีครรภ์ หรืออยู่ระหว่างการรักษา ควรปรึกษาแพทย์ก่อนรับประทานผลิตภัณฑ์เสริมอาหารทุกชนิด
+    </p>
+  </div>
+</section>
+
+<div id="site-footer"></div>
+<script src="assets/js/app.js"></script>
+<script>
+document.addEventListener("site:ready", function (e) {
+  var s = e.detail.site, A = window.App;
+  A.$("#shipList").innerHTML =
+    "<li>จัดส่งโดย " + A.esc(s.shipping.carriers) + "</li>" +
+    (s.shipping.fee === 0
+      ? "<li><b>ส่งฟรีทั่วไทย ทุกยอดสั่งซื้อ</b> ไม่มีขั้นต่ำ</li>"
+      : "<li>ค่าจัดส่ง ฿" + A.baht(s.shipping.fee) + " ทั่วประเทศ · ซื้อครบ ฿" + A.baht(s.shipping.freeOver) + " ส่งฟรี</li>") +
+    "<li>ระยะเวลาจัดส่ง " + A.esc(s.shipping.leadTime) + " หลังยืนยันการชำระเงิน</li>" +
+    "<li>ยืนยันออเดอร์ก่อน 15:00 น. จัดส่งภายในวันเดียวกัน (จันทร์-เสาร์)</li>" +
+    "<li>เราแจ้งเลขพัสดุให้ทาง LINE ทุกออเดอร์</li>";
+  A.$("#payList").innerHTML =
+    "<li>โอนผ่านธนาคาร / พร้อมเพย์ — แจ้งสลิปทาง LINE เพื่อยืนยันออเดอร์</li>" +
+    (s.shipping.cod ? "<li>เก็บเงินปลายทาง (COD) — ชำระกับพนักงานส่งของเมื่อได้รับสินค้า</li>" : "") +
+    (s.payment.installment ? "<li><b>ผ่อน 0%</b> — " + A.esc(s.payment.installmentText) + "</li>" : "") +
+    "<li>เราไม่เก็บข้อมูลบัตรเครดิตหรือรหัสผ่านใด ๆ ไว้บนเว็บไซต์นี้</li>";
+
+  A.$("#bank").innerHTML = "<tbody>" +
+    "<tr><th>ธนาคาร</th><td>" + A.esc(s.payment.bankName) + "</td></tr>" +
+    "<tr><th>ชื่อบัญชี</th><td>" + A.esc(s.payment.bankAccountName) + "</td></tr>" +
+    "<tr><th>เลขที่บัญชี</th><td>" + A.esc(s.payment.bankAccountNo) + "</td></tr>" +
+    "</tbody>";
+  A.$("#disc").textContent = s.disclaimer;
+});
+</script>
+</body>
+</html>

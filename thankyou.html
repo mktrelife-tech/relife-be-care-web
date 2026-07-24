@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ขอบคุณสำหรับคำสั่งซื้อ — Hopeful Wellness</title>
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@400;500;600;700&family=Prompt:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+<div id="site-header"></div>
+
+<section class="section">
+  <div class="wrap">
+    <div class="thanks">
+      <div class="thanks__mark" id="mark">🎉</div>
+      <h1 id="title" style="font-size:clamp(1.6rem,3.4vw,2.2rem)">ขอบคุณสำหรับคำสั่งซื้อ</h1>
+      <p style="color:var(--ink-soft)" id="lead"></p>
+      <div class="thanks__no" id="orderNo"></div>
+      <div id="steps" style="text-align:left"></div>
+      <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:28px" id="cta"></div>
+    </div>
+  </div>
+</section>
+
+<div id="site-footer"></div>
+<script src="assets/js/app.js"></script>
+<script>
+document.addEventListener("site:ready", function (e) {
+  var s = e.detail.site, A = window.App;
+  var q = new URLSearchParams(location.search);
+  var no = q.get("no") || "-";
+  var pay = q.get("pay") || "transfer";
+
+  A.$("#orderNo").textContent = no;
+
+  var COPY = {
+    transfer: {
+      mark: "🎉", title: "ได้รับคำสั่งซื้อแล้ว",
+      lead: "ทีมงานกำลังตรวจสอบการชำระเงินของคุณ และจะยืนยันกลับทาง LINE หรือโทรศัพท์โดยเร็วที่สุด",
+      steps: [
+        ["1", "ทีมงานตรวจสอบสลิป", "ภายใน 30 นาทีในเวลาทำการ"],
+        ["2", "แพ็กสินค้าและจัดส่ง", "ยืนยันก่อน 15:00 น. ส่งภายในวันเดียวกัน"],
+        ["3", "แจ้งเลขพัสดุให้คุณ", "ส่งให้ทาง LINE ทุกออเดอร์"]
+      ]
+    },
+    cod: {
+      mark: "📦", title: "ได้รับคำสั่งซื้อแล้ว",
+      lead: "คำสั่งซื้อแบบเก็บเงินปลายทางของคุณถูกบันทึกแล้ว กรุณาเตรียมเงินสดให้พอดีกับยอดที่สั่ง",
+      steps: [
+        ["1", "ทีมงานโทรยืนยันออเดอร์", "กรุณารับสายด้วยนะครับ"],
+        ["2", "แพ็กสินค้าและจัดส่ง", "ส่งภายใน 1-3 วันทำการ"],
+        ["3", "ชำระเงินกับพนักงานส่งของ", "เตรียมเงินสดให้พอดี"]
+      ]
+    },
+    card: {
+      mark: "✅", title: "ชำระเงินเรียบร้อย",
+      lead: "เราได้รับการชำระเงินผ่านบัตรของคุณแล้ว กำลังเตรียมจัดส่งสินค้าให้ทันที",
+      steps: [
+        ["1", "ยืนยันการชำระเงินแล้ว", "ระบบบันทึกเรียบร้อย"],
+        ["2", "แพ็กสินค้าและจัดส่ง", "ส่งภายใน 1-3 วันทำการ"],
+        ["3", "แจ้งเลขพัสดุให้คุณ", "ส่งให้ทาง LINE"]
+      ]
+    }
+  };
+  /* ---- บัตรเครดิตแบบ Payment Link: ยังไม่จ่าย ต้องพาไปหน้า Pay.sn ก่อน ---- */
+  if (pay === "card" && q.get("mode") === "link") {
+    var link = null;
+    try { link = JSON.parse(sessionStorage.getItem("ww_paylink")); } catch (err) {}
+
+    A.$("#mark").textContent = "💳";
+    A.$("#title").textContent = "อีกขั้นตอนเดียว — ชำระเงินด้วยบัตร";
+    A.$("#lead").textContent = "เราบันทึกคำสั่งซื้อของคุณไว้แล้ว กดปุ่มด้านล่างเพื่อไปหน้าชำระเงินที่ปลอดภัยของ Pay Solutions";
+
+    var amt = link ? link.amount : 0;
+    A.$("#steps").innerHTML =
+      '<div style="background:var(--white);border-radius:var(--r-lg);padding:24px;margin:24px 0;box-shadow:var(--sh-sm);border:1px solid var(--sand)">' +
+        '<div style="display:flex;justify-content:space-between;align-items:baseline;gap:16px;flex-wrap:wrap">' +
+          "<span style='color:var(--ink-soft)'>ยอดที่ต้องชำระ</span>" +
+          "<b style='font-size:2rem;color:var(--brand-dark);font-family:var(--font-display)'>฿" + A.baht(amt) + "</b>" +
+        "</div>" +
+        "<p style='font-size:.88rem;color:var(--ink-soft);margin:14px 0 0;text-align:left'>" +
+          "✓ ยอดเงินและเลขออเดอร์ถูกส่งไปให้หน้าชำระเงินแล้ว คุณกรอกแค่อีเมลกับเบอร์โทร<br>" +
+          "✓ ข้อมูลบัตรกรอกบนระบบของ Pay Solutions โดยตรง เว็บเราไม่เห็นเลขบัตร</p>" +
+      "</div>" +
+      '<div style="background:var(--gold-wash);border-radius:var(--r-md);padding:14px 18px;font-size:.88rem;text-align:left">' +
+        "⏳ หลังชำระเงินเสร็จ รบกวนแจ้งทีมงานทาง LINE สักครั้ง เพื่อให้เรายืนยันและจัดส่งได้เร็วที่สุด</div>";
+
+    A.$("#cta").innerHTML =
+      '<a class="btn btn--primary btn--lg" href="' + A.esc(link ? link.url : "https://pay.sn/relifesolutions") +
+        '">💳 ไปหน้าชำระเงิน Pay Solutions →</a>' +
+      '<a class="btn btn--line btn--lg" href="' + A.esc(s.contact.lineUrl) + '" target="_blank" rel="noopener">แจ้งชำระเงินทาง LINE</a>';
+    return;
+  }
+
+  var t = COPY[pay] || COPY.transfer;
+
+  A.$("#mark").textContent = t.mark;
+  A.$("#title").textContent = t.title;
+  A.$("#lead").textContent = t.lead;
+
+  A.$("#steps").innerHTML = '<ul class="timeline" style="max-width:420px;margin:26px auto 0">' +
+    t.steps.map(function (st, i) {
+      return '<li class="' + (i === 0 ? "is-current" : "is-todo") + '">' +
+        '<span class="timeline__dot">' + st[0] + "</span>" +
+        "<b>" + A.esc(st[1]) + "</b><span>" + A.esc(st[2]) + "</span></li>";
+    }).join("") + "</ul>";
+
+  A.$("#cta").innerHTML =
+    '<a class="btn btn--line btn--lg" href="' + A.esc(s.contact.lineUrl) + '" target="_blank" rel="noopener">💬 แจ้งสลิป / สอบถามทาง LINE</a>' +
+    '<a class="btn btn--ghost btn--lg" href="order.html">📦 เช็คสถานะออเดอร์</a>' +
+    '<a class="btn btn--ghost btn--lg" href="shop.html">เลือกซื้อต่อ</a>';
+});
+</script>
+</body>
+</html>

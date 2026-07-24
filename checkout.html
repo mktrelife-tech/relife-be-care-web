@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>สั่งซื้อสินค้า — Hopeful Wellness</title>
+<meta name="description" content="กรอกข้อมูลจัดส่งและเลือกวิธีชำระเงิน โอนธนาคาร เก็บเงินปลายทาง หรือบัตรเครดิต">
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@400;500;600;700&family=Prompt:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+<div id="site-header"></div>
+<div class="wrap crumb"><a href="index.html">หน้าแรก</a> / <a href="shop.html">สินค้า</a> / สั่งซื้อ</div>
+
+<section class="section section--tight">
+  <div class="wrap">
+    <div class="sec-head" style="margin-bottom:30px">
+      <span class="eyebrow">ขั้นตอนสุดท้าย</span>
+      <h1 style="font-size:clamp(1.7rem,3.6vw,2.4rem)">ยืนยันคำสั่งซื้อ</h1>
+    </div>
+
+    <div id="emptyCart" hidden>
+      <div class="track-box center">
+        <div style="font-size:2.8rem">🛒</div>
+        <h2 style="margin:12px 0 6px">ยังไม่มีสินค้าในตะกร้า</h2>
+        <p style="color:var(--ink-soft)">เลือกสินค้าก่อนแล้วค่อยกลับมาที่หน้านี้นะครับ</p>
+        <a class="btn btn--primary btn--lg" href="shop.html">ดูสินค้าทั้งหมด</a>
+      </div>
+    </div>
+
+    <form class="checkout" id="coForm" hidden novalidate>
+      <!-- ซ้าย: ฟอร์ม -->
+      <div>
+        <div class="co-err" id="coErr" hidden></div>
+
+        <!-- 1. ข้อมูลผู้สั่ง -->
+        <div class="co-panel">
+          <h2><span class="co-step">1</span> ข้อมูลผู้รับสินค้า</h2>
+          <div class="co-row">
+            <div class="field">
+              <label for="fName">ชื่อจริง <span style="color:var(--danger)">*</span></label>
+              <input id="fName" name="firstName" autocomplete="given-name" placeholder="สมศรี">
+            </div>
+            <div class="field">
+              <label for="fLast">นามสกุล <span style="color:var(--danger)">*</span></label>
+              <input id="fLast" name="lastName" autocomplete="family-name" placeholder="ใจดี">
+            </div>
+          </div>
+          <div class="co-row">
+            <div class="field">
+              <label for="fPhone">เบอร์โทรศัพท์ <span style="color:var(--danger)">*</span></label>
+              <input id="fPhone" name="phone" inputmode="tel" autocomplete="tel" placeholder="08X-XXX-XXXX">
+            </div>
+            <div class="field">
+              <label for="fEmail">อีเมล <small style="font-weight:400;color:var(--ink-faint)">(ไม่บังคับ)</small></label>
+              <input id="fEmail" name="email" type="email" autocomplete="email" placeholder="name@example.com">
+            </div>
+          </div>
+          <div class="field">
+            <label for="fAddr">ที่อยู่จัดส่ง <span style="color:var(--danger)">*</span></label>
+            <textarea id="fAddr" name="address" rows="3" autocomplete="street-address"
+              placeholder="บ้านเลขที่ หมู่ ซอย ถนน แขวง/ตำบล เขต/อำเภอ"></textarea>
+          </div>
+          <div class="co-row">
+            <div class="field">
+              <label for="fProvince">จังหวัด <span style="color:var(--danger)">*</span></label>
+              <input id="fProvince" name="province" autocomplete="address-level1" placeholder="กรุงเทพมหานคร">
+            </div>
+            <div class="field">
+              <label for="fZip">รหัสไปรษณีย์ <span style="color:var(--danger)">*</span></label>
+              <input id="fZip" name="zip" inputmode="numeric" maxlength="5" autocomplete="postal-code" placeholder="10110">
+            </div>
+          </div>
+          <div class="field">
+            <label for="fNote">หมายเหตุถึงทีมงาน <small style="font-weight:400;color:var(--ink-faint)">(ไม่บังคับ)</small></label>
+            <textarea id="fNote" name="note" rows="2" placeholder="เช่น ฝากไว้หน้าบ้านได้ / โทรก่อนส่ง"></textarea>
+          </div>
+        </div>
+
+        <!-- 2. วิธีชำระเงิน -->
+        <div class="co-panel">
+          <h2><span class="co-step">2</span> วิธีชำระเงิน</h2>
+          <div class="pay-opts" id="payOpts">
+            <label class="pay-opt is-on">
+              <input type="radio" name="pay" value="transfer" checked>
+              <span><b>โอนเงินผ่านธนาคาร / พร้อมเพย์</b>
+                <small>โอนแล้วแนบสลิปได้เลย ทีมงานตรวจสอบและจัดส่งทันที</small></span>
+              <span class="pay-ico">🏦</span>
+            </label>
+            <label class="pay-opt">
+              <input type="radio" name="pay" value="cod">
+              <span><b>เก็บเงินปลายทาง (COD)</b>
+                <small>ชำระกับพนักงานส่งของเมื่อได้รับสินค้า</small></span>
+              <span class="pay-ico">💵</span>
+            </label>
+            <label class="pay-opt">
+              <input type="radio" name="pay" value="card">
+              <span><b>บัตรเครดิต / เดบิต</b>
+                <small>ชำระผ่านหน้าชำระเงินที่ปลอดภัยของ Pay Solutions · รองรับผ่อน 0%</small></span>
+              <span class="pay-ico">💳</span>
+            </label>
+          </div>
+
+          <!-- รายละเอียดการโอน -->
+          <div class="pay-detail" id="dTransfer">
+            <b>โอนเข้าบัญชีด้านล่าง แล้วแนบสลิป</b>
+            <table class="spec" id="bankInfo" style="margin:12px 0"></table>
+            <div id="qrBox"></div>
+            <p style="margin:14px 0 10px"><b>แนบสลิปโอนเงิน</b> <span style="color:var(--ink-faint);font-size:.86rem">(ไม่เกิน 5 MB · jpg/png/heic)</span></p>
+            <label class="slip-drop" id="slipDrop">
+              <input type="file" id="slipFile" accept="image/*">
+              <div style="font-size:2rem">📄</div>
+              <b style="display:block;margin-top:6px">กดเพื่อเลือกรูปสลิป</b>
+              <small style="color:var(--ink-soft)">หรือลากไฟล์มาวางตรงนี้</small>
+            </label>
+            <div class="slip-preview" id="slipPreview">
+              <img id="slipImg" alt="ตัวอย่างสลิปที่แนบ">
+              <button type="button" class="btn btn--ghost btn--sm" id="slipClear" style="margin:10px auto 0;display:block">ลบรูปนี้</button>
+            </div>
+            <p style="font-size:.83rem;color:var(--ink-soft);margin:12px 0 0">
+              ยังไม่ได้โอนตอนนี้? กดสั่งซื้อไปก่อนได้ แล้วส่งสลิปตามมาทาง LINE ภายหลัง
+            </p>
+          </div>
+
+          <div class="pay-detail" id="dCod" hidden>
+            💵 เตรียมเงินสดให้พอดีกับยอด <b id="codTotal"></b> ให้พนักงานส่งของ<br>
+            <span style="font-size:.86rem;color:var(--ink-soft)">กรุณารับสายจากพนักงานขนส่ง มิฉะนั้นพัสดุอาจถูกตีกลับ</span>
+          </div>
+
+          <div class="pay-detail" id="dCard" hidden>
+            💳 กดยืนยันแล้วระบบจะพาไปหน้าชำระเงินของ <b>Pay Solutions</b> เพื่อกรอกข้อมูลบัตร<br>
+            <span style="font-size:.86rem;color:var(--ink-soft)">
+              ข้อมูลบัตรของคุณกรอกบนหน้าเว็บของผู้ให้บริการโดยตรง เว็บไซต์เราไม่เห็นและไม่เก็บเลขบัตรใด ๆ</span>
+          </div>
+        </div>
+
+        <!-- 3. ยืนยัน -->
+        <div class="co-panel">
+          <h2><span class="co-step">3</span> ยืนยันคำสั่งซื้อ</h2>
+          <label style="display:flex;gap:11px;align-items:flex-start;font-size:.92rem;cursor:pointer">
+            <input type="checkbox" id="fAgree" style="width:19px;height:19px;accent-color:var(--brand);margin-top:2px;flex:0 0 auto">
+            <span>ข้าพเจ้ายอมรับ <a href="policy.html" target="_blank" style="color:var(--brand-dark);text-decoration:underline">เงื่อนไขการสั่งซื้อและนโยบายความเป็นส่วนตัว</a>
+              และยินยอมให้ใช้ข้อมูลนี้เพื่อจัดส่งสินค้าและติดต่อกลับ</span>
+          </label>
+          <button type="submit" class="btn btn--primary btn--lg btn--block" id="submitBtn" style="margin-top:20px">
+            ยืนยันคำสั่งซื้อ
+          </button>
+          <p style="font-size:.82rem;color:var(--ink-faint);text-align:center;margin:12px 0 0">
+            🔒 ข้อมูลของคุณถูกส่งผ่านการเชื่อมต่อที่เข้ารหัส และใช้เพื่อการจัดส่งเท่านั้น
+          </p>
+        </div>
+      </div>
+
+      <!-- ขวา: สรุปคำสั่งซื้อ -->
+      <div class="co-summary">
+        <div class="co-panel">
+          <h2 style="font-size:1.1rem;margin-bottom:14px">สรุปคำสั่งซื้อ</h2>
+          <div id="coLines"></div>
+          <div class="co-totals" id="coTotals"></div>
+          <div class="co-trust" id="coTrust"></div>
+          <a href="shop.html" style="display:block;text-align:center;font-size:.88rem;color:var(--ink-soft);margin-top:16px">← เลือกสินค้าเพิ่ม</a>
+        </div>
+      </div>
+    </form>
+  </div>
+</section>
+
+<div id="site-footer"></div>
+<script src="assets/js/app.js"></script>
+<script src="assets/js/checkout.js"></script>
+</body>
+</html>

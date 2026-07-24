@@ -1,0 +1,285 @@
+backend:
+  name: git-gateway
+  branch: main
+
+locale: th
+media_folder: "assets/img/uploads"
+public_folder: "/assets/img/uploads"
+publish_mode: simple
+
+collections:
+  # ─────────────────────────────────────────
+  - name: settings
+    label: "⚙️ ตั้งค่าเว็บไซต์"
+    files:
+      - name: site
+        label: "ข้อมูลร้าน / หน้าแรก / โปรโมชั่น"
+        file: "content/site.json"
+        fields:
+          - label: "แบรนด์"
+            name: brand
+            widget: object
+            fields:
+              - { label: "ชื่อร้าน", name: name, widget: string }
+              - { label: "สโลแกน", name: tagline, widget: string }
+              - { label: "ตัวอักษรในโลโก้", name: logoText, widget: string, default: "H" }
+              - { label: "โลโก้ (ไฟล์รูป)", name: logo, widget: image, required: false }
+              - { label: "ข้อความใต้โลโก้", name: subtitle, widget: string, required: false }
+
+          - label: "ช่องทางติดต่อ"
+            name: contact
+            widget: object
+            fields:
+              - { label: "เบอร์โทร (แสดงผล)", name: phone, widget: string }
+              - { label: "เบอร์โทร (ตัวเลขล้วน สำหรับปุ่มโทร)", name: phoneRaw, widget: string }
+              - { label: "LINE ID", name: lineId, widget: string }
+              - { label: "ลิงก์ LINE", name: lineUrl, widget: string, hint: "เช่น https://line.me/R/ti/p/@yourid" }
+              - { label: "ลิงก์ Facebook", name: facebook, widget: string, required: false }
+              - { label: "อีเมล", name: email, widget: string, required: false }
+              - { label: "ที่อยู่ร้าน", name: address, widget: text }
+              - { label: "เวลาทำการ", name: openHours, widget: string }
+
+          - label: "ข้อมูลนิติบุคคล"
+            name: business
+            widget: object
+            fields:
+              - { label: "ชื่อบริษัท/ร้านตามทะเบียน", name: legalName, widget: string }
+              - { label: "เลขผู้เสียภาษี", name: taxId, widget: string }
+              - { label: "เลขทะเบียนพาณิชย์", name: regNo, widget: string }
+              - { label: "เป็นตัวแทนจำหน่ายตั้งแต่ปี", name: authorizedSince, widget: string, required: false }
+              - { label: "รูปหนังสือแต่งตั้งตัวแทน", name: authorizedProof, widget: image, required: false }
+
+          - label: "ส่วนหัวหน้าแรก (Hero)"
+            name: hero
+            widget: object
+            fields:
+              - { label: "ป้ายเล็กด้านบน", name: eyebrow, widget: string }
+              - { label: "หัวข้อบรรทัดที่ 1", name: titleLine1, widget: string }
+              - { label: "หัวข้อบรรทัดที่ 2 (สีส้ม)", name: titleAccent, widget: string }
+              - { label: "คำโปรย", name: lead, widget: text }
+              - { label: "รูปหลัก (แนวตั้ง 1200×1500px)", name: image, widget: image, required: false }
+              - { label: "คำอธิบายรูป (สำหรับ SEO)", name: imageAlt, widget: string, required: false }
+              - { label: "ตัวเลขบนป้าย", name: badgeNumber, widget: string }
+              - { label: "ข้อความบนป้าย", name: badgeText, widget: string }
+              - { label: "จุดสร้างความมั่นใจ (3 ข้อ)", name: trust, widget: list, field: { label: "ข้อความ", name: item, widget: string } }
+
+          - label: "จุดเด่น 4 ข้อ"
+            name: features
+            widget: list
+            fields:
+              - { label: "ไอคอน", name: icon, widget: select, options: ["shield", "label", "chat", "truck"] }
+              - { label: "หัวข้อ", name: title, widget: string }
+              - { label: "คำอธิบาย", name: text, widget: string }
+
+          - label: "มาตรฐานการผลิต"
+            name: certs
+            widget: list
+            fields:
+              - { label: "ชื่อย่อ", name: code, widget: string }
+              - { label: "คำอธิบาย", name: name, widget: string }
+
+          - label: "การจัดส่ง"
+            name: shipping
+            widget: object
+            fields:
+              - { label: "ค่าส่ง (บาท)", name: fee, widget: number, value_type: int }
+              - { label: "ซื้อครบเท่าไหร่ส่งฟรี (บาท)", name: freeOver, widget: number, value_type: int }
+              - { label: "ขนส่งที่ใช้", name: carriers, widget: string }
+              - { label: "ระยะเวลาจัดส่ง", name: leadTime, widget: string }
+              - { label: "รับเก็บเงินปลายทาง", name: cod, widget: boolean, default: true }
+
+          - label: "การชำระเงิน"
+            name: payment
+            widget: object
+            fields:
+              - { label: "ธนาคาร", name: bankName, widget: string }
+              - { label: "ชื่อบัญชี", name: bankAccountName, widget: string }
+              - { label: "เลขที่บัญชี", name: bankAccountNo, widget: string }
+              - { label: "QR พร้อมเพย์", name: promptpayQr, widget: image, required: false }
+              - { label: "รับผ่อน 0%", name: installment, widget: boolean, default: true }
+              - { label: "เงื่อนไขการผ่อน", name: installmentText, widget: text, required: false, hint: "ระบุจำนวนงวด ยอดขั้นต่ำ และธนาคารที่ร่วมรายการให้ชัดเจน" }
+
+          - label: "แถบโปรโมชั่น (บนหน้าแรก)"
+            name: promo
+            widget: object
+            fields:
+              - { label: "เปิดใช้งาน", name: active, widget: boolean, default: true }
+              - label: "จุดขายบนแถบบนสุด (แนะนำ 3 ข้อ สั้น ๆ)"
+                name: items
+                widget: list
+                required: false
+                field: { label: "ข้อความ", name: item, widget: string }
+                hint: "เช่น ส่งฟรีทั่วไทย / มีเก็บเงินปลายทาง / ผ่อน 0% ได้ — ไอคอนจะใส่ให้อัตโนมัติ"
+              - { label: "ข้อความสำรอง (ใช้เมื่อไม่ใส่รายการด้านบน)", name: text, widget: string, required: false }
+              - { label: "ข้อความปุ่ม", name: linkText, widget: string }
+              - { label: "ลิงก์ปุ่ม", name: link, widget: string }
+
+          - { label: "ข้อความกำกับตามกฎหมาย (ท้ายเว็บ)", name: disclaimer, widget: text }
+
+  # ─────────────────────────────────────────
+  - name: catalog
+    label: "🛍️ สินค้า"
+    files:
+      - name: products
+        label: "รายการสินค้าทั้งหมด"
+        file: "content/products.json"
+        fields:
+          - label: "สินค้า"
+            name: products
+            widget: list
+            summary: "{{fields.name}} — ฿{{fields.price}}"
+            fields:
+              - { label: "รหัสสินค้า (slug — ห้ามแก้ถ้าไม่จำเป็น)", name: slug, widget: string, hint: "ต้องตรงกับชื่อไฟล์ในโฟลเดอร์ /p/" }
+              - { label: "ชื่อสินค้า (อังกฤษ)", name: name, widget: string }
+              - { label: "ชื่อสินค้า (ไทย)", name: nameTh, widget: string, required: false }
+              - { label: "คำโปรย 1 บรรทัด", name: tagline, widget: string }
+              - { label: "เลข อย.", name: fda, widget: string }
+              - { label: "ราคาขาย (บาท)", name: price, widget: number, value_type: int }
+              - { label: "ราคาก่อนลด (บาท) — ใส่ 0 ถ้าไม่ลด", name: priceWas, widget: number, value_type: int, required: false }
+              - { label: "ปริมาณบรรจุ", name: unit, widget: string, hint: "เช่น 30 แคปซูล" }
+              - { label: "ป้ายบนรูป", name: badge, widget: string, required: false, hint: "เช่น ขายดี, ใหม่ — เว้นว่างได้" }
+              - { label: "สีป้าย", name: badgeStyle, widget: select, options: ["brand", "sage"], default: "brand", required: false }
+              - { label: "แสดงเป็นสินค้าเด่นบนหน้าแรก", name: featured, widget: boolean, default: false }
+              - { label: "ลำดับการแสดง", name: order, widget: number, value_type: int }
+              - { label: "คำอธิบายสั้น", name: short, widget: text }
+              - { label: "รูปสินค้า (ใส่ได้หลายรูป)", name: images, widget: list, required: false, field: { label: "รูป", name: image, widget: image } }
+              - { label: "จุดเด่น", name: highlights, widget: list, field: { label: "ข้อความ", name: item, widget: string } }
+              - { label: "เหมาะกับใคร", name: forWho, widget: text }
+              - { label: "ใครไม่ควรทาน", name: notFor, widget: text }
+              - label: "ส่วนประกอบสำคัญ"
+                name: ingredients
+                widget: list
+                required: false
+                fields:
+                  - { label: "ชื่อส่วนผสม", name: name, widget: string }
+                  - { label: "ปริมาณ", name: amount, widget: string }
+              - { label: "วิธีรับประทาน", name: howto, widget: text }
+              - { label: "คำเตือน", name: warning, widget: text }
+              - label: "คำถามที่พบบ่อยของสินค้านี้"
+                name: faq
+                widget: list
+                required: false
+                fields:
+                  - { label: "คำถาม", name: q, widget: string }
+                  - { label: "คำตอบ", name: a, widget: text }
+
+          - label: "ชุดโปรโมชั่น"
+            name: bundles
+            widget: list
+            required: false
+            fields:
+              - { label: "รหัสชุด", name: slug, widget: string }
+              - { label: "ชื่อชุด", name: name, widget: string }
+              - { label: "คำอธิบาย", name: desc, widget: text }
+              - { label: "ราคาชุด", name: price, widget: number, value_type: int }
+              - { label: "ราคาปกติรวม", name: priceWas, widget: number, value_type: int }
+              - { label: "ป้าย", name: badge, widget: string, required: false }
+
+  # ─────────────────────────────────────────
+  - name: social
+    label: "⭐ รีวิวลูกค้า"
+    files:
+      - name: reviews
+        label: "รีวิวที่แสดงบนหน้าแรก"
+        file: "content/reviews.json"
+        fields:
+          - { label: "หมายเหตุภายใน", name: _note, widget: text, required: false }
+          - label: "รีวิว"
+            name: reviews
+            widget: list
+            summary: "{{fields.name}} — {{fields.product}}"
+            fields:
+              - { label: "ชื่อลูกค้า (ใช้ชื่อย่อได้)", name: name, widget: string }
+              - { label: "อายุ / จังหวัด", name: meta, widget: string }
+              - { label: "จำนวนดาว", name: stars, widget: number, value_type: int, default: 5, min: 1, max: 5 }
+              - { label: "สินค้าที่ซื้อ", name: product, widget: string }
+              - { label: "ข้อความรีวิว", name: text, widget: text }
+
+  # ─────────────────────────────────────────
+  - name: orders
+    label: "📦 ออเดอร์ลูกค้า"
+    files:
+      - name: orders
+        label: "รายการออเดอร์ (สำหรับหน้าเช็คสถานะ)"
+        file: "content/orders.json"
+        fields:
+          - label: "⚠️ อ่านก่อนใช้งาน"
+            name: _note
+            widget: text
+            hint: "ห้ามใส่เบอร์โทรเต็ม ที่อยู่เต็ม หรือนามสกุลเต็ม เพราะไฟล์นี้เปิดสาธารณะ"
+
+          - label: "ออเดอร์"
+            name: orders
+            widget: list
+            summary: "{{fields.orderNo}} — {{fields.firstName}} ({{fields.status}})"
+            fields:
+              - { label: "เลขออเดอร์", name: orderNo, widget: string, hint: "รูปแบบแนะนำ HW-ปีเดือนวัน-ลำดับ เช่น HW-260715-001" }
+              - { label: "ชื่อจริงลูกค้า (ไม่ใส่นามสกุล)", name: firstName, widget: string, hint: "ลูกค้าใช้ชื่อนี้ค้นหา ต้องสะกดให้ตรง" }
+              - { label: "เบอร์โทร 4 ตัวท้าย", name: phoneLast4, widget: string, pattern: ['^[0-9]{4}$', 'ต้องเป็นตัวเลข 4 หลักเท่านั้น'] }
+              - { label: "ชื่อที่แสดงบนหน้าเว็บ (ปิดบางส่วน)", name: customerMasked, widget: string, hint: "เช่น คุณ ส***ศรี" }
+              - label: "สถานะปัจจุบัน"
+                name: status
+                widget: select
+                options:
+                  - { label: "🕐 รอชำระเงิน", value: pending }
+                  - { label: "✅ ยืนยันการชำระเงินแล้ว", value: paid }
+                  - { label: "📦 กำลังแพ็กสินค้า", value: packing }
+                  - { label: "🚚 จัดส่งแล้ว", value: shipped }
+                  - { label: "🏠 จัดส่งสำเร็จ", value: delivered }
+                  - { label: "❌ ยกเลิกคำสั่งซื้อ", value: cancelled }
+              - { label: "วันที่สั่งซื้อ", name: orderDate, widget: string, hint: "รูปแบบ YYYY-MM-DD" }
+              - { label: "รายการสินค้า", name: items, widget: string, hint: "เช่น BETA OIL × 2, LAB FARM × 1" }
+              - { label: "ยอดรวม (บาท)", name: total, widget: number, value_type: int }
+              - label: "บริษัทขนส่ง"
+                name: carrier
+                widget: select
+                required: false
+                options:
+                  - { label: "— ยังไม่ได้ส่ง —", value: "" }
+                  - { label: "Flash Express", value: flash }
+                  - { label: "Kerry Express", value: kerry }
+                  - { label: "ไปรษณีย์ไทย", value: thailandpost }
+                  - { label: "J&T Express", value: jt }
+              - { label: "เลขพัสดุ", name: tracking, widget: string, required: false }
+              - { label: "ข้อความถึงลูกค้า", name: note, widget: text, required: false, hint: "แสดงเป็นกล่องสีเหลืองบนหน้าเช็คสถานะ" }
+              - label: "ประวัติสถานะ (ไทม์ไลน์)"
+                name: history
+                widget: list
+                required: false
+                fields:
+                  - { label: "วันเวลา", name: date, widget: string, hint: "เช่น 2026-07-15 13:02" }
+                  - label: "สถานะ"
+                    name: status
+                    widget: select
+                    options: [pending, paid, packing, shipped, delivered]
+
+          - label: "ชื่อสถานะทั้งหมด (ปกติไม่ต้องแก้)"
+            name: statuses
+            widget: list
+            collapsed: true
+            fields:
+              - { label: "รหัส", name: key, widget: string }
+              - { label: "ชื่อที่แสดง", name: label, widget: string }
+              - { label: "ไอคอน", name: icon, widget: string }
+              - { label: "คำอธิบาย", name: desc, widget: string }
+
+  # ─────────────────────────────────────────
+  - name: blog
+    label: "📝 บทความ"
+    files:
+      - name: articles
+        label: "บทความทั้งหมด"
+        file: "content/articles.json"
+        fields:
+          - label: "บทความ"
+            name: articles
+            widget: list
+            summary: "{{fields.title}}"
+            fields:
+              - { label: "รหัสบทความ (slug ภาษาอังกฤษ)", name: slug, widget: string }
+              - { label: "หัวข้อ", name: title, widget: string }
+              - { label: "หมวดหมู่", name: category, widget: string }
+              - { label: "วันที่เผยแพร่", name: date, widget: string, hint: "รูปแบบ YYYY-MM-DD" }
+              - { label: "คำโปรย", name: excerpt, widget: text }
+              - { label: "ภาพปก (1200×750px)", name: cover, widget: image, required: false }
+              - { label: "เนื้อหา", name: body, widget: text, hint: "รองรับ Markdown: ## หัวข้อ, **ตัวหนา**, - รายการ" }

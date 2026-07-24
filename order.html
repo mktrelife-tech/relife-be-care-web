@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>เช็คสถานะออเดอร์ — Hopeful Wellness</title>
+<meta name="description" content="ตรวจสอบสถานะคำสั่งซื้อและติดตามพัสดุของคุณ กรอกชื่อจริงและเบอร์โทรที่ใช้สั่งซื้อ ตรวจสอบได้ตลอด 24 ชั่วโมง">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@400;500;600;700&family=Prompt:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+<div id="site-header"></div>
+<div class="wrap crumb"><a href="index.html">หน้าแรก</a> / เช็คสถานะออเดอร์</div>
+
+<section class="section section--tight">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">ติดตามคำสั่งซื้อ</span>
+      <h1 style="font-size:clamp(1.8rem,4vw,2.6rem)">เช็คสถานะออเดอร์ของคุณ</h1>
+      <p>กรอกชื่อจริงและเบอร์โทรที่ใช้ตอนสั่งซื้อ ตรวจสอบได้เองตลอด 24 ชั่วโมง</p>
+    </div>
+
+    <div class="track-box">
+      <div style="text-align:center;margin-bottom:22px">
+        <div style="font-size:2.8rem;line-height:1">📦</div>
+        <p style="background:var(--gold-wash);border-radius:var(--r-md);padding:12px 18px;font-size:.9rem;margin:16px 0 0;text-align:left">
+          ⏱️ หลังสั่งซื้อเรียบร้อยแล้ว กรุณารอประมาณ <b>5-10 นาที</b> เพื่อให้ระบบอัปเดตข้อมูล ก่อนกดตรวจสอบสถานะ
+        </p>
+      </div>
+
+      <div class="track-form">
+        <div class="field">
+          <label for="ordName">ชื่อจริง <span style="font-weight:400;color:var(--ink-faint)">(ไม่ต้องใส่นามสกุล)</span></label>
+          <input id="ordName" placeholder="เช่น สมศรี" autocomplete="given-name" spellcheck="false">
+        </div>
+        <div class="field">
+          <label for="ordPhone">เบอร์โทรที่ใช้สั่งซื้อ</label>
+          <input id="ordPhone" inputmode="tel" placeholder="08X-XXX-XXXX" autocomplete="tel">
+        </div>
+        <button class="btn btn--primary btn--lg btn--block" id="ordSearch">🔍 ตรวจสอบสถานะ</button>
+      </div>
+
+      <p id="ordMsg" style="margin:14px 0 0;font-size:.9rem;text-align:center;min-height:1.4em"></p>
+    </div>
+
+    <!-- ผลลัพธ์ -->
+    <div id="result"></div>
+  </div>
+</section>
+
+<!-- ต้องการความช่วยเหลือ -->
+<section class="section section--sand">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">ต้องการความช่วยเหลือ?</span>
+      <h2>มีคำถาม หรืออยากได้ข้อมูลเพิ่มเติม</h2>
+      <p>ทักหาทีมงานได้เลย เราตอบทุกข้อความด้วยตัวเอง ในเวลาทำการตอบภายใน 30 นาที</p>
+    </div>
+    <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap" id="helpCta"></div>
+  </div>
+</section>
+
+<!-- ติดตามพัสดุกับขนส่งโดยตรง -->
+<section class="section">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">ติดตามพัสดุโดยตรง</span>
+      <h2>มีเลขพัสดุอยู่แล้ว?</h2>
+      <p>กรอกเลขพัสดุแล้วเลือกขนส่ง เราจะพาไปหน้าติดตามของบริษัทขนส่งให้ทันที</p>
+    </div>
+    <div class="track-box">
+      <div class="field">
+        <label for="trkNo">เลขพัสดุ (Tracking Number)</label>
+        <input id="trkNo" placeholder="เช่น TH01234567890" autocomplete="off" spellcheck="false">
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px" id="carriers"></div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="section section--sand">
+  <div class="wrap">
+    <div class="sec-head"><h2>คำถามเกี่ยวกับการสั่งซื้อ</h2></div>
+    <div class="faq">
+      <details open><summary>กรอกชื่อกับเบอร์แล้ว แต่ไม่พบข้อมูล<span></span></summary><div class="faq__a">ลองตรวจสอบว่ากรอก <b>ชื่อจริงอย่างเดียว ไม่ใส่นามสกุล</b> และใช้เบอร์เดียวกับตอนสั่งซื้อ หากยังไม่พบ อาจเป็นเพราะเพิ่งสั่งและระบบยังอัปเดตไม่ทัน รอ 5-10 นาทีแล้วลองใหม่ หรือกดปุ่มแจ้งทีมงานเพื่อให้เราตรวจสอบให้</div></details>
+      <details><summary>สถานะขึ้นว่า "จัดส่งแล้ว" แต่ยังไม่ได้ของ<span></span></summary><div class="faq__a">หลังขนส่งรับพัสดุ ระบบของขนส่งอาจใช้เวลา 6-12 ชั่วโมงกว่าจะอัปเดต แนะนำให้ลองเช็คอีกครั้งในวันถัดไป หากเกิน 3 วันทำการแล้วยังไม่เคลื่อนไหว ทักมาแจ้งเรา เราตามให้</div></details>
+      <details><summary>อยากแก้ที่อยู่จัดส่ง ทำได้ไหม<span></span></summary><div class="faq__a">ถ้าสถานะยังไม่ถึง "จัดส่งแล้ว" แก้ได้ครับ ทักมาทาง LINE โดยเร็วที่สุด หากส่งออกไปแล้วจะแก้ที่ปลายทางไม่ได้</div></details>
+      <details><summary>สั่งซื้อจากช่องทางอื่น เช็คที่นี่ได้ไหม<span></span></summary><div class="faq__a">ได้ครับ ไม่ว่าจะสั่งผ่านเว็บไซต์ LINE Facebook หรือโทรสั่ง ทุกออเดอร์ใช้ชื่อและเบอร์เดียวกันตรวจสอบได้ที่นี่หมด</div></details>
+      <details><summary>สถานะไม่อัปเดตนานแล้ว<span></span></summary><div class="faq__a">เราอัปเดตสถานะด้วยตัวเองวันละ 1-2 ครั้งในเวลาทำการ หากค้างอยู่สถานะเดิมเกิน 2 วันทำการ ทักมาถามได้เลยครับ</div></details>
+    </div>
+  </div>
+</section>
+
+<div id="site-footer"></div>
+<script src="assets/js/app.js"></script>
+<script>
+document.addEventListener("site:ready", function (e) {
+  var S = e.detail, A = window.App, s = S.site;
+  var DATA = null;
+
+  var CARRIERS = {
+    flash:        { name: "Flash Express",  url: "https://www.flashexpress.com/fle/tracking?se=" },
+    kerry:        { name: "Kerry Express",  url: "https://th.kerryexpress.com/th/track/?track=" },
+    thailandpost: { name: "ไปรษณีย์ไทย",     url: "https://track.thailandpost.co.th/?trackNumber=" },
+    jt:           { name: "J&T Express",    url: "https://www.jtexpress.co.th/index/query/gzquery.html?bills=" }
+  };
+
+  A.loadJSON("content/orders.json").then(function (d) { DATA = d; }).catch(function () {
+    A.$("#ordMsg").innerHTML = "<span style='color:var(--danger)'>ขณะนี้ระบบตรวจสอบขัดข้อง กรุณาสอบถามทาง LINE</span>";
+  });
+
+  function statusInfo(key) {
+    return (DATA.statuses || []).filter(function (x) { return x.key === key; })[0] ||
+      { key: key, label: key, icon: "•", desc: "" };
+  }
+  /* ตัดเลขเบอร์ให้เหลือตัวเลขล้วน */
+  function digits(v) { return String(v || "").replace(/\D/g, ""); }
+  /* เทียบชื่อแบบไม่สนช่องว่างและคำนำหน้า */
+  function normName(v) {
+    return String(v || "").trim().replace(/\s+/g, "")
+      .replace(/^(คุณ|นาย|นาง|นางสาว|น\.ส\.|ด\.ช\.|ด\.ญ\.)/, "");
+  }
+
+  /* ---------- ค้นหา ---------- */
+  function search() {
+    var msg = A.$("#ordMsg"), res = A.$("#result");
+    var name = A.$("#ordName").value;
+    var tel  = digits(A.$("#ordPhone").value);
+    res.innerHTML = "";
+
+    if (!DATA) { msg.textContent = "กำลังโหลดข้อมูล กรุณาลองอีกครั้ง"; return; }
+    if (!normName(name)) { msg.innerHTML = "<span style='color:var(--danger)'>กรุณากรอกชื่อจริง</span>"; return; }
+    if (tel.length < 9)  { msg.innerHTML = "<span style='color:var(--danger)'>กรุณากรอกเบอร์โทรให้ครบ 10 หลัก</span>"; return; }
+
+    var last4 = tel.slice(-4);
+    var found = (DATA.orders || []).filter(function (x) {
+      return normName(x.firstName) === normName(name) && String(x.phoneLast4) === last4;
+    });
+
+    if (!found.length) { notFound(name.trim(), A.$("#ordPhone").value.trim()); return; }
+
+    msg.innerHTML = "<span style='color:var(--sage-dark)'>✓ พบข้อมูล " + found.length + " รายการ</span>";
+    /* เรียงออเดอร์ล่าสุดขึ้นก่อน */
+    found.sort(function (a, b) { return String(b.orderDate).localeCompare(String(a.orderDate)); });
+    res.innerHTML = found.map(card).join("");
+    bindCards();
+    res.scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+
+  /* ---------- ไม่พบข้อมูล → เก็บ Lead ---------- */
+  function notFound(name, phone) {
+    A.$("#ordMsg").innerHTML = "<span style='color:var(--danger)'>ไม่พบข้อมูลคำสั่งซื้อ</span>";
+
+    var leadMsg =
+      "สวัสดีครับ/ค่ะ ตรวจสอบสถานะออเดอร์ในเว็บแล้วไม่พบข้อมูล\n\n" +
+      "ชื่อ: " + name + "\n" +
+      "เบอร์โทร: " + phone + "\n\n" +
+      "รบกวนทีมงานช่วยตรวจสอบให้ด้วยครับ/ค่ะ";
+
+    A.$("#result").innerHTML =
+      '<div class="order-card"><div class="order-card__body center">' +
+        "<div style='font-size:2.8rem'>🔍</div>" +
+        "<h3 style='margin:12px 0 6px'>ไม่พบข้อมูลคำสั่งซื้อ</h3>" +
+        "<p style='color:var(--ink-soft);font-size:.95rem;max-width:44ch;margin-inline:auto'>" +
+          "กรุณาตรวจสอบว่ากรอก <b>ชื่อจริงอย่างเดียว ไม่ใส่นามสกุล</b> และใช้เบอร์เดียวกับตอนสั่งซื้อ<br>" +
+          "หากเพิ่งสั่งซื้อ กรุณารอ 5-10 นาทีแล้วลองใหม่อีกครั้ง</p>" +
+
+        '<div style="background:var(--sage-wash);border-radius:var(--r-lg);padding:22px;margin:24px auto 0;max-width:460px;text-align:left">' +
+          "<b style='display:block;margin-bottom:6px'>ให้ทีมงานตรวจสอบให้ไหม?</b>" +
+          "<p style='font-size:.9rem;color:var(--ink-soft);margin:0 0 16px'>" +
+            "กดปุ่มด้านล่าง ระบบจะส่งชื่อและเบอร์ของคุณให้ทีมงานทาง LINE เราจะค้นให้และตอบกลับโดยเร็วที่สุด</p>" +
+          '<button class="btn btn--line btn--block btn--lg" id="leadBtn">💬 ให้ทีมงานตรวจสอบให้</button>' +
+        "</div>" +
+
+        "<div style='margin-top:26px;padding-top:22px;border-top:1px solid var(--sand)'>" +
+          "<p style='font-size:.92rem;color:var(--ink-soft);margin-bottom:14px'>ยังไม่เคยสั่งกับเรา? ดูสินค้าทั้งหมดได้เลย</p>" +
+          '<div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap">' +
+            '<a class="btn btn--primary" href="shop.html">ดูสินค้าทั้งหมด</a>' +
+            '<a class="btn btn--ghost" href="quiz.html">หาตัวที่เหมาะกับคุณ</a>' +
+          "</div>" +
+        "</div>" +
+      "</div></div>";
+
+    A.$("#leadBtn").addEventListener("click", function () {
+      try { navigator.clipboard.writeText(leadMsg); } catch (err) {}
+      window.open(s.contact.lineUrl + (s.contact.lineUrl.indexOf("?") > -1 ? "&" : "?") +
+        "text=" + encodeURIComponent(leadMsg), "_blank", "noopener");
+      A.toast("กำลังเปิด LINE — ข้อมูลของคุณถูกใส่ไว้ให้แล้ว");
+    });
+
+    A.$("#result").scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+
+  /* ---------- การ์ดออเดอร์ ---------- */
+  function card(o) {
+    var cur = statusInfo(o.status);
+    var pillClass = o.status === "cancelled" ? " status-pill--danger"
+                  : (o.status === "pending" ? " status-pill--warn" : "");
+
+    var flow = (DATA.statuses || []).filter(function (x) { return x.key !== "cancelled"; });
+    var doneMap = {};
+    (o.history || []).forEach(function (h) { doneMap[h.status] = h.date; });
+    var curIdx = flow.map(function (x) { return x.key; }).indexOf(o.status);
+
+    var timeline;
+    if (o.status === "cancelled") {
+      timeline = '<ul class="timeline"><li class="is-current">' +
+        '<span class="timeline__dot">❌</span><b>ยกเลิกคำสั่งซื้อ</b>' +
+        "<span>" + A.esc(statusInfo("cancelled").desc) + "</span></li></ul>";
+    } else {
+      timeline = '<ul class="timeline">' + flow.map(function (st, i) {
+        var cls = i < curIdx ? "is-done" : (i === curIdx ? "is-current" : "is-todo");
+        return '<li class="' + cls + '"><span class="timeline__dot">' + st.icon + "</span>" +
+          "<b>" + A.esc(st.label) + "</b><span>" + A.esc(st.desc) + "</span>" +
+          (doneMap[st.key] ? "<time>" + A.esc(doneMap[st.key]) + "</time>" : "") + "</li>";
+      }).join("") + "</ul>";
+    }
+
+    var c = CARRIERS[o.carrier];
+    var trackBtn = (o.tracking && c)
+      ? '<a class="btn btn--primary" href="' + A.esc(c.url + encodeURIComponent(o.tracking)) +
+        '" target="_blank" rel="noopener">ติดตามพัสดุกับ ' + A.esc(c.name) + " →</a>"
+      : "";
+
+    return '<div class="order-card">' +
+        '<div class="order-card__head">' +
+          "<div><h3>" + A.esc(o.orderNo) + "</h3>" +
+            "<small>" + A.esc(o.customerMasked) + " · สั่งเมื่อ " + A.esc(o.orderDate) + "</small></div>" +
+          '<span class="status-pill' + pillClass + '">' + cur.icon + " " + A.esc(cur.label) + "</span>" +
+        "</div>" +
+        '<div class="order-card__body">' +
+          (o.note ? '<div style="background:var(--gold-wash);border-radius:var(--r-md);padding:14px 18px;font-size:.92rem;margin-bottom:6px">📌 ' + A.esc(o.note) + "</div>" : "") +
+          timeline +
+          '<dl class="order-meta">' +
+            "<div><dt>รายการสินค้า</dt><dd>" + A.esc(o.items) + "</dd></div>" +
+            "<div><dt>ยอดรวม</dt><dd style='color:var(--brand-dark)'>฿" + A.baht(o.total) + "</dd></div>" +
+            "<div><dt>ขนส่ง</dt><dd>" + (c ? A.esc(c.name) : "—") + "</dd></div>" +
+            "<div><dt>เลขพัสดุ</dt><dd style='font-family:monospace'>" + (o.tracking ? A.esc(o.tracking) : "—") + "</dd></div>" +
+          "</dl>" +
+          '<div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:22px">' + trackBtn +
+            '<button class="btn btn--line" data-ask="' + A.esc(o.orderNo) + '">สอบถามออเดอร์นี้</button>' +
+          "</div>" +
+        "</div>" +
+      "</div>";
+  }
+
+  function bindCards() {
+    A.$$("#result [data-ask]").forEach(function (b) {
+      b.addEventListener("click", function () {
+        var m = "สวัสดีครับ/ค่ะ ต้องการสอบถามเกี่ยวกับออเดอร์ " + b.dataset.ask;
+        window.open(s.contact.lineUrl + (s.contact.lineUrl.indexOf("?") > -1 ? "&" : "?") +
+          "text=" + encodeURIComponent(m), "_blank", "noopener");
+      });
+    });
+  }
+
+  A.$("#ordSearch").addEventListener("click", search);
+  A.$$("#ordName, #ordPhone").forEach(function (el) {
+    el.addEventListener("keydown", function (ev) { if (ev.key === "Enter") search(); });
+  });
+
+  /* ---------- ปุ่มขนส่ง ---------- */
+  A.$("#carriers").innerHTML = Object.keys(CARRIERS).map(function (k) {
+    return '<button class="btn btn--ghost" data-carrier="' + k + '">' + A.esc(CARRIERS[k].name) + "</button>";
+  }).join("");
+  A.$$("#carriers [data-carrier]").forEach(function (b) {
+    b.addEventListener("click", function () {
+      var v = A.$("#trkNo").value.trim();
+      if (!v) { A.toast("กรุณากรอกเลขพัสดุก่อน"); return; }
+      window.open(CARRIERS[b.dataset.carrier].url + encodeURIComponent(v), "_blank", "noopener");
+    });
+  });
+
+  /* ---------- ปุ่มช่วยเหลือ ---------- */
+  A.$("#helpCta").innerHTML =
+    '<a class="btn btn--line btn--lg" href="' + A.esc(s.contact.lineUrl) + '" target="_blank" rel="noopener">💬 ทักไลน์ ' + A.esc(s.contact.lineId) + "</a>" +
+    '<a class="btn btn--ghost btn--lg" href="' + A.esc(s.contact.facebook) + '" target="_blank" rel="noopener">แชท Messenger</a>' +
+    '<a class="btn btn--ghost btn--lg" href="tel:' + A.esc(s.contact.phoneRaw) + '">โทร ' + A.esc(s.contact.phone) + "</a>";
+});
+</script>
+</body>
+</html>

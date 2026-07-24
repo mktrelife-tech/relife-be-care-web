@@ -1,0 +1,68 @@
+{
+  "_note": "⚠️ สำคัญ: ไฟล์นี้เปิดสาธารณะบนอินเทอร์เน็ต ห้ามใส่ 'เบอร์โทรเต็ม' 'ที่อยู่เต็ม' 'นามสกุลเต็ม' หรือเลขบัตรประชาชนเด็ดขาด — ใส่แค่ชื่อจริง (firstName) กับเบอร์ 4 ตัวท้าย (phoneLast4) เท่านั้น ลูกค้ากรอกเบอร์เต็ม ระบบตัดมาเทียบ 4 ตัวท้ายเอง ดูหัวข้อ 'ข้อจำกัดที่ต้องรู้' ในคู่มือ",
+  "statuses": [
+    { "key": "pending",   "label": "รอชำระเงิน",          "icon": "🕐", "desc": "เราได้รับคำสั่งซื้อแล้ว รอการโอนเงินและแจ้งสลิป" },
+    { "key": "paid",      "label": "ยืนยันการชำระเงินแล้ว","icon": "✅", "desc": "ตรวจสอบยอดเรียบร้อย กำลังเตรียมจัดส่ง" },
+    { "key": "packing",   "label": "กำลังแพ็กสินค้า",     "icon": "📦", "desc": "ทีมงานกำลังจัดของและตรวจสอบวันหมดอายุ" },
+    { "key": "shipped",   "label": "จัดส่งแล้ว",           "icon": "🚚", "desc": "ส่งมอบให้ขนส่งเรียบร้อย ติดตามพัสดุได้จากเลขด้านล่าง" },
+    { "key": "delivered", "label": "จัดส่งสำเร็จ",         "icon": "🏠", "desc": "ลูกค้าได้รับสินค้าเรียบร้อยแล้ว ขอบคุณที่ไว้วางใจเรา" },
+    { "key": "cancelled", "label": "ยกเลิกคำสั่งซื้อ",     "icon": "❌", "desc": "คำสั่งซื้อนี้ถูกยกเลิก หากไม่ได้ยกเลิกเอง กรุณาติดต่อทีมงาน" }
+  ],
+  "orders": [
+    {
+      "orderNo": "HW-260715-001",
+      "firstName": "สมศรี",
+      "phoneLast4": "1234",
+      "customerMasked": "คุณ ส***ศรี",
+      "status": "delivered",
+      "orderDate": "2026-07-15",
+      "items": "BETA OIL × 2",
+      "total": 1780,
+      "carrier": "flash",
+      "tracking": "TH01234567890",
+      "note": "",
+      "history": [
+        { "date": "2026-07-15 10:24", "status": "pending" },
+        { "date": "2026-07-15 13:02", "status": "paid" },
+        { "date": "2026-07-15 15:40", "status": "packing" },
+        { "date": "2026-07-16 09:10", "status": "shipped" },
+        { "date": "2026-07-17 14:22", "status": "delivered" }
+      ]
+    },
+    {
+      "orderNo": "HW-260720-002",
+      "firstName": "ประชัย",
+      "phoneLast4": "5678",
+      "customerMasked": "คุณ ป***ชัย",
+      "status": "shipped",
+      "orderDate": "2026-07-20",
+      "items": "BETA LIFE × 1, LAB FARM × 1",
+      "total": 1680,
+      "carrier": "thailandpost",
+      "tracking": "EF123456789TH",
+      "note": "ฝากไว้หน้าบ้านได้เลยตามที่แจ้ง",
+      "history": [
+        { "date": "2026-07-20 11:15", "status": "pending" },
+        { "date": "2026-07-20 12:40", "status": "paid" },
+        { "date": "2026-07-20 16:05", "status": "packing" },
+        { "date": "2026-07-21 08:55", "status": "shipped" }
+      ]
+    },
+    {
+      "orderNo": "HW-260722-003",
+      "firstName": "มาลีวรรณ",
+      "phoneLast4": "9012",
+      "customerMasked": "คุณ ม***วรรณ",
+      "status": "pending",
+      "orderDate": "2026-07-22",
+      "items": "BETAHERB × 3",
+      "total": 2070,
+      "carrier": "",
+      "tracking": "",
+      "note": "รอสลิปโอนเงิน แจ้งได้ทาง LINE ได้เลยครับ",
+      "history": [
+        { "date": "2026-07-22 19:30", "status": "pending" }
+      ]
+    }
+  ]
+}
