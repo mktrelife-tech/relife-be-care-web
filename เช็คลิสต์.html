@@ -1,0 +1,481 @@
+<title>เช็คลิสต์เตรียมข้อมูล — เว็บ RELIFE BE CARE</title>
+<style>
+  :root {
+    --paper:      #FBF7F1;
+    --paper-2:    #F4ECE1;
+    --card:       #FFFFFF;
+    --ink:        #38302A;
+    --ink-soft:   #6C5F53;
+    --ink-faint:  #9C8D7E;
+    --line:       #E7DBCB;
+    --brand:      #BC673A;
+    --brand-deep: #9A4F28;
+    --brand-wash: #F7E7DA;
+    --sage:       #5E7C58;
+    --sage-wash:  #E7EEE2;
+    --req:        #B6402A;
+    --req-wash:   #F8E4DF;
+    --rec:        #B07D12;
+    --rec-wash:   #F7ECCF;
+    --acct:       #4A6A86;
+    --acct-wash:  #E4ECF3;
+    --shadow:     0 1px 2px rgba(56,48,42,.05), 0 8px 24px rgba(56,48,42,.06);
+    --shadow-lg:  0 4px 12px rgba(56,48,42,.07), 0 20px 48px rgba(56,48,42,.10);
+    --radius:     14px;
+    --font: "Sarabun", "IBM Plex Sans Thai", "Noto Sans Thai", "Leelawadee UI", "Tahoma", system-ui, sans-serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --paper: #211C18; --paper-2: #29231E; --card: #2C2621;
+      --ink: #F0E7DC; --ink-soft: #C3B5A6; --ink-faint: #8E8073;
+      --line: #40372F;
+      --brand: #E0895C; --brand-deep: #EDA079; --brand-wash: #3A2A20;
+      --sage: #9DBE95; --sage-wash: #2A3327;
+      --req: #EC9280; --req-wash: #3B241F;
+      --rec: #E0BE6A; --rec-wash: #362D18;
+      --acct: #93B4CE; --acct-wash: #21303B;
+      --shadow: 0 1px 2px rgba(0,0,0,.3), 0 8px 24px rgba(0,0,0,.28);
+      --shadow-lg: 0 4px 12px rgba(0,0,0,.34), 0 20px 48px rgba(0,0,0,.4);
+    }
+  }
+  :root[data-theme="light"] {
+    --paper: #FBF7F1; --paper-2: #F4ECE1; --card: #FFFFFF;
+    --ink: #38302A; --ink-soft: #6C5F53; --ink-faint: #9C8D7E; --line: #E7DBCB;
+    --brand: #BC673A; --brand-deep: #9A4F28; --brand-wash: #F7E7DA;
+    --sage: #5E7C58; --sage-wash: #E7EEE2;
+    --req: #B6402A; --req-wash: #F8E4DF; --rec: #B07D12; --rec-wash: #F7ECCF;
+    --acct: #4A6A86; --acct-wash: #E4ECF3;
+    --shadow: 0 1px 2px rgba(56,48,42,.05), 0 8px 24px rgba(56,48,42,.06);
+    --shadow-lg: 0 4px 12px rgba(56,48,42,.07), 0 20px 48px rgba(56,48,42,.10);
+  }
+  :root[data-theme="dark"] {
+    --paper: #211C18; --paper-2: #29231E; --card: #2C2621;
+    --ink: #F0E7DC; --ink-soft: #C3B5A6; --ink-faint: #8E8073; --line: #40372F;
+    --brand: #E0895C; --brand-deep: #EDA079; --brand-wash: #3A2A20;
+    --sage: #9DBE95; --sage-wash: #2A3327;
+    --req: #EC9280; --req-wash: #3B241F; --rec: #E0BE6A; --rec-wash: #362D18;
+    --acct: #93B4CE; --acct-wash: #21303B;
+    --shadow: 0 1px 2px rgba(0,0,0,.3), 0 8px 24px rgba(0,0,0,.28);
+    --shadow-lg: 0 4px 12px rgba(0,0,0,.34), 0 20px 48px rgba(0,0,0,.4);
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; font-family: var(--font); color: var(--ink);
+    background:
+      radial-gradient(1100px 500px at 100% -8%, var(--brand-wash), transparent 60%),
+      var(--paper);
+    line-height: 1.65; -webkit-font-smoothing: antialiased;
+  }
+  .wrap { max-width: 940px; margin-inline: auto; padding: clamp(20px, 4vw, 48px); }
+
+  /* ---- Header ---- */
+  .masthead { margin-bottom: 30px; }
+  .kicker {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-size: .74rem; font-weight: 700; letter-spacing: .16em; text-transform: uppercase;
+    color: var(--brand-deep); background: var(--brand-wash);
+    padding: 6px 13px; border-radius: 999px;
+  }
+  h1 {
+    font-size: clamp(1.7rem, 4vw, 2.6rem); line-height: 1.2; margin: 16px 0 8px;
+    font-weight: 700; letter-spacing: -.01em; text-wrap: balance;
+  }
+  .lead { color: var(--ink-soft); max-width: 60ch; margin: 0; font-size: 1.02rem; }
+
+  /* ---- Progress ---- */
+  .progress {
+    display: flex; align-items: center; gap: 16px; flex-wrap: wrap;
+    background: var(--card); border: 1px solid var(--line); border-radius: var(--radius);
+    padding: 16px 20px; margin: 26px 0 8px; box-shadow: var(--shadow);
+  }
+  .progress__meta { font-size: .9rem; color: var(--ink-soft); }
+  .progress__meta b { color: var(--ink); font-size: 1.05rem; }
+  .progress__bar { flex: 1; min-width: 160px; height: 9px; background: var(--paper-2); border-radius: 999px; overflow: hidden; }
+  .progress__fill { height: 100%; width: 0; background: linear-gradient(90deg, var(--brand), var(--sage)); border-radius: inherit; transition: width .4s cubic-bezier(.4,0,.2,1); }
+  .btn {
+    font-family: inherit; font-size: .88rem; font-weight: 600; cursor: pointer;
+    border: 1px solid var(--line); background: var(--card); color: var(--ink-soft);
+    padding: 9px 15px; border-radius: 10px; transition: .16s;
+  }
+  .btn:hover { border-color: var(--brand); color: var(--brand-deep); }
+
+  /* ---- Legend ---- */
+  .legend { display: flex; gap: 8px 18px; flex-wrap: wrap; margin: 18px 0 30px; font-size: .84rem; }
+  .tag {
+    display: inline-flex; align-items: center; gap: 7px;
+    font-weight: 700; font-size: .72rem; letter-spacing: .03em;
+    padding: 4px 11px; border-radius: 999px; white-space: nowrap;
+  }
+  .tag--req  { color: var(--req);  background: var(--req-wash); }
+  .tag--rec  { color: var(--rec);  background: var(--rec-wash); }
+  .tag--acct { color: var(--acct); background: var(--acct-wash); }
+  .tag__dot { width: 7px; height: 7px; border-radius: 50%; background: currentColor; }
+
+  /* ---- Section ---- */
+  section { margin-bottom: 22px; }
+  .sec {
+    background: var(--card); border: 1px solid var(--line); border-radius: var(--radius);
+    box-shadow: var(--shadow); overflow: hidden;
+  }
+  .sec__head {
+    display: flex; align-items: center; gap: 15px;
+    padding: 18px 22px; border-bottom: 1px solid var(--line);
+    background: linear-gradient(var(--card), var(--paper));
+  }
+  .sec__num {
+    flex: 0 0 auto; width: 40px; height: 40px; border-radius: 11px;
+    display: grid; place-items: center; font-weight: 700; font-size: 1.1rem;
+    background: var(--brand-wash); color: var(--brand-deep);
+    font-variant-numeric: tabular-nums;
+  }
+  .sec__title { margin: 0; font-size: 1.16rem; font-weight: 700; }
+  .sec__sub { margin: 1px 0 0; font-size: .84rem; color: var(--ink-faint); }
+  .sec__body { padding: 8px 22px 18px; }
+
+  /* ---- Check items ---- */
+  .item {
+    display: grid; grid-template-columns: 24px 1fr; gap: 13px; align-items: start;
+    padding: 13px 0; border-bottom: 1px solid var(--line); cursor: pointer;
+  }
+  .item:last-child { border-bottom: 0; }
+  .item input { position: absolute; opacity: 0; width: 0; height: 0; }
+  .box {
+    margin-top: 2px; width: 22px; height: 22px; border-radius: 7px;
+    border: 2px solid var(--line); background: var(--card);
+    display: grid; place-items: center; transition: .16s; flex: 0 0 auto;
+  }
+  .box svg { width: 13px; height: 13px; stroke: #fff; stroke-width: 3.4; fill: none; opacity: 0; transition: opacity .12s; }
+  .item input:checked ~ .box { background: var(--sage); border-color: var(--sage); }
+  .item input:checked ~ .box svg { opacity: 1; }
+  .item input:focus-visible ~ .box { outline: 2px solid var(--brand); outline-offset: 2px; }
+  .item__txt b { font-weight: 600; }
+  .item__txt small { display: block; color: var(--ink-faint); font-size: .84rem; margin-top: 1px; }
+  .item input:checked ~ .item__txt { opacity: .5; }
+  .item input:checked ~ .item__txt b { text-decoration: line-through; }
+  .item__badge {
+    display: inline-block; font-size: .66rem; font-weight: 700; letter-spacing: .04em;
+    padding: 2px 8px; border-radius: 999px; margin-left: 8px; vertical-align: middle;
+    white-space: nowrap;
+  }
+  .b-req  { color: var(--req);  background: var(--req-wash); }
+  .b-rec  { color: var(--rec);  background: var(--rec-wash); }
+  .b-acct { color: var(--acct); background: var(--acct-wash); }
+
+  /* ---- Callout ---- */
+  .note {
+    display: flex; gap: 12px; padding: 14px 16px; border-radius: 11px;
+    font-size: .9rem; margin: 6px 0 14px;
+  }
+  .note--warn { background: var(--req-wash); color: var(--ink); border: 1px solid color-mix(in srgb, var(--req) 30%, transparent); }
+  .note--info { background: var(--sage-wash); color: var(--ink); border: 1px solid color-mix(in srgb, var(--sage) 30%, transparent); }
+  .note__ico { flex: 0 0 auto; font-size: 1.1rem; line-height: 1.4; }
+  .note b { font-weight: 700; }
+
+  /* ---- Product grid inside section ---- */
+  .prodtag { display: inline-flex; gap: 6px; flex-wrap: wrap; margin: 2px 0 12px; }
+  .chip {
+    font-size: .78rem; font-weight: 600; padding: 4px 11px; border-radius: 999px;
+    border: 1px solid var(--line);
+  }
+  .chip--have { color: var(--sage); background: var(--sage-wash); border-color: transparent; }
+  .chip--need { color: var(--brand-deep); background: var(--brand-wash); border-color: transparent; }
+
+  table.mini { width: 100%; border-collapse: collapse; font-size: .86rem; margin-top: 4px; }
+  table.mini th, table.mini td { text-align: left; padding: 7px 10px; border-bottom: 1px solid var(--line); vertical-align: top; }
+  table.mini th { color: var(--ink-faint); font-weight: 600; white-space: nowrap; }
+  .scroll { overflow-x: auto; }
+
+  footer { margin-top: 34px; padding-top: 22px; border-top: 1px solid var(--line); color: var(--ink-faint); font-size: .84rem; text-align: center; }
+
+  @media (max-width: 560px) {
+    .sec__head { padding: 15px 16px; }
+    .sec__body { padding: 6px 16px 14px; }
+  }
+  @media print {
+    body { background: #fff; }
+    .no-print { display: none !important; }
+    .sec { box-shadow: none; break-inside: avoid; }
+    .item input:checked ~ .item__txt { opacity: 1; }
+  }
+  @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+</style>
+
+<div class="wrap">
+  <header class="masthead">
+    <span class="kicker">✦ เอกสารเตรียมงาน</span>
+    <h1>เช็คลิสต์เตรียมข้อมูล<br>สำหรับเว็บ RELIFE BE CARE</h1>
+    <p class="lead">รวมทุกอย่างที่ต้องส่งให้ผมเพื่อทำเว็บให้เสร็จสมบูรณ์ ติ๊กไปทีละอันได้เลย (ระบบจำความคืบหน้าไว้ให้อัตโนมัติ) ส่งมาเท่าที่มีก่อนก็ได้ ไม่ต้องรอครบ</p>
+  </header>
+
+  <div class="progress no-print">
+    <div class="progress__meta"><b id="pDone">0</b> / <span id="pTotal">0</span> รายการ</div>
+    <div class="progress__bar"><div class="progress__fill" id="pFill"></div></div>
+    <button class="btn" onclick="window.print()">🖨 พิมพ์ / บันทึก PDF</button>
+    <button class="btn" id="resetBtn">ล้างการติ๊ก</button>
+  </div>
+
+  <div class="legend">
+    <span class="tag tag--req"><span class="tag__dot"></span>จำเป็นก่อนเปิดเว็บ</span>
+    <span class="tag tag--rec"><span class="tag__dot"></span>ควรมี (ทำให้ดีขึ้น)</span>
+    <span class="tag tag--acct"><span class="tag__dot"></span>บัญชี/ขึ้นออนไลน์</span>
+  </div>
+
+  <!-- 1 -->
+  <section>
+    <div class="sec">
+      <div class="sec__head">
+        <div class="sec__num">1</div>
+        <div><h2 class="sec__title">ข้อมูลร้าน &amp; ธุรกิจ</h2>
+        <p class="sec__sub">ใช้ทั่วทั้งเว็บ — ส่วนหัว ท้ายเว็บ หน้าติดต่อ หน้ายืนยันตัวแทน</p></div>
+      </div>
+      <div class="sec__body" data-group="biz"></div>
+    </div>
+  </section>
+
+  <!-- 2 -->
+  <section>
+    <div class="sec">
+      <div class="sec__head">
+        <div class="sec__num">2</div>
+        <div><h2 class="sec__title">ข้อมูลสินค้า (5 รายการ)</h2>
+        <p class="sec__sub">กรอกชุดนี้ให้ครบทุกตัว — BETA OIL · BETAX PLUS · BETA LIFE · LAB FARM · BETAHERB</p></div>
+      </div>
+      <div class="sec__body">
+        <div class="note note--info">
+          <span class="note__ico">✅</span>
+          <div><b>ข่าวดี:</b> ผมมีคลังข้อมูล 3 ตัวนี้อยู่แล้ว (ส่วนผสม สรรพคุณ จุดขาย) — ช่วยร่างให้ได้เลย คุณแค่ยืนยันความถูกต้อง
+            <div class="prodtag">
+              <span class="chip chip--have">✓ BETA OIL</span>
+              <span class="chip chip--have">✓ BETA LIFE</span>
+              <span class="chip chip--have">✓ LAB FARM</span>
+              <span class="chip chip--need">ต้องขอ BETAX PLUS</span>
+              <span class="chip chip--need">ต้องขอ BETAHERB</span>
+            </div>
+          </div>
+        </div>
+        <div class="note note--warn">
+          <span class="note__ico">⚠️</span>
+          <div><b>เลข อย. ห้ามผิดเด็ดขาด</b> — เป็นเลขทางกฎหมาย 13 หลักบนฉลาก ถ่ายรูปฉลากส่งมาก็ได้ ผมจะได้คีย์ให้ถูก</div>
+        </div>
+        <div data-group="prod"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3 -->
+  <section>
+    <div class="sec">
+      <div class="sec__head">
+        <div class="sec__num">3</div>
+        <div><h2 class="sec__title">รูปภาพ</h2>
+        <p class="sec__sub">รูปจริงทำให้เว็บน่าเชื่อถือกว่าคู่แข่งชัดเจน — ตอนนี้เป็นกรอบสีเทารอไว้</p></div>
+      </div>
+      <div class="sec__body">
+        <div class="scroll">
+          <table class="mini">
+            <thead><tr><th>รูป</th><th>ขนาดแนะนำ</th><th>ใช้ที่</th></tr></thead>
+            <tbody id="imgTable"></tbody>
+          </table>
+        </div>
+        <div style="height:14px"></div>
+        <div data-group="img"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4 -->
+  <section>
+    <div class="sec">
+      <div class="sec__head">
+        <div class="sec__num">4</div>
+        <div><h2 class="sec__title">การชำระเงิน &amp; จัดส่ง</h2>
+        <p class="sec__sub">ใช้ในตะกร้า หน้าสั่งซื้อ และหน้านโยบาย</p></div>
+      </div>
+      <div class="sec__body" data-group="pay"></div>
+    </div>
+  </section>
+
+  <!-- 5 -->
+  <section>
+    <div class="sec">
+      <div class="sec__head">
+        <div class="sec__num">5</div>
+        <div><h2 class="sec__title">รีวิวลูกค้า</h2>
+        <p class="sec__sub">โซนสร้างความเชื่อมั่น — ตอนนี้เป็นโครงเปล่ารอรีวิวจริง</p></div>
+      </div>
+      <div class="sec__body">
+        <div class="note note--warn">
+          <span class="note__ico">⚠️</span>
+          <div><b>ต้องเป็นรีวิวจริงเท่านั้น</b> — การใช้รีวิวปลอมผิดกฎหมายคุ้มครองผู้บริโภค แคปแชตจริงแล้วเบลอชื่อ/รูปโปรไฟล์ได้</div>
+        </div>
+        <div data-group="review"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6 -->
+  <section>
+    <div class="sec">
+      <div class="sec__head">
+        <div class="sec__num">6</div>
+        <div><h2 class="sec__title">บทความ</h2>
+        <p class="sec__sub">ช่วย SEO และสร้างความน่าเชื่อถือ — ผมเขียนเนื้อหาเต็มให้ได้ ขอแค่หัวข้อ</p></div>
+      </div>
+      <div class="sec__body" data-group="blog"></div>
+    </div>
+  </section>
+
+  <!-- 7 -->
+  <section>
+    <div class="sec">
+      <div class="sec__head">
+        <div class="sec__num">7</div>
+        <div><h2 class="sec__title">บัญชี &amp; การเชื่อมต่อ (สำหรับขึ้นออนไลน์)</h2>
+        <p class="sec__sub">ส่วนนี้คุณสมัคร/สร้างเอง แล้วส่งค่าที่ได้มาให้ผม — ผมช่วยบอกทีละขั้น</p></div>
+      </div>
+      <div class="sec__body">
+        <div data-group="acct"></div>
+        <div class="note note--info" style="margin-top:14px">
+          <span class="note__ico">💡</span>
+          <div>ยังไม่ต้องรีบส่วนนี้ก็ได้ — เตรียมข้อมูลข้อ 1–6 ให้ผมก่อน ผมทำเว็บให้เสร็จ แล้วค่อยขึ้นออนไลน์พร้อมกันทีเดียว</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    ส่งข้อมูลมาเท่าที่มีก่อนได้เลย ไม่ต้องรอครบทุกช่อง · ทุกจุดที่ยังว่างผมใส่ placeholder รอไว้ให้แล้ว
+  </footer>
+</div>
+
+<script>
+  var DATA = {
+    biz: [
+      ["req","ชื่อร้าน / แบรนด์ ที่จะใช้","ตอนนี้ใช้ชื่อ RELIFE BE CARE ชั่วคราว"],
+      ["req","โลโก้","ไฟล์ .png พื้นหลังโปร่ง ถ้ามี"],
+      ["req","ชื่อบริษัท / ร้าน ตามทะเบียนพาณิชย์",""],
+      ["req","เลขทะเบียนพาณิชย์",""],
+      ["req","เลขประจำตัวผู้เสียภาษี (13 หลัก)",""],
+      ["req","ที่อยู่ร้านแบบเต็ม","เลขที่ ถนน แขวง/ตำบล เขต/อำเภอ จังหวัด รหัสไปรษณีย์"],
+      ["req","เบอร์โทรศัพท์",""],
+      ["req","LINE OA — ไอดี (@...) และลิงก์","ช่องทางหลักในการรับออเดอร์และปรึกษา"],
+      ["req","ลิงก์ Facebook Page",""],
+      ["rec","ลิงก์ Messenger (m.me/...)","ใช้ในหน้าเช็คสถานะออเดอร์"],
+      ["rec","อีเมลร้าน",""],
+      ["req","เวลาทำการ","เช่น จันทร์–เสาร์ 09:00–18:00"],
+      ["rec","ปีที่ได้รับแต่งตั้งเป็นตัวแทนจำหน่าย",""],
+      ["rec","รูปหนังสือแต่งตั้งตัวแทนจำหน่าย","เพิ่มความน่าเชื่อถือในหน้าเกี่ยวกับเรา"]
+    ],
+    prod: [
+      ["req","เลข อย. 13 หลัก — ทั้ง 5 ตัว","สำคัญที่สุด ห้ามผิด"],
+      ["req","ราคาขาย + ราคาก่อนลด — แต่ละตัว",""],
+      ["rec","ชุดโปรโมชั่น (ถ้ามี)","เช่น ซื้อ 2 แถม 1 / แพ็กคู่ลดพิเศษ"],
+      ["req","ปริมาณบรรจุ","กี่แคปซูล / ซอฟท์เจล ต่อกล่อง"],
+      ["req","ส่วนผสมสำคัญ + ปริมาณ (mg) ต่อหน่วยบริโภค","ถ่ายรูปฉลากด้านหลังส่งมาได้"],
+      ["req","วิธีรับประทาน (ตามฉลาก)",""],
+      ["req","คำเตือนตามฉลาก",""],
+      ["rec","กลุ่มที่เหมาะ / ไม่เหมาะกับใคร","ผมมีร่างให้แล้ว 3 ตัว ช่วยตรวจความถูกต้อง"],
+      ["req","ข้อมูลครบของ BETAX PLUS","ยังไม่มีในระบบ"],
+      ["req","ข้อมูลครบของ BETAHERB","ยังไม่มีในระบบ"],
+      ["rec","เลขโฆษณา (ฆอ.) ที่ผ่าน อย. ถ้ามี","ทำให้โฆษณาบนเว็บถูกกฎหมายชัดเจน"]
+    ],
+    img: [
+      ["req","รูปสินค้าพื้นหลังขาว — ทั้ง 5 ตัว","อย่างน้อยตัวละ 1 รูป"],
+      ["req","รูปฉลากด้านหลังอ่านออก — ทั้ง 5 ตัว","เป็นจุดขาย “ฉลากโปร่งใส” ของเว็บ"],
+      ["rec","รูป lifestyle — ตัวละ 1–2 รูป","คนถือสินค้า / วางบนโต๊ะ / คู่แก้วน้ำ"],
+      ["req","ภาพหลักหน้าแรก","ลูกหลานกับผู้สูงอายุ อบอุ่น · แนวตั้ง 1200×1500px"],
+      ["rec","รูปเจ้าของ / ทีมงาน / หน้าร้าน","หน้าคนจริงช่วยให้ลูกค้าเชื่อใจ"],
+      ["rec","ใบรับรอง GMP / HACCP / ISO 9001 / GHP","สแกนหรือถ่ายให้อ่านออก"],
+      ["rec","รูปการแพ็ก / สต็อก / กล่องพัสดุ","พิสูจน์ว่ามีของจริง"],
+      ["rec","ภาพปกบทความ (3 รูป)","1200×750px ต่อบทความ"]
+    ],
+    pay: [
+      ["req","ธนาคาร + ชื่อบัญชี + เลขที่บัญชี","สำหรับลูกค้าโอนเงิน"],
+      ["req","รูป QR พร้อมเพย์",""],
+      ["req","ยืนยัน: ส่งฟรีทั่วไทยจริงไหม + ขนส่งที่ใช้","ตอนนี้ตั้งเป็นส่งฟรีไม่มีขั้นต่ำ"],
+      ["req","เงื่อนไขผ่อน 0%","ผ่อนกี่งวด · ยอดขั้นต่ำ · ธนาคารที่ร่วมรายการ"],
+      ["rec","นโยบายการคืน/เปลี่ยนสินค้า","ตอนนี้ตั้งไว้ 7 วัน — ยืนยันหรือแก้ได้"]
+    ],
+    review: [
+      ["rec","รีวิวจริง 6–10 อัน","แคปแชต LINE/Facebook (เบลอชื่อ+รูปโปรไฟล์)"],
+      ["rec","หรือข้อความรีวิว + ชื่อย่อ + อายุ + จังหวัด + สินค้าที่ซื้อ",""]
+    ],
+    blog: [
+      ["rec","หัวข้อบทความที่อยากได้","หรือใช้ 3 หัวข้อที่ผมร่างไว้: เปรียบเทียบน้ำมัน · สอนอ่านฉลาก · ไฟโตสเตอรอล"]
+    ],
+    acct: [
+      ["acct","สมัครบัญชี GitHub (ฟรี)","เก็บโค้ด — ผมช่วย push ให้"],
+      ["acct","สมัครบัญชี Netlify (ฟรี)","ที่อยู่ของเว็บ + หลังบ้าน + ระบบสั่งซื้อ"],
+      ["acct","โดเมนเว็บ","เช่น .co.th (~800–1,200 บ./ปี) หรือ .com (~400 บ./ปี)"],
+      ["acct","Lark: Webhook URL ของกลุ่มแจ้งเตือน","สร้างจาก กลุ่ม → Settings → Bots → Custom Bot"],
+      ["acct","Lark: App ID + App Secret","สำหรับให้รูปสลิปเด้งเข้ากลุ่มได้"],
+      ["acct","Google Sheet","ทำตามไฟล์ google-apps-script.gs (~5 นาที)"],
+      ["acct","Pay Solutions: เอกสารเชื่อมต่อ (ถ้าอยากให้รู้ผลจ่ายอัตโนมัติ)","โหมดลิงก์ใช้ได้เลยอยู่แล้ว อันนี้เสริม"]
+    ]
+  };
+  var IMG_ROWS = [
+    ["กล่อง/ขวด พื้นหลังขาว","1200×1200px","หน้าสินค้า · การ์ดสินค้า"],
+    ["ฉลากด้านหลังอ่านออก","1200×1200px","แท็บส่วนประกอบ"],
+    ["lifestyle","1200×1200px","แกลเลอรีสินค้า"],
+    ["ภาพหลักหน้าแรก","1200×1500px","Hero หน้าแรก"],
+    ["เจ้าของ/ทีม/หน้าร้าน","1600×900px","หน้าเกี่ยวกับเรา"],
+    ["ใบรับรอง & หนังสือแต่งตั้ง","สแกนชัด","หน้าเกี่ยวกับเรา"],
+    ["ภาพปกบทความ","1200×750px","บทความละ 1 รูป"]
+  ];
+
+  var BADGE = { req:["b-req","จำเป็น"], rec:["b-rec","ควรมี"], acct:["b-acct","บัญชี"] };
+  var CHECK = '<svg viewBox="0 0 24 24"><polyline points="4 12 10 18 20 6"/></svg>';
+  var KEY = "hopeful_checklist_v1";
+  var saved = {};
+  try { saved = JSON.parse(localStorage.getItem(KEY)) || {}; } catch(e) {}
+
+  var idx = 0, total = 0;
+  Object.keys(DATA).forEach(function(group){
+    var host = document.querySelector('[data-group="'+group+'"]');
+    if(!host) return;
+    DATA[group].forEach(function(row){
+      var id = "c"+(idx++), pr = row[0], b = BADGE[pr];
+      total++;
+      var on = saved[id] ? " checked" : "";
+      var lbl = document.createElement("label");
+      lbl.className = "item";
+      lbl.innerHTML =
+        '<input type="checkbox" data-id="'+id+'"'+on+'>' +
+        '<span class="box">'+CHECK+'</span>' +
+        '<span class="item__txt"><b>'+row[1]+'</b>' +
+        '<span class="item__badge '+b[0]+'">'+b[1]+'</span>' +
+        (row[2] ? '<small>'+row[2]+'</small>' : '') + '</span>';
+      host.appendChild(lbl);
+    });
+  });
+
+  var imgBody = document.getElementById("imgTable");
+  IMG_ROWS.forEach(function(r){
+    var tr = document.createElement("tr");
+    tr.innerHTML = "<td><b>"+r[0]+"</b></td><td>"+r[1]+"</td><td>"+r[2]+"</td>";
+    imgBody.appendChild(tr);
+  });
+
+  document.getElementById("pTotal").textContent = total;
+  var boxes = Array.prototype.slice.call(document.querySelectorAll('input[type=checkbox]'));
+  function refresh(){
+    var done = boxes.filter(function(b){return b.checked;}).length;
+    document.getElementById("pDone").textContent = done;
+    document.getElementById("pFill").style.width = (total? (done/total*100):0)+"%";
+  }
+  boxes.forEach(function(b){
+    b.addEventListener("change", function(){
+      saved[b.dataset.id] = b.checked;
+      try { localStorage.setItem(KEY, JSON.stringify(saved)); } catch(e){}
+      refresh();
+    });
+  });
+  document.getElementById("resetBtn").addEventListener("click", function(){
+    if(!confirm("ล้างการติ๊กทั้งหมด?")) return;
+    saved = {}; try { localStorage.removeItem(KEY); } catch(e){}
+    boxes.forEach(function(b){ b.checked = false; });
+    refresh();
+  });
+  refresh();
+</script>

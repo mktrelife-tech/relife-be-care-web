@@ -1,6 +1,11 @@
+# ── หลังบ้านบน Vercel: ล็อกอินผ่าน GitHub OAuth ──
+# แก้ repo เป็น "ชื่อบัญชี/ชื่อ-repo" ของคุณ และ base_url เป็นโดเมนเว็บจริง
 backend:
-  name: git-gateway
+  name: github
+  repo: your-github-username/relife-be-care-web
   branch: main
+  base_url: https://your-app.vercel.app
+  auth_endpoint: /api/auth
 
 locale: th
 media_folder: "assets/img/uploads"

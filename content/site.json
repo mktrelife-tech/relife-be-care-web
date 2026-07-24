@@ -1,27 +1,28 @@
 {
   "brand": {
-    "name": "Hopeful Wellness",
+    "name": "RELIFE BE CARE",
     "tagline": "ดูแลคนที่รัก เริ่มจากการเลือกที่ถูกต้อง",
-    "logoText": "H",
-    "logo": "",
+    "logoText": "R",
+    "logo": "assets/img/logo-mark.png",
     "subtitle": "ตัวแทนจำหน่ายอย่างเป็นทางการ"
   },
   "contact": {
-    "phone": "096-656-8065",
-    "phoneRaw": "0966568065",
-    "lineId": "@hopefulwellness",
-    "lineUrl": "https://line.me/R/ti/p/@hopefulwellness",
+    "phone": "062-620-7877",
+    "phoneRaw": "0626207877",
+    "lineId": "@085gpzjb",
+    "lineUrl": "https://lin.ee/t3AjZtI",
     "facebook": "https://facebook.com/",
-    "email": "info@example.co.th",
-    "address": "[[ ใส่ที่อยู่ร้าน — เลขที่ ถนน แขวง/ตำบล เขต/อำเภอ จังหวัด รหัสไปรษณีย์ ]]",
-    "openHours": "จันทร์ - เสาร์  09:00 - 18:00 น."
+    "email": "[[ อีเมลร้าน (ยังไม่มีในชีต) ]]",
+    "address": "PLATINUM PLACE เลขที่ 76/4 ซอยรามคำแหง 178 เขตมีนบุรี กรุงเทพมหานคร 10510",
+    "openHours": "จันทร์ - เสาร์  08:30 - 17:30 น."
   },
   "business": {
-    "legalName": "[[ ชื่อบริษัท / ชื่อร้านตามทะเบียนพาณิชย์ ]]",
-    "taxId": "[[ เลขประจำตัวผู้เสียภาษี 13 หลัก ]]",
-    "regNo": "[[ เลขทะเบียนพาณิชย์ ]]",
-    "authorizedSince": "[[ ปีที่ได้รับแต่งตั้ง ]]",
-    "authorizedProof": ""
+    "legalName": "บริษัท รีไลฟ์ โซลูชั่นส์ จำกัด",
+    "taxId": "105563170054",
+    "regNo": "[[ เลขทะเบียนพาณิชย์ (ยังไม่มีในชีต) ]]",
+    "authorizedSince": "[[ ปีที่ได้รับแต่งตั้ง (ยังไม่มีในชีต) ]]",
+    "distributorId": "VIP0083",
+    "authorizedProof": "assets/img/distributor-card.jpg"
   },
   "hero": {
     "eyebrow": "ตัวแทนจำหน่ายอย่างเป็นทางการ 100%",

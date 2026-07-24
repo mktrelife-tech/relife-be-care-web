@@ -37,6 +37,14 @@
     menu:   '<path d="M3 6h18M3 12h18M3 18h18"/>',
     close:  '<path d="M18 6L6 18M6 6l12 12"/>'
   };
+  /* กล่องโลโก้ — ใช้รูปจริงถ้ามี ไม่งั้นใช้ตัวอักษรในกล่องไล่สี */
+  function brandMark() {
+    const s = state.site;
+    return s.brand.logo
+      ? '<span class="logo__mark logo__mark--img"><img src="' + esc(url(s.brand.logo)) + '" alt="' + esc(s.brand.name) + '"></span>'
+      : '<span class="logo__mark">' + esc(s.brand.logoText || "R") + "</span>";
+  }
+
   const icon = (n, size) => '<svg width="' + (size || 22) + '" height="' + (size || 22) +
     '" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">' +
     (ICONS[n] || "") + "</svg>";
@@ -115,8 +123,7 @@
       "</div></div>" +
 
       '<header class="header" id="header"><div class="wrap header__bar">' +
-        '<a class="logo" href="' + url("index.html") + '">' +
-          '<span class="logo__mark">' + esc(s.brand.logoText || "H") + "</span>" +
+        '<a class="logo" href="' + url("index.html") + '">' + brandMark() +
           '<span class="logo__txt">' + esc(s.brand.name) +
             '<span class="logo__sub">' + esc(s.brand.subtitle || "") + "</span>" +
           "</span>" +
@@ -188,7 +195,7 @@
         '<div class="footer__grid">' +
           "<div>" +
             '<div class="logo" style="color:#fff;margin-bottom:14px">' +
-              '<span class="logo__mark">' + esc(s.brand.logoText || "H") + "</span><span>" + esc(s.brand.name) + "</span></div>" +
+              brandMark() + "<span>" + esc(s.brand.name) + "</span></div>" +
             '<p style="font-size:.9rem;color:#B7ABA0;max-width:32ch">' + esc(s.brand.tagline) + "</p>" +
             '<p style="font-size:.86rem;color:#9C9086">' + esc(s.business.legalName) + "<br>เลขประจำตัวผู้เสียภาษี " + esc(s.business.taxId) + "</p>" +
           "</div>" +

@@ -178,7 +178,7 @@ document.addEventListener("site:ready", function (e) {
       slip: payMethod === "transfer" ? slipData : null
     };
 
-    fetch("/.netlify/functions/create-order", {
+    fetch("/api/create-order", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(payload)
@@ -225,7 +225,7 @@ document.addEventListener("site:ready", function (e) {
         btn.textContent = payMethod === "card" ? "ไปหน้าชำระเงิน" : "ยืนยันคำสั่งซื้อ";
         showErr(
           err.message.indexOf("Failed to fetch") > -1 || err.message.indexOf("404") > -1
-            ? "ยังเชื่อมต่อระบบสั่งซื้อไม่ได้ — ระบบนี้ทำงานเมื่อเว็บขึ้นออนไลน์บน Netlify แล้วเท่านั้น " +
+            ? "ยังเชื่อมต่อระบบสั่งซื้อไม่ได้ — ระบบนี้ทำงานเมื่อเว็บขึ้นออนไลน์แล้วเท่านั้น " +
               "ระหว่างนี้รบกวนสั่งซื้อทาง LINE ได้เลยครับ"
             : err.message
         );
