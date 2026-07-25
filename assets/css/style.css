@@ -343,6 +343,13 @@ ul, ol { margin: 0 0 1em; padding-left: 1.25em; }
 .card__name { font-family: var(--font-display); font-weight: 600; font-size: 1.08rem; margin: 0 0 3px; }
 .card__fda { font-size: .74rem; color: var(--ink-faint); letter-spacing: .02em; margin: 0 0 8px; }
 .card__desc { font-size: .89rem; color: var(--ink-soft); margin: 0 0 14px; flex: 1; }
+.card__benefits { list-style: none; padding: 0; margin: 2px 0 14px; display: flex; flex-wrap: wrap; gap: 6px; flex: 1; align-content: flex-start; }
+.card__benefits li {
+  font-size: .78rem; font-weight: 500; color: var(--sage-dark);
+  background: var(--sage-wash); padding: 4px 10px; border-radius: var(--r-pill);
+  display: inline-flex; align-items: center; gap: 5px;
+}
+.card__benefits li::before { content: "✓"; font-weight: 700; font-size: .72rem; }
 .card__foot { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
 .price { font-family: var(--font-display); font-weight: 700; font-size: 1.24rem; color: var(--brand-dark); }
 .price small { font-size: .8rem; font-weight: 500; color: var(--ink-faint); }

@@ -450,14 +450,17 @@
       : "";
     const was = p.priceWas && p.priceWas > p.price
       ? '<span class="price__was">฿' + baht(p.priceWas) + "</span>" : "";
+    const benefits = (p.benefits && p.benefits.length)
+      ? '<ul class="card__benefits">' + p.benefits.map((b) => "<li>" + esc(b) + "</li>").join("") + "</ul>"
+      : '<p class="card__desc">' + esc(p.short) + "</p>";
     return '<article class="card reveal">' +
       '<a class="card__media" href="' + url("p/" + p.slug + ".html") + '">' + badge + productImg(p) + "</a>" +
       '<div class="card__body">' +
         '<h3 class="card__name"><a href="' + url("p/" + p.slug + ".html") + '">' + esc(p.name) + "</a></h3>" +
         '<p class="card__fda">อย. ' + esc(p.fda) + " · " + esc(p.unit) + "</p>" +
-        '<p class="card__desc">' + esc(p.short) + "</p>" +
+        benefits +
         '<div class="card__foot">' +
-          '<div class="price">' + was + "฿" + baht(p.price) + "</div>" +
+          '<div class="price">' + was + '฿' + baht(p.price) + ' <small>/ กล่อง</small></div>' +
           '<button class="btn btn--primary btn--sm" data-add="' + esc(p.slug) + '">ใส่ตะกร้า</button>' +
         "</div>" +
       "</div></article>";
