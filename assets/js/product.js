@@ -179,6 +179,15 @@ document.addEventListener("site:ready", function (e) {
     A.addToCart(p.slug, selPack, qty);
   });
 
+  /* ย้ายส่วนซื้อ (รูป + เลือกแพ็ก) ลงไปหลังโซน "ความมั่นใจ" — โครงเซลเพจ */
+  var buySection = A.$("#pdp").closest("section");
+  var trustSection = null;
+  A.$$("#pdpSections section").forEach(function (sec) { if (sec.querySelector(".trust-grid")) trustSection = sec; });
+  if (buySection && trustSection) {
+    buySection.classList.add("section--sand");
+    trustSection.after(buySection);
+  }
+
   /* สินค้าอื่น */
   A.$("#related").innerHTML = S.products.filter(function (x) { return x.slug !== p.slug; })
     .slice(0, 4).map(A.productCard).join("");
