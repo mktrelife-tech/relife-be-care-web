@@ -211,7 +211,7 @@ document.addEventListener("site:ready", function (e) {
   var disc =
     '<div class="wrap"><p class="pdp-disc">' + A.esc(S.site.disclaimer) + "</p></div>";
 
-  A.$("#pdpSections").innerHTML = secHero + secWho + secHl + secIng + secHow + secTrust + secFaq + secCta + disc;
+  A.$("#pdpSections").innerHTML = secHero + secWho + secHl + secBanners + secIng + secHow + secTrust + secFaq + secCta + disc;
 
   A.$("#ctaAdd").addEventListener("click", function () {
     A.addToCart(p.slug, selPack, qty);
