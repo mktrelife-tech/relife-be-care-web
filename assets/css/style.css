@@ -258,11 +258,13 @@ ul, ol { margin: 0 0 1em; padding-left: 1.25em; }
 }
 .burger:hover { border-color: var(--brand); color: var(--brand-dark); }
 
-/* ---------- 6. Hero (full-bleed BG + ข้อความทับ) ---------- */
+/* ---------- 6. Hero (full-bleed BG 16:9 + ข้อความทับ) ---------- */
 .hero {
   position: relative; overflow: hidden; display: flex; align-items: center;
-  min-height: clamp(520px, 84vh, 820px);
+  min-height: 520px;
 }
+/* จอใหญ่: สัดส่วนภาพ 16:9 */
+@media (min-width: 900px) { .hero { aspect-ratio: 16 / 9; min-height: 0; max-height: 92vh; } }
 /* ภาพพื้นหลังเต็มกว้าง */
 .hero__bg { position: absolute; inset: 0; z-index: 0; background-size: cover; background-position: center right; }
 .hero__bg.is-placeholder {
