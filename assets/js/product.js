@@ -101,38 +101,82 @@ document.addEventListener("site:ready", function (e) {
   A.$("#qDec").addEventListener("click", function () { if (qty > 1) { qty--; A.$("#qVal").value = qty; } });
   A.$("#addBtn").addEventListener("click", function () { A.addToCart(p.slug, selPack, qty); });
 
-  /* ---- แท็บข้อมูล ---- */
-  A.$("#tabPanels").innerHTML =
-    '<div class="tab-panel" id="tab-detail">' +
-      "<p>" + A.esc(p.short) + "</p>" +
-      "<h3>เหมาะกับใคร</h3><p>" + A.esc(p.forWho) + "</p>" +
-      "<h3>ใครที่ไม่ควรรับประทาน</h3><p>" + A.esc(p.notFor) + "</p>" +
-    "</div>" +
-    '<div class="tab-panel" id="tab-ingredients" hidden>' +
-      "<table class='spec'><tbody>" +
-        (p.ingredients || []).map(function (i) {
-          return "<tr><th>" + A.esc(i.name) + "</th><td>" + A.esc(i.amount) + "</td></tr>";
-        }).join("") +
-      "</tbody></table>" +
-      "<p style='font-size:.85rem;color:var(--ink-faint);margin-top:14px'>ข้อมูลตามที่ระบุบนฉลากผลิตภัณฑ์ · ปริมาณต่อ 1 หน่วยบริโภค</p>" +
-    "</div>" +
-    '<div class="tab-panel" id="tab-howto" hidden>' +
-      "<h3>วิธีรับประทาน</h3><p>" + A.esc(p.howto) + "</p>" +
-      "<h3>คำเตือน</h3><p style='color:var(--ink-soft)'>" + A.esc(p.warning) + "</p>" +
-    "</div>" +
-    '<div class="tab-panel" id="tab-faq" hidden><div class="faq" style="margin:0">' +
-      ((p.faq && p.faq.length) ? p.faq.map(function (f) {
-        return "<details><summary>" + A.esc(f.q) + "<span></span></summary><div class='faq__a'>" + A.esc(f.a) + "</div></details>";
-      }).join("") : "<p style='color:var(--ink-faint)'>[[ เพิ่มคำถามที่ลูกค้าถามบ่อยของสินค้านี้ได้ในหลังบ้าน ]]</p>") +
-    "</div></div>";
+  /* ---- เซลเพจ long-scroll (compliant) ---- */
+  var onePrice = packList[0].price;
+  var lineUrl = A.esc(S.site.contact.lineUrl);
+  var biz = S.site.business || {};
 
-  A.$$("#tabs button").forEach(function (b) {
-    b.addEventListener("click", function () {
-      A.$$("#tabs button").forEach(function (x) { x.classList.remove("is-active"); });
-      b.classList.add("is-active");
-      A.$$("#tabPanels .tab-panel").forEach(function (pn) { pn.hidden = true; });
-      A.$("#tab-" + b.dataset.tab).hidden = false;
-    });
+  var secWho =
+    '<section class="section pdp-sec pdp-sec--who"><div class="wrap">' +
+      '<div class="sec-head"><span class="eyebrow">เหมาะกับใคร</span><h2>' + A.esc(p.name) + " เหมาะกับคุณไหม?</h2></div>" +
+      '<div class="who-card"><div class="who-card__ico">🎯</div><div>' +
+        "<p style='margin:0 0 12px'>" + A.esc(p.forWho) + "</p>" +
+        '<a class="btn btn--ghost btn--sm" href="' + A.url("quiz.html") + '">ยังไม่แน่ใจ? ทำแบบประเมิน 1 นาที →</a>' +
+      "</div></div></div></section>";
+
+  var secHl = (p.highlights && p.highlights.length) ?
+    '<section class="section pdp-sec"><div class="wrap">' +
+      '<div class="sec-head"><span class="eyebrow">จุดเด่น</span><h2>ทำไมถึงเลือก ' + A.esc(p.name) + "</h2></div>" +
+      '<div class="hl-grid">' + p.highlights.map(function (h, i) {
+        return '<div class="hl-item reveal"><span class="hl-item__n">' + (i + 1) + "</span><p>" + A.esc(h) + "</p></div>";
+      }).join("") + "</div></div></section>" : "";
+
+  var secIng = (p.ingredients && p.ingredients.length) ?
+    '<section class="section section--sand pdp-sec"><div class="wrap" style="max-width:760px">' +
+      '<div class="sec-head"><span class="eyebrow">ส่วนประกอบสำคัญ</span><h2>ในทุกแคปซูล</h2>' +
+        "<p>เราแสดงส่วนผสมและปริมาณจริงตามฉลาก ไม่มีปิดบัง</p></div>" +
+      '<div class="scroll"><table class="spec"><tbody>' +
+        p.ingredients.map(function (i) { return "<tr><th>" + A.esc(i.name) + "</th><td>" + A.esc(i.amount) + "</td></tr>"; }).join("") +
+      "</tbody></table></div>" +
+      "<p style='font-size:.85rem;color:var(--ink-faint);margin-top:14px;text-align:center'>ข้อมูลตามที่ระบุบนฉลากผลิตภัณฑ์ · ปริมาณต่อ 1 หน่วยบริโภค</p>" +
+    "</div></section>" : "";
+
+  var secHow =
+    '<section class="section pdp-sec"><div class="wrap" style="max-width:720px">' +
+      '<div class="sec-head"><span class="eyebrow">วิธีรับประทาน &amp; ข้อควรระวัง</span></div>' +
+      '<div class="howto-card"><span style="font-size:1.6rem">💊</span><div><b>วิธีรับประทาน</b><br>' + A.esc(p.howto) + "</div></div>" +
+      '<div class="warn-card"><b>⚠️ คำเตือน</b><p>' + A.esc(p.warning) + "</p></div>" +
+      "<p style='font-size:.92rem'><b>ใครที่ไม่ควรรับประทาน:</b> <span style='color:var(--ink-soft)'>" + A.esc(p.notFor) + "</span></p>" +
+    "</div></section>";
+
+  var trust = [
+    { i: "✅", t: "มีเลข อย.", d: p.fda },
+    { i: "🏭", t: "ผลิตมาตรฐาน GMP", d: "โรงงานได้รับการรับรอง" },
+    { i: "🪪", t: "ตัวแทนจำหน่ายแท้", d: "รหัส " + (biz.distributorId || "VIP0083") },
+    { i: "🚚", t: "ส่งฟรี + ปลายทาง", d: "ผ่อน 0% ได้" }
+  ];
+  var secTrust =
+    '<section class="section section--sage pdp-sec"><div class="wrap">' +
+      '<div class="sec-head"><span class="eyebrow">ความมั่นใจ</span><h2>ตรวจสอบได้ทุกอย่าง</h2></div>' +
+      '<div class="trust-grid">' + trust.map(function (t) {
+        return '<div class="trust-item"><div class="trust-item__i">' + t.i + "</div><b>" + A.esc(t.t) + "</b><span>" + A.esc(t.d) + "</span></div>";
+      }).join("") + "</div></div></section>";
+
+  var secFaq = (p.faq && p.faq.length) ?
+    '<section class="section pdp-sec"><div class="wrap" style="max-width:780px">' +
+      '<div class="sec-head"><span class="eyebrow">คำถามที่พบบ่อย</span><h2>เรื่องที่ลูกค้าถามบ่อย</h2></div>' +
+      '<div class="faq">' + p.faq.map(function (f) {
+        return "<details><summary>" + A.esc(f.q) + "<span></span></summary><div class='faq__a'>" + A.esc(f.a) + "</div></details>";
+      }).join("") + "</div></div></section>" : "";
+
+  var secCta =
+    '<section class="pdp-cta"><div class="wrap"><div class="pdp-cta__box">' +
+      "<div><h2 style='margin:0 0 4px'>พร้อมเริ่มดูแลสุขภาพวันนี้</h2>" +
+        "<p style='margin:0;opacity:.92'>🚚 ส่งฟรีทั่วไทย · 💵 เก็บเงินปลายทาง · 💳 ผ่อน 0% ได้</p></div>" +
+      '<div class="pdp-cta__act">' +
+        "<div class='pdp-cta__price'>เริ่มต้น ฿" + A.baht(onePrice) + " <small>/ กล่อง</small></div>" +
+        '<button class="btn btn--lg" id="ctaAdd" style="background:#fff;color:var(--brand-dark)">🛒 สั่งซื้อเลย</button>' +
+        '<a class="btn btn--line btn--lg" href="' + lineUrl + '" target="_blank" rel="noopener">ถามก่อนซื้อ</a>' +
+      "</div>" +
+    "</div></div></section>";
+
+  var disc =
+    '<div class="wrap"><p class="pdp-disc">' + A.esc(S.site.disclaimer) + "</p></div>";
+
+  A.$("#pdpSections").innerHTML = secWho + secHl + secIng + secHow + secTrust + secFaq + secCta + disc;
+
+  A.$("#ctaAdd").addEventListener("click", function () {
+    A.addToCart(p.slug, selPack, qty);
   });
 
   /* สินค้าอื่น */
