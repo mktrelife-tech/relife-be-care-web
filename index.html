@@ -32,7 +32,7 @@
       <p class="hero__lead" id="heroLead"></p>
       <div class="hero__cta">
         <a class="btn btn--primary btn--lg" href="shop.html">ดูสินค้าทั้งหมด</a>
-        <a class="btn btn--ghost btn--lg" href="quiz.html">หาตัวที่เหมาะกับคุณ →</a>
+        <a class="btn btn--line btn--lg" href="consult.html">🩺 นัดปรึกษาฟรี</a>
       </div>
       <div class="hero__trust" id="heroTrust"></div>
     </div>
@@ -60,13 +60,6 @@
   </div>
 </section>
 
-<!-- ===== SPOTLIGHT ===== -->
-<section class="section">
-  <div class="wrap">
-    <div class="spotlight reveal" id="spotlight"></div>
-  </div>
-</section>
-
 <!-- ===== PRODUCTS ===== -->
 <section class="section section--sand">
   <div class="wrap">
@@ -78,20 +71,6 @@
     <div class="products-grid" id="productsGrid"></div>
     <div class="center" style="margin-top:34px">
       <a class="btn btn--ghost" href="compare.html">เปรียบเทียบสินค้าทั้ง 5 ตัว →</a>
-    </div>
-  </div>
-</section>
-
-<!-- ===== QUIZ CTA ===== -->
-<section class="section">
-  <div class="wrap">
-    <div class="verify reveal" style="background:linear-gradient(135deg,var(--brand-wash),var(--sage-wash));border-color:rgba(2,160,220,.2)">
-      <div class="verify__seal">🧭</div>
-      <div>
-        <h2 style="margin-bottom:6px">ไม่แน่ใจว่าตัวไหนเหมาะกับคุณพ่อคุณแม่?</h2>
-        <p style="margin-bottom:18px;color:var(--ink-soft)">ตอบคำถามสั้น ๆ 5 ข้อ ใช้เวลาไม่ถึง 1 นาที เราจะแนะนำผลิตภัณฑ์ที่ตรงกับสิ่งที่คุณกำลังดูแลที่สุด — ไม่ต้องกรอกเบอร์ ไม่ต้องสมัครสมาชิก</p>
-        <a class="btn btn--primary" href="quiz.html">เริ่มทำแบบประเมิน</a>
-      </div>
     </div>
   </div>
 </section>
@@ -210,28 +189,6 @@ document.addEventListener("site:ready", function (e) {
     return '<div class="feature reveal"><div class="feature__ico">' + A.icon(f.icon, 22) + "</div>" +
       "<h3>" + A.esc(f.title) + "</h3><p>" + A.esc(f.text) + "</p></div>";
   }).join("");
-
-  /* spotlight = สินค้าที่ตั้ง featured:true */
-  var hero = S.products.filter(function (p) { return p.featured; })[0] || S.products[0];
-  if (hero) {
-    A.$("#spotlight").innerHTML =
-      '<div class="spotlight__media">' +
-        (hero.images && hero.images[0]
-          ? '<img src="' + A.esc(hero.images[0]) + '" alt="' + A.esc(hero.name) + '">'
-          : '<div class="ph" style="aspect-ratio:1/1" data-label="รูปสินค้าเด่น ' + A.esc(hero.name) + ' — พื้นหลังขาว 1200×1200px"></div>') +
-      "</div>" +
-      "<div><span class='eyebrow'>สินค้าแนะนำ</span>" +
-        "<h2>" + A.esc(hero.name) + "</h2>" +
-        "<p style='color:var(--ink-soft)'>" + A.esc(hero.tagline) + "</p>" +
-        "<ul>" + (hero.highlights || []).slice(0, 4).map(function (h) { return "<li>" + A.esc(h) + "</li>"; }).join("") + "</ul>" +
-        '<div style="display:flex;align-items:center;gap:18px;flex-wrap:wrap">' +
-          '<div class="price" style="font-size:1.8rem">' +
-            (hero.priceWas > hero.price ? '<span class="price__was">฿' + A.baht(hero.priceWas) + "</span>" : "") +
-            "฿" + A.baht(hero.price) + " <small>/ " + A.esc(hero.unit) + "</small></div>" +
-          '<a class="btn btn--primary" href="p/' + A.esc(hero.slug) + '.html">ดูรายละเอียด</a>' +
-          '<button class="btn btn--ghost" data-add="' + A.esc(hero.slug) + '">ใส่ตะกร้า</button>' +
-        "</div></div>";
-  }
 
   /* products */
   A.$("#productsGrid").innerHTML = S.products.map(A.productCard).join("");
