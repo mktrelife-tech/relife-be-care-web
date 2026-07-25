@@ -174,9 +174,18 @@ document.addEventListener("site:ready", function (e) {
   A.$("#heroTrust").innerHTML = (s.hero.trust || []).map(function (t) {
     return "<span>✓ " + A.esc(t) + "</span>";
   }).join("");
-  A.$("#heroImage").innerHTML = s.hero.image
-    ? '<img src="' + A.esc(s.hero.image) + '" alt="' + A.esc(s.hero.imageAlt) + '">'
-    : '<div class="ph" style="aspect-ratio:4/5" data-label="รูปหลักหน้าแรก — แนะนำ: ลูกหลานกับผู้สูงอายุ ยิ้ม อบอุ่น แนวตั้ง 1200×1500px"></div>';
+  if (s.hero.image) {
+    A.$("#heroImage").innerHTML = '<img src="' + A.esc(s.hero.image) + '" alt="' + A.esc(s.hero.imageAlt) + '">';
+  } else {
+    var hp = S.products.filter(function (p) { return p.featured; })[0] || S.products[0];
+    var hpImg = hp && hp.images && hp.images[0];
+    A.$("#heroImage").innerHTML =
+      '<div class="hero-show">' +
+        (hpImg ? '<img src="' + A.esc(hpImg) + '" alt="' + A.esc(hp.name) + '">' : "") +
+        '<div class="hero-chip hero-chip--1"><span class="hero-chip__ico">✓</span> มีเลข <b>อย.</b> ทุกตัว</div>' +
+        '<div class="hero-chip hero-chip--2"><span class="hero-chip__ico">🏭</span> ผลิตมาตรฐาน <b>GMP</b></div>' +
+      "</div>";
+  }
 
   /* features */
   A.$("#features").innerHTML = (s.features || []).map(function (f) {

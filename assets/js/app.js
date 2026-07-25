@@ -437,8 +437,10 @@
       entries.forEach((en) => {
         if (en.isIntersecting) { en.target.classList.add("is-in"); io.unobserve(en.target); }
       });
-    }, { threshold: 0.12 });
+    }, { threshold: 0.08, rootMargin: "0px 0px -8% 0px" });
     els.forEach((e) => io.observe(e));
+    /* กันเนื้อหาค้างซ่อน: ถ้า IO ไม่ทริกเกอร์ ให้โชว์ทั้งหมดหลัง 2.5 วิ */
+    setTimeout(() => els.forEach((e) => e.classList.add("is-in")), 2500);
   }
 
   /* ---------- Product card ---------- */
