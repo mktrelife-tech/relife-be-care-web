@@ -14,7 +14,13 @@
       "featured": true,
       "order": 1,
       "short": "รวมน้ำมันคาโนลา น้ำมันมะกอก และน้ำมันรำข้าวธรรมชาติ พร้อมไฟโตสเตอรอลและวิตามินอี ในซอฟท์เจลกลืนง่าย สำหรับดูแลสุขภาพประจำวัน",
-      "images": [],
+      "images": [
+        "assets/img/products/beta-oil-box.jpg",
+        "assets/img/products/beta-oil-pack4.jpg",
+        "assets/img/products/beta-oil-pack8.jpg",
+        "assets/img/products/beta-oil-pack15.jpg",
+        "assets/img/products/beta-oil-pack24.jpg"
+      ],
       "highlights": [
         "น้ำมันธรรมชาติ 3 ชนิด — คาโนลา 200 มก. มะกอก 200 มก. รำข้าว 109 มก.",
         "มีไฟโตสเตอรอล สารจากพืชที่พบตามธรรมชาติในน้ำมันพืช",
@@ -57,7 +63,13 @@
       "featured": false,
       "order": 2,
       "short": "รวม 17 สารสำคัญในแคปซูลเดียว ทั้งแอล-ซีสเทอีน อะเซโรลาเชอร์รี เบต้า-กลูแคน ซิงก์ และวิตามินซี สำหรับผู้ที่ต้องการดูแลระบบภูมิคุ้มกัน",
-      "images": [],
+      "images": [
+        "assets/img/products/betax-plus-box.jpg",
+        "assets/img/products/betax-plus-pack4.jpg",
+        "assets/img/products/betax-plus-pack8.jpg",
+        "assets/img/products/betax-plus-pack15.jpg",
+        "assets/img/products/betax-plus-pack24.jpg"
+      ],
       "highlights": [
         "แอล-ซีสเทอีน 100 มก. และสารสกัดอะเซโรลาเชอร์รี 100 มก.",
         "ยีสต์เบต้า-กลูแคน 50 มก. และซิงก์ 5.8 มก.",
@@ -96,7 +108,13 @@
       "featured": false,
       "order": 3,
       "short": "รวมโปรตีนไข่ขาวคุณภาพย่อยง่าย สารสกัดเห็ดหลินจือ และกรดอัลฟาไลโปอิก สำหรับผู้ที่ต้องการดูแลและบำรุงสุขภาพไตในชีวิตประจำวัน",
-      "images": [],
+      "images": [
+        "assets/img/products/beta-life-box.jpg",
+        "assets/img/products/beta-life-pack4.jpg",
+        "assets/img/products/beta-life-pack8.jpg",
+        "assets/img/products/beta-life-pack15.jpg",
+        "assets/img/products/beta-life-pack24.jpg"
+      ],
       "highlights": [
         "ผงไข่ขาว 230 มก. โปรตีนคุณภาพดี ย่อยง่าย เหมาะกับผู้ใส่ใจสุขภาพไต",
         "สารสกัดเห็ดหลินจือ 50 มก.",
@@ -134,7 +152,12 @@
       "featured": false,
       "order": 4,
       "short": "ผลิตภัณฑ์เสริมอาหารสูตร Immune Plus™ รวม 19 สารสำคัญ ทั้งเบต้ากลูแคน โสมเกาหลี ซีบัคธอร์น เควอซิทิน และวิตามินรวม สำหรับผู้ที่ต้องการดูแลภูมิคุ้มกันเป็นประจำ",
-      "images": [],
+      "images": [
+        "assets/img/products/lab-farm-box.jpg",
+        "assets/img/products/lab-farm-pack4.jpg",
+        "assets/img/products/lab-farm-pack8.jpg",
+        "assets/img/products/lab-farm-pack15.jpg"
+      ],
       "highlights": [
         "เบต้ากลูแคนจากยีสต์ 200 มก.",
         "รวมสารสกัดพรีเมียม — โสมเกาหลี ซีบัคธอร์น เควอซิทิน มากิเบอร์รี่",
@@ -173,7 +196,13 @@
       "featured": false,
       "order": 5,
       "short": "รวมสมุนไพรและสารสกัด 14 ชนิด ทั้งมะระขี้นก น้ำมันปลา โสมอเมริกัน อาร์ติโชก โพรโพลิส และเห็ดหลินจือ สำหรับผู้ที่ต้องการดูแลสุขภาพองค์รวม",
-      "images": [],
+      "images": [
+        "assets/img/products/betaherb-box.jpg",
+        "assets/img/products/betaherb-pack4.jpg",
+        "assets/img/products/betaherb-pack8.jpg",
+        "assets/img/products/betaherb-pack15.jpg",
+        "assets/img/products/betaherb-pack24.jpg"
+      ],
       "highlights": [
         "สารสกัดมะระขี้นก 150 มก.",
         "ผงน้ำมันปลา 100 มก. และแมกนีเซียม 100 มก.",
@@ -206,7 +235,8 @@
       "desc": "ดูแลต่อเนื่อง คุ้มกว่า — 4 กล่อง (40 แคปซูล) ราคาพิเศษ",
       "price": 1790,
       "priceWas": 2760,
-      "badge": "ประหยัด 970.-"
+      "badge": "ประหยัด 970.-",
+      "image": "assets/img/products/beta-oil-pack4.jpg"
     },
     {
       "slug": "beta-oil-8box",
@@ -214,7 +244,8 @@
       "desc": "ชุดคุ้มสุด สำหรับดูแลระยะยาว — 8 กล่อง (80 แคปซูล)",
       "price": 3290,
       "priceWas": 5520,
-      "badge": "ประหยัด 2,230.-"
+      "badge": "ประหยัด 2,230.-",
+      "image": "assets/img/products/beta-oil-pack8.jpg"
     }
   ]
 }

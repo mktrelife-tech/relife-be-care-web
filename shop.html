@@ -85,7 +85,8 @@ document.addEventListener("site:ready", function (e) {
   A.$("#bundles").innerHTML = (S.bundles || []).map(function (b) {
     return '<article class="card reveal">' +
       '<div class="card__media"><span class="card__tag">' + A.esc(b.badge) + "</span>" +
-        '<div class="ph" style="width:100%;height:100%" data-label="รูปชุดโปรโมชั่น 1200×1200px"></div></div>' +
+        (b.image ? '<img src="' + A.esc(b.image) + '" alt="' + A.esc(b.name) + '" loading="lazy">'
+                 : '<div class="ph" style="width:100%;height:100%" data-label="รูปชุดโปรโมชั่น"></div>') + "</div>" +
       '<div class="card__body"><h3 class="card__name">' + A.esc(b.name) + "</h3>" +
         '<p class="card__desc">' + A.esc(b.desc) + "</p>" +
         '<div class="card__foot"><div class="price"><span class="price__was">฿' + A.baht(b.priceWas) + "</span>฿" + A.baht(b.price) + "</div>" +
