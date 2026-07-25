@@ -314,6 +314,38 @@ ul, ol { margin: 0 0 1em; padding-left: 1.25em; }
 .hero__badge strong { display: block; font-size: 1.5rem; font-family: var(--font-display); color: var(--brand); line-height: 1.1; }
 .hero__badge span { font-size: .8rem; color: var(--ink-soft); }
 
+/* ---------- 6b. Quick actions (สไตล์โรงพยาบาล) ---------- */
+.quick-wrap { position: relative; z-index: 5; margin-top: clamp(-58px, -5vw, -74px); }
+.quick-actions { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+.qa {
+  display: flex; align-items: center; gap: 15px; text-align: left;
+  background: var(--white); border-radius: var(--r-lg); padding: 20px 20px;
+  box-shadow: var(--sh-lg); border: 1px solid rgba(59,50,43,.05);
+  transition: transform .18s ease, box-shadow .18s ease;
+}
+.qa:hover { transform: translateY(-5px); box-shadow: 0 12px 30px rgba(41,82,102,.16); }
+.qa__ico {
+  flex: 0 0 auto; width: 54px; height: 54px; border-radius: 15px;
+  display: grid; place-items: center; font-size: 1.5rem;
+}
+.qa--1 .qa__ico { background: var(--brand-wash); }
+.qa--2 .qa__ico { background: var(--sage-wash); }
+.qa--3 .qa__ico { background: #E7F8ED; }
+.qa--4 .qa__ico { background: var(--gold-wash); }
+.qa__t { font-weight: 700; font-size: 1.02rem; line-height: 1.2; display: flex; align-items: center; gap: 6px; }
+.qa__t::after { content: "→"; color: var(--brand); opacity: 0; transform: translateX(-4px); transition: .18s; margin-left: auto; }
+.qa:hover .qa__t::after { opacity: 1; transform: none; }
+.qa__s { font-size: .82rem; color: var(--ink-soft); margin-top: 2px; }
+
+@media (max-width: 860px) {
+  .quick-actions { grid-template-columns: repeat(2, 1fr); }
+  .quick-wrap { margin-top: -34px; }
+}
+@media (max-width: 480px) {
+  .quick-actions { grid-template-columns: 1fr; gap: 12px; }
+  .qa { padding: 16px 18px; }
+}
+
 /* ---------- 7. Feature strip ---------- */
 .features { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
 .feature {

@@ -46,8 +46,15 @@
   </div>
 </section>
 
+<!-- ===== QUICK ACTIONS (สไตล์โรงพยาบาล) ===== -->
+<div class="quick-wrap">
+  <div class="wrap">
+    <div class="quick-actions" id="quickActions"></div>
+  </div>
+</div>
+
 <!-- ===== FEATURES ===== -->
-<section class="section section--tight">
+<section class="section section--tight" style="padding-top:clamp(40px,5vw,64px)">
   <div class="wrap">
     <div class="features" id="features"></div>
   </div>
@@ -184,6 +191,19 @@ document.addEventListener("site:ready", function (e) {
         (hpImg ? '<img src="' + A.esc(hpImg) + '" alt="' + A.esc(hp.name) + '">' : "") +
       "</div>";
   }
+
+  /* quick actions (สไตล์โรงพยาบาล) */
+  var QA = [
+    { n: 1, ico: "🔍", t: "ค้นหาสินค้า",        d: "ดูผลิตภัณฑ์ทั้งหมด",       href: "shop.html" },
+    { n: 2, ico: "🧭", t: "สินค้าไหนเหมาะกับคุณ", d: "ทำแบบประเมิน 1 นาที",     href: "quiz.html" },
+    { n: 3, ico: "💬", t: "ปรึกษาผู้เชี่ยวชาญ",   d: "ทักไลน์ฟรี ไม่กดดัน",     href: s.contact.lineUrl, ext: true },
+    { n: 4, ico: "📞", t: "ติดต่อเรา",           d: "โทร / แชท ทีมงาน",        href: "contact.html" }
+  ];
+  A.$("#quickActions").innerHTML = QA.map(function (q) {
+    return '<a class="qa qa--' + q.n + '" href="' + A.esc(q.href) + '"' + (q.ext ? ' target="_blank" rel="noopener"' : "") + ">" +
+      '<span class="qa__ico">' + q.ico + "</span>" +
+      "<span><span class='qa__t'>" + A.esc(q.t) + "</span><span class='qa__s'>" + A.esc(q.d) + "</span></span></a>";
+  }).join("");
 
   /* features */
   A.$("#features").innerHTML = (s.features || []).map(function (f) {
