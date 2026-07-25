@@ -115,6 +115,8 @@ ul, ol { margin: 0 0 1em; padding-left: 1.25em; }
 .btn--ghost:hover { background: var(--cream-2); }
 .btn--sage { background: var(--sage); color: #fff; }
 .btn--sage:hover { background: var(--sage-dark); }
+.btn--red { background: var(--danger); color: #fff; box-shadow: var(--sh-sm); }
+.btn--red:hover { background: #A63A24; }
 .btn--block { width: 100%; }
 .btn--lg { padding: 16px 34px; font-size: 1.05rem; }
 .btn--sm { padding: 9px 18px; font-size: .87rem; }
@@ -636,7 +638,7 @@ table.compare tbody th { font-weight: 500; color: var(--ink-soft); }
   .footer__grid { grid-template-columns: 1fr; }
   body { padding-bottom: 72px; }
   .mobile-bar {
-    display: grid; grid-template-columns: 1.4fr .6fr 1fr; gap: 8px;
+    display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px;
     position: fixed; left: 0; right: 0; bottom: 0; z-index: 70;
     background: rgba(247,250,252,.94); backdrop-filter: blur(12px);
     padding: 10px 14px calc(10px + env(safe-area-inset-bottom));
@@ -715,6 +717,17 @@ table.compare tbody th { font-weight: 500; color: var(--ink-soft); }
   font-weight: 700; font-size: .95rem;
 }
 .hl-item p { margin: 4px 0 0; font-size: .95rem; }
+
+.pdp-banners { display: grid; gap: 16px; max-width: 900px; margin-inline: auto; }
+.pdp-banners img { width: 100%; height: auto; border-radius: var(--r-lg); display: block; box-shadow: var(--sh-sm); }
+.banner-ph {
+  border: 2px dashed var(--brand-light); border-radius: var(--r-lg);
+  padding: 36px 22px; text-align: center; background: var(--brand-wash);
+  display: flex; flex-direction: column; gap: 5px;
+}
+.banner-ph b { font-size: 1.05rem; color: var(--brand-dark); }
+.banner-ph span { color: var(--ink-soft); font-size: .9rem; }
+.banner-ph small { color: var(--ink-faint); font-size: .8rem; margin-top: 4px; }
 
 .howto-card {
   display: flex; gap: 16px; align-items: center; background: var(--sage-wash);

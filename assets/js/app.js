@@ -221,9 +221,9 @@
           "<span>ผลิตภัณฑ์ทุกรายการมีเลขสารบบอาหาร (อย.) ถูกต้อง</span></div>" +
       "</div></footer>" +
       '<div class="mobile-bar">' +
-        '<a class="btn btn--primary" href="' + (location.pathname.indexOf("/p/") > -1 ? "#pdp" : url("shop.html")) + '">' + icon("cart", 18) + " สั่งซื้อ</a>" +
-        '<a class="btn btn--ghost" href="tel:' + esc(s.contact.phoneRaw) + '" aria-label="โทร">' + icon("phone", 18) + "</a>" +
         '<a class="btn btn--line" href="' + esc(s.contact.lineUrl) + '" target="_blank" rel="noopener">สอบถาม</a>' +
+        '<a class="btn btn--red" href="tel:' + esc(s.contact.phoneRaw) + '">' + icon("phone", 17) + " โทร</a>" +
+        '<a class="btn btn--primary" href="' + (location.pathname.indexOf("/p/") > -1 ? "#pdp" : url("shop.html")) + '">' + icon("cart", 17) + " สั่งซื้อ</a>" +
       "</div>";
   }
 

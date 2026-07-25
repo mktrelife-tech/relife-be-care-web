@@ -148,6 +148,15 @@ collections:
               - { label: "ลำดับการแสดง", name: order, widget: number, value_type: int }
               - { label: "คำอธิบายสั้น", name: short, widget: text }
               - { label: "รูปสินค้า (ใส่ได้หลายรูป)", name: images, widget: list, required: false, field: { label: "รูป", name: image, widget: image } }
+              - label: "แบนเนอร์เซลเพจ (ภาพเต็มกว้าง เรียงต่อกัน)"
+                name: banners
+                widget: list
+                required: false
+                hint: "ทำภาพกว้าง 1000px สูงได้ตามต้องการ อัปโหลดได้ไม่จำกัด จะแสดงในหน้าสินค้าแบบเซลเพจ"
+                fields:
+                  - { label: "ภาพแบนเนอร์", name: image, widget: image }
+                  - { label: "คำอธิบายภาพ (สำหรับ SEO)", name: alt, widget: string, required: false }
+                  - { label: "ลิงก์เมื่อคลิก (ไม่บังคับ)", name: link, widget: string, required: false }
               - { label: "จุดเด่น", name: highlights, widget: list, field: { label: "ข้อความ", name: item, widget: string } }
               - { label: "เหมาะกับใคร", name: forWho, widget: text }
               - { label: "ใครไม่ควรทาน", name: notFor, widget: text }
