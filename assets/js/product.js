@@ -54,16 +54,11 @@ document.addEventListener("site:ready", function (e) {
         "📷 ต้องการรูป: รูปกล่องพื้นหลังขาว 1 รูป, รูปฉลากหลังอ่านออก 1 รูป, รูป lifestyle 2 รูป</p>") +
     "</div>" +
     "<div>" +
-      '<span class="pdp__fda">✓ อย. ' + A.esc(p.fda) + "</span>" +
-      "<h1 style='margin:14px 0 4px;font-size:clamp(1.7rem,3.6vw,2.4rem)'>" + A.esc(p.name) + "</h1>" +
-      "<p style='color:var(--ink-soft);font-size:1.03rem'>" + A.esc(p.tagline) + "</p>" +
-      "<p style='color:var(--ink-faint);font-size:.86rem;margin:2px 0 10px'>" + A.esc(p.unit) + " · เลือกแพ็กที่คุ้มที่สุด</p>" +
+      '<span class="eyebrow">เลือกแพ็ก &amp; สั่งซื้อ</span>' +
+      "<h2 style='margin:10px 0 4px;font-size:clamp(1.4rem,3vw,1.9rem)'>" + A.esc(p.name) + "</h2>" +
+      "<p style='color:var(--ink-faint);font-size:.86rem;margin:2px 0 14px'>อย. " + A.esc(p.fda) + " · " + A.esc(p.unit) + " · เลือกแพ็กที่คุ้มที่สุด</p>" +
       packsHtml +
-      "<ul style='list-style:none;padding:0;display:grid;gap:9px;margin:18px 0 22px'>" +
-        (p.highlights || []).map(function (h) {
-          return "<li style='display:flex;gap:10px'><span style='color:var(--sage-dark);font-weight:700'>✓</span><span>" + A.esc(h) + "</span></li>";
-        }).join("") + "</ul>" +
-      '<div class="pdp__buy">' +
+      '<div class="pdp__buy" style="margin-top:18px">' +
         '<div class="qty"><button id="qDec">−</button><input id="qVal" value="1" readonly aria-label="จำนวน"><button id="qInc">+</button></div>' +
         '<button class="btn btn--primary btn--lg" id="addBtn">ใส่ตะกร้า</button>' +
         '<a class="btn btn--line btn--lg" href="' + A.esc(S.site.contact.lineUrl) + '" target="_blank" rel="noopener">ถามก่อนซื้อ</a>' +
@@ -105,6 +100,27 @@ document.addEventListener("site:ready", function (e) {
   var onePrice = packList[0].price;
   var lineUrl = A.esc(S.site.contact.lineUrl);
   var biz = S.site.business || {};
+
+  /* แบนเนอร์สินค้า (บนสุด) */
+  var boxImg = imgs[0];
+  var secHero =
+    '<section class="pdp-hero"><div class="wrap pdp-hero__grid">' +
+      '<div class="pdp-hero__text">' +
+        '<span class="pdp__fda">✓ อย. ' + A.esc(p.fda) + "</span>" +
+        "<h1>" + A.esc(p.name) + "</h1>" +
+        "<p class='pdp-hero__tag'>" + A.esc(p.tagline) + "</p>" +
+        ((p.benefits && p.benefits.length)
+          ? '<ul class="card__benefits" style="margin:14px 0 22px">' + p.benefits.map(function (b) { return "<li>" + A.esc(b) + "</li>"; }).join("") + "</ul>"
+          : "") +
+        '<div class="pdp-hero__cta">' +
+          '<button class="btn btn--primary btn--lg" id="heroBuy">🛒 ดูราคา &amp; สั่งซื้อ ↓</button>' +
+          '<a class="btn btn--line btn--lg" href="' + lineUrl + '" target="_blank" rel="noopener">สอบถาม</a>' +
+        "</div>" +
+      "</div>" +
+      '<div class="pdp-hero__media"><div class="hero-show">' +
+        (boxImg ? '<img src="' + A.esc(A.url(boxImg.replace(/^\//, ""))) + '" alt="' + A.esc(p.name) + '">' : "") +
+      "</div></div>" +
+    "</div></section>";
 
   var secWho =
     '<section class="section pdp-sec pdp-sec--who"><div class="wrap">' +
@@ -173,10 +189,15 @@ document.addEventListener("site:ready", function (e) {
   var disc =
     '<div class="wrap"><p class="pdp-disc">' + A.esc(S.site.disclaimer) + "</p></div>";
 
-  A.$("#pdpSections").innerHTML = secWho + secHl + secIng + secHow + secTrust + secFaq + secCta + disc;
+  A.$("#pdpSections").innerHTML = secHero + secWho + secHl + secIng + secHow + secTrust + secFaq + secCta + disc;
 
   A.$("#ctaAdd").addEventListener("click", function () {
     A.addToCart(p.slug, selPack, qty);
+  });
+  /* ปุ่มในแบนเนอร์ → เลื่อนไปส่วนซื้อ */
+  A.$("#heroBuy").addEventListener("click", function () {
+    var b = A.$("#pdp").closest("section");
+    if (b) b.scrollIntoView({ behavior: "smooth", block: "start" });
   });
 
   /* ย้ายส่วนซื้อ (รูป + เลือกแพ็ก) ลงไปหลังโซน "ความมั่นใจ" — โครงเซลเพจ */
