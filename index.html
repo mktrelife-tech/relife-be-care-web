@@ -65,15 +65,18 @@
   </div>
 </section>
 
-<!-- ===== CONCERNS (เลือกตามอาการ) ===== -->
-<section class="section">
+<!-- ===== CONCERNS (ดูแลตามปัญหาสุขภาพ) ===== -->
+<section class="section" id="concern-section">
   <div class="wrap">
     <div class="sec-head">
-      <span class="eyebrow">เลือกตามอาการ</span>
-      <h2>💙 กังวลเรื่องไหน เราช่วยคุณเริ่มดูแลได้</h2>
-      <p>บอกสิ่งที่คุณหรือคนที่บ้านกังวล เราแนะนำผลิตภัณฑ์ที่ตรงจุดให้</p>
+      <span class="eyebrow">ดูแลตามปัญหาสุขภาพ</span>
+      <h2>ดูแลตรงจุด บรรเทาอาการของโรคต่างๆ</h2>
+      <p>เลือกสิ่งที่ใช่ เพื่อคุณและคนที่คุณห่วงใย</p>
     </div>
     <div class="concerns" id="concerns"></div>
+    <div class="center" style="margin-top:30px">
+      <a class="btn btn--ghost" href="shop.html">ดูปัญหาสุขภาพทั้งหมด →</a>
+    </div>
   </div>
 </section>
 
@@ -216,20 +219,18 @@ document.addEventListener("site:ready", function (e) {
       "<h3>" + A.esc(f.title) + "</h3><p>" + A.esc(f.text) + "</p></div>";
   }).join("");
 
-  /* concerns (เลือกตามอาการ → สินค้า) */
+  /* concerns (ดูแลตามปัญหาสุขภาพ → สินค้า) */
   A.$("#concerns").innerHTML = (s.concerns || []).map(function (c) {
-    var prod = S.products.filter(function (p) { return p.slug === c.slug; })[0];
-    var pimg = prod && prod.images && prod.images[0];
     var media = c.image
       ? '<img src="' + A.esc(c.image) + '" alt="' + A.esc(c.title) + '">'
-      : (pimg ? '<img src="' + A.esc(pimg) + '" alt="' + A.esc(prod.name) + '">'
-              : '<div class="ph" style="height:100%" data-label="ภาพ 640×480px"></div>');
-    return '<a class="concern reveal" href="' + A.url("p/" + A.esc(c.slug) + ".html") + '">' +
-      '<div class="concern__media">' + media + '<span class="concern__ico">' + c.icon + "</span></div>" +
-      '<div class="concern__body"><h3>' + A.esc(c.title) + "</h3>" +
+      : '<div class="concern__ph" data-label="ภาพ 640×480px">' + c.icon + "</div>";
+    return '<div class="concern reveal">' +
+      '<div class="concern__media">' + media + "</div>" +
+      '<div class="concern__body">' +
+        "<h3>" + A.esc(c.title) + "</h3>" +
         "<p>" + A.esc(c.desc) + "</p>" +
-        (prod ? '<span class="concern__rec">แนะนำ <b>' + A.esc(prod.name) + "</b> →</span>" : "") +
-      "</div></a>";
+        '<a class="btn btn--ghost concern__btn" href="' + A.url("p/" + A.esc(c.slug) + ".html") + '">' + A.esc(c.btn || "ดูรายละเอียด") + "</a>" +
+      "</div></div>";
   }).join("");
 
   /* symptoms band */
