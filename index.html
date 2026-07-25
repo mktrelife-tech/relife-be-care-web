@@ -89,17 +89,37 @@
   </div>
 </section>
 
-<!-- ===== PRODUCTS ===== -->
+<!-- ===== PRODUCTS (สินค้าขายดี) ===== -->
 <section class="section section--sand">
   <div class="wrap">
     <div class="sec-head">
-      <span class="eyebrow">ผลิตภัณฑ์ของเรา</span>
-      <h2>ทุกตัวมีเลข อย. บอกส่วนผสมครบ</h2>
-      <p>เราไม่ขายสิ่งที่อธิบายไม่ได้ ทุกผลิตภัณฑ์แสดงเลขสารบบอาหาร ส่วนผสม และปริมาณจริงตามฉลาก</p>
+      <span class="eyebrow">สินค้าขายดี</span>
+      <h2>ตัวช่วยยอดนิยม ที่ลูกค้าเลือกดูแลสุขภาพ</h2>
+      <p>ทุกตัวมีเลข อย. แสดงส่วนผสมและปริมาณจริงตามฉลาก</p>
     </div>
     <div class="products-grid" id="productsGrid"></div>
     <div class="center" style="margin-top:34px">
       <a class="btn btn--ghost" href="compare.html">เปรียบเทียบสินค้าทั้ง 5 ตัว →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== EMOTIONAL BANNER ===== -->
+<section class="section emo">
+  <div class="wrap emo__grid">
+    <div class="emo__left">
+      <div class="emo__media"><div class="ph" style="height:100%" data-label="ภาพอบอุ่น เช่น แม่-ลูก&#10;800×600px"></div></div>
+      <div class="emo__text">
+        <h2 class="emo__quote">"โรคต่างๆ อาจไม่ถามว่าเราพร้อมหรือยัง"</h2>
+        <p class="emo__lead">แต่...เราสามารถเตรียมพร้อม<br>เพื่อคนที่เรารักได้ตั้งแต่วันนี้</p>
+        <p class="emo__sub">รีไลฟ์...เพราะเราใส่ใจสุขภาพของคุณและคนที่คุณรัก</p>
+      </div>
+    </div>
+    <div class="emo__cta">
+      <div class="emo__cta-ico">💬</div>
+      <h3>ไม่แน่ใจว่าจะเลือกตัวไหน?</h3>
+      <p>ให้ผู้เชี่ยวชาญของเรา ช่วยแนะนำผลิตภัณฑ์ที่เหมาะกับคุณ</p>
+      <a class="btn btn--sage btn--lg" href="consult.html">🩺 ปรึกษาฟรี ไม่มีค่าใช้จ่าย →</a>
     </div>
   </div>
 </section>
@@ -190,14 +210,10 @@ document.addEventListener("site:ready", function (e) {
     return "<span>✓ " + A.esc(t) + "</span>";
   }).join("");
   if (s.hero.image) {
-    A.$("#heroImage").innerHTML = '<img src="' + A.esc(s.hero.image) + '" alt="' + A.esc(s.hero.imageAlt) + '">';
+    A.$("#heroImage").innerHTML = '<img class="hero-photo" src="' + A.esc(s.hero.image) + '" alt="' + A.esc(s.hero.imageAlt) + '">';
   } else {
-    var hp = S.products.filter(function (p) { return p.featured; })[0] || S.products[0];
-    var hpImg = hp && hp.images && hp.images[0];
     A.$("#heroImage").innerHTML =
-      '<div class="hero-show">' +
-        (hpImg ? '<img src="' + A.esc(hpImg) + '" alt="' + A.esc(hp.name) + '">' : "") +
-      "</div>";
+      '<div class="hero-photo ph" data-label="รูป Hero — ครอบครัว + สินค้า&#10;แนวนอน 1400×1000px"></div>';
   }
 
   /* quick actions (สไตล์โรงพยาบาล) */
