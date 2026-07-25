@@ -7,27 +7,34 @@ document.addEventListener("site:ready", function (e) {
   var S = e.detail, A = window.App, s = S.site;
   var form = A.$("#coForm"), empty = A.$("#emptyCart");
 
-  /* ---------- ตะกร้า ---------- */
+  /* ---------- ตะกร้า (รองรับแพ็ก) ---------- */
   var cart = S.cart.map(function (i) {
     var p = S.products.filter(function (x) { return x.slug === i.slug; })[0];
-    return p ? { slug: p.slug, name: p.name, price: p.price, qty: i.qty, images: p.images } : null;
+    if (!p) return null;
+    var pack = i.pack || 1;
+    var pk = (p.packs || []).filter(function (x) { return Number(x.qty) === Number(pack); })[0];
+    var unit = A.packPrice(p, pack);
+    return {
+      slug: p.slug, name: p.name, pack: pack, qty: i.qty, unit: unit,
+      img: (pk && pk.image) || (p.images && p.images[0])
+    };
   }).filter(Boolean);
 
   if (!cart.length) { empty.hidden = false; return; }
   form.hidden = false;
 
-  var subtotal = cart.reduce(function (a, i) { return a + i.price * i.qty; }, 0);
+  var subtotal = cart.reduce(function (a, i) { return a + i.unit * i.qty; }, 0);
   var shipFee  = (s.shipping.fee === 0 || subtotal >= s.shipping.freeOver) ? 0 : s.shipping.fee;
   var grand    = subtotal + shipFee;
 
   /* ---------- สรุปรายการ ---------- */
   A.$("#coLines").innerHTML = cart.map(function (i) {
-    var img = (i.images && i.images[0])
-      ? '<img src="' + A.esc(i.images[0]) + '" alt="">'
+    var img = i.img
+      ? '<img src="' + A.esc(i.img) + '" alt="">'
       : '<div class="ph" data-label=""></div>';
     return '<div class="co-line">' + img +
-      "<div><b>" + A.esc(i.name) + "</b><span>฿" + A.baht(i.price) + " × " + i.qty + "</span></div>" +
-      "<b>฿" + A.baht(i.price * i.qty) + "</b></div>";
+      "<div><b>" + A.esc(i.name) + "</b><span>" + A.esc(A.packLabel(i.pack)) + " · ฿" + A.baht(i.unit) + " × " + i.qty + "</span></div>" +
+      "<b>฿" + A.baht(i.unit * i.qty) + "</b></div>";
   }).join("");
 
   A.$("#coTotals").innerHTML =
@@ -173,7 +180,7 @@ document.addEventListener("site:ready", function (e) {
         zip:       A.$("#fZip").value.trim(),
         note:      A.$("#fNote").value.trim()
       },
-      items: cart.map(function (i) { return { slug: i.slug, qty: i.qty }; }),
+      items: cart.map(function (i) { return { slug: i.slug, pack: i.pack, qty: i.qty }; }),
       payment: payMethod,
       slip: payMethod === "transfer" ? slipData : null
     };

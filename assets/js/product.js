@@ -30,6 +30,22 @@ document.addEventListener("site:ready", function (e) {
 
   A.$("#crumbName").textContent = p.name;
 
+  /* ---- ตัวเลือกแพ็ก (ราคาโปร 1/4/8/15 กล่อง) ---- */
+  var packList = (p.packs && p.packs.length) ? p.packs : [{ qty: 1, price: p.price, image: imgs[0] }];
+  var onePrice = packList[0].price;  /* ราคา 1 กล่อง ใช้คำนวณส่วนลด */
+  var packsHtml = '<div class="packs" id="packs">' + packList.map(function (pk, i) {
+    var per = Math.round(pk.price / pk.qty);
+    var single = onePrice * pk.qty;
+    var save = single - pk.price;
+    return '<button type="button" class="pack' + (i === 0 ? " is-on" : "") + '" data-pack="' + pk.qty + '" data-price="' + pk.price + '">' +
+      (pk.image ? '<img class="pack__img" src="' + A.esc(A.url(pk.image.replace(/^\//, ""))) + '" alt="">' : '<span class="pack__img"></span>') +
+      '<span><span class="pack__name">' + (pk.qty > 1 ? "แพ็ก " + pk.qty + " กล่อง" : "1 กล่อง") + "</span>" +
+        '<span class="pack__per">เฉลี่ย ฿' + A.baht(per) + " / กล่อง</span>" +
+        (save > 0 ? '<span class="pack__save">ประหยัด ฿' + A.baht(save) + "</span>" : "") + "</span>" +
+      '<span class="pack__price">' + (save > 0 ? "<small>฿" + A.baht(single) + "</small>" : "") + "฿" + A.baht(pk.price) + "</span>" +
+      '<span class="pack__radio"></span></button>';
+  }).join("") + "</div>";
+
   A.$("#pdp").innerHTML =
     "<div>" +
       '<div class="gallery__main">' + mainImg + "</div>" +
@@ -41,10 +57,9 @@ document.addEventListener("site:ready", function (e) {
       '<span class="pdp__fda">✓ อย. ' + A.esc(p.fda) + "</span>" +
       "<h1 style='margin:14px 0 4px;font-size:clamp(1.7rem,3.6vw,2.4rem)'>" + A.esc(p.name) + "</h1>" +
       "<p style='color:var(--ink-soft);font-size:1.03rem'>" + A.esc(p.tagline) + "</p>" +
-      '<div class="pdp__price"><div class="price">' +
-        (p.priceWas > p.price ? '<span class="price__was">฿' + A.baht(p.priceWas) + "</span>" : "") +
-        "฿" + A.baht(p.price) + "</div><span style='color:var(--ink-faint)'>/ " + A.esc(p.unit) + "</span></div>" +
-      "<ul style='list-style:none;padding:0;display:grid;gap:9px;margin:0 0 24px'>" +
+      "<p style='color:var(--ink-faint);font-size:.86rem;margin:2px 0 10px'>" + A.esc(p.unit) + " · เลือกแพ็กที่คุ้มที่สุด</p>" +
+      packsHtml +
+      "<ul style='list-style:none;padding:0;display:grid;gap:9px;margin:18px 0 22px'>" +
         (p.highlights || []).map(function (h) {
           return "<li style='display:flex;gap:10px'><span style='color:var(--sage-dark);font-weight:700'>✓</span><span>" + A.esc(h) + "</span></li>";
         }).join("") + "</ul>" +
@@ -70,11 +85,21 @@ document.addEventListener("site:ready", function (e) {
     });
   });
 
+  /* เลือกแพ็ก */
+  var selPack = packList[0].qty;
+  A.$$("#packs .pack").forEach(function (b) {
+    b.addEventListener("click", function () {
+      A.$$("#packs .pack").forEach(function (x) { x.classList.remove("is-on"); });
+      b.classList.add("is-on");
+      selPack = +b.dataset.pack;
+    });
+  });
+
   /* จำนวน + ใส่ตะกร้า */
   var qty = 1;
   A.$("#qInc").addEventListener("click", function () { qty++; A.$("#qVal").value = qty; });
   A.$("#qDec").addEventListener("click", function () { if (qty > 1) { qty--; A.$("#qVal").value = qty; } });
-  A.$("#addBtn").addEventListener("click", function () { A.addToCart(p.slug, qty); });
+  A.$("#addBtn").addEventListener("click", function () { A.addToCart(p.slug, selPack, qty); });
 
   /* ---- แท็บข้อมูล ---- */
   A.$("#tabPanels").innerHTML =

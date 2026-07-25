@@ -575,6 +575,31 @@ table.compare tbody th { font-weight: 500; color: var(--ink-soft); }
   .products-grid { grid-template-columns: 1fr; }
 }
 
+/* ---------- 29. Pack pricing (PDP) ---------- */
+.packs { display: grid; gap: 10px; margin: 6px 0 4px; }
+.pack {
+  display: grid; grid-template-columns: 54px 1fr auto; gap: 14px; align-items: center;
+  padding: 12px 14px; border: 1.5px solid var(--sand); border-radius: var(--r-md);
+  background: var(--white); cursor: pointer; transition: .15s; text-align: left; width: 100%;
+  position: relative;
+}
+.pack:hover { border-color: var(--brand-light); }
+.pack.is-on { border-color: var(--brand); background: var(--brand-wash); box-shadow: 0 0 0 3px var(--brand-wash); }
+.pack__img { width: 54px; height: 54px; border-radius: 9px; object-fit: cover; background: var(--cream-2); }
+.pack__name { font-weight: 600; font-size: .96rem; }
+.pack__per { font-size: .82rem; color: var(--ink-soft); }
+.pack__save {
+  display: inline-block; font-size: .72rem; font-weight: 700; color: var(--sage-dark);
+  background: var(--sage-wash); padding: 2px 8px; border-radius: var(--r-pill); margin-top: 3px;
+}
+.pack__price { text-align: right; font-family: var(--font-display); font-weight: 700; font-size: 1.15rem; color: var(--brand-dark); white-space: nowrap; }
+.pack__price small { display: block; font-size: .72rem; font-weight: 400; color: var(--ink-faint); text-decoration: line-through; }
+.pack__radio {
+  position: absolute; top: 10px; right: 12px; width: 18px; height: 18px; border-radius: 50%;
+  border: 2px solid var(--sand); background: var(--white);
+}
+.pack.is-on .pack__radio { border-color: var(--brand); box-shadow: inset 0 0 0 3px var(--brand); }
+
 /* ---------- 28. Checkout ---------- */
 .checkout { display: grid; grid-template-columns: 1.35fr .85fr; gap: clamp(24px, 3.5vw, 44px); align-items: start; }
 .co-panel {

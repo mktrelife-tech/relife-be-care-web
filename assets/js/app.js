@@ -242,20 +242,33 @@
     el.textContent = n;
     el.hidden = n === 0;
   }
-  function addToCart(slug, qty) {
+  /* ราคาต่อ 1 แพ็ก (pack = จำนวนกล่องในแพ็ก เช่น 1/4/8/15) */
+  function packPrice(p, pack) {
+    pack = pack || 1;
+    if (p.packs) {
+      const found = p.packs.find((x) => Number(x.qty) === Number(pack));
+      if (found) return found.price;
+    }
+    return p.price * pack;
+  }
+  function packLabel(pack) { return (pack > 1) ? "แพ็ก " + pack + " กล่อง" : "1 กล่อง"; }
+
+  /* addToCart(slug, pack, qty) — pack = ขนาดแพ็ก, qty = จำนวนแพ็ก */
+  function addToCart(slug, pack, qty) {
     const p = state.products.find((x) => x.slug === slug);
     if (!p) return;
-    const line = state.cart.find((i) => i.slug === slug);
-    if (line) line.qty += qty || 1;
-    else state.cart.push({ slug: slug, qty: qty || 1 });
+    pack = pack || 1; qty = qty || 1;
+    const line = state.cart.find((i) => i.slug === slug && (i.pack || 1) === pack);
+    if (line) line.qty += qty;
+    else state.cart.push({ slug: slug, pack: pack, qty: qty });
     saveCart();
-    toast(p.name + " ถูกเพิ่มลงตะกร้าแล้ว");
+    toast(p.name + " (" + packLabel(pack) + ") เพิ่มลงตะกร้าแล้ว");
     openCart();
   }
   function cartTotal() {
     return state.cart.reduce((sum, i) => {
       const p = state.products.find((x) => x.slug === i.slug);
-      return sum + (p ? p.price * i.qty : 0);
+      return sum + (p ? packPrice(p, i.pack || 1) * i.qty : 0);
     }, 0);
   }
 
@@ -289,16 +302,20 @@
     body.innerHTML = state.cart.map((i) => {
       const p = state.products.find((x) => x.slug === i.slug);
       if (!p) return "";
-      const img = (p.images && p.images[0])
-        ? '<img class="cart-line__img" src="' + esc(url(p.images[0].replace(/^\//, ""))) + '" alt="">'
+      const pack = i.pack || 1;
+      const pk = (p.packs || []).find((x) => Number(x.qty) === Number(pack));
+      const imgSrc = (pk && pk.image) || (p.images && p.images[0]);
+      const img = imgSrc
+        ? '<img class="cart-line__img" src="' + esc(url(imgSrc.replace(/^\//, ""))) + '" alt="">'
         : '<div class="cart-line__img ph" data-label=""></div>';
+      const key = esc(p.slug) + '" data-pack="' + pack;
       return '<div class="cart-line">' + img +
-        '<div><div class="cart-line__name">' + esc(p.name) + "</div>" +
-          '<div class="cart-line__meta">฿' + baht(p.price) + " × " + i.qty + "</div>" +
-          '<button class="cart-line__rm" data-rm="' + esc(p.slug) + '">ลบออก</button></div>' +
-        '<div class="qty"><button data-dec="' + esc(p.slug) + '">−</button>' +
+        '<div><div class="cart-line__name">' + esc(p.name) + '</div>' +
+          '<div class="cart-line__meta">' + esc(packLabel(pack)) + " · ฿" + baht(packPrice(p, pack)) + " × " + i.qty + "</div>" +
+          '<button class="cart-line__rm" data-rm="' + key + '">ลบออก</button></div>' +
+        '<div class="qty"><button data-dec="' + key + '">−</button>' +
           '<input value="' + i.qty + '" readonly aria-label="จำนวน">' +
-          '<button data-inc="' + esc(p.slug) + '">+</button></div>' +
+          '<button data-inc="' + key + '">+</button></div>' +
       "</div>";
     }).join("");
 
@@ -321,20 +338,22 @@
       '<p style="font-size:.78rem;color:var(--ink-faint);text-align:center;margin:10px 0 0">' +
         "🔒 โอนเงิน · เก็บเงินปลายทาง · บัตรเครดิต</p>";
 
-    $$("[data-inc]", foot.parentElement).forEach((b) => b.addEventListener("click", () => changeQty(b.dataset.inc, 1)));
-    $$("[data-dec]", foot.parentElement).forEach((b) => b.addEventListener("click", () => changeQty(b.dataset.dec, -1)));
-    $$("[data-rm]",  foot.parentElement).forEach((b) => b.addEventListener("click", () => removeLine(b.dataset.rm)));
+    $$("[data-inc]", foot.parentElement).forEach((b) => b.addEventListener("click", () => changeQty(b.dataset.inc, +b.dataset.pack, 1)));
+    $$("[data-dec]", foot.parentElement).forEach((b) => b.addEventListener("click", () => changeQty(b.dataset.dec, +b.dataset.pack, -1)));
+    $$("[data-rm]",  foot.parentElement).forEach((b) => b.addEventListener("click", () => removeLine(b.dataset.rm, +b.dataset.pack)));
     $("#checkoutLine").addEventListener("click", checkoutLine);
   }
-  function changeQty(slug, d) {
-    const line = state.cart.find((i) => i.slug === slug);
+  function changeQty(slug, pack, d) {
+    pack = pack || 1;
+    const line = state.cart.find((i) => i.slug === slug && (i.pack || 1) === pack);
     if (!line) return;
     line.qty += d;
-    if (line.qty < 1) return removeLine(slug);
+    if (line.qty < 1) return removeLine(slug, pack);
     saveCart();
   }
-  function removeLine(slug) {
-    state.cart = state.cart.filter((i) => i.slug !== slug);
+  function removeLine(slug, pack) {
+    pack = pack || 1;
+    state.cart = state.cart.filter((i) => !(i.slug === slug && (i.pack || 1) === pack));
     saveCart();
   }
 
@@ -364,7 +383,8 @@
     const ref = makeRef();
     const lines = state.cart.map((i) => {
       const p = state.products.find((x) => x.slug === i.slug);
-      return "• " + p.name + " × " + i.qty + "  = ฿" + baht(p.price * i.qty);
+      const pack = i.pack || 1;
+      return "• " + p.name + " (" + packLabel(pack) + ") × " + i.qty + "  = ฿" + baht(packPrice(p, pack) * i.qty);
     }).join("\n");
     const msg =
       "สวัสดีครับ/ค่ะ ต้องการสั่งซื้อสินค้าตามนี้\n" +
@@ -379,7 +399,7 @@
       date: new Date().toISOString().slice(0, 10),
       items: state.cart.map((i) => {
         const p = state.products.find((x) => x.slug === i.slug);
-        return p.name + " × " + i.qty;
+        return p.name + " (" + packLabel(i.pack || 1) + ") × " + i.qty;
       }).join(", "),
       total: total + ship
     });
@@ -444,7 +464,7 @@
     $$("[data-add]", root || document).forEach((b) => {
       if (b.dataset.bound) return;
       b.dataset.bound = "1";
-      b.addEventListener("click", () => addToCart(b.dataset.add, 1));
+      b.addEventListener("click", () => addToCart(b.dataset.add, +(b.dataset.pack || 1), 1));
     });
   }
 
@@ -479,7 +499,7 @@
     state: state, init: init, $: $, $$: $$, baht: baht, esc: esc, url: url, icon: icon,
     productCard: productCard, productImg: productImg, bindAddButtons: bindAddButtons,
     addToCart: addToCart, openCart: openCart, toast: toast, initReveal: initReveal,
-    myOrders: myOrders, loadJSON: loadJSON
+    myOrders: myOrders, loadJSON: loadJSON, packPrice: packPrice, packLabel: packLabel
   };
 
   document.addEventListener("DOMContentLoaded", () => {

@@ -86,7 +86,11 @@ export default async function handler(req, context) {
     const p = (catalog.products || []).find((x) => x.slug === raw.slug);
     if (!p) return json(400, { ok: false, error: `ไม่พบสินค้ารหัส ${clean(raw.slug, 40)}` });
     const qty = Math.min(Math.max(parseInt(raw.qty, 10) || 0, 1), 99);
-    items.push({ slug: p.slug, name: p.name, price: p.price, qty, lineTotal: p.price * qty });
+    const pack = Math.max(parseInt(raw.pack, 10) || 1, 1);
+    const pk = (p.packs || []).find((x) => Number(x.qty) === pack);
+    const unit = pk ? pk.price : (p.price * pack);
+    const label = pack > 1 ? `${p.name} (แพ็ก ${pack} กล่อง)` : p.name;
+    items.push({ slug: p.slug, name: label, pack, qty, price: unit, lineTotal: unit * qty });
   }
 
   const subtotal = items.reduce((a, i) => a + i.lineTotal, 0);

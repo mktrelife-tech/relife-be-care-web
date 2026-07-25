@@ -21,6 +21,12 @@
         "assets/img/products/beta-oil-pack15.jpg",
         "assets/img/products/beta-oil-pack24.jpg"
       ],
+      "packs": [
+        { "qty": 1,  "price": 690,  "image": "assets/img/products/beta-oil-box.jpg" },
+        { "qty": 4,  "price": 1790, "image": "assets/img/products/beta-oil-pack4.jpg" },
+        { "qty": 8,  "price": 3290, "image": "assets/img/products/beta-oil-pack8.jpg" },
+        { "qty": 15, "price": 5690, "image": "assets/img/products/beta-oil-pack15.jpg" }
+      ],
       "highlights": [
         "น้ำมันธรรมชาติ 3 ชนิด — คาโนลา 200 มก. มะกอก 200 มก. รำข้าว 109 มก.",
         "มีไฟโตสเตอรอล สารจากพืชที่พบตามธรรมชาติในน้ำมันพืช",
@@ -70,6 +76,12 @@
         "assets/img/products/betax-plus-pack15.jpg",
         "assets/img/products/betax-plus-pack24.jpg"
       ],
+      "packs": [
+        { "qty": 1,  "price": 690,  "image": "assets/img/products/betax-plus-box.jpg" },
+        { "qty": 4,  "price": 1790, "image": "assets/img/products/betax-plus-pack4.jpg" },
+        { "qty": 8,  "price": 3290, "image": "assets/img/products/betax-plus-pack8.jpg" },
+        { "qty": 15, "price": 5690, "image": "assets/img/products/betax-plus-pack15.jpg" }
+      ],
       "highlights": [
         "แอล-ซีสเทอีน 100 มก. และสารสกัดอะเซโรลาเชอร์รี 100 มก.",
         "ยีสต์เบต้า-กลูแคน 50 มก. และซิงก์ 5.8 มก.",
@@ -115,6 +127,12 @@
         "assets/img/products/beta-life-pack15.jpg",
         "assets/img/products/beta-life-pack24.jpg"
       ],
+      "packs": [
+        { "qty": 1,  "price": 690,  "image": "assets/img/products/beta-life-box.jpg" },
+        { "qty": 4,  "price": 1790, "image": "assets/img/products/beta-life-pack4.jpg" },
+        { "qty": 8,  "price": 3290, "image": "assets/img/products/beta-life-pack8.jpg" },
+        { "qty": 15, "price": 5690, "image": "assets/img/products/beta-life-pack15.jpg" }
+      ],
       "highlights": [
         "ผงไข่ขาว 230 มก. โปรตีนคุณภาพดี ย่อยง่าย เหมาะกับผู้ใส่ใจสุขภาพไต",
         "สารสกัดเห็ดหลินจือ 50 มก.",
@@ -157,6 +175,12 @@
         "assets/img/products/lab-farm-pack4.jpg",
         "assets/img/products/lab-farm-pack8.jpg",
         "assets/img/products/lab-farm-pack15.jpg"
+      ],
+      "packs": [
+        { "qty": 1,  "price": 890,  "image": "assets/img/products/lab-farm-box.jpg" },
+        { "qty": 4,  "price": 2490, "image": "assets/img/products/lab-farm-pack4.jpg" },
+        { "qty": 8,  "price": 4590, "image": "assets/img/products/lab-farm-pack8.jpg" },
+        { "qty": 15, "price": 7890, "image": "assets/img/products/lab-farm-pack15.jpg" }
       ],
       "highlights": [
         "เบต้ากลูแคนจากยีสต์ 200 มก.",
@@ -202,6 +226,12 @@
         "assets/img/products/betaherb-pack8.jpg",
         "assets/img/products/betaherb-pack15.jpg",
         "assets/img/products/betaherb-pack24.jpg"
+      ],
+      "packs": [
+        { "qty": 1,  "price": 690,  "image": "assets/img/products/betaherb-box.jpg" },
+        { "qty": 4,  "price": 1790, "image": "assets/img/products/betaherb-pack4.jpg" },
+        { "qty": 8,  "price": 3290, "image": "assets/img/products/betaherb-pack8.jpg" },
+        { "qty": 15, "price": 5690, "image": "assets/img/products/betaherb-pack15.jpg" }
       ],
       "highlights": [
         "สารสกัดมะระขี้นก 150 มก.",
