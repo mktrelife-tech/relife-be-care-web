@@ -278,7 +278,7 @@ ul, ol { margin: 0 0 1em; padding-left: 1.25em; }
 
 /* โชว์เคสสินค้าใน Hero (แทนรูป lifestyle จนกว่าจะมีรูปจริง) */
 .hero-show {
-  position: relative; aspect-ratio: 4/5; width: 100%;
+  position: relative; aspect-ratio: 1/1; width: 100%; max-width: 480px; margin-inline: auto;
   border-radius: var(--r-xl); overflow: hidden;
   background:
     radial-gradient(120% 90% at 50% 12%, #FFFFFF 0%, var(--brand-wash) 60%, var(--sage-wash) 100%);
