@@ -23,10 +23,16 @@
 <body>
 <div id="site-header"></div>
 
-<!-- ===== HERO ===== -->
-<section class="hero">
-  <div class="wrap hero__grid">
-    <div>
+<!-- ===== HERO (full-bleed background) ===== -->
+<section class="hero" id="hero">
+  <div class="hero__bg" id="heroBg"></div>
+  <div class="hero__scrim"></div>
+  <div class="hero__badge">
+    <strong id="heroBadgeNum"></strong>
+    <span id="heroBadgeTxt"></span>
+  </div>
+  <div class="wrap hero__inner">
+    <div class="hero__content">
       <span class="eyebrow" id="heroEyebrow"></span>
       <h1 id="heroTitle"></h1>
       <p class="hero__lead" id="heroLead"></p>
@@ -35,13 +41,6 @@
         <a class="btn btn--line btn--lg" href="consult.html">🩺 นัดปรึกษาฟรี</a>
       </div>
       <div class="hero__trust" id="heroTrust"></div>
-    </div>
-    <div class="hero__media">
-      <div id="heroImage"></div>
-      <div class="hero__badge">
-        <strong id="heroBadgeNum"></strong>
-        <span id="heroBadgeTxt"></span>
-      </div>
     </div>
   </div>
 </section>
@@ -209,11 +208,13 @@ document.addEventListener("site:ready", function (e) {
   A.$("#heroTrust").innerHTML = (s.hero.trust || []).map(function (t) {
     return "<span>✓ " + A.esc(t) + "</span>";
   }).join("");
+  var heroBg = A.$("#heroBg");
   if (s.hero.image) {
-    A.$("#heroImage").innerHTML = '<img class="hero-photo" src="' + A.esc(s.hero.image) + '" alt="' + A.esc(s.hero.imageAlt) + '">';
+    heroBg.style.backgroundImage = "url('" + s.hero.image.replace(/'/g, "%27") + "')";
+    heroBg.classList.remove("is-placeholder");
   } else {
-    A.$("#heroImage").innerHTML =
-      '<div class="hero-photo ph" data-label="รูป Hero — ครอบครัว + สินค้า&#10;แนวนอน 1400×1000px"></div>';
+    heroBg.classList.add("is-placeholder");
+    heroBg.setAttribute("data-label", "รูปพื้นหลัง Hero — ครอบครัว + สินค้า · แนวนอน 1920×1080px");
   }
 
   /* quick actions (สไตล์โรงพยาบาล) */
