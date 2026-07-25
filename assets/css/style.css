@@ -357,7 +357,10 @@ ul, ol { margin: 0 0 1em; padding-left: 1.25em; }
 .feature p { font-size: .85rem; color: var(--ink-soft); margin: 0; }
 
 /* ---------- 8. Product cards ---------- */
-.products-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(258px, 1fr)); gap: 24px; }
+/* จัดกึ่งกลางเสมอ — ของเหลือแถวสุดท้ายอยู่กลาง ไม่โดดซ้าย */
+.products-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 24px; }
+.products-grid > * { flex: 1 1 200px; max-width: 246px; min-width: 0; }
+@media (max-width: 480px) { .products-grid > * { flex-basis: 100%; max-width: none; } }
 .card {
   background: var(--white); border-radius: var(--r-lg); overflow: hidden;
   box-shadow: var(--sh-sm); border: 1px solid rgba(38,55,66,.05);
@@ -643,7 +646,6 @@ table.compare tbody th { font-weight: 500; color: var(--ink-soft); }
 }
 @media (max-width: 460px) {
   .features { grid-template-columns: 1fr; }
-  .products-grid { grid-template-columns: 1fr; }
 }
 
 /* ---------- 29. Pack pricing (PDP) ---------- */
@@ -700,7 +702,8 @@ table.compare tbody th { font-weight: 500; color: var(--ink-soft); }
 }
 .who-card__ico { font-size: 2rem; flex: 0 0 auto; }
 
-.hl-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; }
+.hl-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 16px; }
+.hl-grid > * { flex: 1 1 240px; max-width: 360px; }
 .hl-item {
   display: flex; gap: 14px; align-items: flex-start;
   background: var(--white); border-radius: var(--r-md); padding: 20px 20px;
