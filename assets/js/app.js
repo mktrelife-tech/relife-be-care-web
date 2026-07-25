@@ -203,6 +203,7 @@
           '<div><h4>ข้อมูล</h4><ul>' +
             '<li><a href="' + url("about.html") + '">เกี่ยวกับเรา</a></li>' +
             '<li><a href="' + url("order.html") + '">เช็คสถานะออเดอร์</a></li>' +
+            '<li><a href="' + url("consult.html") + '">นัดปรึกษาผู้เชี่ยวชาญ</a></li>' +
             '<li><a href="' + url("articles.html") + '">บทความสุขภาพ</a></li>' +
             '<li><a href="' + url("compare.html") + '">เปรียบเทียบสินค้า</a></li>' +
             '<li><a href="' + url("policy.html") + '">การจัดส่ง &amp; การคืนสินค้า</a></li>' +

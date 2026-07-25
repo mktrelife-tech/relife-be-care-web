@@ -10,6 +10,7 @@
   <url><loc>https://example.co.th/compare.html</loc><priority>0.7</priority></url>
   <url><loc>https://example.co.th/quiz.html</loc><priority>0.7</priority></url>
   <url><loc>https://example.co.th/order.html</loc><priority>0.7</priority></url>
+  <url><loc>https://example.co.th/consult.html</loc><priority>0.8</priority></url>
   <url><loc>https://example.co.th/articles.html</loc><priority>0.6</priority></url>
   <url><loc>https://example.co.th/about.html</loc><priority>0.6</priority></url>
   <url><loc>https://example.co.th/contact.html</loc><priority>0.6</priority></url>
