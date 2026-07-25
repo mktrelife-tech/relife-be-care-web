@@ -65,6 +65,27 @@
   </div>
 </section>
 
+<!-- ===== CONCERNS (เลือกตามอาการ) ===== -->
+<section class="section">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">เลือกตามอาการ</span>
+      <h2>💙 กังวลเรื่องไหน เราช่วยคุณเริ่มดูแลได้</h2>
+      <p>บอกสิ่งที่คุณหรือคนที่บ้านกังวล เราแนะนำผลิตภัณฑ์ที่ตรงจุดให้</p>
+    </div>
+    <div class="concerns" id="concerns"></div>
+  </div>
+</section>
+
+<!-- ===== SYMPTOMS BAND ===== -->
+<section class="symptom-band">
+  <div class="wrap">
+    <h2 class="symptom-band__title">หากคนในบ้านเริ่มมี<span>สัญญาณเหล่านี้</span> อย่าปล่อยไว้</h2>
+    <div class="symptom-grid" id="symptoms"></div>
+    <p class="symptom-note">สัญญาณเล็ก ๆ วันนี้ อาจกลายเป็นเรื่องใหญ่ในวันหน้า — เริ่มดูแลตั้งแต่วันนี้ เพื่อคนที่คุณรัก</p>
+  </div>
+</section>
+
 <!-- ===== PRODUCTS ===== -->
 <section class="section section--sand">
   <div class="wrap">
@@ -193,6 +214,28 @@ document.addEventListener("site:ready", function (e) {
   A.$("#features").innerHTML = (s.features || []).map(function (f) {
     return '<div class="feature reveal"><div class="feature__ico">' + A.icon(f.icon, 22) + "</div>" +
       "<h3>" + A.esc(f.title) + "</h3><p>" + A.esc(f.text) + "</p></div>";
+  }).join("");
+
+  /* concerns (เลือกตามอาการ → สินค้า) */
+  A.$("#concerns").innerHTML = (s.concerns || []).map(function (c) {
+    var prod = S.products.filter(function (p) { return p.slug === c.slug; })[0];
+    var pimg = prod && prod.images && prod.images[0];
+    var media = c.image
+      ? '<img src="' + A.esc(c.image) + '" alt="' + A.esc(c.title) + '">'
+      : (pimg ? '<img src="' + A.esc(pimg) + '" alt="' + A.esc(prod.name) + '">'
+              : '<div class="ph" style="height:100%" data-label="ภาพ 640×480px"></div>');
+    return '<a class="concern reveal" href="' + A.url("p/" + A.esc(c.slug) + ".html") + '">' +
+      '<div class="concern__media">' + media + '<span class="concern__ico">' + c.icon + "</span></div>" +
+      '<div class="concern__body"><h3>' + A.esc(c.title) + "</h3>" +
+        "<p>" + A.esc(c.desc) + "</p>" +
+        (prod ? '<span class="concern__rec">แนะนำ <b>' + A.esc(prod.name) + "</b> →</span>" : "") +
+      "</div></a>";
+  }).join("");
+
+  /* symptoms band */
+  A.$("#symptoms").innerHTML = (s.symptoms || []).map(function (sym) {
+    return '<div class="symptom"><span class="symptom__ico">' + sym.icon + "</span>" +
+      "<div><b>" + A.esc(sym.t) + "</b><span>" + A.esc(sym.d) + "</span></div></div>";
   }).join("");
 
   /* products */

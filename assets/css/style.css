@@ -348,6 +348,51 @@ ul, ol { margin: 0 0 1em; padding-left: 1.25em; }
   .qa { padding: 16px 18px; }
 }
 
+/* ---------- 6c. Concerns (เลือกตามอาการ) ---------- */
+.concerns { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+.concern {
+  display: flex; flex-direction: column; background: var(--white);
+  border-radius: var(--r-lg); overflow: hidden; box-shadow: var(--sh-sm);
+  border: 1px solid rgba(59,50,43,.05); transition: transform .2s ease, box-shadow .2s ease;
+}
+.concern:hover { transform: translateY(-5px); box-shadow: var(--sh-lg); }
+.concern__media { position: relative; aspect-ratio: 4/3; background: linear-gradient(135deg, var(--brand-wash), var(--sage-wash)); overflow: hidden; }
+.concern__media img { width: 100%; height: 100%; object-fit: cover; }
+.concern__ico {
+  position: absolute; left: 14px; bottom: -18px; width: 44px; height: 44px; border-radius: 13px;
+  background: var(--white); box-shadow: var(--sh-md); display: grid; place-items: center; font-size: 1.35rem;
+}
+.concern__body { padding: 26px 18px 20px; display: flex; flex-direction: column; flex: 1; }
+.concern__body h3 { font-size: 1.1rem; margin: 0 0 6px; }
+.concern__body p { font-size: .88rem; color: var(--ink-soft); margin: 0 0 14px; flex: 1; }
+.concern__rec { font-size: .9rem; font-weight: 600; color: var(--brand-dark); }
+.concern__rec b { color: var(--brand); }
+
+/* ---------- 6d. Symptoms band ---------- */
+.symptom-band {
+  background: linear-gradient(120deg, #0E6E70 0%, #0A5560 55%, #0C6A5A 100%);
+  color: #EAF6F5; padding: clamp(44px, 6vw, 72px) 0;
+}
+.symptom-band__title { color: #fff; text-align: center; max-width: 640px; margin: 0 auto clamp(24px, 4vw, 38px); font-size: clamp(1.5rem, 3.4vw, 2.1rem); }
+.symptom-band__title span { color: #6FE3C9; }
+.symptom-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 14px; }
+.symptom {
+  display: flex; align-items: center; gap: 12px; flex: 1 1 210px; max-width: 260px;
+  background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.16);
+  border-radius: var(--r-md); padding: 15px 16px; backdrop-filter: blur(4px);
+}
+.symptom__ico { font-size: 1.5rem; flex: 0 0 auto; }
+.symptom b { display: block; font-size: .96rem; color: #fff; }
+.symptom span { font-size: .8rem; color: rgba(234,246,245,.75); }
+.symptom-note { text-align: center; margin: clamp(24px, 4vw, 34px) auto 0; max-width: 620px; font-size: .96rem; color: rgba(234,246,245,.9); }
+
+@media (max-width: 900px) {
+  .concerns { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 480px) {
+  .concerns { grid-template-columns: 1fr; }
+}
+
 /* ---------- 7. Feature strip ---------- */
 .features { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
 .feature {
