@@ -264,7 +264,7 @@ ul, ol { margin: 0 0 1em; padding-left: 1.25em; }
   min-height: 520px;
 }
 /* จอใหญ่: สัดส่วนภาพ 16:9 */
-@media (min-width: 900px) { .hero { aspect-ratio: 16 / 9; min-height: 0; max-height: 92vh; } }
+@media (min-width: 900px) { .hero { min-height: 0; height: min(56.25vw, 88vh); } }
 /* ภาพพื้นหลังเต็มกว้าง */
 .hero__bg { position: absolute; inset: 0; z-index: 0; background-size: cover; background-position: center right; }
 .hero__bg.is-placeholder {
