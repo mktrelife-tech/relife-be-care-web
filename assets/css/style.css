@@ -264,7 +264,11 @@ ul, ol { margin: 0 0 1em; padding-left: 1.25em; }
   min-height: 520px;
 }
 /* จอใหญ่: สัดส่วนภาพ 16:9 */
-@media (min-width: 900px) { .hero { min-height: 0; height: min(56.25vw, 88vh); } }
+@media (min-width: 900px) {
+  .hero { min-height: 0; height: min(56.25vw, 88vh); }
+  /* ซูมเข้าเล็กน้อยยึดขอบขวา ตัดห้องโล่งฝั่งซ้ายออก ให้คน+สินค้าเต็มเฟรม */
+  .hero__bg { transform: scale(1.18); transform-origin: 100% 48%; }
+}
 /* ภาพพื้นหลังเต็มกว้าง */
 .hero__bg { position: absolute; inset: 0; z-index: 0; background-size: cover; background-position: center right; }
 .hero__bg.is-placeholder {
@@ -282,7 +286,7 @@ ul, ol { margin: 0 0 1em; padding-left: 1.25em; }
 /* ม่านไล่สีให้ข้อความฝั่งซ้ายอ่านออกเมื่อมีรูปจริง */
 .hero__scrim {
   position: absolute; inset: 0; z-index: 1;
-  background: linear-gradient(100deg, rgba(255,255,255,.94) 0%, rgba(255,255,255,.86) 34%, rgba(255,255,255,.55) 52%, rgba(255,255,255,0) 72%);
+  background: linear-gradient(100deg, rgba(228,245,252,.96) 0%, rgba(228,245,252,.9) 28%, rgba(240,250,247,.58) 50%, rgba(255,255,255,0) 70%);
 }
 .hero__inner { position: relative; z-index: 2; width: 100%; padding-block: clamp(40px, 6vw, 80px); }
 .hero__content { max-width: 620px; }
