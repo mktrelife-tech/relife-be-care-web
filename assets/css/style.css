@@ -518,7 +518,7 @@ ul, ol { margin: 0 0 1em; padding-left: 1.25em; }
   display: grid; place-items: center; font-size: 2.2rem;
 }
 /* โซนบัตรตัวแทนจริงบนหน้าแรก — คอลัมน์กว้างคงที่ ไม่อิงขนาดรูป */
-.verify--proof { grid-template-columns: clamp(280px, 34%, 400px) 1fr; align-items: center; gap: clamp(24px, 4vw, 44px); }
+.verify--proof { grid-template-columns: clamp(280px, 34%, 400px) 1fr; align-items: start; gap: clamp(24px, 4vw, 44px); }
 .verify__card { width: 100%; min-width: 0; text-align: center; }
 .verify__card img {
   width: 100%; aspect-ratio: 1200 / 690; object-fit: cover;
