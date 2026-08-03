@@ -22,7 +22,8 @@
     "regNo": "[[ เลขทะเบียนพาณิชย์ (ยังไม่มีในชีต) ]]",
     "authorizedSince": "[[ ปีที่ได้รับแต่งตั้ง (ยังไม่มีในชีต) ]]",
     "distributorId": "VIP0083",
-    "authorizedProof": "assets/img/distributor-card.jpg"
+    "authorizedProof": "assets/img/distributor-card.jpg?v=2",
+    "authorizationLetter": "assets/img/authorization-letter.jpg"
   },
   "hero": {
     "eyebrow": "ตัวแทนจำหน่ายอย่างเป็นทางการ 100%",

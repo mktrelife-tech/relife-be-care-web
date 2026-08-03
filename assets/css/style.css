@@ -540,6 +540,29 @@ ul, ol { margin: 0 0 1em; padding-left: 1.25em; }
 .verify dl { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 14px 24px; margin: 14px 0 0; }
 .verify dt { font-size: .76rem; color: var(--ink-faint); letter-spacing: .06em; text-transform: uppercase; }
 .verify dd { margin: 2px 0 0; font-weight: 600; font-size: .95rem; }
+/* หนังสือรับรองการแต่งตั้งตัวแทน — ภาพย่อคลิกดูฉบับเต็ม (อยู่ใต้บัตร) */
+.verify__letter { display: block; margin-top: 16px; text-decoration: none; }
+.verify__letter img {
+  width: 100%; max-width: 210px; aspect-ratio: auto; object-fit: contain;
+  margin-inline: auto; display: block; border-radius: var(--r-sm);
+  border: 1px solid rgba(0,0,0,.10); box-shadow: var(--sh-sm); background: var(--white);
+  transition: transform .18s ease, box-shadow .18s ease;
+}
+.verify__letter:hover img { transform: translateY(-3px); box-shadow: var(--sh-md); }
+.verify__letter span { display: block; margin-top: 9px; font-size: .76rem; font-weight: 600; color: var(--sage-dark); }
+
+/* ---------- ทีมงานรีไลฟ์ ---------- */
+.team-sec { background: linear-gradient(135deg, var(--brand-wash), var(--sage-wash)); }
+.team-wrap { display: grid; grid-template-columns: 1fr clamp(320px, 42%, 470px); gap: clamp(28px, 4vw, 56px); align-items: center; }
+.team-copy h2 { font-size: clamp(1.5rem, 3vw, 2.15rem); margin: .3em 0 .5em; }
+.team-copy p { color: var(--ink-soft); max-width: 34em; }
+.team-copy__cta { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 22px; }
+.team-figure { margin: 0; }
+.team-figure img { width: 100%; height: auto; display: block; border-radius: var(--r-xl); box-shadow: var(--sh-lg); border: 5px solid var(--white); }
+@media (max-width: 820px) {
+  .team-wrap { grid-template-columns: 1fr; }
+  .team-figure { max-width: 440px; margin-inline: auto; }
+}
 
 /* ---------- 11. Reviews ---------- */
 .reviews { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }

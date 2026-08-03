@@ -142,6 +142,24 @@
   </div>
 </section>
 
+<!-- ===== TEAM ===== -->
+<section class="section team-sec">
+  <div class="wrap team-wrap">
+    <div class="team-copy reveal">
+      <span class="eyebrow">ทีมงานของเรา</span>
+      <h2>เบื้องหลังคือคนจริง ที่พร้อมดูแลคุณ</h2>
+      <p>ทีมงาน บริษัท รีไลฟ์ โซลูชั่นส์ จำกัด ดูแลตั้งแต่ให้คำปรึกษา เลือกสินค้าที่เหมาะกับคุณ ไปจนถึงหลังการขาย — ทักหาเราได้ทุกเมื่อ ไม่ต้องซื้อก็ปรึกษาได้</p>
+      <div class="team-copy__cta">
+        <a class="btn btn--primary" href="consult.html">🩺 นัดปรึกษาฟรี</a>
+        <a class="btn btn--ghost" href="about.html">เกี่ยวกับเรา</a>
+      </div>
+    </div>
+    <figure class="team-figure reveal">
+      <img src="assets/img/relife-team.jpg" alt="ทีมงาน บริษัท รีไลฟ์ โซลูชั่นส์ จำกัด พร้อมดูแลคุณ" loading="lazy">
+    </figure>
+  </div>
+</section>
+
 <!-- ===== REVIEWS ===== -->
 <section class="section section--sand">
   <div class="wrap">
@@ -269,6 +287,12 @@ document.addEventListener("site:ready", function (e) {
     ? '<div class="verify__card"><img src="' + A.esc(s.business.authorizedProof) +
         '" alt="บัตรตัวแทนจำหน่ายอย่างเป็นทางการ ' + A.esc(s.brand.name) + '" loading="lazy">' +
         (s.business.distributorId ? '<span class="verify__id">รหัสตัวแทน ' + A.esc(s.business.distributorId) + "</span>" : "") +
+        (s.business.authorizationLetter
+          ? '<a class="verify__letter" href="' + A.esc(s.business.authorizationLetter) +
+              '" target="_blank" rel="noopener"><img src="' + A.esc(s.business.authorizationLetter) +
+              '" alt="หนังสือรับรองการแต่งตั้งตัวแทนจำหน่าย ' + A.esc(s.brand.name) +
+              '" loading="lazy"><span>📜 หนังสือรับรองการแต่งตั้งตัวแทน · คลิกดูฉบับเต็ม</span></a>'
+          : "") +
       "</div>"
     : '<div class="verify__seal">🛡️</div>';
   A.$("#verify").innerHTML =
