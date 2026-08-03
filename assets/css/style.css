@@ -264,12 +264,21 @@ ul, ol { margin: 0 0 1em; padding-left: 1.25em; }
   min-height: 520px;
 }
 /* จอใหญ่: สัดส่วนภาพ 16:9 */
+/* จอใหญ่: การ์ด 16:9 มีขอบเว้นซ้าย-ขวา กว้างเท่าเนื้อหา แสดงรูปเต็มไม่ครอป */
 @media (min-width: 900px) {
-  .hero { min-height: 0; height: min(56.25vw, 72vh, 660px); }
-  /* จอใหญ่ครอปบน/ล่าง เลื่อนจุดโฟกัสขึ้นเพื่อคงหน้าคน + แถวสินค้าหลัก */
-  .hero__bg { background-position: 50% 30%; }
+  .hero {
+    min-height: 0;
+    width: min(100% - 2 * var(--gutter), 1180px);
+    margin-inline: auto;
+    margin-block: clamp(20px, 3vw, 40px);
+    aspect-ratio: 16 / 9;
+    border-radius: var(--r-xl);
+    box-shadow: var(--sh-lg);
+  }
+  .hero__inner { max-width: none; padding-inline: clamp(36px, 4vw, 60px); }
+  .hero__bg { background-position: center; }
 }
-/* ภาพพื้นหลังเต็มกว้าง */
+/* ภาพพื้นหลัง */
 .hero__bg { position: absolute; inset: 0; z-index: 0; background-size: cover; background-position: center right; }
 .hero__bg.is-placeholder {
   background:
