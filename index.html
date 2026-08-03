@@ -283,29 +283,29 @@ document.addEventListener("site:ready", function (e) {
   }).join("");
 
   /* verify — โชว์บัตรตัวแทนจริงถ้ามี ไม่งั้นใช้ไอคอน */
-  var proof = s.business.authorizedProof
-    ? '<div class="verify__card"><img src="' + A.esc(s.business.authorizedProof) +
-        '" alt="บัตรตัวแทนจำหน่ายอย่างเป็นทางการ ' + A.esc(s.brand.name) + '" loading="lazy">' +
-        (s.business.distributorId ? '<span class="verify__id">รหัสตัวแทน ' + A.esc(s.business.distributorId) + "</span>" : "") +
-        (s.business.authorizationLetter
-          ? '<a class="verify__letter" href="' + A.esc(s.business.authorizationLetter) +
-              '" target="_blank" rel="noopener"><img src="' + A.esc(s.business.authorizationLetter) +
-              '" alt="หนังสือรับรองการแต่งตั้งตัวแทนจำหน่าย ' + A.esc(s.brand.name) +
-              '" loading="lazy"><span>📜 หนังสือรับรองการแต่งตั้งตัวแทน · คลิกดูฉบับเต็ม</span></a>'
-          : "") +
-      "</div>"
-    : '<div class="verify__seal">🛡️</div>';
+  var vProof = function (href, img, cap) {
+    return '<a class="verify__proof" href="' + A.esc(href) + '" target="_blank" rel="noopener">' +
+      '<img src="' + A.esc(img) + '" alt="' + A.esc(cap) + '" loading="lazy">' +
+      '<figcaption>' + cap + '</figcaption></a>';
+  };
+  var proofs = "";
+  if (s.business.authorizedProof) proofs += vProof(s.business.authorizedProof, s.business.authorizedProof,
+    "บัตรตัวแทนจำหน่าย" + (s.business.distributorId ? " · " + s.business.distributorId : ""));
+  if (s.business.authorizationLetter) proofs += vProof(s.business.authorizationLetter, s.business.authorizationLetter,
+    "📜 หนังสือรับรองการแต่งตั้ง · คลิกดูฉบับเต็ม");
   A.$("#verify").innerHTML =
-    proof + "<div>" +
+    "<div class='verify__head'>" +
       "<span class='eyebrow'>ตรวจสอบได้จริง</span>" +
       "<h2 style='margin:0 0 6px'>ตัวแทนจำหน่ายอย่างเป็นทางการ</h2>" +
       "<p style='margin:0 0 6px;color:var(--ink-soft)'>เราจดทะเบียนถูกต้อง และได้รับการแต่งตั้งเป็นตัวแทนจำหน่ายโดยตรงจากบริษัทผู้ผลิต — ทุกข้อมูลตรวจสอบได้</p>" +
       "<dl>" +
         "<div><dt>ชื่อนิติบุคคล</dt><dd>" + A.esc(s.business.legalName) + "</dd></div>" +
         "<div><dt>เลขผู้เสียภาษี</dt><dd>" + A.esc(s.business.taxId) + "</dd></div>" +
+        "<div><dt>รหัสตัวแทน</dt><dd>" + A.esc(s.business.distributorId) + "</dd></div>" +
         "<div><dt>โทรศัพท์</dt><dd>" + A.esc(s.contact.phone) + "</dd></div>" +
-        "<div><dt>เวลาทำการ</dt><dd>" + A.esc(s.contact.openHours) + "</dd></div>" +
-      "</dl></div>";
+      "</dl>" +
+    "</div>" +
+    (proofs ? "<div class='verify__proofs'>" + proofs + "</div>" : "");
 
   /* reviews */
   A.$("#reviews").innerHTML = (S.reviews || []).map(function (r) {
