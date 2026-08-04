@@ -165,9 +165,10 @@
   <div class="wrap">
     <div class="sec-head">
       <span class="eyebrow">เสียงจากลูกค้า</span>
-      <h2>ครอบครัวที่ให้เราช่วยดูแล</h2>
+      <h2>เพราะหลายครอบครัวเริ่มดูแล... ก่อนจะสายเกินไป 💛</h2>
     </div>
     <div class="reviews" id="reviews"></div>
+    <p class="reviews__disclaimer">*ผลลัพธ์อาจแตกต่างกันไปในแต่ละบุคคล</p>
   </div>
 </section>
 
@@ -307,12 +308,17 @@ document.addEventListener("site:ready", function (e) {
     "</div>" +
     (proofs ? "<div class='verify__proofs'>" + proofs + "</div>" : "");
 
-  /* reviews */
+  /* reviews — การ์ดรูปลูกค้า + เรื่องราวสั้น */
   A.$("#reviews").innerHTML = (S.reviews || []).map(function (r) {
-    return '<div class="review reveal"><div class="review__stars">' + "★".repeat(r.stars || 5) + "</div>" +
-      '<p class="review__text">"' + A.esc(r.text) + '"</p>' +
-      '<div class="review__who"><div class="review__avatar">' + A.esc((r.name || "?").trim().charAt(0)) + "</div>" +
-        "<div><b>" + A.esc(r.name) + "</b><span>" + A.esc(r.meta) + " · ซื้อ " + A.esc(r.product) + "</span></div></div></div>";
+    var photo = r.photo
+      ? '<div class="review__photo" style="background-image:url(\'' + A.esc(r.photo).replace(/'/g, "%27") + '\')"></div>'
+      : '<div class="review__photo is-ph">รูปลูกค้า<br>600×600</div>';
+    var who = A.esc(r.name) + (r.age ? " · อายุ " + A.esc(r.age) + " ปี" : "");
+    var use = (r.product ? "ทาน " + A.esc(r.product) : "") + (r.duration ? " ต่อเนื่อง " + A.esc(r.duration) : "");
+    return '<figure class="review reveal">' + photo +
+      '<div class="review__body"><p class="review__text">' + A.esc(r.text) + "</p>" +
+      '<figcaption class="review__who"><b>' + who + "</b>" +
+      (use ? "<span>" + use + "</span>" : "") + "</figcaption></div></figure>";
   }).join("");
 
   /* articles */

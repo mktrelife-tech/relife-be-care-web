@@ -203,11 +203,12 @@ collections:
             widget: list
             summary: "{{fields.name}} — {{fields.product}}"
             fields:
-              - { label: "ชื่อลูกค้า (ใช้ชื่อย่อได้)", name: name, widget: string }
-              - { label: "อายุ / จังหวัด", name: meta, widget: string }
-              - { label: "จำนวนดาว", name: stars, widget: number, value_type: int, default: 5, min: 1, max: 5 }
-              - { label: "สินค้าที่ซื้อ", name: product, widget: string }
-              - { label: "ข้อความรีวิว", name: text, widget: text }
+              - { label: "รูปลูกค้า (จัตุรัส ~600×600px)", name: photo, widget: image, required: false }
+              - { label: "ชื่อลูกค้า (เช่น คุณสมชาย)", name: name, widget: string }
+              - { label: "อายุ (เช่น 62)", name: age, widget: string, required: false }
+              - { label: "สินค้าที่ทาน (เช่น Beta Life)", name: product, widget: string, required: false }
+              - { label: "ทานต่อเนื่อง (เช่น 5 เดือน)", name: duration, widget: string, required: false }
+              - { label: "เรื่องราว / ข้อความรีวิว", name: text, widget: text }
 
   # ─────────────────────────────────────────
   - name: orders
