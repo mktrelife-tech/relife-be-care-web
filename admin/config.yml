@@ -2,9 +2,9 @@
 # แก้ repo เป็น "ชื่อบัญชี/ชื่อ-repo" ของคุณ และ base_url เป็นโดเมนเว็บจริง
 backend:
   name: github
-  repo: your-github-username/relife-be-care-web
+  repo: mktrelife-tech/relife-be-care-web
   branch: main
-  base_url: https://your-app.vercel.app
+  base_url: https://relife-be-care-web.vercel.app
   auth_endpoint: /api/auth
 
 locale: th
