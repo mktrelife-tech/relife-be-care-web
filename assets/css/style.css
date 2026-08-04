@@ -301,10 +301,11 @@ ul, ol { margin: 0 0 1em; padding-left: 1.25em; }
 .hero__content { max-width: 620px; }
 .hero h1 { font-size: clamp(1.8rem, 4.2vw, 3rem); line-height: 1.22; margin-bottom: .3em; }
 .hero h1 .accent { color: var(--brand); }
-.hero__lead { font-size: clamp(1.02rem, 1.5vw, 1.18rem); color: var(--ink-soft); max-width: 30em; }
+.hero__lead { font-size: clamp(1.02rem, 1.5vw, 1.18rem); color: var(--ink-soft); max-width: 32em; white-space: pre-line; }
 .hero__cta { display: flex; flex-wrap: wrap; gap: 12px; margin: 28px 0 22px; }
-.hero__trust { display: flex; flex-wrap: wrap; gap: 8px 20px; font-size: .88rem; color: var(--ink-soft); }
+.hero__trust { display: grid; grid-template-columns: 1fr 1fr; gap: 10px 22px; font-size: .88rem; color: var(--ink-soft); max-width: 34em; }
 .hero__trust span { display: inline-flex; align-items: center; gap: 6px; }
+@media (max-width: 520px) { .hero__trust { grid-template-columns: 1fr; } }
 
 @media (max-width: 720px) {
   .hero__scrim { background: linear-gradient(180deg, rgba(255,255,255,.9) 0%, rgba(255,255,255,.8) 55%, rgba(255,255,255,.7) 100%); }
