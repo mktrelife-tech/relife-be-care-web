@@ -60,7 +60,7 @@ function buildApiRedirect(order, siteUrl) {
     returnurl:         `${siteUrl}/thankyou.html?no=${encodeURIComponent(order.orderNo)}&pay=card`,
     posturl:           `${siteUrl}/api/payment-callback`,
     customername:      `${c.firstName} ${c.lastName}`.slice(0, 100),
-    customeraddress:   `${c.address} ${c.province} ${c.zip}`.slice(0, 200),
+    customeraddress:   `${[c.address, c.subdistrict, c.district, c.province].filter(Boolean).join(" ")} ${c.zip}`.slice(0, 200),
     customertelephone: String(c.phone).replace(/\D/g, "")
   };
 

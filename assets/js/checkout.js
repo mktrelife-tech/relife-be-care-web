@@ -134,8 +134,10 @@ document.addEventListener("site:ready", function (e) {
     { id: "fName",     label: "ชื่อจริง",        test: function (v) { return v.length >= 2; } },
     { id: "fLast",     label: "นามสกุล",        test: function (v) { return v.length >= 2; } },
     { id: "fPhone",    label: "เบอร์โทรศัพท์",   test: function (v) { return v.replace(/\D/g, "").length >= 9; } },
-    { id: "fAddr",     label: "ที่อยู่จัดส่ง",   test: function (v) { return v.length >= 10; } },
+    { id: "fAddr",     label: "ที่อยู่ (บ้านเลขที่ ถนน)", test: function (v) { return v.length >= 5; } },
     { id: "fProvince", label: "จังหวัด",         test: function (v) { return v.length >= 2; } },
+    { id: "fDistrict", label: "อำเภอ/เขต",       test: function (v) { return v.length >= 1; } },
+    { id: "fSubdistrict", label: "ตำบล/แขวง",    test: function (v) { return v.length >= 1; } },
     { id: "fZip",      label: "รหัสไปรษณีย์",    test: function (v) { return /^\d{5}$/.test(v); } }
   ];
 
@@ -176,6 +178,8 @@ document.addEventListener("site:ready", function (e) {
         phone:     A.$("#fPhone").value.trim(),
         email:     A.$("#fEmail").value.trim(),
         address:   A.$("#fAddr").value.trim(),
+        subdistrict: A.$("#fSubdistrict").value.trim(),
+        district:  A.$("#fDistrict").value.trim(),
         province:  A.$("#fProvince").value.trim(),
         zip:       A.$("#fZip").value.trim(),
         note:      A.$("#fNote").value.trim()

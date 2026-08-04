@@ -26,14 +26,16 @@ export default async function handler(req, res) {
   const customer = {
     firstName: clean(c.firstName, 60), lastName: clean(c.lastName, 60),
     phone: clean(c.phone, 20), email: clean(c.email, 120),
-    address: clean(c.address, 400), province: clean(c.province, 60),
+    address: clean(c.address, 400),
+    subdistrict: clean(c.subdistrict, 80), district: clean(c.district, 80),
+    province: clean(c.province, 60),
     zip: clean(c.zip, 5), note: clean(c.note, 400)
   };
   const missing = [];
   if (customer.firstName.length < 2) missing.push("ชื่อจริง");
   if (customer.lastName.length < 2) missing.push("นามสกุล");
   if (customer.phone.replace(/\D/g, "").length < 9) missing.push("เบอร์โทรศัพท์");
-  if (customer.address.length < 10) missing.push("ที่อยู่จัดส่ง");
+  if (customer.address.length < 5) missing.push("ที่อยู่จัดส่ง");
   if (customer.province.length < 2) missing.push("จังหวัด");
   if (!/^\d{5}$/.test(customer.zip)) missing.push("รหัสไปรษณีย์");
   if (missing.length) return res.status(400).json({ ok: false, error: "ข้อมูลไม่ครบ: " + missing.join(", ") });

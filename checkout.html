@@ -61,18 +61,34 @@
             </div>
           </div>
           <div class="field">
-            <label for="fAddr">ที่อยู่จัดส่ง <span style="color:var(--danger)">*</span></label>
-            <textarea id="fAddr" name="address" rows="3" autocomplete="street-address"
-              placeholder="บ้านเลขที่ หมู่ ซอย ถนน แขวง/ตำบล เขต/อำเภอ"></textarea>
+            <label for="fAddr">ที่อยู่ <small style="font-weight:400;color:var(--ink-faint)">(บ้านเลขที่ หมู่ ซอย ถนน)</small> <span style="color:var(--danger)">*</span></label>
+            <textarea id="fAddr" name="address" rows="2" autocomplete="street-address"
+              placeholder="เช่น 99/1 หมู่ 2 ซอยรามคำแหง 24 ถนนรามคำแหง"></textarea>
           </div>
           <div class="co-row">
             <div class="field">
               <label for="fProvince">จังหวัด <span style="color:var(--danger)">*</span></label>
-              <input id="fProvince" name="province" autocomplete="address-level1" placeholder="กรุงเทพมหานคร">
+              <select id="fProvince" name="province" autocomplete="address-level1">
+                <option value="">— เลือกจังหวัด —</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="fDistrict">อำเภอ / เขต <span style="color:var(--danger)">*</span></label>
+              <select id="fDistrict" name="district" autocomplete="address-level2" disabled>
+                <option value="">— เลือกจังหวัดก่อน —</option>
+              </select>
+            </div>
+          </div>
+          <div class="co-row">
+            <div class="field">
+              <label for="fSubdistrict">ตำบล / แขวง <span style="color:var(--danger)">*</span></label>
+              <select id="fSubdistrict" name="subdistrict" autocomplete="address-level3" disabled>
+                <option value="">— เลือกอำเภอก่อน —</option>
+              </select>
             </div>
             <div class="field">
               <label for="fZip">รหัสไปรษณีย์ <span style="color:var(--danger)">*</span></label>
-              <input id="fZip" name="zip" inputmode="numeric" maxlength="5" autocomplete="postal-code" placeholder="10110">
+              <input id="fZip" name="zip" inputmode="numeric" maxlength="5" autocomplete="postal-code" placeholder="เลือกตำบลแล้วเติมอัตโนมัติ" readonly>
             </div>
           </div>
           <div class="field">
@@ -171,6 +187,7 @@
 
 <div id="site-footer"></div>
 <script src="assets/js/app.js?v=2"></script>
+<script src="assets/js/thai-address.js?v=1"></script>
 <script src="assets/js/checkout.js?v=2"></script>
 </body>
 </html>

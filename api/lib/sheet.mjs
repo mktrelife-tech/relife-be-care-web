@@ -19,7 +19,7 @@ export async function appendToSheet(order) {
     lastName:    c.lastName,
     phone:       c.phone,
     email:       c.email,
-    address:     c.address,
+    address:     [c.address, c.subdistrict, c.district].filter(Boolean).join(" "),
     province:    c.province,
     zip:         c.zip,
     note:        c.note,

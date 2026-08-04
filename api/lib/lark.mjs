@@ -101,7 +101,7 @@ export function buildOrderCard(order, imageKey) {
           `**📮 ข้อมูลจัดส่ง**\n` +
           `${c.firstName} ${c.lastName}\n` +
           `โทร ${c.phone}${c.email ? " · " + c.email : ""}\n` +
-          `${c.address}\n${c.province} ${c.zip}` +
+          `${[c.address, c.subdistrict, c.district].filter(Boolean).join(" ")}\n${c.province} ${c.zip}` +
           (c.note ? `\n\n**📝 หมายเหตุ:** ${c.note}` : "")
       }
     }
