@@ -325,7 +325,6 @@ ul, ol { margin: 0 0 1em; padding-left: 1.25em; }
 .hero__cta { display: flex; flex-wrap: wrap; gap: 12px; margin: 28px 0 22px; }
 .hero__trust { display: grid; grid-template-columns: 1fr 1fr; gap: 10px 22px; font-size: .88rem; color: var(--ink-soft); max-width: 34em; }
 .hero__trust span { display: inline-flex; align-items: center; gap: 6px; }
-@media (max-width: 520px) { .hero__trust { grid-template-columns: 1fr; } }
 
 /* แท็บเล็ต (701–899px): ยังเป็นแบบข้อความทับรูป — ปรับม่านให้อ่านง่าย */
 @media (min-width: 701px) and (max-width: 899px) {
