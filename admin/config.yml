@@ -298,4 +298,6 @@ collections:
               - { label: "วันที่เผยแพร่", name: date, widget: string, hint: "รูปแบบ YYYY-MM-DD" }
               - { label: "คำโปรย", name: excerpt, widget: text }
               - { label: "ภาพปก (1200×750px)", name: cover, widget: image, required: false }
-              - { label: "เนื้อหา", name: body, widget: text, hint: "รองรับ Markdown: ## หัวข้อ, **ตัวหนา**, - รายการ" }
+              - { label: "เนื้อหา", name: body, widget: text, hint: "รองรับ Markdown: ## หัวข้อ, **ตัวหนา**, - รายการ, และลิงก์แบบ [ข้อความ](p/beta-oil.html)" }
+              - { label: "สินค้าที่เกี่ยวข้อง (แสดงกล่องท้ายบทความ)", name: product, widget: select, required: false, options: ["", "beta-oil", "betax-plus", "beta-life", "lab-farm", "betaherb"] }
+              - { label: "ข้อความชวนก่อนลิงก์สินค้า", name: productNote, widget: string, required: false, hint: "เช่น อยากได้ตัวช่วยดูแลเรื่องนี้?" }

@@ -647,6 +647,15 @@ ul, ol { margin: 0 0 1em; padding-left: 1.25em; }
 .article-card__cat { font-size: .76rem; font-weight: 600; color: var(--sage-dark); letter-spacing: .06em; text-transform: uppercase; }
 .article-card h3 { font-size: 1.08rem; margin: 6px 0 8px; }
 .article-card p { font-size: .89rem; color: var(--ink-soft); margin: 0; }
+/* เนื้อหาบทความ (อ่านง่าย + ลิงก์สินค้า) */
+#post h2 { font-size: clamp(1.2rem, 2.4vw, 1.5rem); margin: 1.5em 0 .5em; }
+#post p, #post ul { line-height: 1.78; margin: 0 0 1.05em; }
+#post ul { padding-left: 1.2em; }
+#post li { margin-bottom: .35em; }
+.art-link { color: var(--brand-dark); font-weight: 600; text-decoration: underline; text-underline-offset: 2px; }
+.art-link:hover { color: var(--brand); }
+.art-cta { background: linear-gradient(135deg, var(--brand-wash), var(--sage-wash)); border: 1px solid rgba(0,187,144,.2); border-radius: var(--r-lg); padding: 18px 20px; margin: 26px 0 0; }
+.art-cta p { margin: 0; }
 
 /* ---------- 13. Product detail ---------- */
 .pdp { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(28px, 4vw, 56px); align-items: start; }

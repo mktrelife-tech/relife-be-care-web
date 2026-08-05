@@ -60,7 +60,18 @@ document.addEventListener("site:ready", function (e) {
         }).join("") + "</ul>";
       }
       return "<p>" + blk.replace(/\n/g, "<br>") + "</p>";
-    }).join("").replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>");
+    }).join("")
+      .replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>")
+      .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a class="art-link" href="$2">$1</a>');
+  }
+
+  /* กล่องสินค้าที่เกี่ยวข้อง (โยงบทความ → หน้าสินค้า) */
+  var relateHtml = "";
+  if (a.product) {
+    var rp = (S.products || []).filter(function (x) { return x.slug === a.product; })[0];
+    var rName = rp ? rp.name : a.product;
+    relateHtml = '<div class="art-cta"><p>' + (a.productNote ? A.esc(a.productNote) + " " : "") +
+      '<a class="art-link" href="' + A.url("p/" + A.esc(a.product) + ".html") + '">ดู ' + A.esc(rName) + " →</a></p></div>";
   }
 
   A.$("#post").innerHTML =
@@ -70,7 +81,7 @@ document.addEventListener("site:ready", function (e) {
     (a.cover ? '<img src="' + A.esc(a.cover) + '" alt="" style="border-radius:var(--r-lg);margin:22px 0">'
              : '<div class="ph" style="aspect-ratio:16/9;margin:22px 0" data-label="ภาพปกบทความ 1200×675px"></div>') +
     "<p style='font-size:1.08rem;color:var(--ink-soft)'>" + A.esc(a.excerpt) + "</p>" +
-    "<div style='font-size:1.02rem'>" + mdToHtml(a.body) + "</div>";
+    "<div style='font-size:1.02rem'>" + mdToHtml(a.body) + "</div>" + relateHtml;
 
   A.$("#more").innerHTML = S.articles.filter(function (x) { return x.slug !== a.slug; }).map(function (x) {
     return '<a class="article-card" href="article.html?slug=' + encodeURIComponent(x.slug) + '">' +
