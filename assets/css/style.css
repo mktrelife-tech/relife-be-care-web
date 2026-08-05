@@ -285,9 +285,10 @@ ul, ol { margin: 0 0 1em; padding-left: 1.25em; }
   .hero { display: block; min-height: 0; height: auto; overflow: visible; }
   .hero__bg {
     position: relative; inset: auto; width: 100%; z-index: 0;
-    aspect-ratio: 1 / 1;
+    aspect-ratio: 7 / 5;
     background-image: var(--hero-bg-m, var(--hero-bg));
-    background-position: var(--hero-pos-m, center);
+    background-size: contain; background-repeat: no-repeat;
+    background-position: center; background-color: var(--cream-2);
     border-radius: 0 0 var(--r-lg) var(--r-lg);
   }
   .hero__scrim { display: none; }
