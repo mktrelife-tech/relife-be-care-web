@@ -398,7 +398,23 @@ ul, ol { margin: 0 0 1em; padding-left: 1.25em; }
 .concern img { width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: cover; display: block; }
 .concern__ph { aspect-ratio: 4 / 3; display: grid; place-items: center; font-size: 2.6rem; background: linear-gradient(135deg, var(--brand-wash), var(--sage-wash)); }
 
-@media (max-width: 560px) { .concerns { grid-template-columns: 1fr 1fr; } }
+/* มือถือ: เปลี่ยนเป็นสไลด์แนวนอน ปัดดูทีละใบ (scroll-snap) แทนการโชว์ทั้งหมด */
+@media (max-width: 640px) {
+  .concerns {
+    grid-template-columns: none;
+    display: flex; overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    gap: 12px;
+    margin-inline: calc(var(--gutter) * -1);
+    padding-inline: var(--gutter);
+    padding-bottom: 6px;
+    scroll-padding-inline: var(--gutter);
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .concerns::-webkit-scrollbar { display: none; }
+  .concern { flex: 0 0 76%; scroll-snap-align: start; }
+}
 
 /* ---------- 6d. Symptoms band ---------- */
 .symptom-band {
