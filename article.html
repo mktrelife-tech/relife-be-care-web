@@ -65,13 +65,19 @@ document.addEventListener("site:ready", function (e) {
       .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a class="art-link" href="$2">$1</a>');
   }
 
-  /* กล่องสินค้าที่เกี่ยวข้อง (โยงบทความ → หน้าสินค้า) */
+  /* กล่องสินค้าที่เกี่ยวข้อง (โยงบทความ → หน้าสินค้า) พร้อมรูปกล่องสินค้า */
   var relateHtml = "";
   if (a.product) {
     var rp = (S.products || []).filter(function (x) { return x.slug === a.product; })[0];
     var rName = rp ? rp.name : a.product;
-    relateHtml = '<div class="art-cta"><p>' + (a.productNote ? A.esc(a.productNote) + " " : "") +
-      '<a class="art-link" href="' + A.url("p/" + A.esc(a.product) + ".html") + '">ดู ' + A.esc(rName) + " →</a></p></div>";
+    var rImg = a.productImage || (rp && rp.images && rp.images[0]) || "";
+    var rUrl = A.url("p/" + A.esc(a.product) + ".html");
+    relateHtml = '<a class="art-cta" href="' + rUrl + '">' +
+      (rImg ? '<img class="art-cta__img" src="' + A.esc(rImg) + '" alt="' + A.esc(rName) + '" loading="lazy">' : "") +
+      '<span class="art-cta__body">' +
+        (a.productNote ? '<span class="art-cta__note">' + A.esc(a.productNote) + "</span>" : "") +
+        '<span class="art-link">ดู ' + A.esc(rName) + " →</span>" +
+      "</span></a>";
   }
 
   A.$("#post").innerHTML =
