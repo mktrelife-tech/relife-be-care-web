@@ -297,8 +297,6 @@ ul, ol { margin: 0 0 1em; padding-left: 1.25em; }
   .hero__lead { margin-inline: auto; }
   .hero__cta { justify-content: center; }
   .hero__trust { justify-items: center; max-width: none; }
-  /* เมนูลัดไม่ต้องลอยทับ hero แล้ว (โหมดรูปบน-ข้อความล่าง) */
-  .quick-wrap { margin-top: 14px; }
 }
 .hero__bg.is-placeholder {
   background:
@@ -401,6 +399,8 @@ ul, ol { margin: 0 0 1em; padding-left: 1.25em; }
   .quick-actions { grid-template-columns: repeat(2, 1fr); }
   .quick-wrap { margin-top: -34px; }
 }
+/* มือถือ (Hero แบบรูปบน-ข้อความล่าง): เมนูลัดไม่ต้องลอยทับ hero */
+@media (max-width: 700px) { .quick-wrap { margin-top: 16px; } }
 @media (max-width: 480px) {
   .quick-actions { grid-template-columns: 1fr; gap: 12px; }
   .qa { padding: 16px 18px; }
