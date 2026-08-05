@@ -228,7 +228,14 @@ document.addEventListener("site:ready", function (e) {
   }).join("");
   var heroBg = A.$("#heroBg");
   if (s.hero.image) {
-    heroBg.style.backgroundImage = "url('" + s.hero.image.replace(/'/g, "%27") + "')";
+    var deskUrl = "url('" + s.hero.image.replace(/'/g, "%27") + "')";
+    heroBg.style.setProperty("--hero-bg", deskUrl);
+    if (s.hero.imageMobile) {
+      heroBg.style.setProperty("--hero-bg-m", "url('" + s.hero.imageMobile.replace(/'/g, "%27") + "')");
+      heroBg.style.setProperty("--hero-pos-m", "center");
+    } else {
+      heroBg.style.setProperty("--hero-bg-m", deskUrl);
+    }
     heroBg.classList.remove("is-placeholder");
   } else {
     heroBg.classList.add("is-placeholder");

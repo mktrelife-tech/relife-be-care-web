@@ -279,7 +279,11 @@ ul, ol { margin: 0 0 1em; padding-left: 1.25em; }
   .hero__bg { background-position: center; }
 }
 /* ภาพพื้นหลัง */
-.hero__bg { position: absolute; inset: 0; z-index: 0; background-size: cover; background-position: center right; }
+.hero__bg { position: absolute; inset: 0; z-index: 0; background-size: cover; background-position: center right; background-image: var(--hero-bg); }
+/* มือถือ: สลับเป็นรูป Hero เวอร์ชันมือถือถ้ามี (ไม่มีก็ใช้รูปคอม) */
+@media (max-width: 640px) {
+  .hero__bg { background-image: var(--hero-bg-m, var(--hero-bg)); background-position: var(--hero-pos-m, center right); }
+}
 .hero__bg.is-placeholder {
   background:
     radial-gradient(1100px 620px at 82% 20%, var(--brand-wash), transparent 66%),

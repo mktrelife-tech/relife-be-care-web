@@ -63,6 +63,7 @@ collections:
               - { label: "หัวข้อบรรทัดที่ 2 (สีส้ม)", name: titleAccent, widget: string }
               - { label: "คำโปรย", name: lead, widget: text }
               - { label: "รูปหลัก (แนวนอน 16:9 ~1920×1080px — วางคน/สินค้าไว้ฝั่งขวา เว้นซ้ายโล่งไว้วางข้อความ)", name: image, widget: image, required: false }
+              - { label: "รูป Hero สำหรับมือถือ (แนวตั้ง/จัตุรัส ~1080×1350px — ไม่ใส่ก็ใช้รูปคอม)", name: imageMobile, widget: image, required: false }
               - { label: "คำอธิบายรูป (สำหรับ SEO)", name: imageAlt, widget: string, required: false }
               - { label: "ตัวเลขบนป้าย", name: badgeNumber, widget: string }
               - { label: "ข้อความบนป้าย", name: badgeText, widget: string }
