@@ -98,9 +98,11 @@ document.addEventListener("site:ready", function (e) {
     "<p style='font-size:1.08rem;color:var(--ink-soft)'>" + A.esc(a.excerpt) + "</p>" +
     "<div style='font-size:1.02rem'>" + mdToHtml(a.body) + "</div>" + relateHtml + consultHtml;
 
-  A.$("#more").innerHTML = S.articles.filter(function (x) { return x.slug !== a.slug; }).map(function (x) {
+  A.$("#more").innerHTML = S.articles.filter(function (x) { return x.slug !== a.slug; }).slice(0, 3).map(function (x) {
     return '<a class="article-card" href="article.html?slug=' + encodeURIComponent(x.slug) + '">' +
-      '<div class="article-card__media"><div class="ph" style="height:100%" data-label="ภาพประกอบ"></div></div>' +
+      '<div class="article-card__media">' + (x.cover
+        ? '<img src="' + A.esc(x.cover) + '" alt="" loading="lazy">'
+        : '<div class="ph" style="height:100%" data-label="ภาพประกอบ"></div>') + "</div>" +
       '<div class="article-card__body"><span class="article-card__cat">' + A.esc(x.category) + "</span>" +
       "<h3>" + A.esc(x.title) + "</h3></div></a>";
   }).join("");
