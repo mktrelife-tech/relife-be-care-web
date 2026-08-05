@@ -280,9 +280,21 @@ ul, ol { margin: 0 0 1em; padding-left: 1.25em; }
 }
 /* ภาพพื้นหลัง */
 .hero__bg { position: absolute; inset: 0; z-index: 0; background-size: cover; background-position: center right; background-image: var(--hero-bg); }
-/* มือถือ: สลับเป็นรูป Hero เวอร์ชันมือถือถ้ามี (ไม่มีก็ใช้รูปคอม) */
-@media (max-width: 640px) {
-  .hero__bg { background-image: var(--hero-bg-m, var(--hero-bg)); background-position: var(--hero-pos-m, center right); }
+/* มือถือ: Hero แบบรูปบน–ข้อความล่าง (ครอปจัตุรัสเหลือคน+สินค้า ตัดห้องโล่งซ้าย-ขวา) */
+@media (max-width: 700px) {
+  .hero { display: block; min-height: 0; height: auto; overflow: visible; }
+  .hero__bg {
+    position: relative; inset: auto; width: 100%; z-index: 0;
+    aspect-ratio: 1 / 1;
+    background-image: var(--hero-bg-m, var(--hero-bg));
+    background-position: var(--hero-pos-m, center);
+    border-radius: 0 0 var(--r-lg) var(--r-lg);
+  }
+  .hero__scrim { display: none; }
+  .hero__inner { position: static; padding: 22px var(--gutter) 6px; }
+  .hero__content { max-width: 100%; }
+  /* เมนูลัดไม่ต้องลอยทับ hero แล้ว (โหมดรูปบน-ข้อความล่าง) */
+  .quick-wrap { margin-top: 14px; }
 }
 .hero__bg.is-placeholder {
   background:
@@ -311,9 +323,9 @@ ul, ol { margin: 0 0 1em; padding-left: 1.25em; }
 .hero__trust span { display: inline-flex; align-items: center; gap: 6px; }
 @media (max-width: 520px) { .hero__trust { grid-template-columns: 1fr; } }
 
-@media (max-width: 720px) {
-  .hero__scrim { background: linear-gradient(180deg, rgba(255,255,255,.9) 0%, rgba(255,255,255,.8) 55%, rgba(255,255,255,.7) 100%); }
-  .hero__content { max-width: 100%; }
+/* แท็บเล็ต (701–899px): ยังเป็นแบบข้อความทับรูป — ปรับม่านให้อ่านง่าย */
+@media (min-width: 701px) and (max-width: 899px) {
+  .hero__scrim { background: linear-gradient(100deg, rgba(255,255,255,.95) 0%, rgba(255,255,255,.82) 40%, rgba(255,255,255,.3) 62%, rgba(255,255,255,0) 80%); }
 }
 
 /* โชว์เคสสินค้าใน Hero (แทนรูป lifestyle จนกว่าจะมีรูปจริง) */
