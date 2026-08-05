@@ -69,8 +69,7 @@
   <div class="wrap">
     <div class="sec-head">
       <span class="eyebrow">ดูแลตามปัญหาสุขภาพ</span>
-      <h2>ดูแลตรงจุด บรรเทาอาการของโรคต่างๆ</h2>
-      <p>เลือกสิ่งที่ใช่ เพื่อคุณและคนที่คุณห่วงใย</p>
+      <h2>กังวลเรื่องไหน เราช่วยคุณเริ่มดูแลได้ 💛</h2>
     </div>
     <div class="concerns" id="concerns"></div>
     <div class="center" style="margin-top:30px">
@@ -255,18 +254,12 @@ document.addEventListener("site:ready", function (e) {
       "<h3>" + A.esc(f.title) + "</h3><p>" + A.esc(f.text) + "</p></div>";
   }).join("");
 
-  /* concerns (ดูแลตามปัญหาสุขภาพ → สินค้า) */
+  /* concerns (ดูแลตามปัญหาสุขภาพ → การ์ดรูปคลิกไปหน้าสินค้า) */
   A.$("#concerns").innerHTML = (s.concerns || []).map(function (c) {
-    var media = c.image
-      ? '<img src="' + A.esc(c.image) + '" alt="' + A.esc(c.title) + '">'
-      : '<div class="concern__ph" data-label="ภาพ 640×480px">' + c.icon + "</div>";
-    return '<div class="concern reveal">' +
-      '<div class="concern__media">' + media + "</div>" +
-      '<div class="concern__body">' +
-        "<h3>" + A.esc(c.title) + "</h3>" +
-        "<p>" + A.esc(c.desc) + "</p>" +
-        '<a class="btn btn--ghost concern__btn" href="' + A.url("p/" + A.esc(c.slug) + ".html") + '">' + A.esc(c.btn || "ดูรายละเอียด") + "</a>" +
-      "</div></div>";
+    var inner = c.image
+      ? '<img src="' + A.esc(c.image) + '" alt="' + A.esc(c.alt || c.title || "") + '" loading="lazy">'
+      : '<div class="concern__ph">' + A.esc(c.icon || "🩺") + "</div>";
+    return '<a class="concern reveal" href="' + A.url("p/" + A.esc(c.slug) + ".html") + '">' + inner + "</a>";
   }).join("");
 
   /* symptoms band */

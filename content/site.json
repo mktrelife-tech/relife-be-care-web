@@ -98,52 +98,29 @@
   ],
   "concerns": [
     {
-      "icon": "🫘",
-      "title": "โรคไต",
-      "desc": "เสื่อม ไตวาย ฟอกไต",
-      "btn": "ดูแลไต",
-      "slug": "beta-life",
-      "image": ""
+      "image": "assets/img/concerns/concern-1.jpg",
+      "alt": "ไขมันในเลือดสูง ความดันสูง ไขมันอุดตันในเส้นเลือด — แนะนำ Beta Oil",
+      "slug": "beta-oil"
     },
     {
-      "icon": "🩸",
-      "title": "ไขมันในเลือดสูง",
-      "desc": "ความดัน เบาหวาน",
-      "btn": "ดูแลหลอดเลือด",
-      "slug": "beta-oil",
-      "image": ""
+      "image": "assets/img/concerns/concern-2.jpg",
+      "alt": "ไตเสื่อม ค่าไตลดลง บวม เหนื่อยง่าย ปัสสาวะเป็นฟอง — แนะนำ Beta Life",
+      "slug": "beta-life"
     },
     {
-      "icon": "🦠",
-      "title": "ภูมิคุ้มกันต่ำ",
-      "desc": "แพ้ง่าย อ่อนเพลีย",
-      "btn": "เสริมภูมิคุ้มกัน",
-      "slug": "lab-farm",
-      "image": ""
+      "image": "assets/img/concerns/concern-3.jpg",
+      "alt": "ภูมิคุ้มกันอ่อนแอ ภูมิตก ดูแลควบคู่การรักษา — แนะนำ Lab Farm",
+      "slug": "lab-farm"
     },
     {
-      "icon": "🦵",
-      "title": "ข้อเข่าเสื่อม",
-      "desc": "ปวดข้อ ปวดหลัง",
-      "btn": "ดูแลกระดูก",
-      "slug": "betax-plus",
-      "image": ""
+      "image": "assets/img/concerns/concern-4.jpg",
+      "alt": "ภูมิแพ้ ไอจาม คัดจมูก หายใจไม่อิ่ม หอบหืด — แนะนำ Beta X+",
+      "slug": "betax-plus"
     },
     {
-      "icon": "🔥",
-      "title": "กรดไหลย้อน",
-      "desc": "กระเพาะอาหาร ท้องผูก",
-      "btn": "ดูแลระบบย่อย",
-      "slug": "betaherb",
-      "image": ""
-    },
-    {
-      "icon": "👴",
-      "title": "ผู้สูงอายุ",
-      "desc": "บำรุงร่างกาย ชะลอวัย",
-      "btn": "ดูแลผู้สูงอายุ",
-      "slug": "beta-life",
-      "image": ""
+      "image": "assets/img/concerns/concern-5.jpg",
+      "alt": "เบาหวาน ค่าน้ำตาลสูง มือเท้าชา อ่อนเพลียเรื้อรัง — แนะนำ Beta Herb",
+      "slug": "betaherb"
     }
   ],
   "hero": {
