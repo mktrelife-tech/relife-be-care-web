@@ -468,7 +468,18 @@ ul, ol { margin: 0 0 1em; padding-left: 1.25em; }
 /* จัดกึ่งกลางเสมอ — ของเหลือแถวสุดท้ายอยู่กลาง ไม่โดดซ้าย */
 .products-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 24px; }
 .products-grid > * { flex: 1 1 200px; max-width: 246px; min-width: 0; }
-@media (max-width: 480px) { .products-grid > * { flex-basis: 100%; max-width: none; } }
+/* มือถือ: เปลี่ยนเป็นสไลด์แนวนอน ปัดดูทีละใบ (scroll-snap) */
+@media (max-width: 640px) {
+  .products-grid {
+    flex-wrap: nowrap; justify-content: flex-start;
+    overflow-x: auto; scroll-snap-type: x mandatory; gap: 14px;
+    margin-inline: calc(var(--gutter) * -1); padding-inline: var(--gutter);
+    padding-bottom: 6px; scroll-padding-inline: var(--gutter);
+    -webkit-overflow-scrolling: touch; scrollbar-width: none;
+  }
+  .products-grid::-webkit-scrollbar { display: none; }
+  .products-grid > * { flex: 0 0 80%; max-width: none; scroll-snap-align: start; }
+}
 .card {
   background: var(--white); border-radius: var(--r-lg); overflow: hidden;
   box-shadow: var(--sh-sm); border: 1px solid rgba(38,55,66,.05);
