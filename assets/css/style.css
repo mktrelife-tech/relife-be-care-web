@@ -293,7 +293,10 @@ ul, ol { margin: 0 0 1em; padding-left: 1.25em; }
   }
   .hero__scrim { display: none; }
   .hero__inner { position: static; padding: 22px var(--gutter) 6px; }
-  .hero__content { max-width: 100%; }
+  .hero__content { max-width: 100%; text-align: center; }
+  .hero__lead { margin-inline: auto; }
+  .hero__cta { justify-content: center; }
+  .hero__trust { justify-items: center; max-width: none; }
   /* เมนูลัดไม่ต้องลอยทับ hero แล้ว (โหมดรูปบน-ข้อความล่าง) */
   .quick-wrap { margin-top: 14px; }
 }
