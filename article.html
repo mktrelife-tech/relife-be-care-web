@@ -80,6 +80,15 @@ document.addEventListener("site:ready", function (e) {
       "</span></a>";
   }
 
+  /* CTA ปรึกษาก่อนซื้อ + แอดไลน์ (แสดงท้ายทุกบทความ) */
+  var ct = S.site.contact || {};
+  var lineUrl = ct.lineUrl || (ct.lineId ? "https://line.me/R/ti/p/" + ct.lineId : "#");
+  var consultHtml = '<div class="art-consult">' +
+    '<div class="art-consult__txt"><strong>ยังไม่แน่ใจว่าเลือกตัวไหนดี?</strong>' +
+    "<span>ทักมาถามทีมงานก่อนซื้อได้เลย ฟรี ไม่ต้องซื้อก็ปรึกษาได้</span></div>" +
+    '<a class="btn-line" href="' + A.esc(lineUrl) + '" target="_blank" rel="noopener">' +
+    '<span class="btn-line__ico">LINE</span> แอดไลน์ปรึกษา</a></div>';
+
   A.$("#post").innerHTML =
     "<span class='eyebrow'>" + A.esc(a.category) + "</span>" +
     "<h1 style='font-size:clamp(1.7rem,3.8vw,2.5rem)'>" + A.esc(a.title) + "</h1>" +
@@ -87,7 +96,7 @@ document.addEventListener("site:ready", function (e) {
     (a.cover ? '<img src="' + A.esc(a.cover) + '" alt="" style="border-radius:var(--r-lg);margin:22px 0">'
              : '<div class="ph" style="aspect-ratio:16/9;margin:22px 0" data-label="ภาพปกบทความ 1200×675px"></div>') +
     "<p style='font-size:1.08rem;color:var(--ink-soft)'>" + A.esc(a.excerpt) + "</p>" +
-    "<div style='font-size:1.02rem'>" + mdToHtml(a.body) + "</div>" + relateHtml;
+    "<div style='font-size:1.02rem'>" + mdToHtml(a.body) + "</div>" + relateHtml + consultHtml;
 
   A.$("#more").innerHTML = S.articles.filter(function (x) { return x.slug !== a.slug; }).map(function (x) {
     return '<a class="article-card" href="article.html?slug=' + encodeURIComponent(x.slug) + '">' +

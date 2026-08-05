@@ -667,6 +667,24 @@ ul, ol { margin: 0 0 1em; padding-left: 1.25em; }
 .art-cta .art-link { font-weight: 700; text-decoration: none; }
 .art-cta:hover .art-link { text-decoration: underline; }
 @media (max-width: 460px) { .art-cta__img { width: 76px; height: 76px; } }
+/* กล่องปรึกษาก่อนซื้อ + ปุ่มแอดไลน์ (ท้ายบทความ) */
+.art-consult {
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 14px 18px;
+  margin-top: 16px; padding: 18px 20px; border-radius: var(--r-lg);
+  background: var(--sage-wash); border: 1px solid rgba(0,187,144,.22);
+}
+.art-consult__txt { display: flex; flex-direction: column; gap: 3px; min-width: 0; }
+.art-consult__txt strong { font-size: 1.02rem; color: var(--ink); }
+.art-consult__txt span { font-size: .88rem; color: var(--ink-soft); }
+.btn-line {
+  display: inline-flex; align-items: center; gap: 8px; white-space: nowrap;
+  background: #06C755; color: #fff; font-weight: 700; font-family: var(--font-body);
+  padding: 11px 20px; border-radius: var(--r-pill); text-decoration: none;
+  box-shadow: var(--sh-sm); transition: filter .15s ease, transform .15s ease;
+}
+.btn-line:hover { filter: brightness(1.06); transform: translateY(-1px); }
+.btn-line__ico { background: #fff; color: #06C755; font-weight: 800; font-size: .66rem; border-radius: 5px; padding: 2px 5px; letter-spacing: -.5px; }
+@media (max-width: 460px) { .art-consult { flex-direction: column; align-items: stretch; text-align: center; } .btn-line { justify-content: center; } }
 
 /* ---------- 13. Product detail ---------- */
 .pdp { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(28px, 4vw, 56px); align-items: start; }
