@@ -228,10 +228,16 @@ document.addEventListener("site:ready", function (e) {
   }).join("");
   var heroBg = A.$("#heroBg");
   if (s.hero.image) {
-    var deskUrl = "url('" + s.hero.image.replace(/'/g, "%27") + "')";
+    /* ต้องเป็น absolute path — var() ในไฟล์ CSS จะ resolve relative กับ /assets/css/ ไม่ใช่หน้าเว็บ */
+    var toBgUrl = function (p) {
+      p = String(p).replace(/'/g, "%27");
+      if (!/^(https?:)?\/\//.test(p) && p.charAt(0) !== "/") p = "/" + p;
+      return "url('" + p + "')";
+    };
+    var deskUrl = toBgUrl(s.hero.image);
     heroBg.style.setProperty("--hero-bg", deskUrl);
     if (s.hero.imageMobile) {
-      heroBg.style.setProperty("--hero-bg-m", "url('" + s.hero.imageMobile.replace(/'/g, "%27") + "')");
+      heroBg.style.setProperty("--hero-bg-m", toBgUrl(s.hero.imageMobile));
       heroBg.style.setProperty("--hero-pos-m", "center");
     } else {
       heroBg.style.setProperty("--hero-bg-m", deskUrl);
