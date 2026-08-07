@@ -489,14 +489,26 @@ ul, ol { margin: 0 0 1em; padding-left: 1.25em; }
 .cbanner__btn-tx b { font-size: 1rem; color: var(--brand-dark); }
 .cbanner__btn-tx small { font-size: .74rem; color: var(--ink-soft); font-weight: 500; }
 
-/* mobile: image on top, buttons stacked in a white panel below */
+/* mobile: two buttons side-by-side, overlaid on the cream band under the trust bar */
 @media (max-width: 900px) {
   .cbanner__cta {
-    position: static; transform: none; width: auto; max-width: none; min-width: 0;
-    padding: 16px; gap: 10px; background: #fff;
+    position: absolute; top: auto; bottom: 4%; right: 4%; left: 4%;
+    transform: none; width: auto; max-width: none; min-width: 0;
+    flex-direction: row; gap: 9px;
   }
-  .cbanner__btn { width: 100%; }
-  .cbanner__btn--tel { justify-content: center; }
+  .cbanner__btn { flex: 1 1 0; min-width: 0; justify-content: center; padding: 11px 8px; }
+  .cbanner__btn--line { font-size: .98rem; }
+  .cbanner__btn--tel { justify-content: center; padding: 9px 8px; }
+  .cbanner__btn-tx { align-items: center; }
+  .cbanner__btn-tx b { font-size: .98rem; white-space: nowrap; }
+  .cbanner__tel-word, .cbanner__btn-tx small { display: none; }  /* compact: show only the number */
+}
+
+@media (max-width: 380px) {
+  .cbanner__cta { gap: 7px; bottom: 3.5%; }
+  .cbanner__btn--line, .cbanner__btn-tx b { font-size: .86rem; }
+  .cbanner__chip { font-size: .64rem; padding: 2px 5px; }
+  .cbanner__btn-ico { font-size: 1.1rem; }
 }
 
 /* ---------- 7. Feature strip ---------- */
