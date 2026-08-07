@@ -453,24 +453,50 @@ ul, ol { margin: 0 0 1em; padding-left: 1.25em; }
 .symptom span { font-size: .8rem; color: rgba(234,246,245,.75); }
 .symptom-note { text-align: center; margin: clamp(24px, 4vw, 34px) auto 0; max-width: 620px; font-size: .96rem; color: rgba(234,246,245,.9); }
 
-/* ---------- 6e. Emotional banner ---------- */
-.emo { padding: clamp(40px, 5vw, 66px) 0; }
-.emo__grid { display: grid; grid-template-columns: 1.5fr 1fr; gap: 22px; align-items: stretch; }
-.emo__left { display: flex; gap: 22px; align-items: center; background: var(--white); border-radius: var(--r-xl); padding: 22px; box-shadow: var(--sh-sm); border: 1px solid rgba(38,55,66,.05); }
-.emo__media { flex: 0 0 40%; max-width: 230px; border-radius: var(--r-lg); overflow: hidden; align-self: stretch; }
-.emo__media .ph, .emo__media img { width: 100%; height: 100%; object-fit: cover; min-height: 220px; }
-.emo__quote { font-size: clamp(1.25rem, 2.4vw, 1.7rem); color: var(--brand-dark); margin: 0 0 12px; line-height: 1.35; }
-.emo__lead { font-size: 1.06rem; font-weight: 600; margin: 0 0 8px; line-height: 1.5; }
-.emo__sub { color: var(--ink-soft); margin: 0; font-size: .95rem; }
-.emo__cta { background: linear-gradient(135deg, var(--brand-dark), #063a52); color: #fff; border-radius: var(--r-xl); padding: clamp(24px, 3vw, 38px); display: flex; flex-direction: column; justify-content: center; box-shadow: var(--sh-md); }
-.emo__cta-ico { width: 52px; height: 52px; border-radius: 15px; background: rgba(255,255,255,.14); display: grid; place-items: center; font-size: 1.6rem; margin-bottom: 14px; }
-.emo__cta h3 { color: #fff; margin: 0 0 8px; font-size: 1.3rem; }
-.emo__cta p { opacity: .9; margin: 0 0 20px; font-size: .96rem; }
+/* ---------- 6e. Consult banner ---------- */
+.cbanner-sec { padding: clamp(32px, 4vw, 56px) 0; }
+.cbanner { position: relative; border-radius: var(--r-lg); overflow: hidden; box-shadow: var(--sh-md); background: #fff; }
+.cbanner__img { width: 100%; display: block; }
 
-@media (max-width: 860px) {
-  .emo__grid { grid-template-columns: 1fr; }
-  .emo__left { flex-direction: column; text-align: center; }
-  .emo__media { max-width: 320px; width: 100%; }
+/* buttons — desktop: overlaid on the right zone of the banner */
+.cbanner__cta {
+  position: absolute; top: 50%; right: 3.2%; transform: translateY(-50%);
+  width: 30%; max-width: 320px; min-width: 210px;
+  display: flex; flex-direction: column; gap: 12px;
+}
+.cbanner__btn {
+  display: flex; align-items: center; gap: 10px; justify-content: center;
+  border-radius: var(--r-pill); font-weight: 700; text-decoration: none;
+  transition: transform .15s ease, box-shadow .15s ease;
+}
+.cbanner__btn:hover { transform: translateY(-2px); }
+.cbanner__btn--line {
+  background: #06C755; color: #fff; padding: 13px 18px; font-size: 1.06rem;
+  box-shadow: 0 6px 18px rgba(6,199,85,.35);
+}
+.cbanner__btn--line:hover { background: #05b64d; box-shadow: 0 10px 24px rgba(6,199,85,.45); }
+.cbanner__chip {
+  background: #fff; color: #06C755; font-weight: 800; font-size: .72rem;
+  padding: 3px 7px; border-radius: 6px; letter-spacing: .03em;
+}
+.cbanner__btn--tel {
+  background: #fff; color: var(--ink); padding: 9px 16px; justify-content: flex-start;
+  box-shadow: 0 6px 18px rgba(38,55,66,.16); border: 1px solid rgba(38,55,66,.06);
+}
+.cbanner__btn--tel:hover { box-shadow: 0 10px 24px rgba(38,55,66,.22); }
+.cbanner__btn-ico { font-size: 1.3rem; flex: 0 0 auto; }
+.cbanner__btn-tx { display: flex; flex-direction: column; line-height: 1.18; }
+.cbanner__btn-tx b { font-size: 1rem; color: var(--brand-dark); }
+.cbanner__btn-tx small { font-size: .74rem; color: var(--ink-soft); font-weight: 500; }
+
+/* mobile: image on top, buttons stacked in a white panel below */
+@media (max-width: 900px) {
+  .cbanner__cta {
+    position: static; transform: none; width: auto; max-width: none; min-width: 0;
+    padding: 16px; gap: 10px; background: #fff;
+  }
+  .cbanner__btn { width: 100%; }
+  .cbanner__btn--tel { justify-content: center; }
 }
 
 /* ---------- 7. Feature strip ---------- */
