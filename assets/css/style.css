@@ -635,7 +635,7 @@ ul, ol { margin: 0 0 1em; padding-left: 1.25em; }
   border-radius: var(--r-sm); background: var(--white);
 }
 .verify__proof figcaption { margin-top: 11px; font-size: .8rem; font-weight: 600; color: var(--sage-dark); text-align: center; }
-@media (max-width: 560px) { .verify__proof img { height: 220px; } }
+@media (max-width: 560px) { .verify__proof { width: 100%; } .verify__proof img { height: auto; width: 100%; } }
 
 /* ---------- ทีมงานรีไลฟ์ ---------- */
 .team-sec { background: linear-gradient(135deg, var(--brand-wash), var(--sage-wash)); }
