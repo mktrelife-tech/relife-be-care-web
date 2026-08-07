@@ -15,7 +15,7 @@
     "regNo": "[[ เลขทะเบียนพาณิชย์ (ยังไม่มีในชีต) ]]",
     "authorizedSince": "[[ ปีที่ได้รับแต่งตั้ง (ยังไม่มีในชีต) ]]",
     "distributorId": "VIP0083",
-    "authorizedProof": "assets/img/distributor-card.jpg?v=3",
+    "authorizedProof": "assets/img/distributor-card.jpg?v=4",
     "authorizationLetter": "assets/img/authorization-letter.jpg"
   },
   "payment": {
