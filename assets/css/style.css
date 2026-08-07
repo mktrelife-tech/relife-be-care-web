@@ -492,23 +492,25 @@ ul, ol { margin: 0 0 1em; padding-left: 1.25em; }
 /* mobile: two buttons side-by-side, overlaid on the cream band under the trust bar */
 @media (max-width: 900px) {
   .cbanner__cta {
-    position: absolute; top: auto; bottom: 4%; right: 4%; left: 4%;
+    position: absolute; top: auto; bottom: 2.5%; right: 3.5%; left: 3.5%;
     transform: none; width: auto; max-width: none; min-width: 0;
-    flex-direction: row; gap: 9px;
+    flex-direction: row; gap: 8px; line-height: 1.05;
   }
-  .cbanner__btn { flex: 1 1 0; min-width: 0; justify-content: center; padding: 11px 8px; }
-  .cbanner__btn--line { font-size: .98rem; }
-  .cbanner__btn--tel { justify-content: center; padding: 9px 8px; }
+  .cbanner__btn { flex: 1 1 0; min-width: 0; justify-content: center; gap: 7px; padding: 7px 6px; }
+  .cbanner__btn--line { font-size: .92rem; padding: 7px 6px; }
+  .cbanner__btn--tel { justify-content: center; padding: 7px 6px; }
+  .cbanner__btn-ico { font-size: 1.05rem; }
   .cbanner__btn-tx { align-items: center; }
-  .cbanner__btn-tx b { font-size: .98rem; white-space: nowrap; }
+  .cbanner__btn-tx b { font-size: .92rem; white-space: nowrap; }
+  .cbanner__chip { font-size: .64rem; padding: 2px 5px; }
   .cbanner__tel-word, .cbanner__btn-tx small { display: none; }  /* compact: show only the number */
 }
 
-@media (max-width: 380px) {
-  .cbanner__cta { gap: 7px; bottom: 3.5%; }
-  .cbanner__btn--line, .cbanner__btn-tx b { font-size: .86rem; }
-  .cbanner__chip { font-size: .64rem; padding: 2px 5px; }
-  .cbanner__btn-ico { font-size: 1.1rem; }
+@media (max-width: 360px) {
+  .cbanner__cta { gap: 6px; }
+  .cbanner__btn--line, .cbanner__btn-tx b { font-size: .82rem; }
+  .cbanner__chip { font-size: .6rem; padding: 2px 4px; }
+  .cbanner__btn-ico { font-size: .95rem; }
 }
 
 /* ---------- 7. Feature strip ---------- */
