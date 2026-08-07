@@ -16,11 +16,13 @@
       "order": 1,
       "short": "รวมน้ำมันคาโนลา น้ำมันมะกอก และน้ำมันรำข้าวธรรมชาติ พร้อมไฟโตสเตอรอลและวิตามินอี ในซอฟท์เจลกลืนง่าย สำหรับดูแลสุขภาพประจำวัน",
       "images": [
-        "assets/img/products/beta-oil-box.jpg?v=2",
-        "assets/img/products/beta-oil-pack4.jpg?v=2",
-        "assets/img/products/beta-oil-pack8.jpg?v=2",
-        "assets/img/products/beta-oil-pack15.jpg?v=2",
-        "assets/img/products/beta-oil-pack24.jpg?v=2"
+        "assets/img/products/beta-oil-g1.jpg",
+        "assets/img/products/beta-oil-g2.jpg",
+        "assets/img/products/beta-oil-g3.jpg",
+        "assets/img/products/beta-oil-g4.jpg",
+        "assets/img/products/beta-oil-g5.jpg",
+        "assets/img/products/beta-oil-g6.jpg",
+        "assets/img/products/beta-oil-g7.jpg"
       ],
       "packs": [
         { "qty": 1,  "price": 690,  "image": "assets/img/products/beta-oil-box.jpg?v=2" },
