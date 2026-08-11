@@ -56,7 +56,7 @@
 </section>
 
 <div id="site-footer"></div>
-<script src="assets/js/app.js?v=2"></script>
+<script src="assets/js/app.js?v=3"></script>
 <script>
 document.addEventListener("site:ready", function (e) {
   var s = e.detail.site, A = window.App;
@@ -73,7 +73,7 @@ document.addEventListener("site:ready", function (e) {
   A.$("#info").innerHTML = "<tbody>" +
     "<tr><th>ชื่อร้าน</th><td>" + A.esc(s.brand.name) + "</td></tr>" +
     "<tr><th>นิติบุคคล</th><td>" + A.esc(s.business.legalName) + "</td></tr>" +
-    "<tr><th>ที่อยู่</th><td>" + A.esc(s.contact.address) + "</td></tr>" +
+    "<tr><th>ที่อยู่</th><td style='white-space:pre-line'>" + A.esc(s.contact.address) + "</td></tr>" +
     "<tr><th>เวลาทำการ</th><td>" + A.esc(s.contact.openHours) + "</td></tr>" +
     "</tbody>";
 
