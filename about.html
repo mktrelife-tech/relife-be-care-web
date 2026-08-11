@@ -62,13 +62,7 @@
 
     <h2>มาตรฐานโรงงานผู้ผลิต</h2>
     <p style="color:var(--ink-soft)">โรงงานผู้ผลิตได้รับการรับรองมาตรฐานสากลดังนี้ — สามารถขอดูสำเนาใบรับรองได้</p>
-    <div class="certs" id="certs" style="margin:18px 0 26px"></div>
-    <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(190px,1fr))">
-      <div class="ph" style="aspect-ratio:3/4" data-label="ใบรับรอง GMP&#10;สแกน/ถ่ายให้อ่านออก"></div>
-      <div class="ph" style="aspect-ratio:3/4" data-label="ใบรับรอง HACCP"></div>
-      <div class="ph" style="aspect-ratio:3/4" data-label="ใบรับรอง ISO 9001"></div>
-      <div class="ph" style="aspect-ratio:3/4" data-label="ใบรับรอง GHP"></div>
-    </div>
+    <div class="certs" id="certs" style="margin:18px 0 40px"></div>
   </div>
 </section>
 
@@ -87,9 +81,7 @@ document.addEventListener("site:ready", function (e) {
   var s = e.detail.site, A = window.App;
   A.$("#verify").innerHTML =
     '<div class="verify__seal">🛡️</div><div><h3 style="margin:0">' + A.esc(s.business.legalName) + "</h3><dl>" +
-      "<div><dt>เลขทะเบียนพาณิชย์</dt><dd>" + A.esc(s.business.regNo) + "</dd></div>" +
       "<div><dt>เลขผู้เสียภาษี</dt><dd>" + A.esc(s.business.taxId) + "</dd></div>" +
-      "<div><dt>ตัวแทนจำหน่ายตั้งแต่</dt><dd>" + A.esc(s.business.authorizedSince) + "</dd></div>" +
       "<div><dt>ที่ตั้ง</dt><dd>" + A.esc(s.contact.address) + "</dd></div>" +
     "</dl></div>";
   A.$("#certs").innerHTML = (s.certs || []).map(function (c) {
