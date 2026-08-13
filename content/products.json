@@ -75,11 +75,12 @@
       "order": 2,
       "short": "รวม 17 สารสำคัญในแคปซูลเดียว ทั้งแอล-ซีสเทอีน อะเซโรลาเชอร์รี เบต้า-กลูแคน ซิงก์ และวิตามินซี สำหรับผู้ที่ต้องการดูแลระบบภูมิคุ้มกัน",
       "images": [
-        "assets/img/products/betax-plus-box.jpg?v=2",
-        "assets/img/products/betax-plus-pack4.jpg?v=2",
-        "assets/img/products/betax-plus-pack8.jpg?v=2",
-        "assets/img/products/betax-plus-pack15.jpg?v=2",
-        "assets/img/products/betax-plus-pack24.jpg?v=2"
+        "assets/img/products/betax-plus-g1.jpg",
+        "assets/img/products/betax-plus-g2.jpg",
+        "assets/img/products/betax-plus-g3.jpg",
+        "assets/img/products/betax-plus-g4.jpg",
+        "assets/img/products/betax-plus-g5.jpg",
+        "assets/img/products/betax-plus-g6.jpg"
       ],
       "packs": [
         { "qty": 1,  "price": 690,  "image": "assets/img/products/betax-plus-box.jpg?v=2" },
@@ -128,11 +129,13 @@
       "order": 3,
       "short": "รวมโปรตีนไข่ขาวคุณภาพย่อยง่าย สารสกัดเห็ดหลินจือ และกรดอัลฟาไลโปอิก สำหรับผู้ที่ต้องการดูแลและบำรุงสุขภาพไตในชีวิตประจำวัน",
       "images": [
-        "assets/img/products/beta-life-box.jpg?v=2",
-        "assets/img/products/beta-life-pack4.jpg?v=2",
-        "assets/img/products/beta-life-pack8.jpg?v=2",
-        "assets/img/products/beta-life-pack15.jpg?v=2",
-        "assets/img/products/beta-life-pack24.jpg?v=2"
+        "assets/img/products/beta-life-g1.jpg",
+        "assets/img/products/beta-life-g2.jpg",
+        "assets/img/products/beta-life-g3.jpg",
+        "assets/img/products/beta-life-g4.jpg",
+        "assets/img/products/beta-life-g5.jpg",
+        "assets/img/products/beta-life-g6.jpg",
+        "assets/img/products/beta-life-g7.jpg"
       ],
       "packs": [
         { "qty": 1,  "price": 690,  "image": "assets/img/products/beta-life-box.jpg?v=2" },
@@ -180,10 +183,13 @@
       "order": 4,
       "short": "ผลิตภัณฑ์เสริมอาหารสูตร Immune Plus™ รวม 19 สารสำคัญ ทั้งเบต้ากลูแคน โสมเกาหลี ซีบัคธอร์น เควอซิทิน และวิตามินรวม สำหรับผู้ที่ต้องการดูแลภูมิคุ้มกันเป็นประจำ",
       "images": [
-        "assets/img/products/lab-farm-box.jpg?v=2",
-        "assets/img/products/lab-farm-pack4.jpg?v=2",
-        "assets/img/products/lab-farm-pack8.jpg?v=2",
-        "assets/img/products/lab-farm-pack15.jpg?v=2"
+        "assets/img/products/lab-farm-g1.jpg",
+        "assets/img/products/lab-farm-g2.jpg",
+        "assets/img/products/lab-farm-g3.jpg",
+        "assets/img/products/lab-farm-g4.jpg",
+        "assets/img/products/lab-farm-g5.jpg",
+        "assets/img/products/lab-farm-g6.jpg",
+        "assets/img/products/lab-farm-g7.jpg"
       ],
       "packs": [
         { "qty": 1,  "price": 890,  "image": "assets/img/products/lab-farm-box.jpg?v=2" },
@@ -232,11 +238,13 @@
       "order": 5,
       "short": "รวมสมุนไพรและสารสกัด 14 ชนิด ทั้งมะระขี้นก น้ำมันปลา โสมอเมริกัน อาร์ติโชก โพรโพลิส และเห็ดหลินจือ สำหรับผู้ที่ต้องการดูแลสุขภาพองค์รวม",
       "images": [
-        "assets/img/products/betaherb-box.jpg?v=2",
-        "assets/img/products/betaherb-pack4.jpg?v=2",
-        "assets/img/products/betaherb-pack8.jpg?v=2",
-        "assets/img/products/betaherb-pack15.jpg?v=2",
-        "assets/img/products/betaherb-pack24.jpg?v=2"
+        "assets/img/products/betaherb-g1.jpg",
+        "assets/img/products/betaherb-g2.jpg",
+        "assets/img/products/betaherb-g3.jpg",
+        "assets/img/products/betaherb-g4.jpg",
+        "assets/img/products/betaherb-g5.jpg",
+        "assets/img/products/betaherb-g6.jpg",
+        "assets/img/products/betaherb-g7.jpg"
       ],
       "packs": [
         { "qty": 1,  "price": 690,  "image": "assets/img/products/betaherb-box.jpg?v=2" },
