@@ -299,17 +299,32 @@ document.addEventListener("site:ready", function (e) {
   /* products */
   A.$("#productsGrid").innerHTML = S.products.map(A.productCard).join("");
 
-  /* สไลด์สินค้า — ปุ่มลูกศร (เดสก์ท็อป) + อัปเดตสถานะเมื่อเลื่อน */
+  /* สไลด์สินค้า — ปุ่มลูกศร (เดสก์ท็อป) + smooth scroll เขียนเองให้ลื่นทุกเบราว์เซอร์ */
   (function () {
     var sl = A.$("#productsGrid"), prev = A.$("#prodPrev"), next = A.$("#prodNext");
     if (!sl || !prev || !next) return;
-    function step() { var c = sl.querySelector(".product-card, .card"); return c ? c.offsetWidth + 24 : 268; }
+    function step() { var c = sl.querySelector(".card, .product-card"); return c ? c.offsetWidth + 24 : 268; }
     function upd() {
       prev.disabled = sl.scrollLeft <= 4;
       next.disabled = sl.scrollLeft >= sl.scrollWidth - sl.clientWidth - 4;
     }
-    prev.addEventListener("click", function () { sl.scrollBy({ left: -step(), behavior: "smooth" }); });
-    next.addEventListener("click", function () { sl.scrollBy({ left: step(), behavior: "smooth" }); });
+    var raf = null;
+    function slideBy(delta) {
+      var start = sl.scrollLeft;
+      var target = Math.max(0, Math.min(start + delta, sl.scrollWidth - sl.clientWidth));
+      var t0 = null, dur = 340;
+      if (raf) cancelAnimationFrame(raf);
+      function frame(t) {
+        if (t0 === null) t0 = t;
+        var p = Math.min(1, (t - t0) / dur);
+        var e = p < 0.5 ? 2 * p * p : 1 - Math.pow(-2 * p + 2, 2) / 2;
+        sl.scrollLeft = start + (target - start) * e;
+        if (p < 1) raf = requestAnimationFrame(frame); else upd();
+      }
+      raf = requestAnimationFrame(frame);
+    }
+    prev.addEventListener("click", function () { slideBy(-step() * 2); });
+    next.addEventListener("click", function () { slideBy(step() * 2); });
     sl.addEventListener("scroll", upd);
     window.addEventListener("resize", upd);
     upd();
