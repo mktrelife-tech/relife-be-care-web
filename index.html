@@ -308,20 +308,10 @@ document.addEventListener("site:ready", function (e) {
       prev.disabled = sl.scrollLeft <= 4;
       next.disabled = sl.scrollLeft >= sl.scrollWidth - sl.clientWidth - 4;
     }
-    var raf = null;
     function slideBy(delta) {
-      var start = sl.scrollLeft;
-      var target = Math.max(0, Math.min(start + delta, sl.scrollWidth - sl.clientWidth));
-      var t0 = null, dur = 340;
-      if (raf) cancelAnimationFrame(raf);
-      function frame(t) {
-        if (t0 === null) t0 = t;
-        var p = Math.min(1, (t - t0) / dur);
-        var e = p < 0.5 ? 2 * p * p : 1 - Math.pow(-2 * p + 2, 2) / 2;
-        sl.scrollLeft = start + (target - start) * e;
-        if (p < 1) raf = requestAnimationFrame(frame); else upd();
-      }
-      raf = requestAnimationFrame(frame);
+      /* ตั้ง scrollLeft ตรงๆ — CSS scroll-behavior:smooth ทำให้ลื่นในเบราว์เซอร์จริง */
+      sl.scrollLeft = Math.max(0, Math.min(sl.scrollLeft + delta, sl.scrollWidth - sl.clientWidth));
+      setTimeout(upd, 60);
     }
     prev.addEventListener("click", function () { slideBy(-step() * 2); });
     next.addEventListener("click", function () { slideBy(step() * 2); });
