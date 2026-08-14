@@ -543,7 +543,7 @@ ul, ol { margin: 0 0 1em; padding-left: 1.25em; }
 .slider-wrap { position: relative; }
 .products-slider {
   flex-wrap: nowrap; justify-content: flex-start;
-  overflow-x: auto; scroll-snap-type: x proximity; scroll-behavior: smooth;
+  overflow-x: auto; scroll-snap-type: none;
   -webkit-overflow-scrolling: touch; padding-bottom: 12px; scroll-padding-inline: 2px;
 }
 .products-slider > * { flex: 0 0 244px; max-width: 244px; scroll-snap-align: start; }
