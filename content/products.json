@@ -2,6 +2,7 @@
   "products": [
     {
       "slug": "beta-oil",
+      "header": "assets/img/headers/beta-oil.jpg",
       "name": "BETA OIL",
       "nameTh": "เบต้า ออยล์",
       "tagline": "น้ำมันธรรมชาติ 3 ชนิด + ไฟโตสเตอรอล ดูแลสุขภาพประจำวัน",
@@ -61,6 +62,7 @@
     },
     {
       "slug": "betax-plus",
+      "header": "assets/img/headers/betax-plus.jpg",
       "name": "BETA X PLUS",
       "nameTh": "เบต้าเอ็กซ์ พลัส",
       "tagline": "สูตรเข้มข้น 17 สารสำคัญ สนับสนุนระบบภูมิคุ้มกัน",
@@ -115,6 +117,7 @@
     },
     {
       "slug": "beta-life",
+      "header": "assets/img/headers/beta-life.jpg",
       "name": "BETA LIFE",
       "nameTh": "เบต้า ไลฟ์",
       "tagline": "โปรตีนไข่ขาวย่อยง่าย + สารสกัดธรรมชาติ ดูแลสุขภาพไต",
@@ -169,6 +172,7 @@
     },
     {
       "slug": "lab-farm",
+      "header": "assets/img/headers/lab-farm.jpg",
       "name": "LAB FARM",
       "nameTh": "แล็บฟาร์ม",
       "tagline": "Immune Plus™ รวม 19 สารสำคัญ สนับสนุนระบบภูมิคุ้มกัน",
@@ -224,6 +228,7 @@
     },
     {
       "slug": "betaherb",
+      "header": "assets/img/headers/betaherb.jpg",
       "name": "BETA HERB",
       "nameTh": "เบต้าเฮิร์บ",
       "tagline": "รวมสมุนไพรและสารสกัด 14 ชนิด ดูแลสุขภาพองค์รวม",
@@ -279,6 +284,7 @@
     },
     {
       "slug": "beta-cal-pro-plus",
+      "header": "assets/img/headers/beta-cal-pro-plus.jpg",
       "name": "BETA CAL PRO PLUS",
       "nameTh": "เบต้าแคล โปร พลัส",
       "tagline": "แคลเซียม แอล-ทรีโอเนต + คอลลาเจน Type II ดูแลกระดูกและข้อในทุกวัน",
@@ -332,6 +338,7 @@
     },
     {
       "slug": "beta-liv-pro-plus",
+      "header": "assets/img/headers/beta-liv-pro-plus.jpg",
       "name": "BETA LIV PRO PLUS",
       "nameTh": "เบต้า ลีฟ โปร พลัส",
       "tagline": "ดูแลตับด้วยนัตโตะนำเข้าจากญี่ปุ่น (LIVOTOX®)",

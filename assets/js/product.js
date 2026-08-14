@@ -103,24 +103,31 @@ document.addEventListener("site:ready", function (e) {
 
   /* แบนเนอร์สินค้า (บนสุด) */
   var boxImg = imgs[0];
-  var secHero =
-    '<section class="pdp-hero"><div class="wrap pdp-hero__grid">' +
-      '<div class="pdp-hero__text">' +
-        '<span class="pdp__fda">✓ อย. ' + A.esc(p.fda) + "</span>" +
-        "<h1>" + A.esc(p.name) + "</h1>" +
-        "<p class='pdp-hero__tag'>" + A.esc(p.tagline) + "</p>" +
-        ((p.benefits && p.benefits.length)
-          ? '<ul class="card__benefits" style="margin:14px 0 22px">' + p.benefits.map(function (b) { return "<li>" + A.esc(b) + "</li>"; }).join("") + "</ul>"
-          : "") +
-        '<div class="pdp-hero__cta">' +
-          '<button class="btn btn--primary btn--lg" id="heroBuy">🛒 ดูราคา &amp; สั่งซื้อ ↓</button>' +
-          '<a class="btn btn--line btn--lg" href="' + lineUrl + '" target="_blank" rel="noopener">สอบถาม</a>' +
-        "</div>" +
+  var headerImg = p.header ? A.esc(A.url(p.header.replace(/^\//, ""))) : "";
+  var heroText =
+    '<div class="pdp-hero__text">' +
+      '<span class="pdp__fda">✓ อย. ' + A.esc(p.fda) + "</span>" +
+      "<h1>" + A.esc(p.name) + "</h1>" +
+      "<p class='pdp-hero__tag'>" + A.esc(p.tagline) + "</p>" +
+      ((p.benefits && p.benefits.length)
+        ? '<ul class="card__benefits" style="margin:14px 0 22px">' + p.benefits.map(function (b) { return "<li>" + A.esc(b) + "</li>"; }).join("") + "</ul>"
+        : "") +
+      '<div class="pdp-hero__cta">' +
+        '<button class="btn btn--primary btn--lg" id="heroBuy">🛒 ดูราคา &amp; สั่งซื้อ ↓</button>' +
+        '<a class="btn btn--line btn--lg" href="' + lineUrl + '" target="_blank" rel="noopener">สอบถาม</a>' +
       "</div>" +
-      '<div class="pdp-hero__media"><div class="hero-show">' +
-        (boxImg ? '<img src="' + A.esc(A.url(boxImg.replace(/^\//, ""))) + '" alt="' + A.esc(p.name) + '">' : "") +
-      "</div></div>" +
-    "</div></section>";
+    "</div>";
+  var secHero = headerImg
+    ? '<section class="pdp-hero pdp-hero--bg">' +
+        '<div class="pdp-hero__bg"><img src="' + headerImg + '" alt="' + A.esc(p.name) + '"></div>' +
+        '<div class="wrap pdp-hero__inner">' + heroText + "</div>" +
+      "</section>"
+    : '<section class="pdp-hero"><div class="wrap pdp-hero__grid">' +
+        heroText +
+        '<div class="pdp-hero__media"><div class="hero-show">' +
+          (boxImg ? '<img src="' + A.esc(A.url(boxImg.replace(/^\//, ""))) + '" alt="' + A.esc(p.name) + '">' : "") +
+        "</div></div>" +
+      "</div></section>";
 
   var secWho =
     '<section class="section pdp-sec pdp-sec--who"><div class="wrap">' +
