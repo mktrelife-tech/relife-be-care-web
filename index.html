@@ -95,9 +95,13 @@
       <h2>ตัวช่วยยอดนิยม ที่ลูกค้าเลือกดูแลสุขภาพ</h2>
       <p>ทุกตัวมีเลข อย. แสดงส่วนผสมและปริมาณจริงตามฉลาก</p>
     </div>
-    <div class="products-grid" id="productsGrid"></div>
-    <div class="center" style="margin-top:34px">
-      <a class="btn btn--ghost" href="compare.html">เปรียบเทียบสินค้าทั้ง 5 ตัว →</a>
+    <div class="slider-wrap">
+      <button class="slider-arrow slider-arrow--prev" id="prodPrev" type="button" aria-label="เลื่อนซ้าย">‹</button>
+      <div class="products-grid products-slider" id="productsGrid"></div>
+      <button class="slider-arrow slider-arrow--next" id="prodNext" type="button" aria-label="เลื่อนขวา">›</button>
+    </div>
+    <div class="center" style="margin-top:28px">
+      <a class="btn btn--ghost" href="shop.html">ดูสินค้าทั้งหมด →</a>
     </div>
   </div>
 </section>
@@ -294,6 +298,22 @@ document.addEventListener("site:ready", function (e) {
 
   /* products */
   A.$("#productsGrid").innerHTML = S.products.map(A.productCard).join("");
+
+  /* สไลด์สินค้า — ปุ่มลูกศร (เดสก์ท็อป) + อัปเดตสถานะเมื่อเลื่อน */
+  (function () {
+    var sl = A.$("#productsGrid"), prev = A.$("#prodPrev"), next = A.$("#prodNext");
+    if (!sl || !prev || !next) return;
+    function step() { var c = sl.querySelector(".product-card, .card"); return c ? c.offsetWidth + 24 : 268; }
+    function upd() {
+      prev.disabled = sl.scrollLeft <= 4;
+      next.disabled = sl.scrollLeft >= sl.scrollWidth - sl.clientWidth - 4;
+    }
+    prev.addEventListener("click", function () { sl.scrollBy({ left: -step(), behavior: "smooth" }); });
+    next.addEventListener("click", function () { sl.scrollBy({ left: step(), behavior: "smooth" }); });
+    sl.addEventListener("scroll", upd);
+    window.addEventListener("resize", upd);
+    upd();
+  })();
 
   /* certs */
   A.$("#certs").innerHTML = (s.certs || []).map(function (c) {
