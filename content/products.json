@@ -299,11 +299,13 @@
       "order": 6,
       "short": "รวมแคลเซียม แอล-ทรีโอเนต และแคลเซียมคีเลตที่ดูดซึมง่าย เสริมคอลลาเจน Type II ผงทาร์ตเชอร์รี และสารสกัดขมิ้นชัน-ขิง สำหรับดูแลกระดูกและข้อในวัยที่เริ่มต้องใส่ใจ",
       "images": [
-        "assets/img/products/beta-cal-pro-plus-box.jpg",
-        "assets/img/products/beta-cal-pro-plus-pack4.jpg",
-        "assets/img/products/beta-cal-pro-plus-pack8.jpg",
-        "assets/img/products/beta-cal-pro-plus-pack15.jpg",
-        "assets/img/products/beta-cal-pro-plus-pack24.jpg"
+        "assets/img/products/beta-cal-pro-plus-g1.jpg",
+        "assets/img/products/beta-cal-pro-plus-g2.jpg",
+        "assets/img/products/beta-cal-pro-plus-g3.jpg",
+        "assets/img/products/beta-cal-pro-plus-g4.jpg",
+        "assets/img/products/beta-cal-pro-plus-g5.jpg",
+        "assets/img/products/beta-cal-pro-plus-g6.jpg",
+        "assets/img/products/beta-cal-pro-plus-g7.jpg"
       ],
       "packs": [
         { "qty": 1,  "price": 690,  "image": "assets/img/products/beta-cal-pro-plus-box.jpg" },
@@ -353,11 +355,12 @@
       "order": 7,
       "short": "ผลิตภัณฑ์เสริมอาหารดูแลตับ ที่มีสารสกัดถั่วหมักนัตโตะ (LIVOTOX®) นำเข้าจากญี่ปุ่น ร่วมกับสารสกัดธรรมชาติและกรดอะมิโนหลายชนิด",
       "images": [
-        "assets/img/products/beta-liv-pro-plus-box.jpg",
-        "assets/img/products/beta-liv-pro-plus-pack4.jpg",
-        "assets/img/products/beta-liv-pro-plus-pack8.jpg",
-        "assets/img/products/beta-liv-pro-plus-pack15.jpg",
-        "assets/img/products/beta-liv-pro-plus-pack24.jpg"
+        "assets/img/products/beta-liv-pro-plus-g1.jpg",
+        "assets/img/products/beta-liv-pro-plus-g2.jpg",
+        "assets/img/products/beta-liv-pro-plus-g3.jpg",
+        "assets/img/products/beta-liv-pro-plus-g4.jpg",
+        "assets/img/products/beta-liv-pro-plus-g5.jpg",
+        "assets/img/products/beta-liv-pro-plus-g6.jpg"
       ],
       "packs": [
         { "qty": 1,  "price": 690,  "image": "assets/img/products/beta-liv-pro-plus-box.jpg" },
@@ -404,10 +407,12 @@
       "order": 8,
       "short": "รวมสารสกัดเห็ดหัวลิง พรหมมิ และใบแปะก๊วย พร้อมโคลีน สำหรับผู้ที่อยากดูแลสมอง ความจำ และสมาธิในทุกวัน",
       "images": [
-        "assets/img/products/memora-box.jpg",
-        "assets/img/products/memora-pack4.jpg",
-        "assets/img/products/memora-pack8.jpg",
-        "assets/img/products/memora-pack15.jpg"
+        "assets/img/products/memora-g1.jpg",
+        "assets/img/products/memora-g2.jpg",
+        "assets/img/products/memora-g3.jpg",
+        "assets/img/products/memora-g4.jpg",
+        "assets/img/products/memora-g5.jpg",
+        "assets/img/products/memora-g6.jpg"
       ],
       "packs": [
         { "qty": 1,  "price": 690,  "image": "assets/img/products/memora-box.jpg" },
@@ -451,11 +456,12 @@
       "order": 9,
       "short": "อาหารสูตรครบถ้วนชนิดผง รวมผงน้ำมันรำข้าว โปรตีนไข่ขาว น้ำมัน MCT และอินูลิน พร้อมวิตามินและแร่ธาตุหลากหลายชนิด สำหรับเสริมโภชนาการในแต่ละวัน",
       "images": [
-        "assets/img/products/beta-life-balance-box.jpg",
-        "assets/img/products/beta-life-balance-pack2.jpg",
-        "assets/img/products/beta-life-balance-pack3.jpg",
-        "assets/img/products/beta-life-balance-pack6.jpg",
-        "assets/img/products/beta-life-balance-pack9.jpg"
+        "assets/img/products/beta-life-balance-g1.jpg",
+        "assets/img/products/beta-life-balance-g2.jpg",
+        "assets/img/products/beta-life-balance-g3.jpg",
+        "assets/img/products/beta-life-balance-g4.jpg",
+        "assets/img/products/beta-life-balance-g5.jpg",
+        "assets/img/products/beta-life-balance-g6.jpg"
       ],
       "packs": [
         { "qty": 1, "price": 1490, "image": "assets/img/products/beta-life-balance-box.jpg" },
@@ -501,11 +507,12 @@
       "order": 10,
       "short": "เครื่องดื่มชนิดผงสูตรสมดุล รวมโปรตีนไข่ขาว น้ำมัน MCT ใยอาหาร และน้ำมันปลา พร้อมวิตามินและแร่ธาตุ สำหรับเสริมโภชนาการในแต่ละวัน",
       "images": [
-        "assets/img/products/lab-balance-box.jpg",
-        "assets/img/products/lab-balance-pack2.jpg",
-        "assets/img/products/lab-balance-pack3.jpg",
-        "assets/img/products/lab-balance-pack6.jpg",
-        "assets/img/products/lab-balance-pack9.jpg"
+        "assets/img/products/lab-balance-g1.jpg",
+        "assets/img/products/lab-balance-g2.jpg",
+        "assets/img/products/lab-balance-g3.jpg",
+        "assets/img/products/lab-balance-g4.jpg",
+        "assets/img/products/lab-balance-g5.jpg",
+        "assets/img/products/lab-balance-g6.jpg"
       ],
       "packs": [
         { "qty": 1, "price": 1490, "image": "assets/img/products/lab-balance-box.jpg" },
@@ -552,10 +559,12 @@
       "order": 11,
       "short": "รวมโพรไบโอติกส์หลายสายพันธุ์ พรีไบโอติกจากแก่นตะวัน และเคอร์คูมิน PHYTOSOME® สำหรับผู้ที่อยากดูแลระบบทางเดินอาหารและลำไส้",
       "images": [
-        "assets/img/products/beta-care-box.jpg",
-        "assets/img/products/beta-care-pack4.jpg",
-        "assets/img/products/beta-care-pack8.jpg",
-        "assets/img/products/beta-care-pack15.jpg"
+        "assets/img/products/beta-care-g1.jpg",
+        "assets/img/products/beta-care-g2.jpg",
+        "assets/img/products/beta-care-g3.jpg",
+        "assets/img/products/beta-care-g4.jpg",
+        "assets/img/products/beta-care-g5.jpg",
+        "assets/img/products/beta-care-g6.jpg"
       ],
       "packs": [
         { "qty": 1,  "price": 890,  "image": "assets/img/products/beta-care-box.jpg" },
@@ -601,9 +610,12 @@
       "order": 12,
       "short": "ครีมบำรุงผิวกาย รวมว่านหางจระเข้เข้มข้น 200 เท่า สารสกัดชะเอมเทศ เบต้า-กลูแคน และเซราไมด์คอมเพล็กซ์ ช่วยบำรุงผิวให้ชุ่มชื้น",
       "images": [
-        "assets/img/products/beta-care-cream-box.jpg",
-        "assets/img/products/beta-care-cream-pack2.jpg",
-        "assets/img/products/beta-care-cream-pack4.jpg"
+        "assets/img/products/beta-care-cream-g1.jpg",
+        "assets/img/products/beta-care-cream-g2.jpg",
+        "assets/img/products/beta-care-cream-g3.jpg",
+        "assets/img/products/beta-care-cream-g4.jpg",
+        "assets/img/products/beta-care-cream-g5.jpg",
+        "assets/img/products/beta-care-cream-g6.jpg"
       ],
       "packs": [
         { "qty": 1, "price": 690,  "image": "assets/img/products/beta-care-cream-box.jpg" },
