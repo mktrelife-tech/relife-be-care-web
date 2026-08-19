@@ -33,14 +33,15 @@ document.addEventListener("site:ready", function (e) {
   /* ---- ตัวเลือกแพ็ก (ราคาโปร 1/4/8/15 กล่อง) ---- */
   var packList = (p.packs && p.packs.length) ? p.packs : [{ qty: 1, price: p.price, image: imgs[0] }];
   var onePrice = packList[0].price;  /* ราคา 1 กล่อง ใช้คำนวณส่วนลด */
+  var pu = p.packUnit || "กล่อง";
   var packsHtml = '<div class="packs" id="packs">' + packList.map(function (pk, i) {
     var per = Math.round(pk.price / pk.qty);
     var single = onePrice * pk.qty;
     var save = single - pk.price;
     return '<button type="button" class="pack' + (i === 0 ? " is-on" : "") + '" data-pack="' + pk.qty + '" data-price="' + pk.price + '">' +
       (pk.image ? '<img class="pack__img" src="' + A.esc(A.url(pk.image.replace(/^\//, ""))) + '" alt="">' : '<span class="pack__img"></span>') +
-      '<span><span class="pack__name">' + (pk.qty > 1 ? "แพ็ก " + pk.qty + " กล่อง" : "1 กล่อง") + "</span>" +
-        '<span class="pack__per">เฉลี่ย ฿' + A.baht(per) + " / กล่อง</span>" +
+      '<span><span class="pack__name">' + (pk.qty > 1 ? "แพ็ก " + pk.qty + " " + pu : "1 " + pu) + "</span>" +
+        '<span class="pack__per">เฉลี่ย ฿' + A.baht(per) + " / " + pu + "</span>" +
         (save > 0 ? '<span class="pack__save">ประหยัด ฿' + A.baht(save) + "</span>" : "") + "</span>" +
       '<span class="pack__price">' + (save > 0 ? "<small>฿" + A.baht(single) + "</small>" : "") + "฿" + A.baht(pk.price) + "</span>" +
       '<span class="pack__radio"></span></button>';
@@ -106,7 +107,7 @@ document.addEventListener("site:ready", function (e) {
   var headerImg = p.header ? A.esc(A.url(p.header.replace(/^\//, ""))) : "";
   var heroText =
     '<div class="pdp-hero__text">' +
-      '<span class="pdp__fda">✓ อย. ' + A.esc(p.fda) + "</span>" +
+      '<span class="pdp__fda">✓ ' + (/^[0-9]/.test(p.fda) ? "อย. " : "") + A.esc(p.fda) + "</span>" +
       "<h1>" + A.esc(p.name) + "</h1>" +
       "<p class='pdp-hero__tag'>" + A.esc(p.tagline) + "</p>" +
       ((p.benefits && p.benefits.length)
