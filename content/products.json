@@ -386,6 +386,249 @@
       "howto": "คำแนะนำภายใน: บำรุงตับ รับประทาน 1-2 แคปซูล วันละ 1 ครั้ง หลังอาหารเช้า • ก่อนดื่มแอลกอฮอล์ 1-2 แคปซูล ก่อนดื่ม 30-60 นาที (วิธีรับประทานบนฉลากอยู่ระหว่างยืนยัน)",
       "warning": "เด็กและสตรีมีครรภ์ไม่ควรรับประทาน • ไม่มีผลในการป้องกันหรือรักษาโรค • ควรกินอาหารหลากหลายครบ 5 หมู่ ในสัดส่วนที่เหมาะสมเป็นประจำ • ผู้ใช้ยาต้านการแข็งตัวของเลือดควรปรึกษาแพทย์และเฝ้าระวังจ้ำเลือดหรือเลือดออกผิดปกติ",
       "faq": []
+    },
+    {
+      "slug": "memora",
+      "header": "assets/img/headers/memora.jpg?v=2",
+      "name": "MEMORA",
+      "nameTh": "เมโมรา",
+      "tagline": "เห็ดหัวลิง + พรหมมิ + แปะก๊วย ดูแลสมองและความจำ",
+      "benefits": ["เห็ดหัวลิง (Lion's Mane)", "พรหมมิ & แปะก๊วย", "ดูแลสมองและความจำ"],
+      "fda": "13-1-01566-5-0069",
+      "price": 690,
+      "priceWas": 1290,
+      "unit": "10 แคปซูล (แคปซูลละ 800 มก.)",
+      "badge": "สินค้าใหม่",
+      "badgeStyle": "brand",
+      "featured": false,
+      "order": 8,
+      "short": "รวมสารสกัดเห็ดหัวลิง พรหมมิ และใบแปะก๊วย พร้อมโคลีน สำหรับผู้ที่อยากดูแลสมอง ความจำ และสมาธิในทุกวัน",
+      "images": [
+        "assets/img/products/memora-box.jpg",
+        "assets/img/products/memora-pack4.jpg",
+        "assets/img/products/memora-pack8.jpg",
+        "assets/img/products/memora-pack15.jpg"
+      ],
+      "packs": [
+        { "qty": 1,  "price": 690,  "image": "assets/img/products/memora-box.jpg" },
+        { "qty": 4,  "price": 1790, "image": "assets/img/products/memora-pack4.jpg" },
+        { "qty": 8,  "price": 3290, "image": "assets/img/products/memora-pack8.jpg" },
+        { "qty": 15, "price": 5690, "image": "assets/img/products/memora-pack15.jpg" }
+      ],
+      "highlights": [
+        "สารสกัดเห็ดหัวลิง (Lion's Mane) 250 มก.",
+        "สารสกัดพรหมมิ ที่ถูกพูดถึงด้านความจำ",
+        "ใบแปะก๊วย ดูแลการไหลเวียนเลือด",
+        "เสริมโคลีน สารตั้งต้นของสารสื่อประสาท",
+        "เสริมวิตามินบี 6"
+      ],
+      "forWho": "ผู้ที่อยากดูแลสมองและความจำ วัยทำงานที่ต้องใช้สมาธิ และผู้สูงอายุที่เริ่มหลงลืมง่าย",
+      "notFor": "เด็กและสตรีมีครรภ์ ผู้ที่แพ้ส่วนประกอบ — ผู้ที่มีภาวะเลือดแข็งตัวช้าหรือใช้ยาต้านการแข็งตัวของเลือดควรปรึกษาแพทย์ก่อน",
+      "ingredients": [
+        { "name": "สารสกัดเห็ดหัวลิง (Lion's Mane)", "amount": "250 มก." },
+        { "name": "สารสกัดพรหมมิ", "amount": "150 มก." },
+        { "name": "โคลีนไบทาร์เทรต", "amount": "90 มก." },
+        { "name": "สารสกัดใบแปะก๊วย", "amount": "50 มก." },
+        { "name": "วิตามินบี 6 (ไพริดอกซีน ไฮโดรคลอไรด์)", "amount": "2 มก." }
+      ],
+      "howto": "รับประทานวันละ 1 แคปซูล (ตามฉลาก)",
+      "warning": "อาจมีผลให้เลือดแข็งตัวช้า • เด็กและสตรีมีครรภ์ไม่ควรรับประทาน • ไม่มีผลในการป้องกันหรือรักษาโรค • ควรกินอาหารหลากหลายครบ 5 หมู่ ในสัดส่วนที่เหมาะสมเป็นประจำ",
+      "faq": []
+    },
+    {
+      "slug": "beta-life-balance",
+      "header": "assets/img/headers/beta-life-balance.jpg?v=2",
+      "name": "BETA LIFE BALANCE",
+      "nameTh": "เบต้าไลฟ์ บาลานซ์",
+      "tagline": "อาหารสูตรครบถ้วนชนิดผง วิตามินและแร่ธาตุครบ",
+      "benefits": ["สูตรครบถ้วน วิตามิน-แร่ธาตุ", "โปรตีนไข่ขาว & MCT", "ชนิดผงชงดื่มง่าย"],
+      "fda": "13-1-01566-5-0068",
+      "price": 1490,
+      "unit": "10 ซอง (ซองละ 76 กรัม)",
+      "badge": "สินค้าใหม่",
+      "badgeStyle": "sage",
+      "featured": false,
+      "order": 9,
+      "short": "อาหารสูตรครบถ้วนชนิดผง รวมผงน้ำมันรำข้าว โปรตีนไข่ขาว น้ำมัน MCT และอินูลิน พร้อมวิตามินและแร่ธาตุหลากหลายชนิด สำหรับเสริมโภชนาการในแต่ละวัน",
+      "images": [
+        "assets/img/products/beta-life-balance-box.jpg",
+        "assets/img/products/beta-life-balance-pack2.jpg",
+        "assets/img/products/beta-life-balance-pack3.jpg",
+        "assets/img/products/beta-life-balance-pack6.jpg",
+        "assets/img/products/beta-life-balance-pack9.jpg"
+      ],
+      "packs": [
+        { "qty": 1, "price": 1490, "image": "assets/img/products/beta-life-balance-box.jpg" },
+        { "qty": 2, "price": 2790, "image": "assets/img/products/beta-life-balance-pack2.jpg" },
+        { "qty": 3, "price": 3490, "image": "assets/img/products/beta-life-balance-pack3.jpg" },
+        { "qty": 6, "price": 6490, "image": "assets/img/products/beta-life-balance-pack6.jpg" },
+        { "qty": 9, "price": 8990, "image": "assets/img/products/beta-life-balance-pack9.jpg" }
+      ],
+      "highlights": [
+        "สูตรครบถ้วน รวมวิตามินและแร่ธาตุหลากหลายชนิด",
+        "โปรตีนจากไข่ขาวและน้ำมัน MCT",
+        "มีอินูลิน ใยอาหารพรีไบโอติก",
+        "ชนิดผง ชงกับน้ำดื่มได้สะดวก",
+        "เหมาะสำหรับเสริมโภชนาการในแต่ละวัน"
+      ],
+      "forWho": "ผู้ที่ต้องการเสริมโภชนาการให้ครบถ้วน ผู้สูงอายุ ผู้พักฟื้น และผู้ที่ทานอาหารได้น้อย",
+      "notFor": "ผู้ที่แพ้ส่วนประกอบ (เช่น ไข่) — ผู้ที่มีโรคประจำตัวหรือต้องควบคุมแร่ธาตุ ควรปรึกษาแพทย์ก่อน",
+      "ingredients": [
+        { "name": "ผงน้ำมันรำข้าว", "amount": "12.92 ก." },
+        { "name": "ผงไข่ขาว", "amount": "7.98 ก." },
+        { "name": "ผงน้ำมัน MCT", "amount": "4.56 ก." },
+        { "name": "อินูลิน (ใยอาหาร)", "amount": "3.36 ก." },
+        { "name": "โพแทสเซียมคลอไรด์", "amount": "3 ก." },
+        { "name": "และวิตามิน-แร่ธาตุอีกหลายชนิด", "amount": "—" }
+      ],
+      "howto": "ชงกับน้ำดื่ม — ดูวิธีชงและปริมาณที่แนะนำบนฉลากผลิตภัณฑ์",
+      "warning": "ไม่มีผลในการป้องกันหรือรักษาโรค • ควรกินอาหารหลากหลายครบ 5 หมู่ ในสัดส่วนที่เหมาะสมเป็นประจำ • ผู้ที่แพ้ส่วนประกอบควรหลีกเลี่ยง",
+      "faq": []
+    },
+    {
+      "slug": "lab-balance",
+      "header": "assets/img/headers/lab-balance.jpg?v=2",
+      "name": "LAB BALANCE",
+      "nameTh": "แล็บ บาลานซ์",
+      "tagline": "เครื่องดื่มชนิดผง สูตรสมดุล โปรตีนไข่ขาว + ใยอาหาร + น้ำมันปลา",
+      "benefits": ["โปรตีนไข่ขาวสูง", "มีใยอาหาร & น้ำมันปลา", "ชนิดผงชงดื่มง่าย"],
+      "fda": "13-1-02663-5-0060",
+      "price": 1490,
+      "unit": "10 ซอง (ซองละ 48 กรัม)",
+      "badge": "สินค้าใหม่",
+      "badgeStyle": "sage",
+      "featured": false,
+      "order": 10,
+      "short": "เครื่องดื่มชนิดผงสูตรสมดุล รวมโปรตีนไข่ขาว น้ำมัน MCT ใยอาหาร และน้ำมันปลา พร้อมวิตามินและแร่ธาตุ สำหรับเสริมโภชนาการในแต่ละวัน",
+      "images": [
+        "assets/img/products/lab-balance-box.jpg",
+        "assets/img/products/lab-balance-pack2.jpg",
+        "assets/img/products/lab-balance-pack3.jpg",
+        "assets/img/products/lab-balance-pack6.jpg",
+        "assets/img/products/lab-balance-pack9.jpg"
+      ],
+      "packs": [
+        { "qty": 1, "price": 1490, "image": "assets/img/products/lab-balance-box.jpg" },
+        { "qty": 2, "price": 2790, "image": "assets/img/products/lab-balance-pack2.jpg" },
+        { "qty": 3, "price": 3490, "image": "assets/img/products/lab-balance-pack3.jpg" },
+        { "qty": 6, "price": 6490, "image": "assets/img/products/lab-balance-pack6.jpg" },
+        { "qty": 9, "price": 8990, "image": "assets/img/products/lab-balance-pack9.jpg" }
+      ],
+      "highlights": [
+        "โปรตีนจากไข่ขาวสูง (ราว 21% โดยน้ำหนัก)",
+        "มีน้ำมัน MCT และน้ำมันปลา",
+        "ใยอาหารจากอินูลินและโพลีเด็กซ์โทรส",
+        "เสริมแอล-กลูตามีนและแอล-อาร์จินีน",
+        "ชนิดผง ชงกับน้ำดื่มได้สะดวก"
+      ],
+      "forWho": "ผู้ที่ต้องการเสริมโปรตีนและโภชนาการ ผู้พักฟื้น ผู้สูงอายุ และผู้ที่ทานอาหารได้น้อย",
+      "notFor": "ผู้ที่แพ้ส่วนประกอบ (เช่น ไข่ ปลา) — ผู้ที่มีโรคประจำตัวควรปรึกษาแพทย์ก่อน",
+      "ingredients": [
+        { "name": "ผงไข่ขาว", "amount": "20.83%" },
+        { "name": "ผงน้ำมัน MCT", "amount": "4.53%" },
+        { "name": "พาลาทิโนส", "amount": "4.53%" },
+        { "name": "ผงน้ำมันรำข้าว", "amount": "4.08%" },
+        { "name": "อินูลิน (ใยอาหาร)", "amount": "4.08%" },
+        { "name": "ผงน้ำมันปลา", "amount": "3.93%" },
+        { "name": "แอล-กลูตามีน", "amount": "2.61%" }
+      ],
+      "howto": "ชงกับน้ำดื่ม — ดูวิธีชงและปริมาณที่แนะนำบนฉลากผลิตภัณฑ์",
+      "warning": "ไม่มีผลในการป้องกันหรือรักษาโรค • ควรกินอาหารหลากหลายครบ 5 หมู่ ในสัดส่วนที่เหมาะสมเป็นประจำ • ผู้ที่แพ้ส่วนประกอบควรหลีกเลี่ยง (สูตรระบุปริมาณเป็น % โดยน้ำหนักตามฉลาก)",
+      "faq": []
+    },
+    {
+      "slug": "beta-care",
+      "header": "assets/img/headers/beta-care.jpg?v=2",
+      "name": "BETA CARE",
+      "nameTh": "เบต้า แคร์",
+      "tagline": "โพรไบโอติกส์ + เคอร์คูมิน ดูแลลำไส้และการย่อย",
+      "benefits": ["โพรไบโอติกส์หลายสายพันธุ์", "เคอร์คูมิน PHYTOSOME®", "ดูแลลำไส้และการย่อย"],
+      "fda": "13-1-01566-5-0066",
+      "price": 890,
+      "unit": "10 แคปซูล (แคปซูลละ 510 มก.)",
+      "badge": "สินค้าใหม่",
+      "badgeStyle": "brand",
+      "featured": false,
+      "order": 11,
+      "short": "รวมโพรไบโอติกส์หลายสายพันธุ์ พรีไบโอติกจากแก่นตะวัน และเคอร์คูมิน PHYTOSOME® สำหรับผู้ที่อยากดูแลระบบทางเดินอาหารและลำไส้",
+      "images": [
+        "assets/img/products/beta-care-box.jpg",
+        "assets/img/products/beta-care-pack4.jpg",
+        "assets/img/products/beta-care-pack8.jpg",
+        "assets/img/products/beta-care-pack15.jpg"
+      ],
+      "packs": [
+        { "qty": 1,  "price": 890,  "image": "assets/img/products/beta-care-box.jpg" },
+        { "qty": 4,  "price": 2490, "image": "assets/img/products/beta-care-pack4.jpg" },
+        { "qty": 8,  "price": 4590, "image": "assets/img/products/beta-care-pack8.jpg" },
+        { "qty": 15, "price": 7890, "image": "assets/img/products/beta-care-pack15.jpg" }
+      ],
+      "highlights": [
+        "โพรไบโอติกส์หลายสายพันธุ์ (Lactobacillus & Bifidobacterium)",
+        "พรีไบโอติกจากสารสกัดแก่นตะวัน",
+        "เคอร์คูมิน PHYTOSOME® ดูดซึมดี",
+        "เสริมวิตามินดี 3 และวิตามินอี",
+        "ดูแลสมดุลของลำไส้และการย่อย"
+      ],
+      "forWho": "ผู้ที่อยากดูแลระบบทางเดินอาหารและลำไส้ ผู้ที่ท้องอืด หรือขับถ่ายไม่สม่ำเสมอ",
+      "notFor": "เด็กและสตรีมีครรภ์ ผู้ที่แพ้ส่วนประกอบ — ผู้ที่มีภูมิคุ้มกันบกพร่องหรือใช้ยากดภูมิควรปรึกษาแพทย์ก่อน",
+      "ingredients": [
+        { "name": "สารสกัดขมิ้นชัน Curcumin PHYTOSOME®", "amount": "—" },
+        { "name": "แลคโตบาซิลลัส แรมโนซัส", "amount": "—" },
+        { "name": "แลคโตบาซิลลัส แอซิโดฟิลัส", "amount": "—" },
+        { "name": "บิฟิโดแบคทีเรียม (บิฟิดัม / แลคทิส / ลองกัม)", "amount": "—" },
+        { "name": "สารสกัดแก่นตะวัน (พรีไบโอติก)", "amount": "—" },
+        { "name": "วิตามินดี 3 และวิตามินอี", "amount": "—" }
+      ],
+      "howto": "คำแนะนำภายใน: ช่วงอาการกำเริบ 2 แคปซูล / ช่วงปกติ 1 แคปซูล วันละ 1 ครั้ง หลังอาหารเช้า (วิธีรับประทานบนฉลากอยู่ระหว่างยืนยัน)",
+      "warning": "ไม่มีผลในการป้องกันหรือรักษาโรค • ควรกินอาหารหลากหลายครบ 5 หมู่ ในสัดส่วนที่เหมาะสมเป็นประจำ • เด็กและสตรีมีครรภ์ควรปรึกษาแพทย์ก่อนรับประทาน",
+      "faq": []
+    },
+    {
+      "slug": "beta-care-cream",
+      "header": "assets/img/headers/beta-care-cream.jpg?v=2",
+      "name": "BETA CARE CREAM",
+      "nameTh": "เบต้า แคร์ ครีม",
+      "tagline": "ครีมบำรุงผิวกาย ว่านหางจระเข้เข้มข้น + เซราไมด์",
+      "benefits": ["ว่านหางจระเข้เข้มข้น 200x", "มีเซราไมด์คอมเพล็กซ์", "บำรุงผิวชุ่มชื้น"],
+      "fda": "จดแจ้งเครื่องสำอาง 10-1-6900018816",
+      "price": 690,
+      "unit": "ครีมบำรุงผิวกาย (เครื่องสำอาง)",
+      "badge": "สินค้าใหม่",
+      "badgeStyle": "sage",
+      "featured": false,
+      "order": 12,
+      "short": "ครีมบำรุงผิวกาย รวมว่านหางจระเข้เข้มข้น 200 เท่า สารสกัดชะเอมเทศ เบต้า-กลูแคน และเซราไมด์คอมเพล็กซ์ ช่วยบำรุงผิวให้ชุ่มชื้น",
+      "images": [
+        "assets/img/products/beta-care-cream-box.jpg",
+        "assets/img/products/beta-care-cream-pack2.jpg",
+        "assets/img/products/beta-care-cream-pack4.jpg"
+      ],
+      "packs": [
+        { "qty": 1, "price": 690,  "image": "assets/img/products/beta-care-cream-box.jpg" },
+        { "qty": 2, "price": 1090, "image": "assets/img/products/beta-care-cream-pack2.jpg" },
+        { "qty": 4, "price": 1790, "image": "assets/img/products/beta-care-cream-pack4.jpg" }
+      ],
+      "highlights": [
+        "ว่านหางจระเข้เข้มข้น 200 เท่า",
+        "เซราไมด์คอมเพล็กซ์ ช่วยเสริมเกราะปกป้องผิว",
+        "มีเบต้า-กลูแคน ยูเรีย และเชียบัตเตอร์",
+        "น้ำมันมะกอกและวิตามินอี บำรุงผิว",
+        "เนื้อครีมเทคโนโลยี Liquid Crystal"
+      ],
+      "forWho": "ผู้ที่ต้องการบำรุงผิวกายให้ชุ่มชื้น ลดความหมองคล้ำและผิวแห้งกร้าน",
+      "notFor": "ผู้ที่แพ้ส่วนประกอบ — ทดสอบการแพ้บริเวณผิวเล็กน้อยก่อนใช้ครั้งแรก",
+      "ingredients": [
+        { "name": "สารสกัดว่านหางจระเข้เข้มข้น 200 เท่า", "amount": "—" },
+        { "name": "สารสกัดรากชะเอมเทศ", "amount": "—" },
+        { "name": "เบต้า-กลูแคน", "amount": "—" },
+        { "name": "ยูเรีย", "amount": "—" },
+        { "name": "น้ำมันมะกอกและเชียบัตเตอร์", "amount": "—" },
+        { "name": "เซราไมด์คอมเพล็กซ์ และวิตามินอี", "amount": "—" }
+      ],
+      "howto": "ทาบริเวณผิวที่ต้องการบำรุง — ดูวิธีใช้บนฉลากผลิตภัณฑ์",
+      "warning": "สำหรับใช้ภายนอกเท่านั้น • หลีกเลี่ยงบริเวณดวงตาและผิวที่มีบาดแผล • หากมีอาการระคายเคืองควรหยุดใช้และปรึกษาแพทย์ • เก็บให้พ้นมือเด็ก",
+      "faq": []
     }
   ],
   "bundles": [
