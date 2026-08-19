@@ -980,21 +980,27 @@ table.compare tbody th { font-weight: 500; color: var(--ink-soft); }
 /* Header สินค้าแบบรูปเต็มพื้นหลัง + ข้อความซ้อนด้านซ้าย */
 .pdp-hero--bg { position: relative; overflow: hidden; padding: 0; background: none; }
 .pdp-hero--bg .pdp-hero__bg { position: absolute; inset: 0; z-index: 0; }
-.pdp-hero--bg .pdp-hero__bg img { width: 100%; height: 100%; object-fit: cover; object-position: right center; display: block; }
+/* object-position บน = ถ้าต้อง crop จะตัดจากล่าง หัวกล่องปลอดภัยเสมอ */
+.pdp-hero--bg .pdp-hero__bg img { width: 100%; height: 100%; object-fit: cover; object-position: center top; display: block; }
 .pdp-hero--bg .pdp-hero__bg::after {
   content: ""; position: absolute; inset: 0;
   background: linear-gradient(90deg, rgba(255,255,255,.95) 0%, rgba(255,255,255,.86) 26%, rgba(255,255,255,.45) 46%, rgba(255,255,255,0) 62%);
 }
 .pdp-hero--bg .pdp-hero__inner {
-  position: relative; z-index: 1;
-  min-height: clamp(360px, 40vw, 500px); display: flex; align-items: center;
+  position: relative; z-index: 1; height: 100%; min-height: 360px;
+  display: flex; align-items: center;
 }
 .pdp-hero--bg .pdp-hero__text { max-width: 52%; }
-@media (max-width: 768px) {
+/* จอกว้าง: สูงตามสัดส่วนรูป (แทบไม่ครอป) จำกัดสูงสุดไว้ไม่ให้สูงเกิน */
+@media (min-width: 1081px) {
+  .pdp-hero--bg { aspect-ratio: 1600 / 624; max-height: 620px; }
+}
+/* แท็บเล็ต/มือถือ (≤1080): รูปด้านบน–ข้อความด้านล่าง ไม่ครอปเลย */
+@media (max-width: 1080px) {
   .pdp-hero--bg .pdp-hero__bg { position: static; }
   .pdp-hero--bg .pdp-hero__bg img { height: auto; }
   .pdp-hero--bg .pdp-hero__bg::after { display: none; }
-  .pdp-hero--bg .pdp-hero__inner { min-height: 0; display: block; padding-top: 20px; padding-bottom: 4px; }
+  .pdp-hero--bg .pdp-hero__inner { min-height: 0; height: auto; display: block; padding-top: 20px; padding-bottom: 4px; }
   .pdp-hero--bg .pdp-hero__text { max-width: 100%; }
 }
 
