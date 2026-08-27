@@ -147,7 +147,10 @@ document.addEventListener("site:ready", function (e) {
     '<section class="section pdp-sec"><div class="wrap">' +
       '<div class="sec-head"><span class="eyebrow">จุดเด่น</span><h2>ทำไมถึงเลือก ' + A.esc(p.name) + "</h2></div>" +
       '<div class="hl-grid">' + p.highlights.map(function (h, i) {
-        return '<div class="hl-item reveal"><span class="hl-item__n">' + (i + 1) + "</span><p>" + A.esc(h) + "</p></div>";
+        var body = (h && typeof h === "object")
+          ? '<div class="hl-item__tx"><b>' + A.esc(h.t) + "</b><span>" + A.esc(h.d) + "</span></div>"
+          : "<p>" + A.esc(h) + "</p>";
+        return '<div class="hl-item reveal"><span class="hl-item__n">' + (i + 1) + "</span>" + body + "</div>";
       }).join("") + "</div></div></section>" : "";
 
   /* พื้นที่แบนเนอร์ภาพเซลเพจ (ใส่ภาพเต็มกว้างได้ไม่จำกัด) */
