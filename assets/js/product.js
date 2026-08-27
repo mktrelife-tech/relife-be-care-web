@@ -130,8 +130,13 @@ document.addEventListener("site:ready", function (e) {
         "</div></div>" +
       "</div></section>";
 
-  var secWho =
-    '<section class="section pdp-sec pdp-sec--who"><div class="wrap">' +
+  var secWho = (p.forWhoList && p.forWhoList.length) ?
+    '<section class="section pdp-sec pdp-sec--who"><div class="wrap" style="max-width:900px">' +
+      '<div class="sec-head"><span class="eyebrow">เหมาะกับใคร</span><h2>' + A.esc(p.name) + " เหมาะกับใคร?</h2></div>" +
+      '<div class="who-list">' + p.forWhoList.map(function (w) {
+        return '<div class="who-list__item reveal"><span class="who-list__ico">✓</span><div class="who-list__tx"><b>' + A.esc(w.t) + "</b><span>" + A.esc(w.d) + "</span></div></div>";
+      }).join("") + "</div></div></section>"
+    : '<section class="section pdp-sec pdp-sec--who"><div class="wrap">' +
       '<div class="sec-head"><span class="eyebrow">เหมาะกับใคร</span><h2>' + A.esc(p.name) + " เหมาะกับคุณไหม?</h2></div>" +
       '<div class="who-card"><div class="who-card__ico">🎯</div><div>' +
         "<p style='margin:0 0 12px'>" + A.esc(p.forWho) + "</p>" +
