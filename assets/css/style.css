@@ -1005,6 +1005,35 @@ table.compare tbody th { font-weight: 500; color: var(--ink-soft); }
 }
 
 .pdp-sec { padding-block: clamp(40px, 6vw, 70px); }
+
+/* ---- PDP sections ใหม่: เช็กลิสต์กลุ่มเสี่ยง / รางวัล / รีวิว ---- */
+.pdp-sec--risk .risk-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-top: 8px; }
+.risk-item { position: relative; display: flex; align-items: center; gap: 12px; background: var(--white); border: 1px solid var(--sand); border-radius: var(--r-md); padding: 14px 16px; cursor: pointer; transition: border-color .15s ease, box-shadow .15s ease; }
+.risk-item:hover { border-color: var(--brand-light); box-shadow: var(--sh-sm); }
+.risk-item input { position: absolute; opacity: 0; pointer-events: none; }
+.risk-item__box { flex: 0 0 auto; width: 26px; height: 26px; border-radius: 8px; border: 2px solid var(--sand); display: grid; place-items: center; color: transparent; font-weight: 800; font-size: .9rem; transition: all .15s ease; }
+.risk-item input:checked + .risk-item__box { background: var(--sage); border-color: var(--sage); color: #fff; }
+.risk-item input:checked ~ .risk-item__t { color: var(--sage-dark); font-weight: 600; }
+.risk-item__t { font-size: .98rem; line-height: 1.4; }
+.risk-note { text-align: center; margin-top: 22px; font-size: 1.04rem; color: var(--ink-soft); }
+.risk-note.is-hot { color: var(--danger); font-weight: 700; }
+@media (max-width: 620px) { .pdp-sec--risk .risk-grid { grid-template-columns: 1fr; } }
+
+.award-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+.award-item { background: var(--white); border-radius: var(--r-lg); padding: 28px 20px; text-align: center; box-shadow: var(--sh-sm); border: 1px solid rgba(38,55,66,.05); }
+.award-item__ico { font-size: 2.4rem; margin-bottom: 8px; }
+.award-item b { display: block; font-size: 1.02rem; margin-bottom: 4px; line-height: 1.35; }
+.award-item span { color: var(--ink-soft); font-size: .9rem; }
+@media (max-width: 720px) { .award-grid { grid-template-columns: 1fr; } }
+
+.preview-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 22px; }
+.preview-card { margin: 0; background: var(--white); border-radius: var(--r-lg); overflow: hidden; box-shadow: var(--sh-sm); border: 1px solid rgba(38,55,66,.05); display: flex; flex-direction: column; }
+.preview-card img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; display: block; }
+.preview-card__body { padding: 18px 20px 20px; }
+.preview-card__stars { color: #FFB400; letter-spacing: 2px; margin-bottom: 8px; }
+.preview-card blockquote { margin: 0 0 12px; font-size: .98rem; line-height: 1.6; color: var(--ink); }
+.preview-card figcaption { font-size: .88rem; color: var(--ink-soft); }
+.preview-card figcaption b { color: var(--ink); }
 .pdp-sec--who { background: linear-gradient(180deg, var(--brand-wash), transparent); }
 .who-card {
   display: flex; gap: 18px; align-items: flex-start; max-width: 720px; margin-inline: auto;

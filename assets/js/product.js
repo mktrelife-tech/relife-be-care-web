@@ -205,6 +205,41 @@ document.addEventListener("site:ready", function (e) {
         return "<details><summary>" + A.esc(f.q) + "<span></span></summary><div class='faq__a'>" + A.esc(f.a) + "</div></details>";
       }).join("") + "</div></div></section>" : "";
 
+  /* เช็กลิสต์กลุ่มเสี่ยง (hook) */
+  var secRisk = (p.riskChecklist && p.riskChecklist.items && p.riskChecklist.items.length) ?
+    '<section class="section pdp-sec pdp-sec--risk"><div class="wrap" style="max-width:880px">' +
+      '<div class="sec-head"><span class="eyebrow">เช็กด่วน 30 วินาที</span><h2>' + A.esc(p.riskChecklist.title || "คุณใช่กลุ่มที่ควรดูแลไหม?") + "</h2>" +
+        (p.riskChecklist.intro ? "<p>" + A.esc(p.riskChecklist.intro) + "</p>" : "") + "</div>" +
+      '<div class="risk-grid">' + p.riskChecklist.items.map(function (it) {
+        return '<label class="risk-item"><input type="checkbox"><span class="risk-item__box">✓</span><span class="risk-item__t">' + A.esc(it) + "</span></label>";
+      }).join("") + "</div>" +
+      '<p class="risk-note" id="riskNote">ติ๊กข้อที่ตรงกับคุณ — ถ้ามี <b>3 ข้อขึ้นไป</b> ' + A.esc(p.name) + " คือตัวช่วยที่คุณควรมีติดบ้าน</p>" +
+    "</div></section>" : "";
+
+  /* รางวัล & การรับรอง */
+  var secAwards = (p.awards && p.awards.length) ?
+    '<section class="section section--sand pdp-sec"><div class="wrap">' +
+      '<div class="sec-head"><span class="eyebrow">การันตีคุณภาพ</span><h2>รางวัลและการรับรองระดับสากล</h2>' +
+        "<p>นวัตกรรมที่ได้รับการยอมรับจากเวทีระดับโลก</p></div>" +
+      '<div class="award-grid">' + p.awards.map(function (a) {
+        return '<div class="award-item reveal"><div class="award-item__ico">🏅</div><b>' + A.esc(a.title) + "</b>" + (a.detail ? "<span>" + A.esc(a.detail) + "</span>" : "") + "</div>";
+      }).join("") + "</div></div></section>" : "";
+
+  /* รีวิวต่อสินค้า (ดึงจาก reviews.json ตามชื่อสินค้า) */
+  var normP = function (s) { return String(s || "").replace(/\s/g, "").toUpperCase(); };
+  var pReviews = (S.reviews || []).filter(function (r) { return normP(r.product) === normP(p.name); });
+  var secReviews = pReviews.length ?
+    '<section class="section pdp-sec"><div class="wrap">' +
+      '<div class="sec-head"><span class="eyebrow">เสียงจากผู้ใช้จริง</span><h2>ลูกค้าใช้ ' + A.esc(p.name) + " แล้วเป็นอย่างไร</h2></div>" +
+      '<div class="preview-grid">' + pReviews.map(function (r) {
+        return '<figure class="preview-card reveal">' +
+          (r.photo ? '<img src="' + A.esc(A.url(r.photo.replace(/^\//, ""))) + '" alt="' + A.esc(r.name) + '" loading="lazy">' : "") +
+          '<div class="preview-card__body"><div class="preview-card__stars">★★★★★</div>' +
+          "<blockquote>" + A.esc(r.text) + "</blockquote>" +
+          "<figcaption><b>" + A.esc(r.name) + "</b>" + (r.age ? " · อายุ " + A.esc(r.age) + " ปี" : "") + (r.duration ? " · ทาน " + A.esc(r.duration) : "") + "</figcaption></div>" +
+        "</figure>";
+      }).join("") + "</div></div></section>" : "";
+
   var secCta =
     '<section class="pdp-cta"><div class="wrap"><div class="pdp-cta__box">' +
       "<div><h2 style='margin:0 0 4px'>พร้อมเริ่มดูแลสุขภาพวันนี้</h2>" +
@@ -219,7 +254,18 @@ document.addEventListener("site:ready", function (e) {
   var disc =
     '<div class="wrap"><p class="pdp-disc">' + A.esc(S.site.disclaimer) + "</p></div>";
 
-  A.$("#pdpSections").innerHTML = secHero + secWho + secHl + secBanners + secIng + secHow + secTrust + secFaq + secCta + disc;
+  A.$("#pdpSections").innerHTML = secHero + secRisk + secWho + secHl + secAwards + secBanners + secIng + secHow + secTrust + secReviews + secFaq + secCta + disc;
+
+  /* ตัวนับเช็กลิสต์กลุ่มเสี่ยง — ครบ 3 ข้อ ไฮไลต์ */
+  var riskBoxes = A.$$(".pdp-sec--risk input[type=checkbox]");
+  if (riskBoxes.length) {
+    var riskNote = A.$("#riskNote");
+    var updRisk = function () {
+      var n = 0; riskBoxes.forEach(function (b) { if (b.checked) n++; });
+      if (riskNote) riskNote.classList.toggle("is-hot", n >= 3);
+    };
+    riskBoxes.forEach(function (b) { b.addEventListener("change", updRisk); });
+  }
 
   A.$("#ctaAdd").addEventListener("click", function () {
     A.addToCart(p.slug, selPack, qty);
