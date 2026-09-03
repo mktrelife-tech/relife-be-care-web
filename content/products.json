@@ -496,7 +496,7 @@
       ],
       "packs": [
         { "qty": 1, "price": 1490, "image": "assets/img/products/beta-life-balance-box.jpg" },
-        { "qty": 2, "price": 2790, "image": "assets/img/products/beta-life-balance-pack2.jpg" },
+        { "qty": 2, "price": 2490, "image": "assets/img/products/beta-life-balance-pack2.jpg" },
         { "qty": 3, "price": 3490, "image": "assets/img/products/beta-life-balance-pack3.jpg" },
         { "qty": 6, "price": 6490, "image": "assets/img/products/beta-life-balance-pack6.jpg" },
         { "qty": 9, "price": 8990, "image": "assets/img/products/beta-life-balance-pack9.jpg" }
@@ -547,7 +547,7 @@
       ],
       "packs": [
         { "qty": 1, "price": 1490, "image": "assets/img/products/lab-balance-box.jpg" },
-        { "qty": 2, "price": 2790, "image": "assets/img/products/lab-balance-pack2.jpg" },
+        { "qty": 2, "price": 2490, "image": "assets/img/products/lab-balance-pack2.jpg" },
         { "qty": 3, "price": 3490, "image": "assets/img/products/lab-balance-pack3.jpg" },
         { "qty": 6, "price": 6490, "image": "assets/img/products/lab-balance-pack6.jpg" },
         { "qty": 9, "price": 8990, "image": "assets/img/products/lab-balance-pack9.jpg" }
