@@ -1102,6 +1102,28 @@ table.compare tbody th { font-weight: 500; color: var(--ink-soft); }
 .trust-item b { display: block; font-size: 1rem; margin-bottom: 2px; }
 .trust-item span { font-size: .82rem; color: var(--ink-soft); }
 
+/* ===== ขัดหน้าสินค้าให้ punchy ขึ้น (แนว betahopeful) — คงโทนแบรนด์ ===== */
+/* หัวข้อ section ใหญ่ขึ้น + ขีดเน้นไล่สี */
+.pdp-sec .sec-head h2 { font-size: clamp(1.55rem, 4.4vw, 2.35rem); font-weight: 800; line-height: 1.2; letter-spacing: -.01em; }
+.pdp-sec .sec-head h2::after {
+  content: ""; display: block; width: 56px; height: 4px; border-radius: 4px;
+  margin: 14px auto 0; background: linear-gradient(90deg, var(--brand), var(--sage));
+}
+/* วงไอคอนเป็นไล่สี + เงานุ่ม ดูพรีเมียม */
+.who-list__ico { width: 30px; height: 30px; background: linear-gradient(135deg, var(--sage), var(--brand)); box-shadow: 0 5px 12px rgba(47,110,79,.28); }
+.hl-item__n { background: linear-gradient(135deg, var(--brand), var(--sage)); box-shadow: 0 5px 12px rgba(47,110,79,.28); }
+/* การ์ดยกตัวตอน hover ให้รู้สึกมีชีวิต */
+.who-list__item, .hl-item, .award-item, .preview-card, .trust-item { transition: transform .2s ease, box-shadow .2s ease; }
+.who-list__item:hover, .hl-item:hover, .award-item:hover, .trust-item:hover, .preview-card:hover { transform: translateY(-4px); box-shadow: var(--sh-md); }
+/* เช็กลิสต์กลุ่มเสี่ยง — แถบพื้นหลังโทนอุ่นเตือนภัยเบาๆ */
+.pdp-sec--risk { background: linear-gradient(180deg, #fff6f1, transparent); }
+.pdp-sec--risk .eyebrow { color: #b4531f; background: #ffe9dc; }
+/* เหรียญรางวัลเด่นขึ้น */
+.award-item__ico { filter: drop-shadow(0 5px 8px rgba(0,0,0,.16)); }
+/* บล็อกจุดเด่น: แถบเน้นซ้ายไล่สี (คงมุมโค้งไว้) */
+.hl-item { position: relative; overflow: hidden; }
+.hl-item::before { content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 4px; background: linear-gradient(180deg, var(--brand), var(--sage)); }
+
 .pdp-cta { padding-block: clamp(36px, 5vw, 56px); }
 .pdp-cta__box {
   background: linear-gradient(120deg, var(--brand), var(--brand-dark));
