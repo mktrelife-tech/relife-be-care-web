@@ -173,17 +173,7 @@ document.addEventListener("site:ready", function (e) {
         return (b && b.link) ? '<a href="' + A.esc(b.link) + '">' + img + "</a>" : img;
       }).join("") + "</div></div></section>";
   } else {
-    var slots = [
-      { t: "ภาพหัวเซลเพจ / ไลฟ์สไตล์", d: "ภาพสินค้าคู่ไลฟ์สไตล์ อารมณ์อบอุ่น (เลี่ยงคำเคลมโรค)" },
-      { t: "อินโฟกราฟิกส่วนผสม / จุดเด่น", d: "อธิบายส่วนผสมสำคัญแบบภาพ เข้าใจง่าย" },
-      { t: "ภาพรีวิว / ผลลัพธ์ผู้ใช้จริง", d: "แคปแชตหรือภาพรีวิว (เบลอชื่อ)" }
-    ];
-    secBanners = '<section class="section pdp-sec"><div class="wrap">' +
-      '<div class="sec-head"><span class="eyebrow">พื้นที่ใส่ภาพเซลเพจ</span><h2>เพิ่มแบนเนอร์ภาพได้ที่นี่</h2>' +
-        "<p>ทำภาพเต็มกว้าง (แนะนำกว้าง 1000px สูงได้ตามต้องการ) แล้วอัปโหลดในหลังบ้าน จะเรียงต่อกันแบบเซลเพจ</p></div>" +
-      '<div class="pdp-banners">' + slots.map(function (s) {
-        return '<div class="banner-ph"><b>🖼️ ' + A.esc(s.t) + "</b><span>" + A.esc(s.d) + "</span><small>กว้าง 1000px · .jpg/.png</small></div>";
-      }).join("") + "</div></div></section>";
+    secBanners = "";  /* ไม่มีแบนเนอร์ = ไม่แสดงอะไร (เลิกโชว์ช่อง placeholder ประๆ) */
   }
 
   var secIng = (p.ingredients && p.ingredients.length) ?
