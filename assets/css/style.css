@@ -1070,6 +1070,9 @@ table.compare tbody th { font-weight: 500; color: var(--ink-soft); }
 
 .pdp-banners { display: grid; gap: 16px; max-width: 900px; margin-inline: auto; }
 .pdp-banners img { width: 100%; height: auto; border-radius: var(--r-lg); display: block; box-shadow: var(--sh-sm); }
+/* เซลเพจแบบรูปนำ (imageLed) — คอลัมน์รูปแคบ อ่านลื่นเหมือนหน้ามือถือ */
+.pdp-banners--sale { max-width: 640px; gap: 12px; }
+.pdp--buyonly { grid-template-columns: 1fr; max-width: 560px; margin-inline: auto; }
 .banner-ph {
   border: 2px dashed var(--brand-light); border-radius: var(--r-lg);
   padding: 36px 22px; text-align: center; background: var(--brand-wash);

@@ -19,6 +19,7 @@ document.addEventListener("site:ready", function (e) {
   });
   document.head.appendChild(ld);
 
+  var imageLed = p.layout === "imageLed";  /* หน้าแบบรูปนำ (เซลเพจ) — ซ่อน gallery viewer + section ที่ซ้ำกับรูป */
   var imgs = (p.images && p.images.length) ? p.images : [];
   var mainImg = imgs.length
     ? '<img src="' + A.esc(A.url(imgs[0].replace(/^\//, ""))) + '" alt="' + A.esc(p.name) + '" id="mainImg">'
@@ -47,13 +48,16 @@ document.addEventListener("site:ready", function (e) {
       '<span class="pack__radio"></span></button>';
   }).join("") + "</div>";
 
-  A.$("#pdp").innerHTML =
+  if (imageLed) A.$("#pdp").classList.add("pdp--buyonly");
+  var galleryBlock = imageLed ? "" :
     "<div>" +
       '<div class="gallery__main">' + mainImg + "</div>" +
       '<div class="gallery__thumbs">' + thumbs + "</div>" +
       (imgs.length ? "" : '<p style="font-size:.82rem;color:var(--ink-faint);margin-top:12px">' +
         "📷 ต้องการรูป: รูปกล่องพื้นหลังขาว 1 รูป, รูปฉลากหลังอ่านออก 1 รูป, รูป lifestyle 2 รูป</p>") +
-    "</div>" +
+    "</div>";
+  A.$("#pdp").innerHTML =
+    galleryBlock +
     "<div>" +
       '<span class="eyebrow">เลือกแพ็ก &amp; สั่งซื้อ</span>' +
       "<h2 style='margin:10px 0 4px;font-size:clamp(1.4rem,3vw,1.9rem)'>" + A.esc(p.name) + "</h2>" +
@@ -130,7 +134,7 @@ document.addEventListener("site:ready", function (e) {
         "</div></div>" +
       "</div></section>";
 
-  var secWho = (p.forWhoList && p.forWhoList.length) ?
+  var secWho = imageLed ? "" : (p.forWhoList && p.forWhoList.length) ?
     '<section class="section pdp-sec pdp-sec--who"><div class="wrap" style="max-width:900px">' +
       '<div class="sec-head"><span class="eyebrow">เหมาะกับใคร</span><h2>' + A.esc(p.name) + " เหมาะกับใคร?</h2></div>" +
       '<div class="who-list">' + p.forWhoList.map(function (w) {
@@ -155,7 +159,14 @@ document.addEventListener("site:ready", function (e) {
 
   /* พื้นที่แบนเนอร์ภาพเซลเพจ (ใส่ภาพเต็มกว้างได้ไม่จำกัด) */
   var secBanners;
-  if (p.banners && p.banners.length) {
+  if (imageLed && imgs.length) {
+    /* เซลเพจแบบรูปนำ — เอารูปข้อมูล (g1-g7) มาเรียงเต็มกว้าง */
+    secBanners = '<section class="section pdp-sec"><div class="wrap">' +
+      '<div class="pdp-banners pdp-banners--sale">' +
+      imgs.map(function (src) {
+        return '<img src="' + A.esc(A.url(src.replace(/^\//, ""))) + '" alt="' + A.esc(p.name) + '" loading="lazy">';
+      }).join("") + "</div></div></section>";
+  } else if (p.banners && p.banners.length) {
     secBanners = '<section class="section pdp-sec"><div class="wrap"><div class="pdp-banners">' +
       p.banners.map(function (b) {
         var img = '<img src="' + A.esc(A.url(String(b.image || b).replace(/^\//, ""))) + '" alt="' + A.esc((b && b.alt) || p.name) + '" loading="lazy">';
@@ -225,7 +236,7 @@ document.addEventListener("site:ready", function (e) {
     "</div></section>" : "";
 
   /* รางวัล & การรับรอง */
-  var secAwards = (p.awards && p.awards.length) ?
+  var secAwards = imageLed ? "" : (p.awards && p.awards.length) ?
     '<section class="section section--sand pdp-sec"><div class="wrap">' +
       '<div class="sec-head"><span class="eyebrow">การันตีคุณภาพ</span><h2>รางวัลและการรับรองระดับสากล</h2>' +
         "<p>นวัตกรรมที่ได้รับการยอมรับจากเวทีระดับโลก</p></div>" +
@@ -262,7 +273,9 @@ document.addEventListener("site:ready", function (e) {
   var disc =
     '<div class="wrap"><p class="pdp-disc">' + A.esc(S.site.disclaimer) + "</p></div>";
 
-  A.$("#pdpSections").innerHTML = secHero + secRisk + secWho + secHl + secAwards + secBanners + secIng + secHow + secTrust + secReviews + secFaq + secCta + disc;
+  A.$("#pdpSections").innerHTML = imageLed
+    ? secHero + secRisk + secBanners + secHl + secIng + secHow + secTrust + secReviews + secFaq + secCta + disc
+    : secHero + secRisk + secWho + secHl + secAwards + secBanners + secIng + secHow + secTrust + secReviews + secFaq + secCta + disc;
 
   /* ตัวนับเช็กลิสต์กลุ่มเสี่ยง — ครบ 3 ข้อ ไฮไลต์ */
   var riskBoxes = A.$$(".pdp-sec--risk input[type=checkbox]");
