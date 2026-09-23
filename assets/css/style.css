@@ -1124,6 +1124,17 @@ table.compare tbody th { font-weight: 500; color: var(--ink-soft); }
 .hl-item { position: relative; overflow: hidden; }
 .hl-item::before { content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 4px; background: linear-gradient(180deg, var(--brand), var(--sage)); }
 
+/* ===== เซลเพจ: ช่วงเล่าเรื่อง (problem/urgency) + แถบตัวเลข social proof ===== */
+.pdp-sec--story { background: linear-gradient(180deg, #fff6f1, transparent); }
+.pdp-sec--story .eyebrow { color: #b4531f; background: #ffe9dc; }
+.story-lead { max-width: 60ch; margin: 0 auto; text-align: center; font-size: clamp(1rem, 2.6vw, 1.12rem); line-height: 1.75; color: var(--ink-soft); }
+.stat-band { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 16px; }
+.stat-item { text-align: center; background: var(--white); border: 1px solid rgba(59,50,43,.06); border-radius: var(--r-lg); padding: 26px 16px; box-shadow: var(--sh-sm); }
+.stat-item__num { font-family: "Prompt", sans-serif; font-weight: 700; font-size: clamp(1.7rem, 4vw, 2.2rem); color: var(--brand); line-height: 1.1; }
+.stat-item__label { color: var(--ink-soft); font-size: .92rem; margin-top: 6px; }
+.stat-item--ph { background: var(--brand-wash); border: 2px dashed var(--brand-light); box-shadow: none; }
+.stat-item--ph .stat-item__num { color: var(--brand-dark); font-size: 1rem; font-family: "IBM Plex Sans Thai", sans-serif; font-weight: 600; }
+
 .pdp-cta { padding-block: clamp(36px, 5vw, 56px); }
 .pdp-cta__box {
   background: linear-gradient(120deg, var(--brand), var(--brand-dark));

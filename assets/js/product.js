@@ -267,13 +267,33 @@ document.addEventListener("site:ready", function (e) {
       '<button class="btn btn--primary btn--lg" id="midBuy">🛒 สนใจแล้ว · ดูราคา &amp; สั่งซื้อ ↓</button>' +
     "</div></section>" : "";
 
+  /* ช่วงเล่าเรื่อง ปัญหา/ความเร่งด่วน (เฉพาะเซลเพจ) */
+  var secStory = (salepage && p.story && p.story.length) ?
+    p.story.map(function (s) {
+      return '<section class="section pdp-sec pdp-sec--story"><div class="wrap" style="max-width:720px">' +
+        '<div class="sec-head">' + (s.eyebrow ? '<span class="eyebrow">' + A.esc(s.eyebrow) + "</span>" : "") +
+        "<h2>" + A.esc(s.title) + "</h2></div>" +
+        '<p class="story-lead">' + A.esc(s.body) + "</p>" +
+      "</div></section>";
+    }).join("") : "";
+
+  /* แถบตัวเลข social proof — mock ไว้เป็นช่อง "รอตัวเลขจริง" (เฉพาะเซลเพจ) */
+  var secStats = (salepage && p.stats && p.stats.length) ?
+    '<section class="section section--sage pdp-sec"><div class="wrap">' +
+      '<div class="sec-head"><span class="eyebrow">ความไว้วางใจ</span><h2>ทำไมคนถึงเลือก ' + A.esc(p.name) + "</h2></div>" +
+      '<div class="stat-band">' + p.stats.map(function (st) {
+        return st.placeholder
+          ? '<div class="stat-item stat-item--ph"><div class="stat-item__num">🔧 รอตัวเลขจริง</div><div class="stat-item__label">' + A.esc(st.label) + "</div></div>"
+          : '<div class="stat-item"><div class="stat-item__num">' + A.esc(st.num) + '</div><div class="stat-item__label">' + A.esc(st.label) + "</div></div>";
+      }).join("") + "</div></div></section>" : "";
+
   var disc =
     '<div class="wrap"><p class="pdp-disc">' + A.esc(S.site.disclaimer) + "</p></div>";
 
   A.$("#pdpSections").innerHTML = imageLed
     ? secHero + secRisk + secBanners + secHl + secIng + secHow + secTrust + secReviews + secFaq + secCta + disc
     : salepage
-    ? secHero + secRisk + secHl + secWho + secMidCta + secIng + secHow + secAwards + secTrust + secReviews + secFaq + secCta + disc
+    ? secHero + secStory + secRisk + secHl + secWho + secMidCta + secIng + secHow + secAwards + secTrust + secStats + secReviews + secFaq + secCta + disc
     : secHero + secRisk + secWho + secHl + secAwards + secBanners + secIng + secHow + secTrust + secReviews + secFaq + secCta + disc;
 
   /* ตัวนับเช็กลิสต์กลุ่มเสี่ยง — ครบ 3 ข้อ ไฮไลต์ */
