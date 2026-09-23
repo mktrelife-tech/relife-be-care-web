@@ -62,7 +62,7 @@
     { href: "index.html", label: "หน้าแรก", ico: "🏠" },
     { label: "สินค้า", ico: "🛍️", sub: [
       { href: "shop.html",    ico: "🧴", label: "สินค้าทั้งหมด",     desc: "ดูครบทุกรายการพร้อมราคา" },
-      { href: "compare.html", ico: "⚖️", label: "เปรียบเทียบสินค้า", desc: "เทียบทุกตัวในตารางเดียว" },
+      { href: "compare.html", ico: "🎯", label: "เลือกตามเป้าหมาย", desc: "เลือกสินค้าตามเรื่องที่อยากดูแล" },
       { href: "quiz.html",    ico: "🧭", label: "ตัวไหนเหมาะกับคุณ", desc: "ตอบ 5 ข้อ ใช้เวลา 1 นาที" }
     ] },
     { href: "articles.html", label: "บทความ", ico: "📖" },
@@ -205,7 +205,7 @@
             '<li><a href="' + url("order.html") + '">เช็คสถานะออเดอร์</a></li>' +
             '<li><a href="' + url("consult.html") + '">นัดปรึกษาผู้เชี่ยวชาญ</a></li>' +
             '<li><a href="' + url("articles.html") + '">บทความสุขภาพ</a></li>' +
-            '<li><a href="' + url("compare.html") + '">เปรียบเทียบสินค้า</a></li>' +
+            '<li><a href="' + url("compare.html") + '">เลือกตามเป้าหมาย</a></li>' +
             '<li><a href="' + url("policy.html") + '">การจัดส่ง &amp; การคืนสินค้า</a></li>' +
             '<li><a href="' + url("policy.html") + '#privacy">นโยบายความเป็นส่วนตัว</a></li>' +
           "</ul></div>" +
