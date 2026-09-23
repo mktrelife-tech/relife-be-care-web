@@ -2,6 +2,7 @@
   "products": [
     {
       "slug": "beta-oil",
+      "layout": "salepage",
       "header": "assets/img/headers/beta-oil.jpg?v=2",
       "riskChecklist": {
         "title": "คุณใช่คนที่ควรเริ่มดูแลไขมันไหม?",

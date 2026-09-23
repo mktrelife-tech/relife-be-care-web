@@ -20,6 +20,7 @@ document.addEventListener("site:ready", function (e) {
   document.head.appendChild(ld);
 
   var imageLed = p.layout === "imageLed";  /* หน้าแบบรูปนำ (เซลเพจ) — ซ่อน gallery viewer + section ที่ซ้ำกับรูป */
+  var salepage = p.layout === "salepage";  /* ฟีลเซลเพจ: จัดลำดับเล่าเรื่องขายของ + CTA กลางหน้า + ย้ายกล่องซื้อไว้หลังรีวิว */
   var imgs = (p.images && p.images.length) ? p.images : [];
   var mainImg = imgs.length
     ? '<img src="' + A.esc(A.url(imgs[0].replace(/^\//, ""))) + '" alt="' + A.esc(p.name) + '" id="mainImg">'
@@ -260,11 +261,19 @@ document.addEventListener("site:ready", function (e) {
       "</div>" +
     "</div></div></section>";
 
+  /* CTA แทรกกลางหน้า (เฉพาะโหมดเซลเพจ) */
+  var secMidCta = salepage ?
+    '<section class="pdp-sec" style="padding-block:4px"><div class="wrap center">' +
+      '<button class="btn btn--primary btn--lg" id="midBuy">🛒 สนใจแล้ว · ดูราคา &amp; สั่งซื้อ ↓</button>' +
+    "</div></section>" : "";
+
   var disc =
     '<div class="wrap"><p class="pdp-disc">' + A.esc(S.site.disclaimer) + "</p></div>";
 
   A.$("#pdpSections").innerHTML = imageLed
     ? secHero + secRisk + secBanners + secHl + secIng + secHow + secTrust + secReviews + secFaq + secCta + disc
+    : salepage
+    ? secHero + secRisk + secHl + secWho + secMidCta + secIng + secHow + secAwards + secTrust + secReviews + secFaq + secCta + disc
     : secHero + secRisk + secWho + secHl + secAwards + secBanners + secIng + secHow + secTrust + secReviews + secFaq + secCta + disc;
 
   /* ตัวนับเช็กลิสต์กลุ่มเสี่ยง — ครบ 3 ข้อ ไฮไลต์ */
@@ -281,19 +290,27 @@ document.addEventListener("site:ready", function (e) {
   A.$("#ctaAdd").addEventListener("click", function () {
     A.addToCart(p.slug, selPack, qty);
   });
-  /* ปุ่มในแบนเนอร์ → เลื่อนไปส่วนซื้อ */
-  A.$("#heroBuy").addEventListener("click", function () {
+  /* ปุ่ม CTA (หัวหน้า + กลางหน้า) → เลื่อนไปส่วนซื้อ */
+  var scrollToBuy = function () {
     var b = A.$("#pdp").closest("section");
     if (b) b.scrollIntoView({ behavior: "smooth", block: "start" });
-  });
+  };
+  A.$("#heroBuy").addEventListener("click", scrollToBuy);
+  var midBuyBtn = A.$("#midBuy");
+  if (midBuyBtn) midBuyBtn.addEventListener("click", scrollToBuy);
 
-  /* ย้ายส่วนซื้อ (รูป + เลือกแพ็ก) ลงไปหลังโซน "ความมั่นใจ" — โครงเซลเพจ */
+  /* ย้ายส่วนซื้อ (รูป + เลือกแพ็ก) — เซลเพจ: หลังรีวิว (หลักฐาน→ข้อเสนอ), ปกติ: หลังโซนความมั่นใจ */
   var buySection = A.$("#pdp").closest("section");
-  var trustSection = null;
-  A.$$("#pdpSections section").forEach(function (sec) { if (sec.querySelector(".trust-grid")) trustSection = sec; });
-  if (buySection && trustSection) {
+  var anchorSection = null;
+  if (salepage) {
+    A.$$("#pdpSections section").forEach(function (sec) { if (sec.querySelector(".preview-grid")) anchorSection = sec; });
+  }
+  if (!anchorSection) {
+    A.$$("#pdpSections section").forEach(function (sec) { if (sec.querySelector(".trust-grid")) anchorSection = sec; });
+  }
+  if (buySection && anchorSection) {
     buySection.classList.add("section--sand");
-    trustSection.after(buySection);
+    anchorSection.after(buySection);
   }
 
   /* สินค้าอื่น */
