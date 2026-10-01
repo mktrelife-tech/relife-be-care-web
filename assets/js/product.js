@@ -21,6 +21,7 @@ document.addEventListener("site:ready", function (e) {
 
   var imageLed = p.layout === "imageLed";  /* หน้าแบบรูปนำ (เซลเพจ) — ซ่อน gallery viewer + section ที่ซ้ำกับรูป */
   var salepage = p.layout === "salepage";  /* ฟีลเซลเพจ: จัดลำดับเล่าเรื่องขายของ + CTA กลางหน้า + ย้ายกล่องซื้อไว้หลังรีวิว */
+  var salepageImg = p.layout === "salepageImg";  /* เซลเพจภาพ: วางภาพดีไซน์เต็มกว้าง (banners) + รูปรีวิว ซ่อน section ตัวหนังสือที่ซ้ำ */
   var imgs = (p.images && p.images.length) ? p.images : [];
   var mainImg = imgs.length
     ? '<img src="' + A.esc(A.url(imgs[0].replace(/^\//, ""))) + '" alt="' + A.esc(p.name) + '" id="mainImg">'
@@ -49,8 +50,8 @@ document.addEventListener("site:ready", function (e) {
       '<span class="pack__radio"></span></button>';
   }).join("") + "</div>";
 
-  if (imageLed) A.$("#pdp").classList.add("pdp--buyonly");
-  var galleryBlock = imageLed ? "" :
+  if (imageLed || salepageImg) A.$("#pdp").classList.add("pdp--buyonly");
+  var galleryBlock = (imageLed || salepageImg) ? "" :
     "<div>" +
       '<div class="gallery__main">' + mainImg + "</div>" +
       '<div class="gallery__thumbs">' + thumbs + "</div>" +
@@ -123,7 +124,9 @@ document.addEventListener("site:ready", function (e) {
         '<a class="btn btn--line btn--lg" href="' + lineUrl + '" target="_blank" rel="noopener">สอบถาม</a>' +
       "</div>" +
     "</div>";
-  var secHero = headerImg
+  var secHero = (salepage || salepageImg)
+    ? '<section class="pdp-hero"><div class="wrap">' + heroText + "</div></section>"  /* เซลเพจ: hero ข้อความล้วน (ไม่มีแบนเนอร์ header) */
+    : headerImg
     ? '<section class="pdp-hero pdp-hero--bg">' +
         '<div class="pdp-hero__bg"><img src="' + headerImg + '" alt="' + A.esc(p.name) + '"></div>' +
         '<div class="wrap pdp-hero__inner">' + heroText + "</div>" +
@@ -135,7 +138,7 @@ document.addEventListener("site:ready", function (e) {
         "</div></div>" +
       "</div></section>";
 
-  var secWho = imageLed ? "" : (p.forWhoList && p.forWhoList.length) ?
+  var secWho = (imageLed || salepageImg) ? "" : (p.forWhoList && p.forWhoList.length) ?
     '<section class="section pdp-sec pdp-sec--who"><div class="wrap" style="max-width:900px">' +
       '<div class="sec-head"><span class="eyebrow">เหมาะกับใคร</span><h2>' + A.esc(p.name) + " เหมาะกับใคร?</h2></div>" +
       '<div class="who-list">' + p.forWhoList.map(function (w) {
@@ -148,7 +151,7 @@ document.addEventListener("site:ready", function (e) {
         '<a class="btn btn--ghost btn--sm" href="' + A.url("quiz.html") + '">ยังไม่แน่ใจ? ทำแบบประเมิน 1 นาที →</a>' +
       "</div></div></div></section>";
 
-  var secHl = (p.highlights && p.highlights.length) ?
+  var secHl = salepageImg ? "" : (p.highlights && p.highlights.length) ?
     '<section class="section pdp-sec"><div class="wrap">' +
       '<div class="sec-head"><span class="eyebrow">จุดเด่น</span><h2>ทำไมถึงเลือก ' + A.esc(p.name) + "</h2></div>" +
       '<div class="hl-grid">' + p.highlights.map(function (h, i) {
@@ -168,7 +171,8 @@ document.addEventListener("site:ready", function (e) {
         return '<img src="' + A.esc(A.url(src.replace(/^\//, ""))) + '" alt="' + A.esc(p.name) + '" loading="lazy">';
       }).join("") + "</div></div></section>";
   } else if (p.banners && p.banners.length) {
-    secBanners = '<section class="section pdp-sec"><div class="wrap"><div class="pdp-banners">' +
+    var bnSale = (salepage || salepageImg) ? " pdp-banners--sale" : "";
+    secBanners = '<section class="section pdp-sec"><div class="wrap"><div class="pdp-banners' + bnSale + '">' +
       p.banners.map(function (b) {
         var img = '<img src="' + A.esc(A.url(String(b.image || b).replace(/^\//, ""))) + '" alt="' + A.esc((b && b.alt) || p.name) + '" loading="lazy">';
         return (b && b.link) ? '<a href="' + A.esc(b.link) + '">' + img + "</a>" : img;
@@ -177,7 +181,25 @@ document.addEventListener("site:ready", function (e) {
     secBanners = "";  /* ไม่มีแบนเนอร์ = ไม่แสดงอะไร (เลิกโชว์ช่อง placeholder ประๆ) */
   }
 
-  var secIng = (p.ingredients && p.ingredients.length) ?
+  /* รูปรีวิว (การ์ดดีไซน์) สำหรับเซลเพจภาพ */
+  var secReviewImages = ((salepageImg || salepage) && p.reviewImages && p.reviewImages.length) ?
+    '<section class="section pdp-sec pdp-reviews-img"><div class="wrap">' +
+      '<div class="sec-head"><span class="eyebrow">เสียงจากผู้ใช้จริง</span><h2>รีวิวลูกค้า ' + A.esc(p.name) + "</h2></div>" +
+      '<div class="pdp-banners pdp-banners--sale">' +
+      p.reviewImages.map(function (src) {
+        return '<img src="' + A.esc(A.url(String(src).replace(/^\//, ""))) + '" alt="รีวิว ' + A.esc(p.name) + '" loading="lazy">';
+      }).join("") + "</div></div></section>" : "";
+
+  /* วิดีโอรีวิว (ฝัง YouTube) */
+  var secReviewVideos = ((salepage || salepageImg) && p.reviewVideos && p.reviewVideos.length) ?
+    '<section class="section pdp-sec"><div class="wrap">' +
+      '<div class="sec-head"><span class="eyebrow">วิดีโอรีวิว</span><h2>ดูรีวิว ' + A.esc(p.name) + " จากผู้ใช้จริง</h2></div>" +
+      '<div class="pdp-videos">' + p.reviewVideos.map(function (vid) {
+        var id = A.esc(String(vid));
+        return '<div class="video-embed"><iframe src="https://www.youtube-nocookie.com/embed/' + id + '" title="วิดีโอรีวิว ' + A.esc(p.name) + '" loading="lazy" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>';
+      }).join("") + "</div></div></section>" : "";
+
+  var secIng = salepageImg ? "" : (p.ingredients && p.ingredients.length) ?
     '<section class="section section--sand pdp-sec"><div class="wrap" style="max-width:760px">' +
       '<div class="sec-head"><span class="eyebrow">ส่วนประกอบสำคัญ</span><h2>ในทุกแคปซูล</h2>' +
         "<p>เราแสดงส่วนผสมและปริมาณจริงตามฉลาก ไม่มีปิดบัง</p></div>" +
@@ -187,7 +209,7 @@ document.addEventListener("site:ready", function (e) {
       "<p style='font-size:.85rem;color:var(--ink-faint);margin-top:14px;text-align:center'>ข้อมูลตามที่ระบุบนฉลากผลิตภัณฑ์ · ปริมาณต่อ 1 หน่วยบริโภค</p>" +
     "</div></section>" : "";
 
-  var secHow =
+  var secHow = salepageImg ? "" :
     '<section class="section pdp-sec"><div class="wrap" style="max-width:720px">' +
       '<div class="sec-head"><span class="eyebrow">วิธีรับประทาน &amp; ข้อควรระวัง</span></div>' +
       '<div class="howto-card"><span style="font-size:1.6rem">💊</span><div><b>วิธีรับประทาน</b><br>' + A.esc(p.howto) + "</div></div>" +
@@ -201,7 +223,7 @@ document.addEventListener("site:ready", function (e) {
     { i: "🪪", t: "ตัวแทนจำหน่ายแท้", d: "รหัส " + (biz.distributorId || "VIP0083") },
     { i: "🚚", t: "ส่งฟรี + ปลายทาง", d: "ผ่อน 0% ได้" }
   ];
-  var secTrust =
+  var secTrust = salepageImg ? "" :
     '<section class="section section--sage pdp-sec"><div class="wrap">' +
       '<div class="sec-head"><span class="eyebrow">ความมั่นใจ</span><h2>ตรวจสอบได้ทุกอย่าง</h2></div>' +
       '<div class="trust-grid">' + trust.map(function (t) {
@@ -216,7 +238,7 @@ document.addEventListener("site:ready", function (e) {
       }).join("") + "</div></div></section>" : "";
 
   /* เช็กลิสต์กลุ่มเสี่ยง (hook) */
-  var secRisk = (p.riskChecklist && p.riskChecklist.items && p.riskChecklist.items.length) ?
+  var secRisk = salepageImg ? "" : (p.riskChecklist && p.riskChecklist.items && p.riskChecklist.items.length) ?
     '<section class="section pdp-sec pdp-sec--risk"><div class="wrap" style="max-width:880px">' +
       '<div class="sec-head"><span class="eyebrow">เช็กด่วน 30 วินาที</span><h2>' + A.esc(p.riskChecklist.title || "คุณใช่กลุ่มที่ควรดูแลไหม?") + "</h2>" +
         (p.riskChecklist.intro ? "<p>" + A.esc(p.riskChecklist.intro) + "</p>" : "") + "</div>" +
@@ -261,8 +283,19 @@ document.addEventListener("site:ready", function (e) {
       "</div>" +
     "</div></div></section>";
 
+  /* แทรกภาพดีไซน์ต่อท้าย section ตัวหนังสือ (โหมด salepage) — เก็บตัวอักษรไว้เพื่อ SEO */
+  var imgFor = function (key) {
+    var si = p.sectionImages || {};
+    if (!si[key]) return "";
+    return '<section class="section pdp-sec" style="padding-block:6px"><div class="wrap"><div class="pdp-banners pdp-banners--sale">' +
+      '<img src="' + A.esc(A.url(String(si[key]).replace(/^\//, ""))) + '" alt="' + A.esc(p.name) + '" loading="lazy"></div></div></section>';
+  };
+
+  /* H1 ซ่อนไว้เพื่อ SEO เมื่อใช้เซลเพจภาพ (ไม่มี hero ตัวหนังสือ) */
+  var secH1 = (salepage || salepageImg) ? '<h1 style="position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0">' + A.esc(p.name) + " " + A.esc(p.tagline) + "</h1>" : "";
+
   /* CTA แทรกกลางหน้า (เฉพาะโหมดเซลเพจ) */
-  var secMidCta = salepage ?
+  var secMidCta = (salepage || salepageImg) ?
     '<section class="pdp-sec" style="padding-block:4px"><div class="wrap center">' +
       '<button class="btn btn--primary btn--lg" id="midBuy">🛒 สนใจแล้ว · ดูราคา &amp; สั่งซื้อ ↓</button>' +
     "</div></section>" : "";
@@ -278,7 +311,7 @@ document.addEventListener("site:ready", function (e) {
     }).join("") : "";
 
   /* แถบตัวเลข social proof — mock ไว้เป็นช่อง "รอตัวเลขจริง" (เฉพาะเซลเพจ) */
-  var secStats = (salepage && p.stats && p.stats.length) ?
+  var secStats = ((salepage || salepageImg) && p.stats && p.stats.length) ?
     '<section class="section section--sage pdp-sec"><div class="wrap">' +
       '<div class="sec-head"><span class="eyebrow">ความไว้วางใจ</span><h2>ทำไมคนถึงเลือก ' + A.esc(p.name) + "</h2></div>" +
       '<div class="stat-band">' + p.stats.map(function (st) {
@@ -290,10 +323,12 @@ document.addEventListener("site:ready", function (e) {
   var disc =
     '<div class="wrap"><p class="pdp-disc">' + A.esc(S.site.disclaimer) + "</p></div>";
 
-  A.$("#pdpSections").innerHTML = imageLed
+  A.$("#pdpSections").innerHTML = salepageImg
+    ? secH1 + secBanners + secMidCta + secReviewVideos + secReviewImages + secFaq + secCta + disc
+    : imageLed
     ? secHero + secRisk + secBanners + secHl + secIng + secHow + secTrust + secReviews + secFaq + secCta + disc
     : salepage
-    ? secHero + secStory + secRisk + secHl + secWho + secMidCta + secIng + secHow + secAwards + secTrust + secStats + secReviews + secFaq + secCta + disc
+    ? secH1 + imgFor("hero") + secStory + imgFor("risk") + secRisk + secHl + imgFor("who") + secWho + secMidCta + imgFor("ingredients") + secIng + imgFor("howto") + secHow + imgFor("awards") + secAwards + imgFor("trust") + secTrust + secReviewVideos + secReviewImages + secReviews + secFaq + secCta + disc
     : secHero + secRisk + secWho + secHl + secAwards + secBanners + secIng + secHow + secTrust + secReviews + secFaq + secCta + disc;
 
   /* ตัวนับเช็กลิสต์กลุ่มเสี่ยง — ครบ 3 ข้อ ไฮไลต์ */
@@ -315,15 +350,19 @@ document.addEventListener("site:ready", function (e) {
     var b = A.$("#pdp").closest("section");
     if (b) b.scrollIntoView({ behavior: "smooth", block: "start" });
   };
-  A.$("#heroBuy").addEventListener("click", scrollToBuy);
+  var heroBuyBtn = A.$("#heroBuy");
+  if (heroBuyBtn) heroBuyBtn.addEventListener("click", scrollToBuy);
   var midBuyBtn = A.$("#midBuy");
   if (midBuyBtn) midBuyBtn.addEventListener("click", scrollToBuy);
 
-  /* ย้ายส่วนซื้อ (รูป + เลือกแพ็ก) — เซลเพจ: หลังรีวิว (หลักฐาน→ข้อเสนอ), ปกติ: หลังโซนความมั่นใจ */
+  /* ย้ายส่วนซื้อ (รูป + เลือกแพ็ก) — เซลเพจภาพ: หลังรูปรีวิว · เซลเพจ: หลังรีวิว · ปกติ: หลังโซนความมั่นใจ */
   var buySection = A.$("#pdp").closest("section");
   var anchorSection = null;
   if (salepage) {
     A.$$("#pdpSections section").forEach(function (sec) { if (sec.querySelector(".preview-grid")) anchorSection = sec; });
+  }
+  if (!anchorSection && (salepageImg || salepage)) {
+    A.$$("#pdpSections section").forEach(function (sec) { if (sec.classList.contains("pdp-reviews-img")) anchorSection = sec; });
   }
   if (!anchorSection) {
     A.$$("#pdpSections section").forEach(function (sec) { if (sec.querySelector(".trust-grid")) anchorSection = sec; });
