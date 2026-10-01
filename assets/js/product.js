@@ -328,7 +328,7 @@ document.addEventListener("site:ready", function (e) {
     : imageLed
     ? secHero + secRisk + secBanners + secHl + secIng + secHow + secTrust + secReviews + secFaq + secCta + disc
     : salepage
-    ? secH1 + imgFor("hero") + secStory + imgFor("risk") + secRisk + secHl + imgFor("who") + secWho + secMidCta + imgFor("ingredients") + secIng + imgFor("howto") + secHow + imgFor("awards") + secAwards + imgFor("trust") + secTrust + secReviewVideos + secReviewImages + secReviews + secFaq + secCta + disc
+    ? secH1 + imgFor("hero") + secStory + imgFor("risk") + secRisk + imgFor("highlights") + secHl + imgFor("who") + secWho + secMidCta + imgFor("ingredients") + secIng + imgFor("howto") + secHow + imgFor("awards") + secAwards + imgFor("trust") + secTrust + secReviewVideos + secReviewImages + secReviews + secFaq + secCta + disc
     : secHero + secRisk + secWho + secHl + secAwards + secBanners + secIng + secHow + secTrust + secReviews + secFaq + secCta + disc;
 
   /* ตัวนับเช็กลิสต์กลุ่มเสี่ยง — ครบ 3 ข้อ ไฮไลต์ */
