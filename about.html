@@ -83,7 +83,7 @@
 document.addEventListener("site:ready", function (e) {
   var s = e.detail.site, A = window.App;
   A.$("#verify").innerHTML =
-    '<div class="verify__seal">🛡️</div><div><h3 style="margin:0">' + A.esc(s.business.legalName) + "</h3><dl>" +
+    '<div class="verify__seal"><img src="assets/img/logo-mark.png" alt="RELIFE BE CARE" style="width:62px;height:62px;object-fit:contain"></div><div><h3 style="margin:0">' + A.esc(s.business.legalName) + "</h3><dl>" +
       "<div><dt>เลขผู้เสียภาษี</dt><dd>" + A.esc(s.business.taxId) + "</dd></div>" +
       "<div><dt>ที่ตั้ง</dt><dd style='white-space:pre-line'>" + A.esc(s.contact.address) + "</dd></div>" +
     "</dl></div>";
