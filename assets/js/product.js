@@ -20,7 +20,8 @@ document.addEventListener("site:ready", function (e) {
   document.head.appendChild(ld);
 
   var imageLed = p.layout === "imageLed";  /* หน้าแบบรูปนำ (เซลเพจ) — ซ่อน gallery viewer + section ที่ซ้ำกับรูป */
-  var salepage = p.layout === "salepage";  /* ฟีลเซลเพจ: จัดลำดับเล่าเรื่องขายของ + CTA กลางหน้า + ย้ายกล่องซื้อไว้หลังรีวิว */
+  var salepageTpl = p.layout === "salepageTemplate";  /* เทมเพลตเซลเพจ: โชว์กรอบบอกว่าแต่ละจุดต้องใส่ภาพอะไร (ยังไม่มีภาพจริง) */
+  var salepage = p.layout === "salepage" || salepageTpl;  /* ฟีลเซลเพจ: จัดลำดับเล่าเรื่องขายของ + CTA กลางหน้า + ย้ายกล่องซื้อไว้หลังรีวิว */
   var salepageImg = p.layout === "salepageImg";  /* เซลเพจภาพ: วางภาพดีไซน์เต็มกว้าง (banners) + รูปรีวิว ซ่อน section ตัวหนังสือที่ซ้ำ */
   var imgs = (p.images && p.images.length) ? p.images : [];
   var mainImg = imgs.length
@@ -188,7 +189,11 @@ document.addEventListener("site:ready", function (e) {
       '<div class="pdp-banners pdp-banners--sale">' +
       p.reviewImages.map(function (src) {
         return '<img src="' + A.esc(A.url(String(src).replace(/^\//, ""))) + '" alt="รีวิว ' + A.esc(p.name) + '" loading="lazy">';
-      }).join("") + "</div></div></section>" : "";
+      }).join("") + "</div></div></section>"
+    : salepageTpl ?
+      '<section class="section pdp-sec pdp-reviews-img"><div class="wrap" style="max-width:640px">' +
+        '<div class="sec-head"><span class="eyebrow">เสียงจากผู้ใช้จริง</span><h2>รูปรีวิวลูกค้า</h2></div>' +
+        '<div class="banner-ph"><b>🖼️ รูปรีวิวลูกค้า (แคปแชต / รูปถือสินค้า)</b><small>แนะนำ 4-6 ใบ · จัตุรัส 1080px หรือ 4:3</small></div></div></section>' : "";
 
   /* วิดีโอรีวิว (ฝัง YouTube) */
   var secReviewVideos = ((salepage || salepageImg) && p.reviewVideos && p.reviewVideos.length) ?
@@ -197,7 +202,11 @@ document.addEventListener("site:ready", function (e) {
       '<div class="pdp-videos">' + p.reviewVideos.map(function (vid) {
         var id = A.esc(String(vid));
         return '<div class="video-embed"><iframe src="https://www.youtube-nocookie.com/embed/' + id + '" title="วิดีโอรีวิว ' + A.esc(p.name) + '" loading="lazy" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>';
-      }).join("") + "</div></div></section>" : "";
+      }).join("") + "</div></div></section>"
+    : salepageTpl ?
+      '<section class="section pdp-sec"><div class="wrap" style="max-width:640px">' +
+        '<div class="sec-head"><span class="eyebrow">วิดีโอรีวิว</span><h2>วิดีโอรีวิว</h2></div>' +
+        '<div class="banner-ph"><b>🎬 วิดีโอรีวิว (ลิงก์ YouTube)</b><small>1-2 คลิป · ส่งลิงก์ youtu.be มาได้เลย</small></div></div></section>' : "";
 
   var secIng = salepageImg ? "" : (p.ingredients && p.ingredients.length) ?
     '<section class="section section--sand pdp-sec"><div class="wrap" style="max-width:760px">' +
@@ -284,11 +293,27 @@ document.addEventListener("site:ready", function (e) {
     "</div></div></section>";
 
   /* แทรกภาพดีไซน์ต่อท้าย section ตัวหนังสือ (โหมด salepage) — เก็บตัวอักษรไว้เพื่อ SEO */
+  var SLOT_LABELS = {
+    hero: "ภาพ Hero (เปิดหน้า) — กระแทกปัญหา/ความกลัว + สินค้า",
+    risk: "ภาพความเสี่ยง/ผลกระทบ ถ้าปล่อยไว้",
+    highlights: "ภาพจุดเด่น ทำไมต้องเลือก (ข้อดี 5-6 ข้อ)",
+    who: "ภาพเหมาะกับใคร (กลุ่มเป้าหมาย)",
+    ingredients: "ภาพส่วนผสมสำคัญ + เลข อย.",
+    howto: "ภาพวิธีรับประทาน",
+    awards: "ภาพรางวัล / การรับรอง",
+    trust: "ภาพ อย. ตรวจสอบได้"
+  };
   var imgFor = function (key) {
     var si = p.sectionImages || {};
-    if (!si[key]) return "";
-    return '<section class="section pdp-sec" style="padding-block:6px"><div class="wrap"><div class="pdp-banners pdp-banners--sale">' +
-      '<img src="' + A.esc(A.url(String(si[key]).replace(/^\//, ""))) + '" alt="' + A.esc(p.name) + '" loading="lazy"></div></div></section>';
+    if (si[key]) {
+      return '<section class="section pdp-sec" style="padding-block:6px"><div class="wrap"><div class="pdp-banners pdp-banners--sale">' +
+        '<img src="' + A.esc(A.url(String(si[key]).replace(/^\//, ""))) + '" alt="' + A.esc(p.name) + '" loading="lazy"></div></div></section>';
+    }
+    if (salepageTpl) {  /* โชว์กรอบบอกตำแหน่งภาพ */
+      return '<section class="section pdp-sec" style="padding-block:6px"><div class="wrap" style="max-width:640px">' +
+        '<div class="banner-ph"><b>🖼️ ' + A.esc(SLOT_LABELS[key] || key) + "</b><small>จัตุรัส 1080×1080px · .jpg</small></div></div></section>";
+    }
+    return "";
   };
 
   /* H1 ซ่อนไว้เพื่อ SEO เมื่อใช้เซลเพจภาพ (ไม่มี hero ตัวหนังสือ) */
@@ -328,7 +353,7 @@ document.addEventListener("site:ready", function (e) {
     : imageLed
     ? secHero + secRisk + secBanners + secHl + secIng + secHow + secTrust + secReviews + secFaq + secCta + disc
     : salepage
-    ? secH1 + imgFor("hero") + secStory + imgFor("risk") + secRisk + imgFor("highlights") + secHl + imgFor("who") + secWho + secMidCta + imgFor("ingredients") + secIng + imgFor("howto") + secHow + imgFor("awards") + secAwards + imgFor("trust") + secTrust + secReviewVideos + secReviewImages + secReviews + secFaq + secCta + disc
+    ? secH1 + imgFor("hero") + secReviewVideos + secReviewImages + secReviews + secStory + imgFor("risk") + secRisk + imgFor("highlights") + secHl + imgFor("who") + secWho + secMidCta + imgFor("ingredients") + secIng + imgFor("howto") + secHow + imgFor("awards") + secAwards + imgFor("trust") + secTrust + secFaq + secCta + disc
     : secHero + secRisk + secWho + secHl + secAwards + secBanners + secIng + secHow + secTrust + secReviews + secFaq + secCta + disc;
 
   /* ตัวนับเช็กลิสต์กลุ่มเสี่ยง — ครบ 3 ข้อ ไฮไลต์ */
@@ -358,10 +383,8 @@ document.addEventListener("site:ready", function (e) {
   /* ย้ายส่วนซื้อ (รูป + เลือกแพ็ก) — เซลเพจภาพ: หลังรูปรีวิว · เซลเพจ: หลังรีวิว · ปกติ: หลังโซนความมั่นใจ */
   var buySection = A.$("#pdp").closest("section");
   var anchorSection = null;
-  if (salepage) {
-    A.$$("#pdpSections section").forEach(function (sec) { if (sec.querySelector(".preview-grid")) anchorSection = sec; });
-  }
-  if (!anchorSection && (salepageImg || salepage)) {
+  /* เซลเพจ: รีวิวย้ายขึ้นบนแล้ว → ผูกกล่องซื้อไว้หลัง "ความมั่นใจ" (ท้ายเนื้อหา) */
+  if (salepageImg) {
     A.$$("#pdpSections section").forEach(function (sec) { if (sec.classList.contains("pdp-reviews-img")) anchorSection = sec; });
   }
   if (!anchorSection) {

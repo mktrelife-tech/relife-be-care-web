@@ -357,6 +357,24 @@
     },
     {
       "slug": "lab-farm",
+      "layout": "salepage",
+      "sectionImages": {
+        "hero": "assets/img/salepage/lab-farm-01.jpg",
+        "risk": "assets/img/salepage/lab-farm-02.jpg",
+        "highlights": "assets/img/salepage/lab-farm-03.jpg",
+        "who": "assets/img/salepage/lab-farm-04.jpg",
+        "ingredients": "assets/img/salepage/lab-farm-05.jpg",
+        "howto": "assets/img/salepage/lab-farm-06.jpg",
+        "awards": "assets/img/salepage/lab-farm-07.jpg",
+        "trust": "assets/img/salepage/lab-farm-08.jpg"
+      },
+      "reviewVideos": ["0QFbejwTnb8", "tdhgVDu7TFw"],
+      "reviewImages": [
+        "assets/img/reviews/lab-farm-rv1.jpg",
+        "assets/img/reviews/lab-farm-rv2.jpg",
+        "assets/img/reviews/lab-farm-rv3.jpg",
+        "assets/img/reviews/lab-farm-rv4.jpg"
+      ],
       "story": [
         {
           "eyebrow": "⚠️ ร่างกายอ่อนล้าสะสม",
