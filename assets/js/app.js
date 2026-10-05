@@ -450,7 +450,7 @@
   /* ---------- Product card ---------- */
   function productCard(p) {
     const badge = p.badge
-      ? '<span class="card__tag' + (p.badgeStyle === "sage" ? " card__tag--sage" : "") + '">' + esc(p.badge) + "</span>"
+      ? '<span class="card__tag' + (p.badgeStyle === "sage" ? " card__tag--sage" : "") + '"' + (p.badgeColor ? ' style="background:' + esc(p.badgeColor) + ';color:#fff"' : "") + ">" + esc(p.badge) + "</span>"
       : "";
     const was = p.priceWas && p.priceWas > p.price
       ? '<span class="price__was">฿' + baht(p.priceWas) + "</span>" : "";
