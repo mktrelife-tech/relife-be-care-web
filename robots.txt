@@ -2,5 +2,7 @@ User-agent: *
 Allow: /
 Disallow: /admin/
 Disallow: /content/orders.json
+Disallow: /checkout.html
+Disallow: /thankyou.html
 
-Sitemap: https://example.co.th/sitemap.xml
+Sitemap: https://www.hopefulrelife.com/sitemap.xml

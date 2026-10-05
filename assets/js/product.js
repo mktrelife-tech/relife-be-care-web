@@ -9,15 +9,32 @@ document.addEventListener("site:ready", function (e) {
   var md = document.querySelector('meta[name="description"]');
   if (md) md.setAttribute("content", p.short);
 
-  /* ---- โครงสร้างข้อมูลสำหรับ Google (Product schema) ---- */
+  /* ---- โครงสร้างข้อมูลสำหรับ Google (Product + FAQ schema) ---- */
+  var DOMAIN = "https://www.hopefulrelife.com";
+  var ogImg = (p.sectionImages && p.sectionImages.hero) || p.header || (p.images && p.images[0]);
+  var absImg = ogImg ? DOMAIN + "/" + String(ogImg).replace(/^\//, "").split("?")[0] : undefined;
   var ld = document.createElement("script");
   ld.type = "application/ld+json";
   ld.textContent = JSON.stringify({
     "@context": "https://schema.org", "@type": "Product",
-    name: p.name, description: p.short, brand: { "@type": "Brand", name: p.name },
-    offers: { "@type": "Offer", price: p.price, priceCurrency: "THB", availability: "https://schema.org/InStock" }
+    name: p.name, description: p.short, image: absImg,
+    brand: { "@type": "Brand", name: "HOPEFUL" },
+    url: DOMAIN + "/p/" + p.slug + ".html",
+    offers: { "@type": "Offer", price: p.price, priceCurrency: "THB", availability: "https://schema.org/InStock", url: DOMAIN + "/p/" + p.slug + ".html" }
   });
   document.head.appendChild(ld);
+
+  if (p.faq && p.faq.length) {
+    var faqLd = document.createElement("script");
+    faqLd.type = "application/ld+json";
+    faqLd.textContent = JSON.stringify({
+      "@context": "https://schema.org", "@type": "FAQPage",
+      mainEntity: p.faq.map(function (f) {
+        return { "@type": "Question", name: f.q, acceptedAnswer: { "@type": "Answer", text: f.a } };
+      })
+    });
+    document.head.appendChild(faqLd);
+  }
 
   var imageLed = p.layout === "imageLed";  /* หน้าแบบรูปนำ (เซลเพจ) — ซ่อน gallery viewer + section ที่ซ้ำกับรูป */
   var salepageTpl = p.layout === "salepageTemplate";  /* เทมเพลตเซลเพจ: โชว์กรอบบอกว่าแต่ละจุดต้องใส่ภาพอะไร (ยังไม่มีภาพจริง) */
