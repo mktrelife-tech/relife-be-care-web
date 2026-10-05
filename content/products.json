@@ -629,6 +629,23 @@
     },
     {
       "slug": "beta-cal-pro-plus",
+      "layout": "salepage",
+      "sectionImages": {
+        "hero": "assets/img/salepage/beta-cal-pro-plus-01.jpg",
+        "risk": "assets/img/salepage/beta-cal-pro-plus-02.jpg",
+        "highlights": "assets/img/salepage/beta-cal-pro-plus-03.jpg",
+        "who": "assets/img/salepage/beta-cal-pro-plus-04.jpg",
+        "ingredients": "assets/img/salepage/beta-cal-pro-plus-05.jpg",
+        "awards": "assets/img/salepage/beta-cal-pro-plus-06.jpg",
+        "howto": "assets/img/salepage/beta-cal-pro-plus-07.jpg",
+        "trust": "assets/img/salepage/beta-cal-pro-plus-08.jpg"
+      },
+      "reviewImages": [
+        "assets/img/reviews/beta-cal-pro-plus-rv1.jpg",
+        "assets/img/reviews/beta-cal-pro-plus-rv2.jpg",
+        "assets/img/reviews/beta-cal-pro-plus-rv3.jpg",
+        "assets/img/reviews/beta-cal-pro-plus-rv4.jpg"
+      ],
       "story": [
         {
           "eyebrow": "⚠️ กระดูกบางลงทุกปี",
