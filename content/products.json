@@ -123,6 +123,11 @@
           "qty": 15,
           "price": 5690,
           "image": "assets/img/products/beta-oil-pack15.jpg?v=2"
+        },
+        {
+          "qty": 24,
+          "price": 8290,
+          "image": "assets/img/products/beta-oil-pack24.jpg?v=2"
         }
       ],
       "highlights": [
@@ -385,6 +390,11 @@
           "qty": 15,
           "price": 5690,
           "image": "assets/img/products/betax-plus-pack15.jpg?v=2"
+        },
+        {
+          "qty": 24,
+          "price": 8290,
+          "image": "assets/img/products/betax-plus-pack24.jpg?v=2"
         }
       ],
       "highlights": [
@@ -621,6 +631,11 @@
           "qty": 15,
           "price": 5690,
           "image": "assets/img/products/beta-life-pack15.jpg?v=2"
+        },
+        {
+          "qty": 24,
+          "price": 8290,
+          "image": "assets/img/products/beta-life-pack24.jpg?v=2"
         }
       ],
       "highlights": [
@@ -1073,6 +1088,11 @@
           "qty": 15,
           "price": 5690,
           "image": "assets/img/products/betaherb-pack15.jpg?v=2"
+        },
+        {
+          "qty": 24,
+          "price": 8290,
+          "image": "assets/img/products/betaherb-pack24.jpg?v=2"
         }
       ],
       "highlights": [
@@ -1305,6 +1325,11 @@
           "qty": 15,
           "price": 5690,
           "image": "assets/img/products/beta-cal-pro-plus-pack15.jpg"
+        },
+        {
+          "qty": 24,
+          "price": 8290,
+          "image": "assets/img/products/beta-cal-pro-plus-pack24.jpg"
         }
       ],
       "highlights": [
@@ -1533,6 +1558,11 @@
           "qty": 15,
           "price": 5690,
           "image": "assets/img/products/beta-liv-pro-plus-pack15.jpg"
+        },
+        {
+          "qty": 24,
+          "price": 8290,
+          "image": "assets/img/products/beta-liv-pro-plus-pack24.jpg"
         }
       ],
       "highlights": [
@@ -1748,6 +1778,11 @@
           "qty": 15,
           "price": 5690,
           "image": "assets/img/products/memora-pack15.jpg"
+        },
+        {
+          "qty": 24,
+          "price": 8290,
+          "image": "assets/img/products/memora-pack24.jpg"
         }
       ],
       "highlights": [
@@ -1923,7 +1958,7 @@
         },
         {
           "qty": 2,
-          "price": 2490,
+          "price": 2790,
           "image": "assets/img/products/beta-life-balance-pack2.jpg"
         },
         {
@@ -2119,7 +2154,7 @@
         },
         {
           "qty": 2,
-          "price": 2490,
+          "price": 2790,
           "image": "assets/img/products/lab-balance-pack2.jpg"
         },
         {
