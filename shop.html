@@ -93,18 +93,25 @@ document.addEventListener("site:ready", function (e) {
     });
   });
 
-  /* ชุดโปรโมชั่น */
-  A.$("#bundles").innerHTML = (S.bundles || []).map(function (b) {
-    return '<article class="card reveal">' +
-      '<div class="card__media"><span class="card__tag">' + A.esc(b.badge) + "</span>" +
-        (b.image ? '<img src="' + A.esc(b.image) + '" alt="' + A.esc(b.name) + '" loading="lazy">'
-                 : '<div class="ph" style="width:100%;height:100%" data-label="รูปชุดโปรโมชั่น"></div>') + "</div>" +
-      '<div class="card__body"><h3 class="card__name">' + A.esc(b.name) + "</h3>" +
-        '<p class="card__desc">' + A.esc(b.desc) + "</p>" +
-        '<div class="card__foot"><div class="price"><span class="price__was">฿' + A.baht(b.priceWas) + "</span>฿" + A.baht(b.price) + "</div>" +
-        '<a class="btn btn--line btn--sm" href="' + A.esc(S.site.contact.lineUrl) + '" target="_blank" rel="noopener">สั่งชุดนี้</a></div>' +
-      "</div></article>";
-  }).join("");
+  /* ชุดโปรโมชั่น — ดึงจาก packs จริงของสินค้าตัวเด่น (4 กล่องขึ้นไป) คำนวณส่วนลดอัตโนมัติ */
+  var FEAT = "beta-oil";
+  var fp = S.products.filter(function (p) { return p.slug === FEAT; })[0];
+  if (fp) {
+    var one = (fp.packs && fp.packs[0] ? fp.packs[0].price : fp.price);
+    A.$("#bundles").innerHTML = (fp.packs || []).filter(function (k) { return k.qty >= 4; }).map(function (k) {
+      var single = one * k.qty, save = single - k.price, per = Math.round(k.price / k.qty);
+      return '<article class="card reveal">' +
+        '<div class="card__media">' +
+          (save > 0 ? '<span class="card__tag" style="background:' + (fp.badgeColor || "var(--brand)") + ';color:#fff">ประหยัด ฿' + A.baht(save) + "</span>" : "") +
+          (k.image ? '<img src="' + A.esc(A.url(k.image.replace(/^\//, ""))) + '" alt="' + A.esc(fp.name) + " แพ็ก " + k.qty + '" loading="lazy">'
+                   : '<div class="ph" style="width:100%;height:100%"></div>') + "</div>" +
+        '<div class="card__body"><h3 class="card__name">' + A.esc(fp.name) + " แพ็ก " + k.qty + " กล่อง</h3>" +
+          '<p class="card__desc">เฉลี่ย ฿' + A.baht(per) + " / กล่อง · คุ้มกว่าซื้อแยก</p>" +
+          '<div class="card__foot"><div class="price"><span class="price__was">฿' + A.baht(single) + "</span>฿" + A.baht(k.price) + "</div>" +
+          '<a class="btn btn--line btn--sm" href="' + A.url("p/" + FEAT + ".html") + '">ดูแพ็กนี้</a></div>' +
+        "</div></article>";
+    }).join("");
+  }
   A.initReveal();
 });
 </script>
