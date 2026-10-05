@@ -884,6 +884,21 @@
     },
     {
       "slug": "memora",
+      "layout": "salepage",
+      "sectionImages": {
+        "hero": "assets/img/salepage/memora-01.jpg",
+        "risk": "assets/img/salepage/memora-02.jpg",
+        "highlights": "assets/img/salepage/memora-03.jpg",
+        "who": "assets/img/salepage/memora-04.jpg",
+        "ingredients": "assets/img/salepage/memora-05.jpg",
+        "howto": "assets/img/salepage/memora-06.jpg",
+        "trust": "assets/img/salepage/memora-07.jpg"
+      },
+      "reviewImages": [
+        "assets/img/reviews/memora-rv1.jpg",
+        "assets/img/reviews/memora-rv2.jpg",
+        "assets/img/reviews/memora-rv3.jpg"
+      ],
       "story": [
         {
           "eyebrow": "⚠️ หลงลืมบ่อยขึ้น",
