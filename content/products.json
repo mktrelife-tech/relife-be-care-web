@@ -501,6 +501,21 @@
     },
     {
       "slug": "betaherb",
+      "layout": "salepage",
+      "sectionImages": {
+        "hero": "assets/img/salepage/betaherb-01.jpg",
+        "risk": "assets/img/salepage/betaherb-02.jpg",
+        "highlights": "assets/img/salepage/betaherb-03.jpg",
+        "who": "assets/img/salepage/betaherb-04.jpg",
+        "howto": "assets/img/salepage/betaherb-05.jpg",
+        "trust": "assets/img/salepage/betaherb-06.jpg",
+        "ingredients": "assets/img/salepage/betaherb-07.jpg"
+      },
+      "reviewImages": [
+        "assets/img/reviews/betaherb-rv1.jpg",
+        "assets/img/reviews/betaherb-rv2.jpg",
+        "assets/img/reviews/betaherb-rv3.jpg"
+      ],
       "story": [
         {
           "eyebrow": "⚠️ สะสมความไม่สมดุลโดยไม่รู้ตัว",
