@@ -858,6 +858,11 @@
           "qty": 15,
           "price": 7890,
           "image": "assets/img/products/lab-farm-pack15.jpg?v=2"
+        },
+        {
+          "qty": 25,
+          "price": 12990,
+          "image": "assets/img/products/lab-farm-pack25.jpg"
         }
       ],
       "highlights": [
@@ -2366,6 +2371,11 @@
           "qty": 15,
           "price": 7890,
           "image": "assets/img/products/beta-care-pack15.jpg"
+        },
+        {
+          "qty": 25,
+          "price": 12990,
+          "image": "assets/img/products/beta-care-pack25.jpg"
         }
       ],
       "highlights": [
