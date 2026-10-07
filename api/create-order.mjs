@@ -69,8 +69,9 @@ export default async function handler(req, res) {
     /* ราคาอิงข้อมูลฝั่งเซิร์ฟเวอร์เสมอ — หาแพ็กจาก packs ถ้าไม่มีใช้ราคาเดี่ยว × จำนวนกล่อง */
     const pk = (p.packs || []).find((x) => Number(x.qty) === pack);
     const unit = pk ? pk.price : (p.price * pack);
-    const label = pack > 1 ? (p.name + " (แพ็ก " + pack + " กล่อง)") : p.name;
-    items.push({ slug: p.slug, name: label, pack, qty, price: unit, lineTotal: unit * qty });
+    const u = p.packUnit || "กล่อง";
+    const label = pack > 1 ? (p.name + " (แพ็ก " + pack + " " + u + ")") : (p.name + " (1 " + u + ")");
+    items.push({ slug: p.slug, product: p.name, name: label, pack, qty, price: unit, lineTotal: unit * qty });
   }
 
   const subtotal = items.reduce((a, i) => a + i.lineTotal, 0);
@@ -104,8 +105,8 @@ export default async function handler(req, res) {
   /* ---------- บันทึกลง Google Sheet ---------- */
   let sheetOk = false;
   try {
-    await appendToSheet(order);
-    sheetOk = true;
+    const r = await appendToSheet(order);
+    sheetOk = !(r && r.skipped);
   } catch (err) {
     console.error("SHEET_FAIL", order.orderNo, String(err.message || err));
   }

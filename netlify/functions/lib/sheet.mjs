@@ -19,7 +19,7 @@ export async function appendToSheet(order) {
     lastName:    c.lastName,
     phone:       c.phone,
     email:       c.email,
-    address:     c.address,
+    address:     [c.address, c.subdistrict, c.district].filter(Boolean).join(" "),
     province:    c.province,
     zip:         c.zip,
     note:        c.note,
@@ -37,6 +37,9 @@ export async function appendToSheet(order) {
     body: JSON.stringify(row)
   });
   if (!res.ok) throw new Error("Sheet error " + res.status);
+  /* Apps Script ตอบ 200 เสมอ ต้องดู ok ในเนื้อหาด้วย (เช่น secret ไม่ตรง) */
+  const data = await res.json().catch(() => ({}));
+  if (data.ok === false) throw new Error("Sheet error: " + (data.error || "unknown"));
   return { ok: true };
 }
 

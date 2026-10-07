@@ -72,71 +72,73 @@ const STATUS_LABEL = {
   failed:           "❌ ชำระเงินไม่สำเร็จ"
 };
 
+/* วิธีชำระเงินแบบที่ทีมอ่านง่าย (ตามการ์ดของเว็บ LAB FARM) */
+const PAY_TEXT = {
+  transfer: "โอนเงิน",
+  cod:      "เก็บปลายทาง (COD)",
+  card:     "บัตรเครดิต (Pay Solutions)"
+};
+
 export function buildOrderCard(order, imageKey) {
   const c = order.customer;
   const money = (n) => "฿" + Number(n).toLocaleString("th-TH");
+  const field = (label, value) => ({ is_short: true, text: { tag: "lark_md", content: `**${label}**\n${value}` } });
 
-  const itemLines = order.items
-    .map((i) => `• ${i.name} × ${i.qty}  =  ${money(i.lineTotal)}`)
+  /* หัวการ์ด: ถ้าสั่งสินค้าตัวเดียวใช้ชื่อสินค้า ไม่งั้นใช้ชื่อร้าน */
+  const names = [...new Set(order.items.map((i) => i.product || i.name))];
+  const title = names.length === 1 ? names[0] : "Hopeful Relife";
+
+  const pkg = order.items
+    .map((i) => `${i.name}${i.qty > 1 ? " × " + i.qty : ""}`)
     .join("\n");
+
+  let pay = PAY_TEXT[order.payment] || order.payment;
+  if (order.payment === "card" && order.status === "awaiting_payment") pay += "\n⏳ รอลูกค้าชำระ";
+
+  const address = [c.address, c.subdistrict, c.district, c.province, c.zip].filter(Boolean).join(" ");
 
   const elements = [
     {
       tag: "div",
       fields: [
-        { is_short: true, text: { tag: "lark_md", content: `**เลขออเดอร์**\n${order.orderNo}` } },
-        { is_short: true, text: { tag: "lark_md", content: `**ยอดรวม**\n${money(order.grandTotal)}` } },
-        { is_short: true, text: { tag: "lark_md", content: `**วิธีชำระเงิน**\n${PAY_LABEL[order.payment] || order.payment}` } },
-        { is_short: true, text: { tag: "lark_md", content: `**สถานะ**\n${STATUS_LABEL[order.status] || order.status}` } }
+        field("👤 ลูกค้า", `${c.firstName} ${c.lastName}`),
+        field("📞 เบอร์", c.phone),
+        field("📦 แพ็กเกจ", pkg),
+        field("💰 ยอดรวม", money(order.grandTotal)),
+        field("💳 ชำระเงิน", pay),
+        field("🗺️ จังหวัด", c.province)
       ]
     },
-    { tag: "hr" },
-    { tag: "div", text: { tag: "lark_md", content: `**🛒 รายการสินค้า**\n${itemLines}\n\nค่าจัดส่ง: ${order.shipFee === 0 ? "ฟรี" : money(order.shipFee)}` } },
-    { tag: "hr" },
-    {
-      tag: "div",
-      text: {
-        tag: "lark_md",
-        content:
-          `**📮 ข้อมูลจัดส่ง**\n` +
-          `${c.firstName} ${c.lastName}\n` +
-          `โทร ${c.phone}${c.email ? " · " + c.email : ""}\n` +
-          `${[c.address, c.subdistrict, c.district].filter(Boolean).join(" ")}\n${c.province} ${c.zip}` +
-          (c.note ? `\n\n**📝 หมายเหตุ:** ${c.note}` : "")
-      }
-    }
+    { tag: "div", text: { tag: "lark_md", content: `**📍 ที่อยู่จัดส่ง**\n${address}` } }
   ];
 
+  if (c.note) {
+    elements.push({ tag: "div", text: { tag: "lark_md", content: `**📝 หมายเหตุ**\n${c.note}` } });
+  }
+
   if (imageKey) {
-    elements.push({ tag: "hr" });
     elements.push({ tag: "div", text: { tag: "lark_md", content: "**🧾 สลิปโอนเงิน**" } });
     elements.push({ tag: "img", img_key: imageKey, alt: { tag: "plain_text", content: "สลิปโอนเงิน" } });
   } else if (order.payment === "transfer") {
-    elements.push({ tag: "hr" });
     elements.push({ tag: "div", text: { tag: "lark_md", content: "⚠️ **ลูกค้ายังไม่ได้แนบสลิป** — ต้องติดตามขอสลิป" } });
   }
 
   elements.push({
-    tag: "action",
-    actions: [
-      {
-        tag: "button",
-        text: { tag: "plain_text", content: "📞 โทรหาลูกค้า" },
-        type: "default",
-        url: "tel:" + String(c.phone).replace(/\D/g, "")
-      }
-    ]
+    tag: "note",
+    elements: [{
+      tag: "plain_text",
+      content: `เลขออเดอร์ ${order.orderNo} · ค่าส่ง ${order.shipFee === 0 ? "ฟรี" : money(order.shipFee)}` +
+        (c.email ? ` · ${c.email}` : "") + " · จากเว็บ hopefulrelife.com"
+    }]
   });
-
-  const colour = order.payment === "cod" ? "orange" : (order.status === "paid" ? "green" : "carmine");
 
   return {
     msg_type: "interactive",
     card: {
       config: { wide_screen_mode: true },
       header: {
-        template: colour,
-        title: { tag: "plain_text", content: `${STATUS_LABEL[order.status] || ""} · ${order.orderNo}` }
+        template: order.status === "paid" ? "green" : "orange",
+        title: { tag: "plain_text", content: (order.status === "paid" ? "✅ ชำระเงินแล้ว " : "🛒 ออเดอร์ใหม่ ") + title }
       },
       elements
     }
