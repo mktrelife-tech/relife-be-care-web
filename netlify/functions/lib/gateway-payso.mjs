@@ -75,11 +75,14 @@ export function buildPayment(order, siteUrl) {
   if (MODE === "api") return buildApiRedirect(order, siteUrl);
 
   /* โหมด link — ประกอบ URL แบบ path: /<ยอดเงิน>/<รายละเอียด>
-     รายละเอียดต้องไม่มีช่องว่าง ไม่งั้นจะกลายเป็น %20 ในระบบ Pay Solutions */
-  const detail = (
-    order.orderNo + "_" +
-    order.items.map((i) => i.name.replace(/\s+/g, "") + "x" + i.qty).join("-")
-  ).replace(/[^\w\-.]/g, "").slice(0, 100);
+     Pay Solutions รองรับภาษาไทยถ้า encode (ทดสอบแล้ว 7 ต.ค. 2026) แต่ห้ามมีช่องว่าง
+     เพราะจะกลายเป็น %20 ในช่อง จึงตัดเฉพาะช่องว่าง และคงชื่อสินค้า/จำนวนกล่องเป็นไทย
+     ให้ลูกค้าอ่านออกว่าซื้ออะไร — ปิดท้ายด้วยเลขออเดอร์ไว้อ้างอิง/จับคู่การชำระ */
+  const itemText = order.items
+    .map((i) => i.name.replace(/\s+/g, "") + (i.qty > 1 ? "×" + i.qty : ""))
+    .join("+")
+    .slice(0, 150);
+  const detail = itemText + "-" + order.orderNo;
 
   const base = PAY_LINK.replace(/\/+$/, "");
   return {
