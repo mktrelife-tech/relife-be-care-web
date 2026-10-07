@@ -77,10 +77,21 @@ document.addEventListener("site:ready", function (e) {
   var slipData = null;
   var drop = A.$("#slipDrop"), fileInput = A.$("#slipFile");
 
+  /* แจ้งปัญหาสลิปใต้กล่องแนบเลย (ไม่เด้งไปบนสุดของหน้า ลูกค้าจะไม่เห็น) */
+  var slipErr = document.createElement("p");
+  slipErr.style.cssText = "color:var(--danger);font-size:.88rem;margin:10px 0 0;font-weight:500";
+  slipErr.hidden = true;
+  drop.parentNode.insertBefore(slipErr, A.$("#slipPreview"));
+  function slipFail(msg) { slipErr.textContent = "⚠️ " + msg; slipErr.hidden = false; }
+
   function readSlip(file) {
     if (!file) return;
-    if (!/^image\//.test(file.type)) { showErr("ไฟล์สลิปต้องเป็นรูปภาพเท่านั้น"); return; }
-    if (file.size > 5 * 1024 * 1024) { showErr("ไฟล์สลิปใหญ่เกิน 5 MB กรุณาย่อรูปก่อน"); return; }
+    slipErr.hidden = true;
+    /* รูปจากมือถือบางรุ่น (HEIC) ไม่มี type มา — ดูนามสกุลไฟล์ประกอบ */
+    var isImg = /^image\//.test(file.type) || /\.(jpe?g|png|webp|heic|heif|gif|bmp)$/i.test(file.name || "");
+    if (!isImg) { slipFail("ไฟล์สลิปต้องเป็นรูปภาพ (jpg / png)"); return; }
+    /* ย่อรูปให้อยู่แล้ว เลยรับไฟล์ใหญ่ได้ (รูปถ่ายจากมือถือมัก 5–10 MB) */
+    if (file.size > 25 * 1024 * 1024) { slipFail("ไฟล์ใหญ่เกิน 25 MB กรุณาแคปหน้าจอสลิปแล้วแนบแทน"); return; }
     var fr = new FileReader();
     fr.onload = function () {
       var img = new Image();
@@ -98,9 +109,14 @@ document.addEventListener("site:ready", function (e) {
         A.$("#slipImg").src = slipData;
         A.$("#slipPreview").classList.add("is-on");
         drop.style.display = "none";
+        slipErr.hidden = true;
         hideErr();
       };
-      img.onerror = function () { showErr("อ่านไฟล์รูปไม่สำเร็จ กรุณาลองไฟล์อื่น"); };
+      img.onerror = function () {
+        slipFail(/heic|heif/i.test(file.type + file.name)
+          ? "เบราว์เซอร์นี้เปิดรูปแบบ HEIC ไม่ได้ — กรุณาแคปหน้าจอสลิปแล้วแนบใหม่ หรือกดสั่งซื้อไปก่อนแล้วส่งสลิปทาง LINE"
+          : "อ่านไฟล์รูปไม่สำเร็จ — ลองแคปหน้าจอสลิปแล้วแนบใหม่ หรือส่งสลิปทาง LINE ภายหลัง");
+      };
       img.src = fr.result;
     };
     fr.readAsDataURL(file);
