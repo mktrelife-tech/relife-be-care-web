@@ -127,6 +127,17 @@ export function buildOrderCard(order, imageKey) {
     elements.push({ tag: "div", text: { tag: "lark_md", content: "**🧾 สลิปโอนเงิน**" } });
     elements.push({ tag: "img", img_key: imageKey, alt: { tag: "plain_text", content: "สลิปโอนเงิน" } });
   }
+  if (order.slipUrl) {
+    elements.push({
+      tag: "action",
+      actions: [{
+        tag: "button",
+        text: { tag: "plain_text", content: "🧾 ดูสลิปโอนเงิน" },
+        type: "primary",
+        url: order.slipUrl
+      }]
+    });
+  }
 
   elements.push({
     tag: "note",

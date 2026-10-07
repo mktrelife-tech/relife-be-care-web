@@ -6,6 +6,7 @@
 import { getTenantToken, uploadImage, sendToGroup, buildOrderCard } from "./lib/lark.mjs";
 import { appendToSheet } from "./lib/sheet.mjs";
 import { buildPayment } from "./lib/gateway-payso.mjs";
+import { uploadSlip } from "./lib/blob.mjs";
 
 function siteUrlFrom(req) {
   if (process.env.SITE_URL) return process.env.SITE_URL.replace(/\/$/, "");
@@ -85,16 +86,31 @@ export default async function handler(req, res) {
     status: payment === "card" ? "awaiting_payment" : "new",
     payment, customer, items, subtotal, shipFee, grandTotal,
     hasSlip: !!(payment === "transfer" && body.slip),
+    slipUrl: "",
     paymentRef: ""
   };
+
+  /* ---------- เก็บสลิปใน Vercel Blob (ได้ลิงก์ไว้กดดูจาก Lark / Sheet) ---------- */
+  if (order.hasSlip) {
+    try {
+      order.slipUrl = (await uploadSlip(order.orderNo, body.slip, siteUrl)) || "";
+    } catch (err) {
+      console.error("BLOB_FAIL", order.orderNo, String(err.message || err));
+    }
+  }
 
   /* ---------- แจ้งเข้า Lark ---------- */
   let larkOk = false;
   try {
+    /* ถ้ามี Lark App ให้ฝังรูปสลิปในการ์ดด้วย — พลาดก็ยังส่งการ์ดได้ (มีปุ่มดูสลิปจาก Blob) */
     let imageKey = null;
     if (order.hasSlip) {
-      const token = await getTenantToken();
-      if (token) imageKey = await uploadImage(token, body.slip);
+      try {
+        const token = await getTenantToken();
+        if (token) imageKey = await uploadImage(token, body.slip);
+      } catch (err) {
+        console.error("LARK_IMG_FAIL", order.orderNo, String(err.message || err));
+      }
     }
     await sendToGroup(buildOrderCard(order, imageKey));
     larkOk = true;

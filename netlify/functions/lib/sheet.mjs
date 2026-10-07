@@ -27,7 +27,7 @@ export async function appendToSheet(order) {
     subtotal:    order.subtotal,
     shipFee:     order.shipFee,
     grandTotal:  order.grandTotal,
-    hasSlip:     order.hasSlip ? "มีสลิป" : "",
+    hasSlip:     order.slipUrl || (order.hasSlip ? "มีสลิป" : ""),
     paymentRef:  order.paymentRef || ""
   };
 
