@@ -92,12 +92,19 @@ export function buildOrderCard(order, imageKey) {
     .map((i) => `${i.name}${i.qty > 1 ? " × " + i.qty : ""}`)
     .join("\n");
 
-  let pay = PAY_TEXT[order.payment] || order.payment;
-  if (order.payment === "card" && order.status === "awaiting_payment") pay += "\n⏳ รอลูกค้าชำระ";
+  /* สถานะการจ่าย → บอกทีมว่าทำอะไรต่อ (ส่งได้เลย / ต้องเช็คก่อน) */
+  let action;
+  if (order.status === "paid")             action = "✅ **ชำระแล้ว → ส่งของได้เลย**";
+  else if (order.payment === "cod")        action = "💵 **เก็บปลายทาง (COD) → ส่งของได้เลย**";
+  else if (order.payment === "card")       action = "⏳ **บัตรเครดิต รอลูกค้าชำระ → ยังไม่ส่ง** เช็คใน Pay Solutions ก่อน";
+  else if (order.hasSlip)                  action = "🏦 **โอนเงิน แนบสลิปแล้ว → ตรวจยอดเงินเข้าก่อนส่ง**";
+  else                                     action = "⚠️ **โอนเงิน ยังไม่แนบสลิป → ทักขอสลิปก่อนส่ง**";
 
   const address = [c.address, c.subdistrict, c.district, c.province, c.zip].filter(Boolean).join(" ");
 
   const elements = [
+    { tag: "div", text: { tag: "lark_md", content: `🔖 **เลขออเดอร์  ${order.orderNo}**\n${action}` } },
+    { tag: "hr" },
     {
       tag: "div",
       fields: [
@@ -105,7 +112,7 @@ export function buildOrderCard(order, imageKey) {
         field("📞 เบอร์", c.phone),
         field("📦 แพ็กเกจ", pkg),
         field("💰 ยอดรวม", money(order.grandTotal)),
-        field("💳 ชำระเงิน", pay),
+        field("💳 ชำระเงิน", PAY_TEXT[order.payment] || order.payment),
         field("🗺️ จังหวัด", c.province)
       ]
     },
@@ -119,26 +126,25 @@ export function buildOrderCard(order, imageKey) {
   if (imageKey) {
     elements.push({ tag: "div", text: { tag: "lark_md", content: "**🧾 สลิปโอนเงิน**" } });
     elements.push({ tag: "img", img_key: imageKey, alt: { tag: "plain_text", content: "สลิปโอนเงิน" } });
-  } else if (order.payment === "transfer") {
-    elements.push({ tag: "div", text: { tag: "lark_md", content: "⚠️ **ลูกค้ายังไม่ได้แนบสลิป** — ต้องติดตามขอสลิป" } });
   }
 
   elements.push({
     tag: "note",
     elements: [{
       tag: "plain_text",
-      content: `เลขออเดอร์ ${order.orderNo} · ค่าส่ง ${order.shipFee === 0 ? "ฟรี" : money(order.shipFee)}` +
-        (c.email ? ` · ${c.email}` : "") + " · จากเว็บ hopefulrelife.com"
+      content: `ค่าส่ง ${order.shipFee === 0 ? "ฟรี" : money(order.shipFee)}` +
+        (c.email ? ` · ${c.email}` : "") + " · ที่มา: เว็บ hopefulrelife.com"
     }]
   });
 
+  /* หัวการ์ดสีฟ้าเทอร์ควอยซ์ + ป้าย "ออเดอร์เว็บ" ให้แยกจากการ์ดเว็บอื่น (LAB FARM ใช้สีส้ม) */
   return {
     msg_type: "interactive",
     card: {
       config: { wide_screen_mode: true },
       header: {
-        template: order.status === "paid" ? "green" : "orange",
-        title: { tag: "plain_text", content: (order.status === "paid" ? "✅ ชำระเงินแล้ว " : "🛒 ออเดอร์ใหม่ ") + title }
+        template: order.status === "paid" ? "green" : "turquoise",
+        title: { tag: "plain_text", content: (order.status === "paid" ? "✅ ชำระแล้ว · " : "🌐 ออเดอร์เว็บ Hopeful Relife · ") + title }
       },
       elements
     }
