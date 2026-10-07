@@ -1382,3 +1382,17 @@ table.compare tbody th { font-weight: 500; color: var(--ink-soft); }
 .mnav a.is-active { color: var(--brand-dark); font-weight: 600; }
 .mnav__group { font-size: .74rem; letter-spacing: .12em; text-transform: uppercase; color: var(--ink-faint); margin: 22px 6px 4px; }
 .mnav__foot { margin-top: 26px; display: grid; gap: 10px; }
+
+/* ---------- 27. ผ่อน 0% → แอดไลน์ (buy box) ---------- */
+.pdp-installment {
+  display: flex; align-items: center; gap: 12px;
+  margin-top: 12px; padding: 13px 16px;
+  background: #e9f8ef; border: 1.5px solid #27b86a; border-radius: var(--r-md);
+  color: var(--ink); font-size: .9rem; line-height: 1.35;
+  transition: background .15s, transform .15s, box-shadow .15s;
+}
+.pdp-installment:hover { background: #ddf3e6; transform: translateY(-1px); box-shadow: 0 4px 14px rgba(39,184,106,.22); }
+.pdp-installment__ico { font-size: 1.5rem; flex: 0 0 auto; }
+.pdp-installment__txt { flex: 1; }
+.pdp-installment__txt b { color: #1a8f4f; }
+.pdp-installment__arr { flex: 0 0 auto; font-size: 1.2rem; font-weight: 700; color: #27b86a; }

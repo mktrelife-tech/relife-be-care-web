@@ -92,8 +92,12 @@ document.addEventListener("site:ready", function (e) {
         "<b>🚚 " + (S.site.shipping.fee === 0 ? "ส่งฟรีทั่วไทย" : "ค่าส่ง ฿" + A.baht(S.site.shipping.fee)) + "</b><br>" +
         A.esc(S.site.shipping.carriers) + " · ส่งภายใน " + A.esc(S.site.shipping.leadTime) +
         (S.site.shipping.cod ? "<br>💵 เก็บเงินปลายทางได้" : "") +
-        ((S.site.payment && S.site.payment.installment) ? " · 💳 ผ่อน 0% ได้" : "") +
       "</div>" +
+      ((S.site.payment && S.site.payment.installment) ?
+        '<a class="pdp-installment" href="' + A.esc(S.site.contact.lineUrl) + '" target="_blank" rel="noopener">' +
+          '<span class="pdp-installment__ico">💳</span>' +
+          '<span class="pdp-installment__txt"><b>อยากผ่อน 0%?</b> แอดไลน์แจ้งแอดมิน ผ่อนได้สูงสุด 10 เดือน</span>' +
+          '<span class="pdp-installment__arr">→</span></a>' : "") +
     "</div>";
 
   /* แกลเลอรี */
@@ -301,7 +305,8 @@ document.addEventListener("site:ready", function (e) {
   var secCta =
     '<section class="pdp-cta"><div class="wrap"><div class="pdp-cta__box">' +
       "<div><h2 style='margin:0 0 4px'>พร้อมเริ่มดูแลสุขภาพวันนี้</h2>" +
-        "<p style='margin:0;opacity:.92'>🚚 ส่งฟรีทั่วไทย · 💵 เก็บเงินปลายทาง · 💳 ผ่อน 0% ได้</p></div>" +
+        "<p style='margin:0;opacity:.92'>🚚 ส่งฟรีทั่วไทย · 💵 เก็บเงินปลายทาง · " +
+          "<a href='" + lineUrl + "' target='_blank' rel='noopener' style='color:#fff;text-decoration:underline;font-weight:600'>💳 ผ่อน 0% — ทักไลน์</a></p></div>" +
       '<div class="pdp-cta__act">' +
         "<div class='pdp-cta__price'>เริ่มต้น ฿" + A.baht(onePrice) + " <small>/ กล่อง</small></div>" +
         '<button class="btn btn--lg" id="ctaAdd" style="background:#fff;color:var(--brand-dark)">🛒 สั่งซื้อเลย</button>' +
