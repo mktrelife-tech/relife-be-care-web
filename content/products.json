@@ -2256,7 +2256,17 @@
           "a": "สินค้ามีเลข อย. 13-1-02663-5-0060 นำเลขนี้ไปตรวจสอบได้ที่เว็บไซต์ของสำนักงานคณะกรรมการอาหารและยา"
         }
       ],
-      "badgeColor": "#2E8B74"
+      "badgeColor": "#2E8B74",
+      "layout": "salepage",
+      "sectionImages": {
+        "hero": "assets/img/salepage/lab-balance-01.jpg",
+        "risk": "assets/img/salepage/lab-balance-02.jpg",
+        "who": "assets/img/salepage/lab-balance-03.jpg",
+        "ingredients": "assets/img/salepage/lab-balance-04.jpg",
+        "howto": "assets/img/salepage/lab-balance-05.jpg",
+        "highlights": "assets/img/salepage/lab-balance-07.jpg",
+        "trust": "assets/img/salepage/lab-balance-06.jpg"
+      }
     },
     {
       "slug": "beta-care",
