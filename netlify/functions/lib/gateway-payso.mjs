@@ -77,12 +77,11 @@ export function buildPayment(order, siteUrl) {
   /* โหมด link — ประกอบ URL แบบ path: /<ยอดเงิน>/<รายละเอียด>
      Pay Solutions รองรับภาษาไทยถ้า encode (ทดสอบแล้ว 7 ต.ค. 2026) แต่ห้ามมีช่องว่าง
      เพราะจะกลายเป็น %20 ในช่อง จึงตัดเฉพาะช่องว่าง และคงชื่อสินค้า/จำนวนกล่องเป็นไทย
-     ให้ลูกค้าอ่านออกว่าซื้ออะไร — ปิดท้ายด้วยเลขออเดอร์ไว้อ้างอิง/จับคู่การชำระ */
-  const itemText = order.items
+     ให้ลูกค้าอ่านออกว่าซื้ออะไร (ไม่ใส่เลขออเดอร์ให้รก — จับคู่การชำระจากยอด/Lark/Sheet) */
+  const detail = order.items
     .map((i) => i.name.replace(/\s+/g, "") + (i.qty > 1 ? "×" + i.qty : ""))
     .join("+")
-    .slice(0, 150);
-  const detail = itemText + "-" + order.orderNo;
+    .slice(0, 160);
 
   const base = PAY_LINK.replace(/\/+$/, "");
   return {
