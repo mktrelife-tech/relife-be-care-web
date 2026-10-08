@@ -1,0 +1,23 @@
+# แจ้ง Bing ผ่าน IndexNow อัตโนมัติทุกครั้งที่ push ขึ้น main
+# สคริปต์จะรอจนหน้าที่แก้ขึ้นเว็บจริง (Vercel deploy เสร็จ) ก่อนแจ้ง
+name: IndexNow
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: แจ้งหน้าที่เปลี่ยนไป Bing (IndexNow)
+        run: node tools/indexnow.mjs --diff "${{ github.event.before }}" "${{ github.sha }}" --wait

@@ -10,6 +10,7 @@
     "@vercel/blob": "^2.8.1"
   },
   "scripts": {
-    "prerender": "node tools/prerender.mjs"
+    "prerender": "node tools/prerender.mjs",
+    "indexnow": "node tools/indexnow.mjs"
   }
 }
