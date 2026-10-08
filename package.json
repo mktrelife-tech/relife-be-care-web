@@ -8,5 +8,8 @@
   },
   "dependencies": {
     "@vercel/blob": "^2.8.1"
+  },
+  "scripts": {
+    "prerender": "node tools/prerender.mjs"
   }
 }

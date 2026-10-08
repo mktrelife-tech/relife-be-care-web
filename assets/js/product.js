@@ -13,6 +13,8 @@ document.addEventListener("site:ready", function (e) {
   var DOMAIN = "https://www.hopefulrelife.com";
   var ogImg = (p.sectionImages && p.sectionImages.hero) || p.header || (p.images && p.images[0]);
   var absImg = ogImg ? DOMAIN + "/" + String(ogImg).replace(/^\//, "").split("?")[0] : undefined;
+  /* ถ้าหน้าถูก pre-render มีโครงสร้างข้อมูลครบแล้ว (tools/prerender.mjs) ไม่ต้องใส่ซ้ำ */
+  var hasStaticLd = !!document.querySelector('script[type="application/ld+json"][data-seo]');
   var ld = document.createElement("script");
   ld.type = "application/ld+json";
   ld.textContent = JSON.stringify({
@@ -22,9 +24,9 @@ document.addEventListener("site:ready", function (e) {
     url: DOMAIN + "/p/" + p.slug + ".html",
     offers: { "@type": "Offer", price: p.price, priceCurrency: "THB", availability: "https://schema.org/InStock", url: DOMAIN + "/p/" + p.slug + ".html" }
   });
-  document.head.appendChild(ld);
+  if (!hasStaticLd) document.head.appendChild(ld);
 
-  if (p.faq && p.faq.length) {
+  if (!hasStaticLd && p.faq && p.faq.length) {
     var faqLd = document.createElement("script");
     faqLd.type = "application/ld+json";
     faqLd.textContent = JSON.stringify({

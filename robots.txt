@@ -1,8 +1,100 @@
+# อนุญาตเครื่องมือค้นหาและ AI ทุกตัวให้อ่านเนื้อหาสินค้าและบทความ
 User-agent: *
 Allow: /
 Disallow: /admin/
+Disallow: /api/
 Disallow: /content/orders.json
 Disallow: /checkout.html
 Disallow: /thankyou.html
+Disallow: /order.html
+
+# AI search / answer engines (ระบุชัดเพื่อให้แน่ใจว่าไม่ถูกบล็อก)
+User-agent: GPTBot
+Allow: /
+Disallow: /admin/
+Disallow: /api/
+Disallow: /checkout.html
+Disallow: /thankyou.html
+Disallow: /order.html
+
+User-agent: OAI-SearchBot
+Allow: /
+Disallow: /admin/
+Disallow: /api/
+Disallow: /checkout.html
+Disallow: /thankyou.html
+Disallow: /order.html
+
+User-agent: ChatGPT-User
+Allow: /
+Disallow: /admin/
+Disallow: /api/
+Disallow: /checkout.html
+Disallow: /thankyou.html
+Disallow: /order.html
+
+User-agent: ClaudeBot
+Allow: /
+Disallow: /admin/
+Disallow: /api/
+Disallow: /checkout.html
+Disallow: /thankyou.html
+Disallow: /order.html
+
+User-agent: Claude-SearchBot
+Allow: /
+Disallow: /admin/
+Disallow: /api/
+Disallow: /checkout.html
+Disallow: /thankyou.html
+Disallow: /order.html
+
+User-agent: Claude-User
+Allow: /
+Disallow: /admin/
+Disallow: /api/
+Disallow: /checkout.html
+Disallow: /thankyou.html
+Disallow: /order.html
+
+User-agent: PerplexityBot
+Allow: /
+Disallow: /admin/
+Disallow: /api/
+Disallow: /checkout.html
+Disallow: /thankyou.html
+Disallow: /order.html
+
+User-agent: Perplexity-User
+Allow: /
+Disallow: /admin/
+Disallow: /api/
+Disallow: /checkout.html
+Disallow: /thankyou.html
+Disallow: /order.html
+
+User-agent: Google-Extended
+Allow: /
+Disallow: /admin/
+Disallow: /api/
+Disallow: /checkout.html
+Disallow: /thankyou.html
+Disallow: /order.html
+
+User-agent: Applebot-Extended
+Allow: /
+Disallow: /admin/
+Disallow: /api/
+Disallow: /checkout.html
+Disallow: /thankyou.html
+Disallow: /order.html
+
+User-agent: Bingbot
+Allow: /
+Disallow: /admin/
+Disallow: /api/
+Disallow: /checkout.html
+Disallow: /thankyou.html
+Disallow: /order.html
 
 Sitemap: https://www.hopefulrelife.com/sitemap.xml

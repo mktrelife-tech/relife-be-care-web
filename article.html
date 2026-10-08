@@ -4,6 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>บทความ — Hopeful Relife</title>
+<meta name="robots" content="noindex, follow">
 <meta name="description" content="บทความความรู้สุขภาพจาก Hopeful Relife">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -35,11 +36,11 @@
 </section>
 
 <div id="site-footer"></div>
-<script src="assets/js/app.js?v=6"></script>
+<script src="assets/js/app.js?v=7"></script>
 <script>
 document.addEventListener("site:ready", function (e) {
   var S = e.detail, A = window.App;
-  var slug = new URLSearchParams(location.search).get("slug");
+  var slug = new URLSearchParams(location.search).get("slug") || document.body.getAttribute("data-slug");
   var a = S.articles.filter(function (x) { return x.slug === slug; })[0] || S.articles[0];
   if (!a) { A.$("#post").innerHTML = "<p>ไม่พบบทความ</p>"; return; }
 
@@ -73,7 +74,7 @@ document.addEventListener("site:ready", function (e) {
     var rImg = a.productImage || (rp && rp.images && rp.images[0]) || "";
     var rUrl = A.url("p/" + A.esc(a.product) + ".html");
     relateHtml = '<a class="art-cta" href="' + rUrl + '">' +
-      (rImg ? '<img class="art-cta__img" src="' + A.esc(rImg) + '" alt="' + A.esc(rName) + '" loading="lazy">' : "") +
+      (rImg ? '<img class="art-cta__img" src="' + A.esc(A.url(rImg)) + '" alt="' + A.esc(rName) + '" loading="lazy">' : "") +
       '<span class="art-cta__body">' +
         (a.productNote ? '<span class="art-cta__note">' + A.esc(a.productNote) + "</span>" : "") +
         '<span class="art-link">ดู ' + A.esc(rName) + " →</span>" +
@@ -93,15 +94,15 @@ document.addEventListener("site:ready", function (e) {
     "<span class='eyebrow'>" + A.esc(a.category) + "</span>" +
     "<h1 style='font-size:clamp(1.7rem,3.8vw,2.5rem)'>" + A.esc(a.title) + "</h1>" +
     "<p style='color:var(--ink-faint);font-size:.88rem'>เผยแพร่ " + A.esc(a.date) + "</p>" +
-    (a.cover ? '<img src="' + A.esc(a.cover) + '" alt="" style="border-radius:var(--r-lg);margin:22px 0">'
+    (a.cover ? '<img src="' + A.esc(A.url(a.cover)) + '" alt="" style="border-radius:var(--r-lg);margin:22px 0">'
              : '<div class="ph" style="aspect-ratio:16/9;margin:22px 0" data-label="ภาพปกบทความ 1200×675px"></div>') +
     "<p style='font-size:1.08rem;color:var(--ink-soft)'>" + A.esc(a.excerpt) + "</p>" +
     "<div style='font-size:1.02rem'>" + mdToHtml(a.body) + "</div>" + relateHtml + consultHtml;
 
   A.$("#more").innerHTML = S.articles.filter(function (x) { return x.slug !== a.slug; }).slice(0, 3).map(function (x) {
-    return '<a class="article-card" href="article.html?slug=' + encodeURIComponent(x.slug) + '">' +
+    return '<a class="article-card" href="' + A.url("blog/" + encodeURIComponent(x.slug) + ".html") + '">' +
       '<div class="article-card__media">' + (x.cover
-        ? '<img src="' + A.esc(x.cover) + '" alt="" loading="lazy">'
+        ? '<img src="' + A.esc(A.url(x.cover)) + '" alt="" loading="lazy">'
         : '<div class="ph" style="height:100%" data-label="ภาพประกอบ"></div>') + "</div>" +
       '<div class="article-card__body"><span class="article-card__cat">' + A.esc(x.category) + "</span>" +
       "<h3>" + A.esc(x.title) + "</h3></div></a>";

@@ -34,17 +34,17 @@
       <h1 style="font-size:clamp(1.8rem,4vw,2.6rem)">ความรู้ที่ช่วยให้คุณเลือกเป็น</h1>
       <p>เราเชื่อว่าคนที่เข้าใจสิ่งที่ตัวเองกิน จะดูแลตัวเองได้ดีกว่า</p>
     </div>
-    <div class="articles" id="list"></div>
+    <div class="articles" id="list"><!--SEO:cards--><a class="article-card" href="blog/kidney-care-daily.html"><div class="article-card__body"><span class="article-card__cat">ความรู้สุขภาพ</span><h3>สัญญาณเตือน “ไตทำงานหนัก” และวิธีดูแลไตในทุกวัน</h3><p>ไตไม่เคยบ่นสักคำ มันทำงานเงียบๆ ให้เราทุกวันจนเราแทบลืมไปว่ามีมันอยู่ กว่าจะรู้ตัวอีกทีก็ตอนที่มันเริ่มเหนื่อย ลองมาฟังสัญญาณเล็กๆ ที่ไตพยา…</p></div></a><a class="article-card" href="blog/rice-bran-vs-olive-vs-canola.html"><div class="article-card__body"><span class="article-card__cat">รู้จักส่วนผสม</span><h3>น้ำมันรำข้าว น้ำมันมะกอก น้ำมันคาโนลา ต่างกันยังไง</h3><p>น้ำมันพืชขวดที่วางอยู่ในครัว จริงๆ แล้วแต่ละชนิดไม่เหมือนกันเลยนะ มาดูกันว่ารำข้าว มะกอก คาโนลา เด่นคนละเรื่องยังไง แล้วทำไมการมีหลายตัวถึง…</p></div></a><a class="article-card" href="blog/how-to-read-supplement-label.html"><div class="article-card__body"><span class="article-card__cat">คู่มือผู้บริโภค</span><h3>สอนอ่านฉลากอาหารเสริม ใน 5 นาที ก่อนซื้อให้พ่อแม่</h3><p>ก่อนควักเงินซื้ออาหารเสริมให้พ่อแม่ ลองพลิกกล่องดูหลังสักนิด 5 นาทีนี้ช่วยให้เราเลือกได้สบายใจขึ้นเยอะ เดี๋ยวเราสรุปให้ว่าต้องดูตรงไหนบ้าง</p></div></a><a class="article-card" href="blog/phytosterol-for-elderly.html"><div class="article-card__body"><span class="article-card__cat">ความรู้สุขภาพ</span><h3>ไฟโตสเตอรอลคืออะไร ทำไมถึงพูดถึงกันในกลุ่มผู้สูงอายุ</h3><p>เคยเห็นคำว่า ‘ไฟโตสเตอรอล’ บนฉลากแล้วสงสัยไหมว่ามันคืออะไร มาทำความรู้จักสารจากพืชตัวนี้แบบง่ายๆ ที่จริงเราได้รับมันจากอาหารทุกวันอยู่แล้วโ…</p></div></a><a class="article-card" href="blog/boost-immunity-naturally.html"><div class="article-card__body"><span class="article-card__cat">ความรู้สุขภาพ</span><h3>เสริมภูมิคุ้มกันแบบเป็นธรรมชาติ เริ่มได้จากกิจวัตรประจำวัน</h3><p>ภูมิคุ้มกันแข็งแรงไม่ได้มาจากของวิเศษอะไรสักอย่าง แต่มาจากเรื่องเล็กๆ ที่เราทำซ้ำทุกวัน ทั้งการนอน การกิน และการขยับตัว มาดูกันว่าเริ่มยังไ…</p></div></a><a class="article-card" href="blog/protect-lungs-pm25.html"><div class="article-card__body"><span class="article-card__cat">ความรู้สุขภาพ</span><h3>ดูแลทางเดินหายใจช่วงฝุ่น PM2.5 — สิ่งที่ควรทำทุกวัน</h3><p>พอค่าฝุ่นขึ้นแดงทีไร ทางเดินหายใจของเราก็ทำงานหนักขึ้นทุกที โดยเฉพาะกลุ่มเสี่ยง มาดูกันว่าในวันฝุ่นหนา เราดูแลตัวเองได้ยังไงบ้าง ทั้งจากข้า…</p></div></a><a class="article-card" href="blog/manage-blood-sugar-lifestyle.html"><div class="article-card__body"><span class="article-card__cat">ความรู้สุขภาพ</span><h3>ดูแลระดับน้ำตาลในเลือด เริ่มจากพฤติกรรมประจำวัน</h3><p>ไม่ต้องรอให้หมอบอกว่าเป็นเบาหวานก่อนถึงจะเริ่มดูแล โดยเฉพาะพอเลข 4 ขึ้นต้นอายุ มาดูสัญญาณที่ควรไปตรวจ และพฤติกรรมเล็กๆ ที่ช่วยคุมน้ำตาลได้จ…</p></div></a><!--/SEO:cards--></div>
   </div>
 </section>
 
 <div id="site-footer"></div>
-<script src="assets/js/app.js?v=6"></script>
+<script src="assets/js/app.js?v=7"></script>
 <script>
 document.addEventListener("site:ready", function (e) {
   var S = e.detail, A = window.App;
   A.$("#list").innerHTML = S.articles.map(function (a) {
-    return '<a class="article-card reveal" href="article.html?slug=' + encodeURIComponent(a.slug) + '">' +
+    return '<a class="article-card reveal" href="blog/' + encodeURIComponent(a.slug) + '.html">' +
       '<div class="article-card__media">' + (a.cover
         ? '<img src="' + A.esc(a.cover) + '" alt="">'
         : '<div class="ph" style="height:100%" data-label="ภาพประกอบบทความ 1200×750px"></div>') + "</div>" +

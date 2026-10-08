@@ -17,7 +17,7 @@
   const esc  = (s) => String(s == null ? "" : s).replace(/[&<>"']/g, (c) =>
     ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
   /* ไฟล์ HTML ในโฟลเดอร์ /p/ ต้องถอยขึ้นหนึ่งระดับ */
-  const BASE = location.pathname.includes("/p/") ? "../" : "";
+  const BASE = /\/(p|blog)\//.test(location.pathname) ? "../" : "";
   const url  = (p) => BASE + p;
 
   async function loadJSON(path) {
