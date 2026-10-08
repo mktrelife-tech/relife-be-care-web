@@ -470,4 +470,26 @@ for (const p of PRODUCTS) {
 full.push("## คำถามที่พบบ่อยเกี่ยวกับการสั่งซื้อ", "", ...SHOP_FAQ.flatMap((f) => [`**${f.q}**`, f.a, ""]));
 write("llms-full.txt", full.join("\n"));
 
+/* ============================================================
+   5) Google Analytics 4 — ใส่ gtag ทุกหน้า (รหัสอยู่ที่ site.json → analytics.ga4)
+      ถ้ายังไม่ใส่รหัส จะไม่ใส่สคริปต์ (เอาออกให้ด้วยถ้าเคยมี)
+   ============================================================ */
+const GA4 = String((SITE.analytics && SITE.analytics.ga4) || "").trim();
+const gaSnippet = /^G-[A-Z0-9]+$/.test(GA4)
+  ? `\n<script async src="https://www.googletagmanager.com/gtag/js?id=${GA4}"></script>\n` +
+    `<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag("js",new Date());gtag("config","${GA4}");</script>\n`
+  : "";
+const gaFiles = [
+  ...fs.readdirSync(ROOT).filter((f) => f.endsWith(".html") && !/^(google[a-f0-9]+|checklist|เช็คลิสต์)\.html$/.test(f)),
+  ...fs.readdirSync(path.join(ROOT, "p")).filter((f) => f.endsWith(".html")).map((f) => "p/" + f),
+  ...fs.readdirSync(path.join(ROOT, "blog")).filter((f) => f.endsWith(".html")).map((f) => "blog/" + f)
+];
+for (const f of gaFiles) {
+  const html = read(f);
+  /* ใส่ไว้ต้น <head> เพื่อให้เก็บข้อมูลได้เร็วที่สุด */
+  const out = block(html, "ga", gaSnippet, (h, w) => h.replace(/<head>/, () => "<head>" + w));
+  if (out !== html) write(f, out);
+}
+if (!gaSnippet) console.log("GA4: ยังไม่ได้ใส่รหัส (site.json → analytics.ga4) — ข้ามการใส่ gtag");
+
 console.log(`prerender เสร็จ: สินค้า ${count.products} หน้า · บทความ ${count.blog} หน้า · sitemap ${PRODUCTS.length + ARTICLES.length + pages.length} URL`);

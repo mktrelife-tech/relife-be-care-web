@@ -257,11 +257,31 @@
   }
   function packLabel(pack) { return (pack > 1) ? "แพ็ก " + pack + " กล่อง" : "1 กล่อง"; }
 
+  /* ---------- Google Analytics 4 (ทำงานเมื่อหน้าใส่ gtag แล้ว — ใส่โดย tools/prerender.mjs) ---------- */
+  function track(name, params) {
+    try { if (typeof window.gtag === "function") window.gtag("event", name, params || {}); } catch (e) {}
+  }
+  /* รายการสินค้าแบบที่ GA4 e-commerce ต้องการ — 1 แพ็ก = 1 item, ราคา = ราคาแพ็ก */
+  function gaItem(slug, pack, qty) {
+    const p = state.products.find((x) => x.slug === slug);
+    pack = pack || 1;
+    return {
+      item_id: slug + (pack > 1 ? "-pack" + pack : ""),
+      item_name: p ? p.name : slug,
+      item_brand: "HOPEFUL",
+      item_variant: packLabel(pack),
+      price: p ? packPrice(p, pack) : 0,
+      quantity: qty || 1
+    };
+  }
+
   /* addToCart(slug, pack, qty) — pack = ขนาดแพ็ก, qty = จำนวนแพ็ก */
   function addToCart(slug, pack, qty) {
     const p = state.products.find((x) => x.slug === slug);
     if (!p) return;
     pack = pack || 1; qty = qty || 1;
+    const it = gaItem(slug, pack, qty);
+    track("add_to_cart", { currency: "THB", value: it.price * qty, items: [it] });
     const line = state.cart.find((i) => i.slug === slug && (i.pack || 1) === pack);
     if (line) line.qty += qty;
     else state.cart.push({ slug: slug, pack: pack, qty: qty });
@@ -508,8 +528,25 @@
     state: state, init: init, $: $, $$: $$, baht: baht, esc: esc, url: url, icon: icon,
     productCard: productCard, productImg: productImg, bindAddButtons: bindAddButtons,
     addToCart: addToCart, openCart: openCart, toast: toast, initReveal: initReveal,
-    myOrders: myOrders, loadJSON: loadJSON, packPrice: packPrice, packLabel: packLabel
+    myOrders: myOrders, loadJSON: loadJSON, packPrice: packPrice, packLabel: packLabel,
+    track: track, gaItem: gaItem
   };
+
+  /* คลิกทักไลน์ / โทร = ลูกค้าสนใจ (lead) — เก็บว่าคลิกจากปุ่มไหน หน้าไหน */
+  document.addEventListener("click", (ev) => {
+    const a = ev.target.closest && ev.target.closest("a[href]");
+    if (!a) return;
+    const href = a.getAttribute("href") || "";
+    const where = location.pathname.replace(/\.html$/, "") || "/";
+    if (/lin\.ee|line\.me/.test(href)) {
+      track("generate_lead", {
+        method: a.classList.contains("pdp-installment") || /ผ่อน/.test(a.textContent) ? "line_installment" : "line",
+        link_text: (a.textContent || "").trim().slice(0, 60), page: where
+      });
+    } else if (/^tel:/.test(href)) {
+      track("generate_lead", { method: "phone", page: where });
+    }
+  }, true);
 
   document.addEventListener("DOMContentLoaded", () => {
     init().catch((err) => {

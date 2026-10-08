@@ -27,6 +27,10 @@ document.addEventListener("site:ready", function (e) {
   var shipFee  = (s.shipping.fee === 0 || subtotal >= s.shipping.freeOver) ? 0 : s.shipping.fee;
   var grand    = subtotal + shipFee;
 
+  /* GA4: เข้าหน้ากรอกที่อยู่/ชำระเงิน */
+  var gaItems = cart.map(function (i) { return A.gaItem(i.slug, i.pack, i.qty); });
+  A.track("begin_checkout", { currency: "THB", value: grand, items: gaItems });
+
   /* ---------- สรุปรายการ ---------- */
   A.$("#coLines").innerHTML = cart.map(function (i) {
     var img = i.img
@@ -217,6 +221,14 @@ document.addEventListener("site:ready", function (e) {
       })
       .then(function (data) {
         if (!data.ok) throw new Error(data.error || "ส่งคำสั่งซื้อไม่สำเร็จ");
+
+        /* GA4: ฝากข้อมูลออเดอร์ไว้ให้หน้าขอบคุณยิง purchase (กันยิงซ้ำด้วยเลขออเดอร์) */
+        try {
+          sessionStorage.setItem("ww_ga_purchase", JSON.stringify({
+            transaction_id: data.orderNo, currency: "THB", value: grand, shipping: shipFee,
+            payment_type: payMethod, items: gaItems
+          }));
+        } catch (e) {}
 
         localStorage.removeItem("ww_cart_v1");
 

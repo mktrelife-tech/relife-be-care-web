@@ -38,6 +38,9 @@ document.addEventListener("site:ready", function (e) {
     document.head.appendChild(faqLd);
   }
 
+  /* GA4: ดูหน้าสินค้า */
+  A.track("view_item", { currency: "THB", value: p.price, items: [A.gaItem(p.slug, 1, 1)] });
+
   var imageLed = p.layout === "imageLed";  /* หน้าแบบรูปนำ (เซลเพจ) — ซ่อน gallery viewer + section ที่ซ้ำกับรูป */
   var salepageTpl = p.layout === "salepageTemplate";  /* เทมเพลตเซลเพจ: โชว์กรอบบอกว่าแต่ละจุดต้องใส่ภาพอะไร (ยังไม่มีภาพจริง) */
   var salepage = p.layout === "salepage" || salepageTpl;  /* ฟีลเซลเพจ: จัดลำดับเล่าเรื่องขายของ + CTA กลางหน้า + ย้ายกล่องซื้อไว้หลังรีวิว */

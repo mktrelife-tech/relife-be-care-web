@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="th">
-<head>
+<head><!--SEO:ga--><!--/SEO:ga-->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>ขอบคุณสำหรับคำสั่งซื้อ — Hopeful Relife</title>
@@ -28,7 +28,7 @@
 </section>
 
 <div id="site-footer"></div>
-<script src="assets/js/app.js?v=7"></script>
+<script src="assets/js/app.js?v=8"></script>
 <script>
 document.addEventListener("site:ready", function (e) {
   var s = e.detail.site, A = window.App;
@@ -37,6 +37,15 @@ document.addEventListener("site:ready", function (e) {
   var pay = q.get("pay") || "transfer";
 
   A.$("#orderNo").textContent = no;
+
+  /* GA4: ยิง purchase ครั้งเดียวต่อออเดอร์ (รีเฟรชหน้าก็ไม่นับซ้ำ) */
+  try {
+    var ga = JSON.parse(sessionStorage.getItem("ww_ga_purchase") || "null");
+    if (ga && ga.transaction_id === no) {
+      A.track("purchase", ga);
+      sessionStorage.removeItem("ww_ga_purchase");
+    }
+  } catch (e) {}
 
   var COPY = {
     transfer: {
