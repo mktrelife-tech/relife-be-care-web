@@ -1397,3 +1397,6 @@ table.compare tbody th { font-weight: 500; color: var(--ink-soft); }
 .pdp-installment__txt { flex: 1; }
 .pdp-installment__txt b { color: #1a8f4f; }
 .pdp-installment__arr { flex: 0 0 auto; font-size: 1.2rem; font-weight: 700; color: #27b86a; }
+.art-fig { margin: 26px 0; }
+.art-fig img { width: 100%; height: auto; border-radius: var(--r-lg); display: block; }
+.art-fig figcaption { font-size: .85rem; color: var(--ink-soft); text-align: center; margin-top: 8px; }

@@ -243,6 +243,8 @@ for (const p of PRODUCTS) {
    ============================================================ */
 function mdToHtml(src) {
   return String(src || "").split(/\n{2,}/).map((blk) => {
+    const im = blk.trim().match(/^!\[([^\]]*)\]\(([^)\s]+)\)$/);
+    if (im) return `<figure><img src="../${esc(im[2])}" alt="${esc(im[1])}" loading="lazy">${im[1] ? `<figcaption>${esc(im[1])}</figcaption>` : ""}</figure>`;
     blk = esc(blk.trim());
     if (!blk) return "";
     if (/^### /.test(blk)) return "<h3>" + blk.replace(/^### /, "") + "</h3>";

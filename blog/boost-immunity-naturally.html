@@ -12,7 +12,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@400;500;600;700&family=Prompt:wght@500;600;700&display=swap" rel="stylesheet">
 <link rel="icon" type="image/png" href="../assets/img/logo-mark.png">
-<link rel="stylesheet" href="../assets/css/style.css?v=13">
+<link rel="stylesheet" href="../assets/css/style.css?v=14">
 <!--SEO:meta-->
 <link rel="canonical" href="https://www.hopefulrelife.com/blog/boost-immunity-naturally.html">
 <meta property="og:type" content="article">
@@ -70,6 +70,10 @@ document.addEventListener("site:ready", function (e) {
   /* แปลง Markdown แบบง่าย (หัวข้อ / ตัวหนา / รายการ / ย่อหน้า) */
   function mdToHtml(src) {
     return String(src || "").split(/\n{2,}/).map(function (blk) {
+      /* รูปในเนื้อหา: ![คำบรรยาย](assets/img/...) อยู่บรรทัดเดียวทั้งย่อหน้า */
+      var im = blk.trim().match(/^!\[([^\]]*)\]\(([^)\s]+)\)$/);
+      if (im) return '<figure class="art-fig"><img src="' + A.esc(A.url(im[2])) + '" alt="' + A.esc(im[1]) + '" loading="lazy">' +
+        (im[1] ? "<figcaption>" + A.esc(im[1]) + "</figcaption>" : "") + "</figure>";
       blk = A.esc(blk.trim());
       if (!blk) return "";
       if (/^### /.test(blk)) return "<h3>" + blk.replace(/^### /, "") + "</h3>";
@@ -82,7 +86,10 @@ document.addEventListener("site:ready", function (e) {
       return "<p>" + blk.replace(/\n/g, "<br>") + "</p>";
     }).join("")
       .replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>")
-      .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a class="art-link" href="$2">$1</a>');
+      .replace(/\[([^\]]+)\]\(([^)]+)\)/g, function (m, t, h) {
+        /* path ภายในเว็บ → เติม ../ เมื่ออยู่หน้า blog/ */
+        return '<a class="art-link" href="' + (/^(https?:|\/|#|mailto:|tel:)/.test(h) ? h : A.url(h)) + '">' + t + "</a>";
+      });
   }
 
   /* กล่องสินค้าที่เกี่ยวข้อง (โยงบทความ → หน้าสินค้า) พร้อมรูปกล่องสินค้า */
