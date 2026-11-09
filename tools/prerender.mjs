@@ -16,7 +16,6 @@ import { fileURLToPath } from "node:url";
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const DOMAIN = "https://www.hopefulrelife.com";
-const TODAY = new Date().toISOString().slice(0, 10);
 
 const read = (f) => fs.readFileSync(path.join(ROOT, f), "utf8");
 const write = (f, s) => { fs.mkdirSync(path.dirname(path.join(ROOT, f)), { recursive: true }); fs.writeFileSync(path.join(ROOT, f), s); };
@@ -396,17 +395,15 @@ const shopFaqLd = { "@type": "FAQPage", "@id": DOMAIN + "/#faq", mainEntity: SHO
 /* ============================================================
    4) sitemap.xml / robots.txt / llms.txt / llms-full.txt
    ============================================================ */
-const pages = [
-  ["/", "1.0"], ["/shop.html", "0.9"], ["/articles.html", "0.7"], ["/about.html", "0.6"],
-  ["/quiz.html", "0.6"], ["/consult.html", "0.5"], ["/contact.html", "0.5"], ["/policy.html", "0.3"]
-];
+const pages = ["/", "/shop.html", "/articles.html", "/about.html", "/quiz.html", "/consult.html", "/contact.html", "/policy.html"];
 const sm = [
   `<?xml version="1.0" encoding="UTF-8"?>`,
   `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">`,
-  ...pages.map(([u, pr]) => `  <url><loc>${DOMAIN}${u}</loc><lastmod>${TODAY}</lastmod><priority>${pr}</priority></url>`),
-  ...PRODUCTS.map((p) => `  <url><loc>${productUrl(p)}</loc><lastmod>${TODAY}</lastmod><priority>0.8</priority>` +
+  ...pages.map((u) => `  <url><loc>${DOMAIN}${u}</loc></url>`),
+  /* lastmod ใส่เฉพาะเมื่อมีวันที่แก้เนื้อหาจริง (field updated ใน products.json) ห้ามใช้วันที่รันสคริปต์ */
+  ...PRODUCTS.map((p) => `  <url><loc>${productUrl(p)}</loc>${p.updated ? `<lastmod>${p.updated}</lastmod>` : ""}` +
     (productImg(p) ? `<image:image><image:loc>${productImg(p)}</image:loc></image:image>` : "") + `</url>`),
-  ...ARTICLES.map((a) => `  <url><loc>${blogUrl(a)}</loc><lastmod>${a.updated || a.date}</lastmod><priority>0.7</priority>` +
+  ...ARTICLES.map((a) => `  <url><loc>${blogUrl(a)}</loc><lastmod>${a.updated || a.date}</lastmod>` +
     (a.cover ? `<image:image><image:loc>${abs(a.cover)}</image:loc></image:image>` : "") + `</url>`),
   `</urlset>`, ""
 ].join("\n");
@@ -415,7 +412,6 @@ write("sitemap.xml", sm);
 write("robots.txt", [
   "# อนุญาตเครื่องมือค้นหาและ AI ทุกตัวให้อ่านเนื้อหาสินค้าและบทความ",
   "User-agent: *",
-  "Allow: /",
   "Disallow: /admin/",
   "Disallow: /api/",
   "Disallow: /content/orders.json",
@@ -423,9 +419,6 @@ write("robots.txt", [
   "Disallow: /thankyou.html",
   "Disallow: /order.html",
   "",
-  "# AI search / answer engines (ระบุชัดเพื่อให้แน่ใจว่าไม่ถูกบล็อก)",
-  ...["GPTBot", "OAI-SearchBot", "ChatGPT-User", "ClaudeBot", "Claude-SearchBot", "Claude-User", "PerplexityBot", "Perplexity-User", "Google-Extended", "Applebot-Extended", "Bingbot"]
-    .map((b) => `User-agent: ${b}\nAllow: /\nDisallow: /admin/\nDisallow: /api/\nDisallow: /checkout.html\nDisallow: /thankyou.html\nDisallow: /order.html\n`),
   `Sitemap: ${DOMAIN}/sitemap.xml`, ""
 ].join("\n"));
 
