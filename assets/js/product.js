@@ -93,7 +93,6 @@ document.addEventListener("site:ready", function (e) {
         '<button class="btn btn--primary btn--lg" id="addBtn">ใส่ตะกร้า</button>' +
         '<a class="btn btn--line btn--lg" href="' + A.esc(S.site.contact.lineUrl) + '" target="_blank" rel="noopener">ถามก่อนซื้อ</a>' +
       "</div>" +
-      (A.giftPromo() ? '<a href="' + A.esc(A.url("where-to-buy.html#promo")) + '" style="display:block;background:#FFF1E6;border:1px solid #FFD6B5;color:inherit;border-radius:var(--r-md);padding:14px 18px;font-size:.9rem;margin-bottom:12px"><b>🎁 ' + A.esc(A.giftPromo().title) + "</b><br>ซื้อครบ ฿" + A.baht(A.giftPromo().tiers[0].min) + " รับของแถม ถึง " + A.esc(A.giftPromo().endText) + " · ดูเงื่อนไข →</a>" : "") +
       '<div style="background:var(--sage-wash);border-radius:var(--r-md);padding:16px 18px;font-size:.9rem">' +
         "<b>🚚 " + (S.site.shipping.fee === 0 ? "ส่งฟรีทั่วไทย" : "ค่าส่ง ฿" + A.baht(S.site.shipping.fee)) + "</b><br>" +
         A.esc(S.site.shipping.carriers) + " · ส่งภายใน " + A.esc(S.site.shipping.leadTime) +

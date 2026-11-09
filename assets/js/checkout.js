@@ -45,17 +45,7 @@ document.addEventListener("site:ready", function (e) {
     "<div><span>ยอดรวมสินค้า</span><span>฿" + A.baht(subtotal) + "</span></div>" +
     "<div><span>ค่าจัดส่ง</span><span>" + (shipFee === 0
       ? "<b style='color:var(--sage-dark)'>ฟรี</b>" : "฿" + A.baht(shipFee)) + "</span></div>" +
-    "<div class='co-grand'><span>ยอดที่ต้องชำระ</span><b>฿" + A.baht(grand) + "</b></div>" +
-    giftHtml(A.giftFor(subtotal));
-
-  function giftHtml(g) {
-    if (!g || (!g.now && !g.next)) return "";
-    return "<div style='display:block;background:#FFF1E6;border-radius:12px;padding:12px 14px;margin-top:12px;font-size:.9rem'>" +
-      (g.now ? "🎁 <b>ของแถมของคุณ:</b> " + A.esc(g.now.gift) : "") +
-      (g.now && g.next ? "<br>" : "") +
-      (g.next ? "ซื้อเพิ่มอีก <b>฿" + A.baht(g.next.min - subtotal) + "</b> รับ " + A.esc(g.next.gift) : "") +
-      "</div>";
-  }
+    "<div class='co-grand'><span>ยอดที่ต้องชำระ</span><b>฿" + A.baht(grand) + "</b></div>";
 
   A.$("#coTrust").innerHTML =
     "<span>✓ สินค้าตรงปก</span><span>✓ " + A.esc(s.shipping.leadTime) + "</span><span>✓ เปลี่ยน/คืนได้ 7 วัน</span>";

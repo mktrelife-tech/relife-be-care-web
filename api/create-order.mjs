@@ -8,15 +8,6 @@ import { appendToSheet } from "./lib/sheet.mjs";
 import { buildPayment } from "./lib/gateway-payso.mjs";
 import { uploadSlip } from "./lib/blob.mjs";
 
-/* โปรของแถมตามยอดซื้อ (site.json → giftPromo) เทียบวันที่ตามเวลาไทย */
-function giftFor(g, amount) {
-  if (!g) return "";
-  const today = new Date(Date.now() + 7 * 3600000).toISOString().slice(0, 10);
-  if (today < g.start || today > g.end) return "";
-  const tier = (g.tiers || []).filter((t) => amount >= t.min).pop();
-  return tier ? tier.gift : "";
-}
-
 function siteUrlFrom(req) {
   if (process.env.SITE_URL) return process.env.SITE_URL.replace(/\/$/, "");
   const host = req.headers["x-forwarded-host"] || req.headers.host;
@@ -94,7 +85,6 @@ export default async function handler(req, res) {
     createdAt: new Date().toISOString(),
     status: payment === "card" ? "awaiting_payment" : "new",
     payment, customer, items, subtotal, shipFee, grandTotal,
-    gift: giftFor(site.giftPromo, subtotal),
     hasSlip: !!(payment === "transfer" && body.slip),
     slipUrl: "",
     paymentRef: ""

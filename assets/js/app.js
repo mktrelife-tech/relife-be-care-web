@@ -98,12 +98,9 @@
 
     /* แถบบนสุด — ถ้าใส่ items จะแสดงเป็นรายการมีไอคอนคั่น ถ้าไม่ใส่จะใช้ text ธรรมดา */
     const PROMO_ICON = ["🚚", "💵", "💳", "🎁", "⭐"];
-    const gift = giftPromo();
     let promoInner;
     if (s.promo && s.promo.active && s.promo.items && s.promo.items.length) {
-      promoInner = '<ul class="topbar__list">' +
-        (gift ? "<li><i>🎁</i>ซื้อครบ ฿" + baht(gift.tiers[0].min) + " รับของแถม ถึง " + esc(gift.endText) + "</li>" : "") +
-        s.promo.items.map((t, i) =>
+      promoInner = '<ul class="topbar__list">' + s.promo.items.map((t, i) =>
         "<li><i>" + PROMO_ICON[i % PROMO_ICON.length] + "</i>" + esc(t) + "</li>").join("") + "</ul>";
     } else if (s.promo && s.promo.active) {
       promoInner = "<span>" + esc(s.promo.text) + "</span>";
@@ -112,7 +109,7 @@
     }
     const promo = '<div class="topbar__promo">' + promoInner +
       (s.promo && s.promo.active && s.promo.link
-        ? '<a href="' + esc(url(gift ? "where-to-buy.html#promo" : s.promo.link)) + '">' + esc(s.promo.linkText) + " →</a>" : "") + "</div>";
+        ? '<a href="' + esc(url(s.promo.link)) + '">' + esc(s.promo.linkText) + " →</a>" : "") + "</div>";
 
     host.innerHTML =
       '<div class="topbar" id="topbar"><div class="wrap topbar__in">' + promo +
@@ -527,25 +524,8 @@
     bindAddButtons();
   }
 
-  /* โปรของแถมตามยอดซื้อ (site.json → giftPromo) หมดเขตแล้วซ่อนเองตามเวลาไทย */
-  function giftPromo() {
-    const g = state.site && state.site.giftPromo;
-    if (!g) return null;
-    const today = new Date(Date.now() + 7 * 3600000).toISOString().slice(0, 10);
-    return today >= g.start && today <= g.end ? g : null;
-  }
-  function giftFor(amount) {
-    const g = giftPromo();
-    if (!g) return null;
-    return {
-      now: g.tiers.filter((t) => amount >= t.min).pop() || null,
-      next: g.tiers.find((t) => amount < t.min) || null
-    };
-  }
-
   /* export */
   window.App = {
-    giftPromo: giftPromo, giftFor: giftFor,
     state: state, init: init, $: $, $$: $$, baht: baht, esc: esc, url: url, icon: icon,
     productCard: productCard, productImg: productImg, bindAddButtons: bindAddButtons,
     addToCart: addToCart, openCart: openCart, toast: toast, initReveal: initReveal,
