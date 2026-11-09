@@ -149,6 +149,7 @@ function productBody(p) {
 
   if (p.faq && p.faq.length) {
     parts.push(`<h2>คำถามที่พบบ่อยเกี่ยวกับ ${esc(p.name)}</h2>` + li(p.faq, (f) => `<h3>${esc(f.q)}</h3><p>${esc(f.a)}</p>`));
+    if (p.guide) parts.push(`<p><a href="../${esc(p.guide.url)}">${esc(p.guide.title)}</a></p>`);
   }
   if (p.warning || p.notFor) {
     parts.push(`<h2>คำเตือนและข้อควรระวัง</h2>` + (p.warning ? `<p>${esc(p.warning)}</p>` : "") +

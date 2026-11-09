@@ -270,7 +270,9 @@ document.addEventListener("site:ready", function (e) {
       '<div class="sec-head"><span class="eyebrow">คำถามที่พบบ่อย</span><h2>เรื่องที่ลูกค้าถามบ่อย</h2></div>' +
       '<div class="faq">' + p.faq.map(function (f) {
         return "<details><summary>" + A.esc(f.q) + "<span></span></summary><div class='faq__a'>" + A.esc(f.a) + "</div></details>";
-      }).join("") + "</div></div></section>" : "";
+      }).join("") + "</div>" +
+      (p.guide ? '<p style="margin:18px 0 0"><a class="art-link" href="' + A.esc(A.url(p.guide.url)) + '">📖 ' + A.esc(p.guide.title) + " →</a></p>" : "") +
+      "</div></section>" : "";
 
   /* เช็กลิสต์กลุ่มเสี่ยง (hook) */
   var secRisk = salepageImg ? "" : (p.riskChecklist && p.riskChecklist.items && p.riskChecklist.items.length) ?
