@@ -23,7 +23,6 @@
       <div class="thanks__mark" id="mark">🎉</div>
       <h1 id="title" style="font-size:clamp(1.6rem,3.4vw,2.2rem)">ขอบคุณสำหรับคำสั่งซื้อ</h1>
       <p style="color:var(--ink-soft)" id="lead"></p>
-      <div class="thanks__no" id="orderNo"></div>
       <div id="steps" style="text-align:left"></div>
       <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:28px" id="cta"></div>
     </div>
@@ -36,15 +35,12 @@
 document.addEventListener("site:ready", function (e) {
   var s = e.detail.site, A = window.App;
   var q = new URLSearchParams(location.search);
-  var no = q.get("no") || "-";
   var pay = q.get("pay") || "transfer";
-
-  A.$("#orderNo").textContent = no;
 
   /* GA4: ยิง purchase ครั้งเดียวต่อออเดอร์ (รีเฟรชหน้าก็ไม่นับซ้ำ) */
   try {
     var ga = JSON.parse(sessionStorage.getItem("ww_ga_purchase") || "null");
-    if (ga && ga.transaction_id === no) {
+    if (ga) {
       A.track("purchase", ga);
       sessionStorage.removeItem("ww_ga_purchase");
     }
@@ -96,7 +92,7 @@ document.addEventListener("site:ready", function (e) {
           "<b style='font-size:2rem;color:var(--brand-dark);font-family:var(--font-display)'>฿" + A.baht(amt) + "</b>" +
         "</div>" +
         "<p style='font-size:.88rem;color:var(--ink-soft);margin:14px 0 0;text-align:left'>" +
-          "✓ ยอดเงินและเลขออเดอร์ถูกส่งไปให้หน้าชำระเงินแล้ว คุณกรอกแค่อีเมลกับเบอร์โทร<br>" +
+          "✓ ยอดเงินถูกส่งไปให้หน้าชำระเงินแล้ว คุณกรอกแค่อีเมลกับเบอร์โทร<br>" +
           "✓ ข้อมูลบัตรกรอกบนระบบของ Pay Solutions โดยตรง เว็บเราไม่เห็นเลขบัตร</p>" +
       "</div>" +
       '<div style="background:var(--gold-wash);border-radius:var(--r-md);padding:14px 18px;font-size:.88rem;text-align:left">' +

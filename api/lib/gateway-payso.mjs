@@ -57,7 +57,7 @@ function buildApiRedirect(order, siteUrl) {
     total,
     cc:                "00",   /* 00 = บาท */
     lang:              "TH",
-    returnurl:         `${siteUrl}/thankyou.html?no=${encodeURIComponent(order.orderNo)}&pay=card`,
+    returnurl:         `${siteUrl}/thankyou.html?pay=card`,
     posturl:           `${siteUrl}/api/payment-callback`,
     customername:      `${c.firstName} ${c.lastName}`.slice(0, 100),
     customeraddress:   `${[c.address, c.subdistrict, c.district, c.province].filter(Boolean).join(" ")} ${c.zip}`.slice(0, 200),

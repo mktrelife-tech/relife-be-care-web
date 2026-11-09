@@ -247,15 +247,14 @@ document.addEventListener("site:ready", function (e) {
           return;
         }
 
-        /* บัตรเครดิตแบบ Payment Link — ต้องแสดงยอดและเลขออเดอร์ให้ลูกค้ากรอกเอง */
+        /* บัตรเครดิตแบบ Payment Link — ต้องแสดงยอดให้ลูกค้าก่อนไปจ่าย */
         if (data.payLink) {
           sessionStorage.setItem("ww_paylink", JSON.stringify(data.payLink));
-          location.href = "thankyou.html?no=" + encodeURIComponent(data.orderNo) + "&pay=card&mode=link";
+          location.href = "thankyou.html?pay=card&mode=link";
           return;
         }
 
-        location.href = "thankyou.html?no=" + encodeURIComponent(data.orderNo) +
-          "&pay=" + encodeURIComponent(payMethod) +
+        location.href = "thankyou.html?pay=" + encodeURIComponent(payMethod) +
           (data.warning ? "&warn=" + encodeURIComponent(data.warning) : "");
       })
       .catch(function (err) {
