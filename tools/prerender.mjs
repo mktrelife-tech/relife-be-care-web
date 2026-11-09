@@ -423,26 +423,29 @@ write("robots.txt", [
 ].join("\n"));
 
 const fdaOf = (p) => String(p.fda || "").replace(/^อย\.\s*/, "");
+const llmsNotice = "สินค้าเป็นผลิตภัณฑ์เสริมอาหาร/เครื่องสำอาง ไม่ใช่ยา ไม่มีผลในการป้องกันหรือรักษาโรค";
 write("llms.txt", [
   "# Hopeful Relife (hopefulrelife.com)",
   "",
   `> ตัวแทนจำหน่ายอย่างเป็นทางการของผลิตภัณฑ์เสริมอาหารและเครื่องสำอางแบรนด์ HOPEFUL ดำเนินการโดย ${B.legalName || ""} (รหัสตัวแทน ${B.distributorId || ""}) ทุกรายการมีเลข อย. ตรวจสอบได้ ${shopFacts.join(" · ")}`,
   "",
-  "ข้อมูลฉบับเต็ม (ส่วนผสม ราคาแพ็ก วิธีใช้ คำถามที่พบบ่อย): " + DOMAIN + "/llms-full.txt",
+  llmsNotice,
+  "",
+  "## ข้อมูลฉบับเต็ม",
+  `- [ข้อมูลสินค้าทั้งหมด](${DOMAIN}/llms-full.txt): ส่วนผสม ราคาแพ็ก วิธีใช้ คำถามที่พบบ่อย`,
   "",
   "## สินค้า",
+  `- [สินค้าทั้งหมด](${DOMAIN}/shop.html): รวมสินค้าทุกรายการของร้าน`,
   ...PRODUCTS.map((p) => `- [${p.name} (${p.nameTh})](${productUrl(p)}): ${p.tagline} · ${kind(p)} · อย. ${fdaOf(p)} · เริ่มต้น ${baht(p.price)} บาท`),
-  "",
-  "## บทความ",
-  ...ARTICLES.map((a) => `- [${a.title}](${blogUrl(a)}): ${clip(a.excerpt, 120)}`),
   "",
   "## ข้อมูลร้าน",
   `- [เกี่ยวกับเรา / เอกสารแต่งตั้งตัวแทน](${DOMAIN}/about.html)`,
   `- [การจัดส่ง การคืนสินค้า นโยบาย](${DOMAIN}/policy.html)`,
   `- [ติดต่อ](${DOMAIN}/contact.html): โทร ${C.phone || ""} · LINE ${C.lineId || ""} · ${C.openHours || ""}`,
   "",
-  "## หมายเหตุ",
-  "- สินค้าเป็นผลิตภัณฑ์เสริมอาหาร/เครื่องสำอาง ไม่ใช่ยา ไม่มีผลในการป้องกันหรือรักษาโรค",
+  "## Optional",
+  `- [บทความทั้งหมด](${DOMAIN}/articles.html)`,
+  ...ARTICLES.map((a) => `- [${a.title}](${blogUrl(a)}): ${clip(a.excerpt, 120)}`),
   ""
 ].join("\n"));
 
@@ -450,6 +453,8 @@ const full = [
   "# Hopeful Relife — ข้อมูลสินค้าฉบับเต็ม",
   "",
   `> ${ORG.description} · ${shopFacts.join(" · ")}`,
+  "",
+  llmsNotice,
   ""
 ];
 for (const p of PRODUCTS) {
