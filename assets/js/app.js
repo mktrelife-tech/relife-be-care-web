@@ -200,6 +200,7 @@
           "</div>" +
           "<div><h4>สินค้า</h4><ul>" + prodLinks + "</ul></div>" +
           '<div><h4>ข้อมูล</h4><ul>' +
+            '<li><a href="' + url("where-to-buy.html") + '">ซื้อของแท้ที่ไหน</a></li>' +
             '<li><a href="' + url("about.html") + '">เกี่ยวกับเรา</a></li>' +
             '<li><a href="' + url("order.html") + '">เช็คสถานะออเดอร์</a></li>' +
             '<li><a href="' + url("consult.html") + '">นัดปรึกษาผู้เชี่ยวชาญ</a></li>' +

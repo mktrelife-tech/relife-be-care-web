@@ -255,14 +255,15 @@ document.addEventListener("site:ready", function (e) {
   var trust = [
     { i: "✅", t: "มีเลข อย.", d: p.fda },
     { i: "🏭", t: "ผลิตมาตรฐาน GMP", d: "โรงงานได้รับการรับรอง" },
-    { i: "🪪", t: "ตัวแทนจำหน่ายแท้", d: "รหัส " + (biz.distributorId || "VIP0083") },
+    { i: "🪪", t: "ตัวแทนจำหน่ายแท้", d: "รหัส " + (biz.distributorId || "VIP0083"), link: "where-to-buy.html" },
     { i: "🚚", t: "ส่งฟรี + ปลายทาง", d: "ผ่อน 0% ได้" }
   ];
   var secTrust = salepageImg ? "" :
     '<section class="section section--sage pdp-sec"><div class="wrap">' +
       '<div class="sec-head"><span class="eyebrow">ความมั่นใจ</span><h2>ตรวจสอบได้ทุกอย่าง</h2></div>' +
       '<div class="trust-grid">' + trust.map(function (t) {
-        return '<div class="trust-item"><div class="trust-item__i">' + t.i + "</div><b>" + A.esc(t.t) + "</b><span>" + A.esc(t.d) + "</span></div>";
+        return '<div class="trust-item"><div class="trust-item__i">' + t.i + "</div><b>" + A.esc(t.t) + "</b><span>" + A.esc(t.d) + "</span>" +
+          (t.link ? '<a class="art-link" href="' + A.esc(A.url(t.link)) + '">ดูบัตรตัวแทน →</a>' : "") + "</div>";
       }).join("") + "</div></div></section>";
 
   var secFaq = (p.faq && p.faq.length) ?

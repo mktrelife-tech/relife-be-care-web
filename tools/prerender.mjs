@@ -387,6 +387,12 @@ const shopFaqLd = { "@type": "FAQPage", "@id": DOMAIN + "/#faq", mainEntity: SHO
   write("shop.html", html);
 }
 {
+  let html = read("where-to-buy.html");
+  html = block(html, "ld", "\n" + ldTag({ "@context": "https://schema.org", "@graph": [ORG, itemListLd] }) + "\n", beforeHeadEnd);
+  html = block(html, "cards", staticCards, insideId("grid"));
+  write("where-to-buy.html", html);
+}
+{
   /* หน้ารวมบทความ — รายการลิงก์ static */
   let html = read("articles.html");
   const list = ARTICLES.map((a) => `<a class="article-card" href="blog/${a.slug}.html"><div class="article-card__body"><span class="article-card__cat">${esc(a.category)}</span><h3>${esc(a.title)}</h3><p>${esc(clip(a.excerpt, 140))}</p></div></a>`).join("");
@@ -398,7 +404,7 @@ const shopFaqLd = { "@type": "FAQPage", "@id": DOMAIN + "/#faq", mainEntity: SHO
 /* ============================================================
    4) sitemap.xml / robots.txt / llms.txt / llms-full.txt
    ============================================================ */
-const pages = ["/", "/shop.html", "/articles.html", "/about.html", "/quiz.html", "/consult.html", "/contact.html", "/policy.html"];
+const pages = ["/", "/shop.html", "/where-to-buy.html", "/articles.html", "/about.html", "/quiz.html", "/consult.html", "/contact.html", "/policy.html"];
 const sm = [
   `<?xml version="1.0" encoding="UTF-8"?>`,
   `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">`,
@@ -442,6 +448,7 @@ write("llms.txt", [
   ...PRODUCTS.map((p) => `- [${p.name} (${p.nameTh})](${productUrl(p)}): ${p.tagline} · ${kind(p)} · อย. ${fdaOf(p)} · เริ่มต้น ${baht(p.price)} บาท`),
   "",
   "## ข้อมูลร้าน",
+  `- [ซื้อ HOPEFUL ของแท้ที่ไหน](${DOMAIN}/where-to-buy.html): บัตรตัวแทน หนังสือรับรอง และวิธีสั่งซื้อ`,
   `- [เกี่ยวกับเรา / เอกสารแต่งตั้งตัวแทน](${DOMAIN}/about.html)`,
   `- [การจัดส่ง การคืนสินค้า นโยบาย](${DOMAIN}/policy.html)`,
   `- [ติดต่อ](${DOMAIN}/contact.html): โทร ${C.phone || ""} · LINE ${C.lineId || ""} · ${C.openHours || ""}`,
