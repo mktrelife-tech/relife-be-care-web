@@ -244,6 +244,8 @@ function mdToHtml(src) {
   return String(src || "").split(/\n{2,}/).map((blk) => {
     const im = blk.trim().match(/^!\[([^\]]*)\]\(([^)\s]+)\)$/);
     if (im) return `<figure><img src="../${esc(im[2])}" alt="${esc(im[1])}" loading="lazy">${im[1] ? `<figcaption>${esc(im[1])}</figcaption>` : ""}</figure>`;
+    const yt = blk.trim().match(/^@\[youtube\]\(([\w-]{6,20})\)$/);
+    if (yt) return `<div class="video-embed" style="aspect-ratio:9/16;max-width:320px;margin:24px auto"><iframe src="https://www.youtube-nocookie.com/embed/${yt[1]}" title="วิดีโอประกอบบทความ" loading="lazy" allowfullscreen></iframe></div>`;
     blk = esc(blk.trim());
     if (!blk) return "";
     if (/^### /.test(blk)) return "<h3>" + blk.replace(/^### /, "") + "</h3>";
@@ -252,7 +254,7 @@ function mdToHtml(src) {
     return "<p>" + blk.replace(/\n/g, "<br>") + "</p>";
   }).join("")
     .replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>")
-    .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a class="art-link" href="$2">$1</a>');
+    .replace(/\[([^\]]+)\]\(([^)]+)\)/g, (m, t, h) => `<a class="art-link" href="${/^(https?:|\/|#|mailto:|tel:)/.test(h) ? h : "../" + h}">${t}</a>`);
 }
 
 /* ใส่ ../ ให้ path แบบ relative (เพราะหน้าอยู่ในโฟลเดอร์ blog/) — ไม่แตะโค้ดใน <script> */
