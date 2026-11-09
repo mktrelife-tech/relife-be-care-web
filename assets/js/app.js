@@ -98,9 +98,12 @@
 
     /* แถบบนสุด — ถ้าใส่ items จะแสดงเป็นรายการมีไอคอนคั่น ถ้าไม่ใส่จะใช้ text ธรรมดา */
     const PROMO_ICON = ["🚚", "💵", "💳", "🎁", "⭐"];
+    const gift = giftPromo();
     let promoInner;
     if (s.promo && s.promo.active && s.promo.items && s.promo.items.length) {
-      promoInner = '<ul class="topbar__list">' + s.promo.items.map((t, i) =>
+      promoInner = '<ul class="topbar__list">' +
+        (gift ? "<li><i>🎁</i>ซื้อครบ ฿" + baht(gift.tiers[0].min) + " รับของแถม ถึง " + esc(gift.endText) + "</li>" : "") +
+        s.promo.items.map((t, i) =>
         "<li><i>" + PROMO_ICON[i % PROMO_ICON.length] + "</i>" + esc(t) + "</li>").join("") + "</ul>";
     } else if (s.promo && s.promo.active) {
       promoInner = "<span>" + esc(s.promo.text) + "</span>";
@@ -109,7 +112,8 @@
     }
     const promo = '<div class="topbar__promo">' + promoInner +
       (s.promo && s.promo.active && s.promo.link
-        ? '<a href="' + esc(url(s.promo.link)) + '">' + esc(s.promo.linkText) + " →</a>" : "") + "</div>";
+        ? (gift ? '<a href="' + esc(s.contact.lineUrl) + '" target="_blank" rel="noopener">แอดไลน์รับโปร →</a>'
+               : '<a href="' + esc(url(s.promo.link)) + '">' + esc(s.promo.linkText) + " →</a>") : "") + "</div>";
 
     host.innerHTML =
       '<div class="topbar" id="topbar"><div class="wrap topbar__in">' + promo +
@@ -358,6 +362,7 @@
       '<p style="font-size:.85rem;color:var(--ink-soft);margin:0 0 14px">' +
         (ship.cod ? "💵 เก็บเงินปลายทางได้" : "") +
         (pay.installment ? (ship.cod ? " · " : "") + "💳 ผ่อน 0% ได้" : "") + "</p>" +
+      giftNote(total) +
       '<a class="btn btn--primary btn--block btn--lg" href="' + url("checkout.html") + '">สั่งซื้อสินค้า</a>' +
       '<button class="btn btn--ghost btn--block" id="checkoutLine" style="margin-top:10px">หรือสั่งผ่าน LINE</button>' +
       '<p style="font-size:.78rem;color:var(--ink-faint);text-align:center;margin:10px 0 0">' +
@@ -518,14 +523,81 @@
     renderFooter();
     ensureDrawer();
     updateCartCount();
+    renderGiftBanner();
 
     document.dispatchEvent(new CustomEvent("site:ready", { detail: state }));
     initReveal();
     bindAddButtons();
   }
 
+  /* โปรของแถมตามยอดซื้อ (site.json → giftPromo) หมดเขตแล้วซ่อนเองตามเวลาไทย */
+  function giftPromo() {
+    const g = state.site && state.site.giftPromo;
+    if (!g) return null;
+    const today = new Date(Date.now() + 7 * 3600000).toISOString().slice(0, 10);
+    return today >= g.start && today <= g.end ? g : null;
+  }
+  function giftFor(amount) {
+    const g = giftPromo();
+    if (!g) return null;
+    return {
+      now: g.tiers.filter((t) => amount >= t.min).pop() || null,
+      next: g.tiers.find((t) => amount < t.min) || null
+    };
+  }
+
+  /* ข้อความชวนแอดไลน์ แสดงคู่กับโปรทุกจุด */
+  function giftLine() {
+    const c = state.site.contact;
+    return '<a class="art-link" href="' + esc(c.lineUrl) + '" target="_blank" rel="noopener"><b>💬 แอดไลน์ ' + esc(c.lineId) + " เพื่อสั่งซื้อหรือรับโปรนี้</b></a>";
+  }
+
+  /* แบนเนอร์โปรใหญ่ในหน้าแรกและหน้าร้าน */
+  function renderGiftBanner() {
+    const host = $("#giftBanner"), g = giftPromo();
+    if (!host || !g) return;
+    host.innerHTML =
+      "<style>" +
+      ".gb{background:#FFF7F0;padding:clamp(24px,4vw,48px) 0}" +
+      ".gb__in{display:grid;grid-template-columns:minmax(0,340px) minmax(0,1fr);gap:clamp(22px,4vw,48px);align-items:center}" +
+      ".gb__img{display:block;width:100%;height:auto;border-radius:var(--r-lg);box-shadow:var(--sh-md)}" +
+      ".gb h2{margin:8px 0 4px;font-size:clamp(1.5rem,3vw,2.2rem)}" +
+      ".gb ul{list-style:none;padding:0;margin:16px 0;display:grid;gap:10px}" +
+      ".gb li{display:flex;gap:14px;align-items:center;background:#fff;border-radius:14px;padding:12px 16px;box-shadow:var(--sh-sm)}" +
+      ".gb li b{flex:none;min-width:84px;color:#D5281F;font-size:1.08rem}" +
+      ".gb small{display:block;color:var(--ink-soft);margin-bottom:16px}" +
+      "@media(max-width:760px){.gb__in{grid-template-columns:minmax(0,1fr)}.gb__img{max-width:420px;margin:0 auto}.gb .btn{width:100%;text-align:center;justify-content:center}}" +
+      "</style>" +
+      '<section class="gb"><div class="wrap gb__in">' +
+        '<a href="' + esc(url("shop.html")) + '#grid"><img class="gb__img" src="' + esc(url(g.image)) + '" width="832" height="1040" alt="' + esc(g.title) + '"></a>' +
+        '<div><span class="eyebrow">โปรโมชั่นถึง ' + esc(g.endText) + "</span><h2>" + esc(g.title) + "</h2><ul>" +
+          g.tiers.map((t) => "<li><b>฿" + baht(t.min) + "+</b><span>แถมฟรี " + esc(t.gift) + "</span></li>").join("") +
+        "</ul><small>*" + esc(g.note) + '</small><div style="display:flex;flex-wrap:wrap;gap:12px"><a class="btn btn--line btn--lg" href="' + esc(state.site.contact.lineUrl) + '" target="_blank" rel="noopener">💬 แอดไลน์ ' + esc(state.site.contact.lineId) + ' สั่งซื้อ/รับโปร</a><a class="btn btn--primary btn--lg" href="' + esc(url("shop.html")) + '#grid">เลือกสินค้ารับของแถม →</a></div></div>' +
+      "</div></section>";
+  }
+
+  /* กล่องโปรเหนือตัวเลือกแพ็กในหน้าสินค้า */
+  function giftBox() {
+    const g = giftPromo();
+    if (!g) return "";
+    return '<div style="background:#FFF1E6;border:1px solid #FFD6B5;border-radius:var(--r-md);padding:14px 16px;margin:0 0 14px;font-size:.9rem">' +
+      "<b>🎁 " + esc(g.title) + "</b> <span style='color:var(--ink-soft);font-size:.82rem'>ถึง " + esc(g.endText) + "</span>" +
+      '<ul style="list-style:none;padding:0;margin:8px 0">' + g.tiers.map((t) =>
+        "<li style='display:flex;gap:10px;padding:3px 0'><b style='flex:none;min-width:64px;color:#D5281F'>฿" + baht(t.min) + "+</b><span>" + esc(t.gift) + "</span></li>").join("") + "</ul>" +
+      "<small style='color:var(--ink-soft)'>*" + esc(g.note) + '</small> <a class="art-link" href="' + esc(url(g.image)) + '" target="_blank" rel="noopener">ดูรูปโปร</a><div style="margin-top:8px">' + giftLine() + "</div></div>";
+  }
+  /* ข้อความของแถมในตะกร้า */
+  function giftNote(amount) {
+    const f = giftFor(amount);
+    if (!f || (!f.now && !f.next)) return "";
+    return '<p style="background:#FFF1E6;border-radius:10px;padding:10px 12px;font-size:.85rem;margin:0 0 14px">' +
+      (f.now ? "🎁 <b>ของแถมของคุณ:</b> " + esc(f.now.gift) : "") + (f.now && f.next ? "<br>" : "") +
+      (f.next ? "ซื้อเพิ่มอีก <b>฿" + baht(f.next.min - amount) + "</b> รับ " + esc(f.next.gift) : "") + "<br>" + giftLine() + "</p>";
+  }
+
   /* export */
   window.App = {
+    giftPromo: giftPromo, giftFor: giftFor, giftBox: giftBox, giftLine: giftLine,
     state: state, init: init, $: $, $$: $$, baht: baht, esc: esc, url: url, icon: icon,
     productCard: productCard, productImg: productImg, bindAddButtons: bindAddButtons,
     addToCart: addToCart, openCart: openCart, toast: toast, initReveal: initReveal,

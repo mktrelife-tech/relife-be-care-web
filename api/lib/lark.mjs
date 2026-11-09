@@ -119,6 +119,10 @@ export function buildOrderCard(order, imageKey) {
     { tag: "div", text: { tag: "lark_md", content: `**📍 ที่อยู่จัดส่ง**\n${address}` } }
   ];
 
+  if (order.gift) {
+    elements.push({ tag: "div", text: { tag: "lark_md", content: `**🎁 ของแถมตามโปร**\n${order.gift}\nเลือกสินค้าแถมที่ไม่ซ้ำกับสินค้าที่ซื้อ` } });
+  }
+
   if (c.note) {
     elements.push({ tag: "div", text: { tag: "lark_md", content: `**📝 หมายเหตุ**\n${c.note}` } });
   }
