@@ -87,6 +87,7 @@ document.addEventListener("site:ready", function (e) {
       '<span class="eyebrow">เลือกแพ็ก &amp; สั่งซื้อ</span>' +
       "<h2 style='margin:10px 0 4px;font-size:clamp(1.4rem,3vw,1.9rem)'>" + A.esc(p.name) + "</h2>" +
       "<p style='color:var(--ink-faint);font-size:.86rem;margin:2px 0 14px'>อย. " + A.esc(p.fda) + " · " + A.esc(p.unit) + " · เลือกแพ็กที่คุ้มที่สุด</p>" +
+      (p.searchNames ? "<p style='color:var(--ink-faint);font-size:.8rem;margin:-8px 0 14px'>ค้นหาได้ทั้ง: " + A.esc(p.searchNames.join(", ")) + "</p>" : "") +
       A.giftBox() +
       packsHtml +
       '<div class="pdp__buy" style="margin-top:18px">' +

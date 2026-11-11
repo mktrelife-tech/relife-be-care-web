@@ -147,6 +147,7 @@ function productBody(p) {
     if (shopFacts.length) parts.push(`<p>${esc(shopFacts.join(" · "))}</p>`);
   }
 
+  if (p.searchNames) parts.push(`<p>ค้นหาได้ทั้ง: ${esc(p.searchNames.join(", "))}</p>`);
   if (p.faq && p.faq.length) {
     parts.push(`<h2>คำถามที่พบบ่อยเกี่ยวกับ ${esc(p.name)}</h2>` + li(p.faq, (f) => `<h3>${esc(f.q)}</h3><p>${esc(f.a)}</p>`));
     if (p.guide) parts.push(`<p><a href="../${esc(p.guide.url)}">${esc(p.guide.title)}</a></p>`);
@@ -187,7 +188,7 @@ function productLd(p) {
       "@type": "Product",
       "@id": url + "#product",
       name: p.name,
-      alternateName: p.nameTh,
+      alternateName: [p.nameTh, ...(p.searchNames || [])],
       description: p.short || p.tagline,
       image: [productImg(p), ...(p.packs || []).map((k) => abs(k.image))].filter(Boolean).slice(0, 6),
       brand: { "@type": "Brand", name: "HOPEFUL" },

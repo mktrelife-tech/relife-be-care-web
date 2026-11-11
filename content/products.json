@@ -258,7 +258,13 @@
       "guide": {
         "title": "วิธีดูเบต้าออยล์ของแท้ ของปลอม 6 จุด",
         "url": "blog/beta-oil-real-vs-fake.html"
-      }
+      },
+      "searchNames": [
+        "เบต้าออยล์",
+        "เบต้าออย",
+        "BETAOIL",
+        "Beta Oil"
+      ]
     },
     {
       "slug": "betax-plus",
@@ -487,7 +493,13 @@
           "a": "สินค้ามีเลข อย. 10-1-15662-5-0098 นำเลขนี้ไปตรวจสอบได้ที่เว็บไซต์ของสำนักงานคณะกรรมการอาหารและยา"
         }
       ],
-      "badgeColor": "#2AA17C"
+      "badgeColor": "#2AA17C",
+      "searchNames": [
+        "เบต้าเอ็กซ์พลัส",
+        "เบต้าเอ็กซ์",
+        "BETAX PLUS",
+        "BetaX"
+      ]
     },
     {
       "slug": "beta-life",
@@ -724,7 +736,12 @@
           "a": "สินค้ามีเลข อย. 13-1-01566-5-0025 นำเลขนี้ไปตรวจสอบได้ที่เว็บไซต์ของสำนักงานคณะกรรมการอาหารและยา"
         }
       ],
-      "badgeColor": "#8A5A3B"
+      "badgeColor": "#8A5A3B",
+      "searchNames": [
+        "เบต้าไลฟ์",
+        "BETALIFE",
+        "Beta Life"
+      ]
     },
     {
       "slug": "lab-farm",
@@ -955,7 +972,13 @@
           "a": "สินค้ามีเลข อย. 73-1-02663-5-0191 นำเลขนี้ไปตรวจสอบได้ที่เว็บไซต์ของสำนักงานคณะกรรมการอาหารและยา"
         }
       ],
-      "badgeColor": "#3C9A4E"
+      "badgeColor": "#3C9A4E",
+      "searchNames": [
+        "แล็บฟาร์ม",
+        "แลบฟาร์ม",
+        "แลปฟาร์ม",
+        "LABFARM"
+      ]
     },
     {
       "slug": "betaherb",
@@ -1190,7 +1213,13 @@
           "a": "สินค้ามีเลข อย. 10-1-15662-5-0011 นำเลขนี้ไปตรวจสอบได้ที่เว็บไซต์ของสำนักงานคณะกรรมการอาหารและยา"
         }
       ],
-      "badgeColor": "#6A4BA3"
+      "badgeColor": "#6A4BA3",
+      "searchNames": [
+        "เบต้าเฮิร์บ",
+        "เบต้าเฮิบ",
+        "BETAHERB",
+        "Beta Herb"
+      ]
     },
     {
       "slug": "beta-cal-pro-plus",
@@ -1431,7 +1460,13 @@
           "a": "สินค้ามีเลข อย. 13-1-01566-5-0027 นำเลขนี้ไปตรวจสอบได้ที่เว็บไซต์ของสำนักงานคณะกรรมการอาหารและยา"
         }
       ],
-      "badgeColor": "#2C6FB5"
+      "badgeColor": "#2C6FB5",
+      "searchNames": [
+        "เบต้าแคล",
+        "เบต้าแคลโปรพลัส",
+        "เบต้าแคลพลัส",
+        "BETACAL"
+      ]
     },
     {
       "slug": "beta-liv-pro-plus",
@@ -1656,7 +1691,13 @@
           "a": "สินค้ามีเลข อย. 13-1-15859-5-1473 นำเลขนี้ไปตรวจสอบได้ที่เว็บไซต์ของสำนักงานคณะกรรมการอาหารและยา"
         }
       ],
-      "badgeColor": "#B23A48"
+      "badgeColor": "#B23A48",
+      "searchNames": [
+        "เบต้าลีฟ",
+        "เบต้าลิฟ",
+        "เบต้าลีฟโปรพลัส",
+        "BETALIV"
+      ]
     },
     {
       "slug": "memora",
@@ -1743,7 +1784,7 @@
         ]
       },
       "name": "MEMORA",
-      "nameTh": "เมโมรา",
+      "nameTh": "เม็มโมร่า",
       "tagline": "เห็ดหัวลิง + พรหมมิ + แปะก๊วย ดูแลสมองและความจำ",
       "benefits": [
         "เห็ดหัวลิง (Lion's Mane)",
@@ -1864,7 +1905,14 @@
           "a": "สินค้ามีเลข อย. 13-1-01566-5-0069 นำเลขนี้ไปตรวจสอบได้ที่เว็บไซต์ของสำนักงานคณะกรรมการอาหารและยา"
         }
       ],
-      "badgeColor": "#D95C9A"
+      "badgeColor": "#D95C9A",
+      "searchNames": [
+        "เม็มโมร่า",
+        "เมโมรา",
+        "เมมโมร่า",
+        "เมโมร่า",
+        "Memora"
+      ]
     },
     {
       "slug": "beta-life-balance",
@@ -2069,7 +2117,12 @@
         "ingredients": "assets/img/salepage/beta-life-balance-04.jpg",
         "howto": "assets/img/salepage/beta-life-balance-05.jpg",
         "highlights": "assets/img/salepage/beta-life-balance-07.jpg"
-      }
+      },
+      "searchNames": [
+        "เบต้าไลฟ์บาลานซ์",
+        "เบต้าบาลานซ์",
+        "BETALIFE BALANCE"
+      ]
     },
     {
       "slug": "lab-balance",
@@ -2279,7 +2332,12 @@
         "howto": "assets/img/salepage/lab-balance-05.jpg",
         "highlights": "assets/img/salepage/lab-balance-07.jpg",
         "trust": "assets/img/salepage/lab-balance-06.jpg"
-      }
+      },
+      "searchNames": [
+        "แล็บบาลานซ์",
+        "แลบบาลานซ์",
+        "LABBALANCE"
+      ]
     },
     {
       "slug": "beta-care",
@@ -2485,7 +2543,12 @@
         "howto": "assets/img/salepage/beta-care-05.jpg",
         "highlights": "assets/img/salepage/beta-care-07.jpg",
         "trust": "assets/img/salepage/beta-care-06.jpg"
-      }
+      },
+      "searchNames": [
+        "เบต้าแคร์",
+        "BETACARE",
+        "Beta Care"
+      ]
     },
     {
       "slug": "beta-care-cream",
@@ -2682,7 +2745,12 @@
         "howto": "assets/img/salepage/beta-care-cream-05.jpg",
         "highlights": "assets/img/salepage/beta-care-cream-07.jpg",
         "trust": "assets/img/salepage/beta-care-cream-06.jpg"
-      }
+      },
+      "searchNames": [
+        "เบต้าแคร์ครีม",
+        "เบต้าแคร์ ครีม",
+        "BETACARE CREAM"
+      ]
     }
   ],
   "bundles": [
