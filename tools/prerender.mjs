@@ -103,6 +103,39 @@ const productUrl = (p) => `${DOMAIN}/p/${p.slug}.html`;
 const productImg = (p) => abs((p.sectionImages && p.sectionImages.hero) || p.header || (p.images && p.images[0]) || ((p.packs || [])[0] || {}).image);
 const productTitle = (p) => `${p.name} (${p.nameTh}) — ${p.tagline} | Hopeful Relife`;
 
+/* รูปทั้งหมดของสินค้า พร้อมคำบรรยายภาษาไทย (alt) — ใช้ทั้งในหน้า static, JSON-LD และ sitemap
+   เดิมหน้าสินค้ามีรูปเฉพาะตอน JS วาด → Google Images / AI crawler ไม่เห็นรูปเลย */
+const SECTION_ALT = {
+  hero: (p) => `${p.name} ${p.nameTh} ${p.tagline}`,
+  risk: (p) => `${p.name} ${p.nameTh} เรื่องที่ควรใส่ใจ`,
+  who: (p) => `${p.name} ${p.nameTh} เหมาะกับใคร`,
+  ingredients: (p) => `ส่วนประกอบสำคัญของ ${p.name} ${p.nameTh}`,
+  howto: (p) => `วิธี${isCosmetic(p) ? "ใช้" : "รับประทาน"} ${p.name} ${p.nameTh}`,
+  awards: (p) => `${p.name} ${p.nameTh} รางวัลและมาตรฐาน`,
+  trust: (p) => `${p.name} ${p.nameTh} ของแท้จากตัวแทนจำหน่ายอย่างเป็นทางการ`
+};
+function productImages(p) {
+  const out = [], seen = new Set();
+  const add = (src, alt, key) => {
+    if (!src) return;
+    const k = String(src).split("?")[0];
+    if (seen.has(k)) return;
+    seen.add(k);
+    out.push({ src, alt, key });
+  };
+  const sec = p.sectionImages || {};
+  if (sec.hero) add(sec.hero, SECTION_ALT.hero(p), "hero");
+  Object.keys(sec).forEach((k) => add(sec[k], (SECTION_ALT[k] || ((x) => `${x.name} ${x.nameTh} ข้อมูลสินค้า`))(p), k));
+  (p.images || []).forEach((src, i) => add(src, `${p.name} (${p.nameTh}) ภาพสินค้า ${i + 1}`, "gallery"));
+  (p.packs || []).slice().sort((a, b) => a.qty - b.qty)
+    .forEach((k) => add(k.image, `${p.name} ${p.nameTh} ${k.qty} ${unitWord(p)} ราคา ${baht(k.price)} บาท`, "pack"));
+  add(p.header, `${p.name} ${p.nameTh}`, "header");
+  return out;
+}
+const imgTag = (im, prefix) =>
+  `<img src="${prefix}${esc(String(im.src).replace(/^\.?\//, ""))}" alt="${esc(im.alt)}" loading="lazy" decoding="async" style="max-width:100%;height:auto">`;
+const fig = (im, prefix) => im ? `<figure>${imgTag(im, prefix)}<figcaption>${esc(im.alt)}</figcaption></figure>` : "";
+
 /* ============================================================
    1) หน้าสินค้า p/<slug>.html
    ============================================================ */
@@ -111,8 +144,13 @@ function productBody(p) {
   const li = (arr, f) => (arr || []).map(f).join("");
   const packs = (p.packs || []).slice().sort((a, b) => a.qty - b.qty);
   const parts = [];
+  const imgs = productImages(p);
+  const bySec = (k) => imgs.find((im) => im.key === k);
+  const used = new Set();
+  const figSec = (k) => { const im = bySec(k); if (!im) return ""; used.add(im); return fig(im, "../"); };
 
   parts.push(`<h1>${esc(p.name)} (${esc(p.nameTh)}) — ${esc(p.tagline)}</h1>`);
+  parts.push(figSec("hero"));
   /* สรุปแบบตอบคำถามทันที (Answer-first) — AI มักดึงย่อหน้าแรกไปตอบ */
   parts.push(`<p><strong>${esc(p.name)} คืออะไร?</strong> ${esc(p.name)} (${esc(p.nameTh)}) เป็น${kind(p)}จากแบรนด์ HOPEFUL ${esc(p.short || p.tagline)} ` +
     `เลขทะเบียน อย. ${esc(String(p.fda || "").replace(/^อย\.\s*/, ""))} · ${esc(p.unit || "")} · ราคาเริ่มต้น ${baht(p.price)} บาท</p>`);
@@ -127,15 +165,15 @@ function productBody(p) {
     parts.push(`<h2>จุดเด่นของ ${esc(p.name)}</h2><ul>${li(p.highlights, (h) => `<li><strong>${esc(h.t)}</strong>${h.d ? " — " + esc(h.d) : ""}</li>`)}</ul>`);
   }
   if (p.forWhoList && p.forWhoList.length) {
-    parts.push(`<h2>${esc(p.name)} เหมาะกับใคร</h2><ul>${li(p.forWhoList, (h) => `<li><strong>${esc(h.t)}</strong>${h.d ? " — " + esc(h.d) : ""}</li>`)}</ul>`);
+    parts.push(`<h2>${esc(p.name)} เหมาะกับใคร</h2>${figSec("who")}<ul>${li(p.forWhoList, (h) => `<li><strong>${esc(h.t)}</strong>${h.d ? " — " + esc(h.d) : ""}</li>`)}</ul>`);
   } else if (p.forWho) {
-    parts.push(`<h2>${esc(p.name)} เหมาะกับใคร</h2><p>${esc(p.forWho)}</p>`);
+    parts.push(`<h2>${esc(p.name)} เหมาะกับใคร</h2>${figSec("who")}<p>${esc(p.forWho)}</p>`);
   }
   if (p.ingredients && p.ingredients.length) {
-    parts.push(`<h2>ส่วนประกอบสำคัญของ ${esc(p.name)}</h2><table><thead><tr><th>ส่วนประกอบ</th><th>ปริมาณ</th></tr></thead><tbody>` +
+    parts.push(`<h2>ส่วนประกอบสำคัญของ ${esc(p.name)}</h2>${figSec("ingredients")}<table><thead><tr><th>ส่วนประกอบ</th><th>ปริมาณ</th></tr></thead><tbody>` +
       li(p.ingredients, (i) => `<tr><td>${esc(i.name)}</td><td>${esc(i.amount || "—")}</td></tr>`) + `</tbody></table>`);
   }
-  if (p.howto) parts.push(`<h2>วิธี${isCosmetic(p) ? "ใช้" : "รับประทาน"} ${esc(p.name)}</h2><p>${esc(p.howto)}</p>`);
+  if (p.howto) parts.push(`<h2>วิธี${isCosmetic(p) ? "ใช้" : "รับประทาน"} ${esc(p.name)}</h2>${figSec("howto")}<p>${esc(p.howto)}</p>`);
 
   if (packs.length) {
     const one = packs[0].price / (packs[0].qty || 1);
@@ -146,6 +184,10 @@ function productBody(p) {
       }) + `</tbody></table>`);
     if (shopFacts.length) parts.push(`<p>${esc(shopFacts.join(" · "))}</p>`);
   }
+
+  /* รูปที่เหลือ (รูปสินค้า / แพ็ก / ภาพประกอบอื่น) — ให้ Google Images และ AI เห็นครบ */
+  const rest = imgs.filter((im) => !used.has(im) && im.key !== "header");
+  if (rest.length) parts.push(`<h2>รูปสินค้า ${esc(p.name)} (${esc(p.nameTh)})</h2>` + rest.map((im) => fig(im, "../")).join(""));
 
   if (p.searchNames) parts.push(`<p>ค้นหาได้ทั้ง: ${esc(p.searchNames.join(", "))}</p>`);
   if (p.faq && p.faq.length) {
@@ -190,7 +232,9 @@ function productLd(p) {
       name: p.name,
       alternateName: [p.nameTh, ...(p.searchNames || [])],
       description: p.short || p.tagline,
-      image: [productImg(p), ...(p.packs || []).map((k) => abs(k.image))].filter(Boolean).slice(0, 6),
+      image: productImages(p).filter((im) => im.key !== "header").slice(0, 10).map((im) => ({
+        "@type": "ImageObject", url: abs(im.src), contentUrl: abs(im.src), caption: im.alt
+      })),
       brand: { "@type": "Brand", name: "HOPEFUL" },
       sku: p.slug,
       category: kind(p),
@@ -405,16 +449,19 @@ const shopFaqLd = { "@type": "FAQPage", "@id": DOMAIN + "/#faq", mainEntity: SHO
 /* ============================================================
    4) sitemap.xml / robots.txt / llms.txt / llms-full.txt
    ============================================================ */
-const pages = ["/", "/shop.html", "/where-to-buy.html", "/articles.html", "/about.html", "/quiz.html", "/consult.html", "/contact.html", "/policy.html"];
+const smImg = (u) => `<image:image><image:loc>${esc(u)}</image:loc></image:image>`;
+const articleBodyImgs = (a) => [...String(a.body || "").matchAll(/!\[[^\]]*\]\(([^)\s]+)\)/g)].map((m) => m[1]);
+const homeImgs = ["assets/img/hero.jpg", ...PRODUCTS.map(productImg)].filter(Boolean).map(abs);
+const pages = ["/","/shop.html", "/where-to-buy.html", "/articles.html", "/about.html", "/quiz.html", "/consult.html", "/contact.html", "/policy.html"];
 const sm = [
   `<?xml version="1.0" encoding="UTF-8"?>`,
   `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">`,
-  ...pages.map((u) => `  <url><loc>${DOMAIN}${u}</loc></url>`),
+  ...pages.map((u) => `  <url><loc>${DOMAIN}${u}</loc>` + (u === "/" ? [...new Set(homeImgs)].map(smImg).join("") : "") + `</url>`),
   /* lastmod ใส่เฉพาะเมื่อมีวันที่แก้เนื้อหาจริง (field updated ใน products.json) ห้ามใช้วันที่รันสคริปต์ */
   ...PRODUCTS.map((p) => `  <url><loc>${productUrl(p)}</loc>${p.updated ? `<lastmod>${p.updated}</lastmod>` : ""}` +
-    (productImg(p) ? `<image:image><image:loc>${productImg(p)}</image:loc></image:image>` : "") + `</url>`),
+    productImages(p).map((im) => smImg(abs(im.src))).join("") + `</url>`),
   ...ARTICLES.map((a) => `  <url><loc>${blogUrl(a)}</loc><lastmod>${a.updated || a.date}</lastmod>` +
-    (a.cover ? `<image:image><image:loc>${abs(a.cover)}</image:loc></image:image>` : "") + `</url>`),
+    [...new Set([a.cover, ...articleBodyImgs(a)].filter(Boolean).map(abs))].map(smImg).join("") + `</url>`),
   `</urlset>`, ""
 ].join("\n");
 write("sitemap.xml", sm);
@@ -499,6 +546,22 @@ for (const f of gaFiles) {
   const html = read(f);
   /* ใส่ไว้ต้น <head> เพื่อให้เก็บข้อมูลได้เร็วที่สุด */
   const out = block(html, "ga", gaSnippet, (h, w) => h.replace(/<head>/, () => "<head>" + w));
+  if (out !== html) write(f, out);
+}
+/* อนุญาตให้ Google แสดงรูปใหญ่ / snippet ยาวในผลค้นหา — ใส่เฉพาะหน้าที่ยังไม่มี meta robots ของตัวเอง (เช่น noindex) */
+const ROBOTS_META = `\n<meta name="robots" content="max-image-preview:large, max-snippet:-1, max-video-preview:-1">\n`;
+for (const f of gaFiles) {
+  const html = read(f);
+  const own = html.replace(/<!--SEO:robots-->[\s\S]*?<!--\/SEO:robots-->/, "");
+  const skip = /<meta name="robots"/.test(own) || /^(checkout|thankyou|order)\.html$/.test(f);
+  const out = block(html, "robots", skip ? "" : ROBOTS_META, beforeHeadEnd);
+  if (out !== html) write(f, out);
+}
+
+/* รูปตอนแชร์ลิงก์หน้าแรก/หน้าร้าน — ใช้ภาพครอบครัว+สินค้า แทนโลโก้ */
+for (const f of ["index.html", "shop.html", "where-to-buy.html"]) {
+  const html = read(f);
+  const out = html.replace(/(<meta (?:property="og:image"|name="twitter:image") content=")[^"]*assets\/img\/logo-full\.png(")/g, `$1${DOMAIN}/assets/img/hero.jpg$2`);
   if (out !== html) write(f, out);
 }
 if (!gaSnippet) console.log("GA4: ยังไม่ได้ใส่รหัส (site.json → analytics.ga4) — ข้ามการใส่ gtag");
