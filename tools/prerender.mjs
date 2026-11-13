@@ -97,7 +97,7 @@ const shopFacts = [
 ].filter(Boolean);
 
 const isCosmetic = (p) => /เครื่องสำอาง/.test(p.fda || "") || /cream/.test(p.slug);
-const kind = (p) => isCosmetic(p) ? "ผลิตภัณฑ์บำรุงผิว (เครื่องสำอาง)" : "ผลิตภัณฑ์เสริมอาหาร";
+const kind = (p) => p.kind || (isCosmetic(p) ? "ผลิตภัณฑ์บำรุงผิว (เครื่องสำอาง)" : "ผลิตภัณฑ์เสริมอาหาร");
 const unitWord = (p) => p.packUnit || (isCosmetic(p) ? "หลอด" : "กล่อง");
 const productUrl = (p) => `${DOMAIN}/p/${p.slug}.html`;
 const productImg = (p) => abs((p.sectionImages && p.sectionImages.hero) || p.header || (p.images && p.images[0]) || ((p.packs || [])[0] || {}).image);
