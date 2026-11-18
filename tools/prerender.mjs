@@ -84,7 +84,7 @@ const ORG = {
   url: DOMAIN,
   logo: abs(SITE.brand && SITE.brand.logo),
   telephone: "+66" + String(C.phoneRaw || "").replace(/^0/, ""),
-  sameAs: [C.lineUrl].filter((x) => x && /^https?:/.test(x)),
+  sameAs: [C.lineUrl, C.youtube].filter((x) => x && /^https?:/.test(x)),
   description: "ตัวแทนจำหน่ายอย่างเป็นทางการของผลิตภัณฑ์เสริมอาหารและเครื่องสำอางแบรนด์ HOPEFUL (รหัสตัวแทน " + (B.distributorId || "") + ")"
 };
 const sellerNote = `จำหน่ายโดย ${esc(B.legalName || "บริษัท รีไลฟ์ โซลูชั่นส์ จำกัด")} ตัวแทนจำหน่ายอย่างเป็นทางการของ HOPEFUL (รหัส ${esc(B.distributorId || "")}) · โทร ${esc(C.phone || "")} · LINE ${esc(C.lineId || "")}`;

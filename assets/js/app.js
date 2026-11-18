@@ -215,6 +215,7 @@
           "<div><h4>ติดต่อเรา</h4><ul>" +
             '<li>โทร <a href="tel:' + esc(s.contact.phoneRaw) + '">' + esc(s.contact.phone) + "</a></li>" +
             '<li>LINE <a href="' + esc(s.contact.lineUrl) + '" target="_blank" rel="noopener">' + esc(s.contact.lineId) + "</a></li>" +
+            (s.contact.youtube ? '<li>YouTube <a href="' + esc(s.contact.youtube) + '" target="_blank" rel="noopener">@HopefulRelife</a></li>' : "") +
             "<li>" + esc(s.contact.openHours) + "</li>" +
             '<li style="color:#9C9086;white-space:pre-line">' + esc(s.contact.address) + "</li>" +
           "</ul></div>" +
