@@ -2,6 +2,13 @@
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "cleanUrls": false,
   "trailingSlash": false,
+  "redirects": [
+    {
+      "source": "/:path((?!api/|admin$|admin/)[^.]+)",
+      "destination": "/:path.html",
+      "permanent": true
+    }
+  ],
   "headers": [
     {
       "source": "/assets/img/(.*)",
