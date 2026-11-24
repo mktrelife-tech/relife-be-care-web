@@ -1,0 +1,138 @@
+[
+ {
+  "slug": "hopeful-price-list",
+  "ref": "hopeful-supplement-schedule",
+  "products": [],
+  "l1": "ราคา HOPEFUL",
+  "l2": "ทุกตัว ทุกแพ็ก",
+  "color": "teal and gold",
+  "scene": "presenter smiling and pointing at the row of all HOPEFUL boxes on the table, a small paper price tag beside the boxes"
+ },
+ {
+  "slug": "hopeful-which-pack",
+  "ref": "beta-oil-when-to-take",
+  "products": [
+   "beta-oil"
+  ],
+  "l1": "ซื้อแพ็กไหน",
+  "l2": "คุ้มที่สุด?",
+  "color": "golden yellow and deep green",
+  "scene": "presenter holding up four fingers; on the table in front: FOUR identical BETA OIL boxes standing upright, each showing its full front face exactly like the attached box, arranged in a neat staggered row slightly overlapping each other (front box fully visible, the others peeking behind it, offset to the left) — NOT stacked flat, no thin sliced box edges, every box the same real size and proportions"
+ },
+ {
+  "slug": "hopeful-one-box-lasts",
+  "ref": "lab-farm-when-to-take",
+  "products": [
+   "lab-farm"
+  ],
+  "l1": "1 กล่อง",
+  "l2": "กินได้กี่วัน?",
+  "color": "green",
+  "scene": "presenter holding one capsule between two fingers, a LAB FARM box and a blister strip on the table next to a small desk calendar"
+ },
+ {
+  "slug": "hopeful-where-to-buy-genuine",
+  "ref": "hopeful-supplement-schedule",
+  "products": [],
+  "l1": "ซื้อของแท้",
+  "l2": "ที่ไหนดี?",
+  "color": "navy blue and red",
+  "scene": "presenter holding a product box and giving a confident thumbs-up, a round green check-mark shield badge floating near the headline"
+ },
+ {
+  "slug": "hopeful-fda-numbers",
+  "ref": "beta-cal-pro-plus-when-to-take",
+  "products": [
+   "beta-oil",
+   "beta-life"
+  ],
+  "l1": "เลข อย.",
+  "l2": "เช็กยังไง?",
+  "color": "royal blue",
+  "scene": "presenter holding a magnifying glass over the side of a product box, inspecting the label"
+ },
+ {
+  "slug": "hopeful-who-should-not-take",
+  "ref": "beta-liv-pro-plus-when-to-take",
+  "products": [
+   "beta-cal-pro-plus",
+   "betax-plus"
+  ],
+  "l1": "ใครไม่ควรกิน",
+  "l2": "ตัวไหนบ้าง?",
+  "color": "deep red",
+  "scene": "presenter with a calm, caring expression raising one open palm as a gentle 'wait' gesture, a small round amber caution icon near the headline"
+ },
+ {
+  "slug": "beta-oil-vs-beta-life",
+  "ref": "beta-life-when-to-take",
+  "products": [
+   "beta-oil",
+   "beta-life"
+  ],
+  "l1": "เบต้าออยล์ vs เบต้าไลฟ์",
+  "l2": "ต่างกันยังไง?",
+  "color": "brown and gold",
+  "scene": "presenter seated behind the two boxes, one hand open toward each box as if comparing them"
+ },
+ {
+  "slug": "lab-farm-vs-betax-plus",
+  "ref": "betax-plus-when-to-take",
+  "products": [
+   "lab-farm-3d",
+   "betax-plus"
+  ],
+  "l1": "แล็บฟาร์ม vs เบต้าเอ็กซ์",
+  "l2": "เลือกตัวไหนดี?",
+  "color": "emerald green and teal",
+  "scene": "presenter seated behind the two boxes, pointing at them with a thoughtful smile as if helping choose"
+ },
+ {
+  "slug": "beta-life-balance-vs-lab-balance",
+  "ref": "lab-balance-how-to-drink",
+  "products": [
+   "beta-life-balance",
+   "lab-balance"
+  ],
+  "l1": "บาลานซ์ 2 สูตร",
+  "l2": "ต่างกันยังไง?",
+  "color": "brown and green",
+  "scene": "two glasses of creamy drink in front of the two boxes, presenter holding one sachet"
+ },
+ {
+  "slug": "beta-life-vs-beta-life-balance",
+  "ref": "beta-life-balance-how-to-drink",
+  "products": [
+   "beta-life",
+   "beta-life-balance"
+  ],
+  "l1": "เบต้าไลฟ์ vs บาลานซ์",
+  "l2": "แคปซูลหรือชงดื่ม?",
+  "color": "warm brown",
+  "scene": "NO blister pack anywhere in the image; instead just two or three loose white capsules lying on the table in front of the BETALIFE box, and a glass of creamy drink beside the BETA LIFE BALANCE box; presenter gesturing between the two boxes"
+ },
+ {
+  "slug": "beta-care-vs-beta-care-cream",
+  "ref": "beta-care-cream-how-to-use",
+  "products": [
+   "beta-care",
+   "beta-care-cream"
+  ],
+  "l1": "เบต้าแคร์ กิน vs ทา",
+  "l2": "ใช้คู่กันได้ไหม?",
+  "color": "sky blue and teal",
+  "scene": "presenter holding the cream tube in one hand with the capsule box on the table, friendly smile"
+ },
+ {
+  "slug": "hopeful-order-shipping-payment",
+  "ref": "memora-when-to-take",
+  "products": [
+   "beta-oil",
+   "memora"
+  ],
+  "l1": "สั่งซื้อยังไง",
+  "l2": "ส่งกี่วัน?",
+  "color": "magenta pink",
+  "scene": "presenter holding a smartphone showing a generic shopping checkout screen (no readable text), a closed brown delivery parcel box on the table next to the product boxes"
+ }
+]
