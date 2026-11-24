@@ -1,0 +1,381 @@
+[
+  {
+    "slug": "hopeful-supplement-schedule",
+    "style": "kidney",
+    "product": "",
+    "l1": "กินอาหารเสริมหลายตัว",
+    "l2": "พร้อมกันได้ไหม?",
+    "sub": "จัดตารางกินเช้า–เย็น แบบไม่ตีกัน",
+    "icons": [
+      "ตัวไหนกินคู่กันได้",
+      "ตัวไหนต้องเว้น 2 ชม.",
+      "ตัวอย่างตารางกิน",
+      "กินคู่ยาประจำตัว"
+    ],
+    "scene": "a Thai grandmother and her adult daughter at a bright kitchen counter sorting supplements into a 7-day pill organizer, a glass of water and a wall clock"
+  },
+  {
+    "slug": "beta-oil-when-to-take",
+    "style": "kidney",
+    "product": "beta-oil",
+    "l1": "เบต้าออยล์",
+    "l2": "กินตอนไหนดี?",
+    "sub": "วันละกี่เม็ด ก่อนหรือหลังอาหาร ใครไม่ควรกิน",
+    "icons": [
+      "หลังอาหารเย็น",
+      "วันละ 1–2 เม็ด",
+      "ยาที่ต้องแยกมื้อ",
+      "ใครไม่ควรกิน"
+    ],
+    "scene": "a smiling Thai senior couple at a bright dinner table in the evening with a healthy Thai meal"
+  },
+  {
+    "slug": "betax-plus-when-to-take",
+    "style": "kidney",
+    "product": "betax-plus",
+    "l1": "เบต้าเอ็กซ์ พลัส",
+    "l2": "กินตอนไหน?",
+    "sub": "วันละกี่แคปซูล และใครไม่ควรกิน",
+    "icons": [
+      "พร้อมมื้อแรกของวัน",
+      "วันละ 1–2 แคปซูล",
+      "ช่วงฝุ่น PM2.5",
+      "ผู้ป่วยไตไม่ควรกิน"
+    ],
+    "scene": "a Thai man in his 50s on a bright condo balcony in the morning with a glass of water and breakfast, hazy city skyline softly in the background"
+  },
+  {
+    "slug": "beta-life-when-to-take",
+    "style": "kidney",
+    "product": "beta-life",
+    "l1": "เบต้าไลฟ์",
+    "l2": "กินตอนไหน?",
+    "sub": "ต้องเว้นห่างแคลเซียมและธาตุเหล็ก 2 ชั่วโมง",
+    "icons": [
+      "หลังอาหารเช้า",
+      "วันละ 1–2 แคปซูล",
+      "ห่างแคลเซียม 2 ชม.",
+      "ใครควรปรึกษาแพทย์"
+    ],
+    "scene": "a happy Thai grandmother eating breakfast (rice porridge and egg) at a bright window table while her granddaughter pours a glass of water"
+  },
+  {
+    "slug": "lab-farm-when-to-take",
+    "style": "kidney",
+    "product": "lab-farm",
+    "l1": "แล็บฟาร์ม",
+    "l2": "กินตอนไหนดี?",
+    "sub": "กินแบบดูแลภูมิ กับช่วงฟื้นฟูร่างกาย ต่างกันยังไง",
+    "icons": [
+      "พร้อมอาหารเช้า",
+      "ปกติ วันละ 1 แคปซูล",
+      "ช่วงฟื้นฟู เช้า+เย็น",
+      "คนความดันสูงระวัง"
+    ],
+    "scene": "a fit Thai senior couple in a bright green home garden in the morning, the man watering plants and the woman holding a glass of water",
+    "productRef": "lab-farm-3d",
+    "boxNote": "The product is a flat rectangular carton: front face about 1.4 times wider than tall, and thin — its depth is only about one fifth of its height, exactly like the attached 3D render. Keep these proportions exactly; do not make it taller, cubic or stretched."
+  },
+  {
+    "slug": "betaherb-when-to-take",
+    "style": "kidney",
+    "product": "betaherb",
+    "l1": "เบต้าเฮิร์บ",
+    "l2": "กินตอนไหน?",
+    "sub": "กินคู่เบต้าออยล์ ต้องเว้นกี่ชั่วโมง",
+    "icons": [
+      "พร้อมอาหารเช้า",
+      "วันละ 1 แคปซูล",
+      "ห่างเบต้าออยล์ 2 ชม.",
+      "คนแพ้ปลาห้ามกิน"
+    ],
+    "scene": "a Thai senior woman choosing fresh bitter gourds and vegetables at a bright clean market stall, smiling",
+    "productRef": "betaherb-3d",
+    "boxNote": "The product is a flat rectangular carton: front face about 1.4 times wider than tall, and thin — its depth is only about one fifth of its height, exactly like the attached 3D render. Keep these proportions exactly; do not make it taller, cubic or stretched."
+  },
+  {
+    "slug": "beta-cal-pro-plus-when-to-take",
+    "style": "kidney",
+    "product": "beta-cal-pro-plus",
+    "l1": "เบต้าแคล โปร พลัส",
+    "l2": "กินตอนไหน?",
+    "sub": "วันละกี่แคปซูล และต้องเว้นห่างจากอะไรบ้าง",
+    "icons": [
+      "หลังอาหารเช้า",
+      "วันละ 1–2 แคปซูล",
+      "ยาที่ต้องเว้น 2 ชม.",
+      "ผู้ป่วยไตไม่ควรกิน"
+    ],
+    "scene": "a happy Thai senior couple walking together on a sunny park path in the morning, sporty casual clothes"
+  },
+  {
+    "slug": "beta-liv-pro-plus-when-to-take",
+    "style": "kidney",
+    "product": "beta-liv-pro-plus",
+    "l1": "เบต้าลีฟ โปร พลัส",
+    "l2": "กินตอนไหน?",
+    "sub": "กินประจำ หรือกินก่อนดื่ม ต่างกันยังไง",
+    "icons": [
+      "หลังอาหารเช้า",
+      "วันละ 1–2 แคปซูล",
+      "ก่อนดื่ม 30–60 นาที",
+      "ใช้ยาละลายลิ่มเลือดระวัง"
+    ],
+    "scene": "a Thai office worker in his 40s at a bright modern office desk in the morning with a salad and a glass of water, smiling"
+  },
+  {
+    "slug": "memora-when-to-take",
+    "style": "kidney",
+    "product": "memora",
+    "l1": "เม็มโมร่า",
+    "l2": "กินตอนไหนดี?",
+    "sub": "ช่วง 3–6 เดือนแรก กับช่วงกินบำรุง ต่างกันยังไง",
+    "icons": [
+      "หลังอาหารเช้า",
+      "3–6 เดือนแรก เช้า+เย็น",
+      "ซื้อให้พ่อแม่",
+      "ยาละลายลิ่มเลือดระวัง"
+    ],
+    "scene": "a Thai grandfather happily doing a crossword puzzle with his granddaughter in a bright cozy living room with a cup of tea"
+  },
+  {
+    "slug": "beta-life-balance-how-to-drink",
+    "style": "kidney",
+    "product": "beta-life-balance",
+    "l1": "เบต้าไลฟ์ บาลานซ์",
+    "l2": "ชงยังไง?",
+    "sub": "ปริมาณน้ำ วันละกี่ซอง ผู้ป่วยไตดื่มได้ไหม",
+    "icons": [
+      "น้ำ 124 มล.",
+      "คน 2–3 นาที",
+      "วันละ 1–2 ซอง",
+      "ผู้ป่วยไตถามแพทย์"
+    ],
+    "scene": "a caring Thai daughter handing a glass of creamy beige nutrition drink to her elderly mother at a bright kitchen table"
+  },
+  {
+    "slug": "lab-balance-how-to-drink",
+    "style": "kidney",
+    "product": "lab-balance",
+    "l1": "แล็บ บาลานซ์",
+    "l2": "ชงยังไง?",
+    "sub": "เครื่องดื่มโปรตีน สำหรับคนกินข้าวได้น้อย",
+    "icons": [
+      "น้ำ 250 มล.",
+      "คน 2–3 นาที",
+      "วันละ 1–2 ซอง",
+      "แพ้ไข่หรือปลาระวัง"
+    ],
+    "scene": "a Thai senior man recovering at home sitting in a bright bedroom chair, smiling while holding a glass of white protein drink, his wife beside him"
+  },
+  {
+    "slug": "beta-care-when-to-take",
+    "style": "kidney",
+    "product": "beta-care",
+    "l1": "เบต้าแคร์",
+    "l2": "กินตอนไหน?",
+    "sub": "กี่แคปซูลต่อวัน กินคู่ยาปฏิชีวนะได้ไหม",
+    "icons": [
+      "หลังอาหารเช้า",
+      "ปกติ 1 แคปซูล",
+      "ห่างยาปฏิชีวนะ 2 ชม.",
+      "รักษากับแพทย์ต่อ"
+    ],
+    "scene": "a Thai woman in her 40s in a bright airy bedroom in the morning eating yogurt with fruit, relaxed and smiling, light blue and white tones"
+  },
+  {
+    "slug": "beta-care-cream-how-to-use",
+    "style": "kidney",
+    "product": "beta-care-cream",
+    "l1": "เบต้าแคร์ ครีม",
+    "l2": "ทาตอนไหนดี?",
+    "sub": "วันละกี่ครั้ง และทดสอบการแพ้ก่อนใช้",
+    "icons": [
+      "หลังอาบน้ำ",
+      "วันละ 2–3 ครั้ง",
+      "ทดสอบการแพ้ก่อน",
+      "ใช้ภายนอกเท่านั้น"
+    ],
+    "scene": "a Thai woman in a bright spa-like bathroom applying moisturizing cream to her arm after a shower, white towel, aloe vera plant"
+  },
+  {
+    "slug": "hopeful-food-allergy-guide",
+    "style": "oils",
+    "product": "",
+    "l1": "แพ้อาหาร",
+    "l2": "กินตัวไหนต้องระวัง?",
+    "sub": "ไข่ ปลา นมวัว ถั่วเหลือง เห็ด ในอาหารเสริม HOPEFUL",
+    "icons": [
+      "แพ้ไข่",
+      "แพ้ปลา–อาหารทะเล",
+      "แพ้นมวัว",
+      "แพ้ถั่วเหลือง"
+    ],
+    "scene": "common food allergens arranged beautifully on a bright white table: eggs, a fish fillet, shrimp, a glass of milk, soybeans and mushrooms"
+  },
+  {
+    "slug": "yeast-beta-glucan",
+    "style": "oils",
+    "product": "lab-farm",
+    "l1": "เบต้ากลูแคนจากยีสต์",
+    "l2": "คืออะไร?",
+    "sub": "ต่างจากเบต้ากลูแคนในข้าวโอ๊ตยังไง",
+    "icons": [
+      "จากยีสต์",
+      "จากเห็ด",
+      "จากข้าวโอ๊ต",
+      "อ่านฉลากให้เป็น"
+    ],
+    "scene": "bowls of dry yeast granules, rolled oats and fresh mushrooms on a bright white kitchen table with soft daylight"
+  },
+  {
+    "slug": "lingzhi-mushroom",
+    "style": "oils",
+    "product": "beta-life",
+    "l1": "เห็ดหลินจือ",
+    "l2": "คืออะไร?",
+    "sub": "อยู่ในอาหารเสริมตัวไหน ใครควรระวัง",
+    "icons": [
+      "เห็ดหลินจือแดง",
+      "สารสกัด vs ผงบด",
+      "คนแพ้เห็ดระวัง",
+      "ยาละลายลิ่มเลือด"
+    ],
+    "scene": "fresh glossy red lingzhi reishi mushrooms and a cup of herbal tea on a bright white wooden table with green leaves"
+  },
+  {
+    "slug": "alpha-lipoic-acid",
+    "style": "oils",
+    "product": "beta-life",
+    "l1": "กรดอัลฟาไลโปอิก",
+    "l2": "(ALA) คืออะไร?",
+    "sub": "สารต้านอนุมูลอิสระ ที่อยู่ในอาหารเสริมหลายตัว",
+    "icons": [
+      "ผักใบเขียว",
+      "บรอกโคลี",
+      "ไม่ใช่โอเมก้า-3",
+      "กินยาเบาหวานระวัง"
+    ],
+    "scene": "fresh spinach, broccoli and green vegetables in bowls on a bright white kitchen table with water droplets"
+  },
+  {
+    "slug": "calcium-l-threonate",
+    "style": "oils",
+    "product": "beta-cal-pro-plus",
+    "l1": "แคลเซียมแอล-ทรีโอเนต",
+    "l2": "คืออะไร?",
+    "sub": "อ่านฉลากแคลเซียมให้ถูก น้ำหนักบนฉลากไม่เท่าแคลเซียมจริง",
+    "icons": [
+      "แคลเซียม 3 แบบ",
+      "อ่านฉลากให้ถูก",
+      "คู่วิตามินดี",
+      "ผู้ป่วยไตไม่ควรกิน"
+    ],
+    "scene": "a glass of milk, white seashells, pearls and a small bowl of white mineral powder on a bright white and light blue table"
+  },
+  {
+    "slug": "collagen-type-2",
+    "style": "oils",
+    "product": "beta-cal-pro-plus",
+    "l1": "คอลลาเจนไทป์ทู",
+    "l2": "คืออะไร?",
+    "sub": "ต่างจากคอลลาเจนบำรุงผิวยังไง",
+    "icons": [
+      "กระดูกอ่อนในข้อ",
+      "ไทป์วัน–ผิว",
+      "อ่านชนิดบนฉลาก",
+      "แพ้นมวัวระวัง"
+    ],
+    "scene": "a happy Thai senior woman doing gentle knee stretches on a yoga mat in a bright living room"
+  },
+  {
+    "slug": "natto-livotox",
+    "style": "oils",
+    "product": "beta-liv-pro-plus",
+    "l1": "นัตโตะ",
+    "l2": "คืออะไร?",
+    "sub": "ถั่วหมักญี่ปุ่น LIVOTOX® ใน BETA LIV PRO PLUS",
+    "icons": [
+      "ถั่วเหลืองหมัก",
+      "วิตามินเค 2",
+      "แพ้ถั่วเหลืองระวัง",
+      "ยา Warfarin ระวัง"
+    ],
+    "scene": "a Japanese ceramic bowl of sticky natto soybeans lifted with chopsticks, soybeans scattered on a bright white table, minimal clean style"
+  },
+  {
+    "slug": "lions-mane-bacopa-ginkgo",
+    "style": "oils",
+    "product": "memora",
+    "l1": "เห็ดหัวลิง พรหมมิ แปะก๊วย",
+    "l2": "คืออะไร?",
+    "sub": "3 ส่วนผสมหลักใน MEMORA ต่างกันยังไง",
+    "icons": [
+      "เห็ดหัวลิง",
+      "พรหมมิ",
+      "ใบแปะก๊วย",
+      "เลือดแข็งตัวช้าระวัง"
+    ],
+    "scene": "a fresh white lion's mane mushroom, green ginkgo leaves and small bacopa leaves arranged on a bright white and soft pink table"
+  },
+  {
+    "slug": "probiotics-vs-prebiotics",
+    "style": "oils",
+    "product": "beta-care",
+    "l1": "โพรไบโอติกส์",
+    "l2": "ต่างจากพรีไบโอติก?",
+    "sub": "แก่นตะวันเกี่ยวอะไรด้วย",
+    "icons": [
+      "จุลินทรีย์มีชีวิต",
+      "ใยอาหารอินูลิน",
+      "แก่นตะวัน",
+      "ห่างยาปฏิชีวนะ"
+    ],
+    "scene": "a bowl of yogurt, fresh Jerusalem artichoke tubers, bananas and onions on a bright white and light blue kitchen table"
+  },
+  {
+    "slug": "curcumin-phytosome",
+    "style": "oils",
+    "product": "beta-care",
+    "l1": "เคอร์คูมิน",
+    "l2": "คืออะไร?",
+    "sub": "ต่างจากผงขมิ้นชันทั่วไปยังไง",
+    "icons": [
+      "สารสีเหลืองในขมิ้น",
+      "ดูดซึมได้น้อย",
+      "PHYTOSOME®",
+      "นิ่วในถุงน้ำดีระวัง"
+    ],
+    "scene": "fresh turmeric roots and a small bowl of bright yellow turmeric powder on a bright white table with green leaves"
+  },
+  {
+    "slug": "egg-white-protein-kidney",
+    "style": "oils",
+    "product": "beta-life-balance",
+    "l1": "โปรตีนไข่ขาว",
+    "l2": "กับผู้ป่วยไต",
+    "sub": "ทำไมใช้ไข่ขาว และต้องคุมปริมาณยังไง",
+    "icons": [
+      "โปรตีนคุณภาพดี",
+      "ฟอสฟอรัสต่ำ",
+      "ให้แพทย์กำหนด",
+      "แพ้ไข่ระวัง"
+    ],
+    "scene": "fresh eggs, separated egg whites in a clear glass bowl and a glass of nutrition drink on a bright white kitchen counter"
+  },
+  {
+    "slug": "mct-oil",
+    "style": "oils",
+    "product": "lab-balance",
+    "l1": "น้ำมัน MCT",
+    "l2": "คืออะไร?",
+    "sub": "ทำไมอยู่ในเครื่องดื่มสำหรับผู้สูงอายุและผู้พักฟื้น",
+    "icons": [
+      "ไขมันสายกลาง",
+      "ย่อยง่าย",
+      "ให้พลังงานเร็ว",
+      "ดื่มตามฉลาก"
+    ],
+    "scene": "a halved coconut, a small glass bottle of clear oil and a glass of white drink on a bright white table with tropical green leaves"
+  }
+]

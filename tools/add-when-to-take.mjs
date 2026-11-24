@@ -11,9 +11,11 @@ const NOTE = "*ผลิตภัณฑ์เสริมอาหาร ไม�
 const FORGOT = "## ลืมกินทำยังไง\n\nถ้าลืมกินมื้อไหน **ไม่ต้องกินเพิ่มเป็น 2 เท่า**ในวันถัดไป ให้กลับมากินตามปกติในรอบถัดไป อาหารเสริมเน้นความสม่ำเสมอระยะยาว มากกว่าการกินชดเชยในวันเดียว";
 const HABIT = "## เคล็ดลับกินให้สม่ำเสมอ\n\n- ผูกกับกิจวัตรที่ทำทุกวันอยู่แล้ว เช่น วางกล่องไว้ข้างโต๊ะกินข้าวเช้า\n- ใช้ตลับยาแบ่งวัน 7 ช่อง เห็นชัดว่ากินแล้วหรือยัง เหมาะกับผู้สูงอายุ\n- ตั้งปลุกในมือถือเวลาเดิมทุกวัน\n- ถ้าซื้อให้พ่อแม่ เขียนเวลากินติดไว้ที่กล่องให้ท่านดูง่าย";
 
+/* ใช้ปกจริงถ้ามีไฟล์ assets/img/articles/cover-<slug>.jpg ไม่งั้นใช้รูปสำรอง */
+const coverOf = (slug, fb) => fs.existsSync(`assets/img/articles/cover-${slug}.jpg`) ? `assets/img/articles/cover-${slug}.jpg` : fb;
 const art = (o) => ({
   slug: o.slug, title: o.title, category: o.cat || CAT, date: DATE,
-  excerpt: o.excerpt, cover: o.cover, product: o.product,
+  excerpt: o.excerpt, cover: coverOf(o.slug, o.cover), product: o.product,
   body: o.body.trim()
 });
 
