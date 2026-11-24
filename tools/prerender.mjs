@@ -296,7 +296,16 @@ function mdToHtml(src) {
     if (!blk) return "";
     if (/^### /.test(blk)) return "<h3>" + blk.replace(/^### /, "") + "</h3>";
     if (/^## /.test(blk)) return "<h2>" + blk.replace(/^## /, "") + "</h2>";
+    if (/^\|/.test(blk)) {
+      const rows = blk.split("\n").filter((l) => /^\|/.test(l) && !/^\|[\s|:-]+\|$/.test(l))
+        .map((l) => l.replace(/^\||\|$/g, "").split("|").map((c) => c.trim()));
+      const [head, ...body] = rows;
+      return `<div class="art-table"><table><thead><tr>${head.map((c) => `<th>${c}</th>`).join("")}</tr></thead><tbody>` +
+        body.map((r) => `<tr>${r.map((c) => `<td>${c}</td>`).join("")}</tr>`).join("") + `</tbody></table></div>`;
+    }
     if (/^[-*] /m.test(blk)) return "<ul>" + blk.split("\n").map((l) => "<li>" + l.replace(/^[-*]\s*/, "") + "</li>").join("") + "</ul>";
+    if (/^\d+\. /.test(blk)) return "<ol>" + blk.split("\n").map((l) => "<li>" + l.replace(/^\d+\.\s*/, "") + "</li>").join("") + "</ol>";
+    if (/^\*[^*][\s\S]*[^*]\*$/.test(blk)) return "<p><em>" + blk.slice(1, -1) + "</em></p>";
     return "<p>" + blk.replace(/\n/g, "<br>") + "</p>";
   }).join("")
     .replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>")
@@ -318,6 +327,18 @@ const articleTpl = read("article.html")
   .replace(/<!--SEO:[a-z]+-->[\s\S]*?<!--\/SEO:[a-z]+-->/g, "");
 
 const blogUrl = (a) => `${DOMAIN}/blog/${a.slug}.html`;
+
+/* ดึงคำถาม-คำตอบจากหัวข้อ "## คำถามที่พบบ่อย..." (### คำถาม + ย่อหน้าคำตอบ) → FAQPage schema */
+const plain = (s) => s.replace(/\*\*(.+?)\*\*/g, "$1").replace(/\[([^\]]+)\]\([^)]+\)/g, "$1").replace(/\s+/g, " ").trim();
+function articleFaq(a) {
+  const m = String(a.body || "").split(/\n(?=## )/).find((s) => /^## คำถามที่พบบ่อย/.test(s));
+  if (!m) return [];
+  return m.split(/\n(?=### )/).slice(1).map((s) => {
+    const [q, ...rest] = s.replace(/^### /, "").split(/\n{2,}/);
+    const ans = rest.filter((p) => p.trim() && !/^[*_]|^💬|^📞|^ดูราคา/.test(p.trim())).slice(0, 2).join(" ");
+    return { q: plain(q), a: plain(ans) };
+  }).filter((f) => f.q && f.a);
+}
 for (const a of ARTICLES) {
   const prod = PRODUCTS.find((x) => x.slug === a.product);
   const body =
@@ -354,7 +375,12 @@ for (const a of ARTICLES) {
           { "@type": "ListItem", position: 2, name: "บทความ", item: DOMAIN + "/articles.html" },
           { "@type": "ListItem", position: 3, name: a.title, item: blogUrl(a) }
         ]
-      }
+      },
+      ...(articleFaq(a).length ? [{
+        "@type": "FAQPage",
+        "@id": blogUrl(a) + "#faq",
+        mainEntity: articleFaq(a).map((f) => ({ "@type": "Question", name: f.q, acceptedAnswer: { "@type": "Answer", text: f.a } }))
+      }] : [])
     ]
   });
 

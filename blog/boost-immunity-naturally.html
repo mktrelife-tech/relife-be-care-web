@@ -84,11 +84,25 @@ document.addEventListener("site:ready", function (e) {
       if (!blk) return "";
       if (/^### /.test(blk)) return "<h3>" + blk.replace(/^### /, "") + "</h3>";
       if (/^## /.test(blk))  return "<h2>" + blk.replace(/^## /, "") + "</h2>";
+      if (/^\|/.test(blk)) {
+        var rows = blk.split("\n").filter(function (l) { return /^\|/.test(l) && !/^\|[\s|:-]+\|$/.test(l); })
+          .map(function (l) { return l.replace(/^\||\|$/g, "").split("|").map(function (c) { return c.trim(); }); });
+        return '<div class="art-table"><table><thead><tr>' + rows[0].map(function (c) { return "<th>" + c + "</th>"; }).join("") +
+          "</tr></thead><tbody>" + rows.slice(1).map(function (r) {
+            return "<tr>" + r.map(function (c) { return "<td>" + c + "</td>"; }).join("") + "</tr>";
+          }).join("") + "</tbody></table></div>";
+      }
       if (/^[-*] /m.test(blk)) {
         return "<ul>" + blk.split("\n").map(function (l) {
           return "<li>" + l.replace(/^[-*]\s*/, "") + "</li>";
         }).join("") + "</ul>";
       }
+      if (/^\d+\. /.test(blk)) {
+        return "<ol>" + blk.split("\n").map(function (l) {
+          return "<li>" + l.replace(/^\d+\.\s*/, "") + "</li>";
+        }).join("") + "</ol>";
+      }
+      if (/^\*[^*][\s\S]*[^*]\*$/.test(blk)) return "<p><em>" + blk.slice(1, -1) + "</em></p>";
       return "<p>" + blk.replace(/\n/g, "<br>") + "</p>";
     }).join("")
       .replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>")
