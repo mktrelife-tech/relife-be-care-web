@@ -236,6 +236,15 @@ document.addEventListener("site:ready", function (e) {
         '<div class="sec-head"><span class="eyebrow">วิดีโอรีวิว</span><h2>วิดีโอรีวิว</h2></div>' +
         '<div class="banner-ph"><b>🎬 วิดีโอรีวิว (ลิงก์ YouTube)</b><small>1-2 คลิป · ส่งลิงก์ youtu.be มาได้เลย</small></div></div></section>' : "";
 
+  /* คลิปให้ความรู้ (Shorts แนวตั้ง) — explainerVideos ของสินค้า + คลิปซื้อของแท้ที่ใช้ได้ทุกตัว (ตรงกับ VideoObject ที่ prerender ใส่) */
+  var exVids = (p.explainerVideos || []).concat(S.site.trustVideo ? [S.site.trustVideo] : []).filter(function (v, i, a) { return v && a.indexOf(v) === i; });
+  var secExplainers = exVids.length ?
+    '<section class="section pdp-sec"><div class="wrap">' +
+      '<div class="sec-head"><span class="eyebrow">วิดีโอแนะนำ</span><h2>วิดีโอเกี่ยวกับ ' + A.esc(p.name) + "</h2></div>" +
+      '<div class="pdp-shorts">' + exVids.map(function (vid) {
+        return '<div class="video-embed video-embed--short"><iframe src="https://www.youtube-nocookie.com/embed/' + A.esc(String(vid)) + '" title="วิดีโอ ' + A.esc(p.name) + '" loading="lazy" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>';
+      }).join("") + "</div></div></section>" : "";
+
   var secIng = salepageImg ? "" : (p.ingredients && p.ingredients.length) ?
     '<section class="section section--sand pdp-sec"><div class="wrap" style="max-width:760px">' +
       '<div class="sec-head"><span class="eyebrow">ส่วนประกอบสำคัญ</span><h2>ในทุกแคปซูล</h2>' +
@@ -381,12 +390,12 @@ document.addEventListener("site:ready", function (e) {
     '<div class="wrap"><p class="pdp-disc">' + A.esc(S.site.disclaimer) + "</p></div>";
 
   A.$("#pdpSections").innerHTML = salepageImg
-    ? secH1 + secBanners + secMidCta + secReviewVideos + secReviewImages + secFaq + secCta + disc
+    ? secH1 + secBanners + secMidCta + secReviewVideos + secReviewImages + secExplainers + secFaq + secCta + disc
     : imageLed
-    ? secHero + secRisk + secBanners + secHl + secIng + secHow + secTrust + secReviews + secFaq + secCta + disc
+    ? secHero + secRisk + secBanners + secHl + secIng + secHow + secTrust + secReviews + secExplainers + secFaq + secCta + disc
     : salepage
-    ? secH1 + imgFor("hero") + secReviewVideos + secReviewImages + secReviews + secStory + imgFor("risk") + secRisk + imgFor("highlights") + secHl + imgFor("who") + secWho + secMidCta + imgFor("ingredients") + secIng + imgFor("howto") + secHow + imgFor("awards") + secAwards + imgFor("trust") + secTrust + secFaq + secCta + disc
-    : secHero + secRisk + secWho + secHl + secAwards + secBanners + secIng + secHow + secTrust + secReviews + secFaq + secCta + disc;
+    ? secH1 + imgFor("hero") + secReviewVideos + secReviewImages + secReviews + secStory + imgFor("risk") + secRisk + imgFor("highlights") + secHl + imgFor("who") + secWho + secMidCta + imgFor("ingredients") + secIng + imgFor("howto") + secHow + imgFor("awards") + secAwards + imgFor("trust") + secTrust + secExplainers + secFaq + secCta + disc
+    : secHero + secRisk + secWho + secHl + secAwards + secBanners + secIng + secHow + secTrust + secReviews + secExplainers + secFaq + secCta + disc;
 
   /* ตัวนับเช็กลิสต์กลุ่มเสี่ยง — ครบ 3 ข้อ ไฮไลต์ */
   var riskBoxes = A.$$(".pdp-sec--risk input[type=checkbox]");

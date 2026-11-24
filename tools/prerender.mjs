@@ -26,6 +26,9 @@ const PRODUCTS = prodData.products || prodData;
 const SITE = json("content/site.json");
 const artData = json("content/articles.json");
 const ARTICLES = artData.articles || artData;
+/* คลิปให้ความรู้ (จาก tools/fetch-video-meta.mjs) — ใช้ทำส่วนวิดีโอ static + VideoObject
+   ตั้งใจไม่ใช้คลิปรีวิว (reviewVideos) เพราะชื่อคลิปพูดถึงโรค/ค่าตรวจ */
+const VIDEOS = fs.existsSync(path.join(ROOT, "content/videos.json")) ? json("content/videos.json") : {};
 
 const esc = (s) => String(s == null ? "" : s)
   .replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
@@ -226,6 +229,12 @@ function productBody(p) {
   const rest = imgs.filter((im) => !used.has(im) && im.key !== "header");
   if (rest.length) parts.push(`<h2>รูปสินค้า ${esc(p.name)} (${esc(p.nameTh)})</h2>` + rest.map((im) => fig(im, "../")).join(""));
 
+  const vids = productVideos(p);
+  if (vids.length) {
+    parts.push(`<h2>วิดีโอเกี่ยวกับ ${esc(p.name)}</h2>` + vids.map((v) =>
+      `<figure><a href="https://www.youtube.com/watch?v=${esc(v.id)}"><img src="https://i.ytimg.com/vi/${esc(v.id)}/hqdefault.jpg" alt="${esc(v.name)}" loading="lazy" style="max-width:100%;height:auto"></a><figcaption>${esc(v.name)}</figcaption></figure>`).join(""));
+  }
+
   if (p.searchNames) parts.push(`<p>ค้นหาได้ทั้ง: ${esc(p.searchNames.join(", "))}</p>`);
   if (allFaq(p).length) {
     parts.push(`<h2>คำถามที่พบบ่อยเกี่ยวกับ ${esc(p.name)}</h2>` + li(allFaq(p), (f) => `<h3>${esc(f.q)}</h3><p>${esc(f.a)}</p>`));
@@ -291,6 +300,7 @@ function productLd(p) {
       ]
     }
   ];
+  for (const v of productVideos(p)) graph.push(videoLd(v));
   if (allFaq(p).length) {
     graph.push({
       "@type": "FAQPage",
@@ -299,6 +309,26 @@ function productLd(p) {
     });
   }
   return ldTag({ "@context": "https://schema.org", "@graph": graph });
+}
+
+/* คลิปของสินค้า = explainerVideos ของตัวเอง + คลิปซื้อของแท้ (trustVideo) ที่ใช้ได้ทุกตัว */
+function productVideos(p) {
+  return [...new Set([...(p.explainerVideos || []), SITE.trustVideo])].map((id) => VIDEOS[id]).filter(Boolean);
+}
+const isoDur = (s) => `PT${Math.floor(s / 60) ? Math.floor(s / 60) + "M" : ""}${s % 60}S`;
+function videoLd(v) {
+  return {
+    "@type": "VideoObject",
+    "@id": `https://www.youtube.com/watch?v=${v.id}#video`,
+    name: v.name,
+    description: clip(v.description.replace(/#\S+/g, ""), 300) || v.name,
+    thumbnailUrl: [`https://i.ytimg.com/vi/${v.id}/hqdefault.jpg`],
+    uploadDate: v.uploadDate,
+    duration: isoDur(v.seconds || 0),
+    embedUrl: `https://www.youtube.com/embed/${v.id}`,
+    contentUrl: `https://www.youtube.com/watch?v=${v.id}`,
+    publisher: { "@id": DOMAIN + "/#org" }
+  };
 }
 
 /* คำถามที่คนถาม AI บ่อยที่สุดต่อสินค้า (ราคา / ซื้อของแท้ที่ไหน / กินตอนไหน) สร้างจากข้อมูลจริง + FAQ ใน products.json */
