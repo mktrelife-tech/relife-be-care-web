@@ -84,8 +84,44 @@ const ORG = {
   url: DOMAIN,
   logo: abs(SITE.brand && SITE.brand.logo),
   telephone: "+66" + String(C.phoneRaw || "").replace(/^0/, ""),
-  sameAs: [C.lineUrl, C.youtube].filter((x) => x && /^https?:/.test(x)),
-  description: "ตัวแทนจำหน่ายอย่างเป็นทางการของผลิตภัณฑ์เสริมอาหารและเครื่องสำอางแบรนด์ HOPEFUL (รหัสตัวแทน " + (B.distributorId || "") + ")"
+  sameAs: [C.lineUrl, C.youtube, C.facebook].filter((x) => x && /^https?:\/\/[^/]+\/./.test(x)),
+  description: "ตัวแทนจำหน่ายอย่างเป็นทางการของผลิตภัณฑ์เสริมอาหารและเครื่องสำอางแบรนด์ HOPEFUL (รหัสตัวแทน " + (B.distributorId || "") + ")",
+  /* ช่วยให้ Google/AI รู้ว่า "Hopeful Relife" คือใคร — ชื่อที่คนเรียก, ที่อยู่, ช่องทางติดต่อ, บริษัทแม่ */
+  alternateName: ["โฮปฟูล รีไลฟ์", "Hopeful Relife ตัวแทน HOPEFUL", "hopefulrelife.com"],
+  taxID: B.taxId,
+  address: {
+    "@type": "PostalAddress",
+    streetAddress: "โครงการ PLATINUM PLACE เลขที่ 76/4 ซอยรามคำแหง 178",
+    addressLocality: "เขตมีนบุรี",
+    addressRegion: "กรุงเทพมหานคร",
+    postalCode: "10510",
+    addressCountry: "TH"
+  },
+  contactPoint: {
+    "@type": "ContactPoint",
+    contactType: "customer service",
+    telephone: "+66" + String(C.phoneRaw || "").replace(/^0/, ""),
+    url: C.lineUrl,
+    areaServed: "TH",
+    availableLanguage: ["th"],
+    hoursAvailable: { "@type": "OpeningHoursSpecification", dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"], opens: "08:30", closes: "17:30" }
+  },
+  brand: { "@type": "Brand", name: "HOPEFUL" },
+  parentOrganization: {
+    "@type": "Organization",
+    name: B.legalName || "บริษัท รีไลฟ์ โซลูชั่นส์ จำกัด",
+    alternateName: "Relife Solutions Co., Ltd.",
+    url: "https://relife.co.th/",
+    sameAs: ["https://www.facebook.com/profile.php?id=61559599575146"]
+  }
+};
+
+/* ราคาทุกแพ็กเป็นประโยคเดียว — AI มักหยิบประโยคที่มีตัวเลขครบไปตอบคำถาม "ราคาเท่าไหร่" */
+const packsSorted = (p) => (p.packs || []).slice().sort((a, b) => a.qty - b.qty);
+const priceSentence = (p) => {
+  const ks = packsSorted(p);
+  if (!ks.length) return `${p.name} ราคา ${baht(p.price)} บาท`;
+  return `ราคา ${p.name} (${p.nameTh}) ` + ks.map((k) => `${k.qty} ${unitWord(p)} ${baht(k.price)} บาท`).join(" · ");
 };
 const sellerNote = `จำหน่ายโดย ${esc(B.legalName || "บริษัท รีไลฟ์ โซลูชั่นส์ จำกัด")} ตัวแทนจำหน่ายอย่างเป็นทางการของ HOPEFUL (รหัส ${esc(B.distributorId || "")}) · โทร ${esc(C.phone || "")} · LINE ${esc(C.lineId || "")}`;
 const ship = SITE.shipping || {};
@@ -154,6 +190,7 @@ function productBody(p) {
   /* สรุปแบบตอบคำถามทันที (Answer-first) — AI มักดึงย่อหน้าแรกไปตอบ */
   parts.push(`<p><strong>${esc(p.name)} คืออะไร?</strong> ${esc(p.name)} (${esc(p.nameTh)}) เป็น${kind(p)}จากแบรนด์ HOPEFUL ${esc(p.short || p.tagline)} ` +
     `เลขทะเบียน อย. ${esc(String(p.fda || "").replace(/^อย\.\s*/, ""))} · ${esc(p.unit || "")} · ราคาเริ่มต้น ${baht(p.price)} บาท</p>`);
+  parts.push(`<p><strong>${esc(p.name)} ราคาเท่าไหร่?</strong> ${esc(priceSentence(p))}${shopFacts.length ? " · " + esc(shopFacts.slice(0, 3).join(" · ")) : ""}</p>`);
 
   if (p.benefits && p.benefits.length) parts.push(`<ul>${li(p.benefits, (b) => `<li>${esc(b)}</li>`)}</ul>`);
 
@@ -177,7 +214,7 @@ function productBody(p) {
 
   if (packs.length) {
     const one = packs[0].price / (packs[0].qty || 1);
-    parts.push(`<h2>ราคา ${esc(p.name)} และโปรโมชั่น</h2><table><thead><tr><th>แพ็ก</th><th>ราคา</th><th>เฉลี่ยต่อ${u}</th></tr></thead><tbody>` +
+    parts.push(`<h2>ราคา ${esc(p.name)} และโปรโมชั่น</h2><p>${esc(priceSentence(p))}</p><table><thead><tr><th>แพ็ก</th><th>ราคา</th><th>เฉลี่ยต่อ${u}</th></tr></thead><tbody>` +
       li(packs, (k) => {
         const save = Math.round(one * k.qty - k.price);
         return `<tr><td>${k.qty} ${u}</td><td>${baht(k.price)} บาท</td><td>${baht(Math.round(k.price / k.qty))} บาท${save > 0 ? ` (ประหยัด ${baht(save)} บาท)` : ""}</td></tr>`;
@@ -190,8 +227,8 @@ function productBody(p) {
   if (rest.length) parts.push(`<h2>รูปสินค้า ${esc(p.name)} (${esc(p.nameTh)})</h2>` + rest.map((im) => fig(im, "../")).join(""));
 
   if (p.searchNames) parts.push(`<p>ค้นหาได้ทั้ง: ${esc(p.searchNames.join(", "))}</p>`);
-  if (p.faq && p.faq.length) {
-    parts.push(`<h2>คำถามที่พบบ่อยเกี่ยวกับ ${esc(p.name)}</h2>` + li(p.faq, (f) => `<h3>${esc(f.q)}</h3><p>${esc(f.a)}</p>`));
+  if (allFaq(p).length) {
+    parts.push(`<h2>คำถามที่พบบ่อยเกี่ยวกับ ${esc(p.name)}</h2>` + li(allFaq(p), (f) => `<h3>${esc(f.q)}</h3><p>${esc(f.a)}</p>`));
     if (p.guide) parts.push(`<p><a href="../${esc(p.guide.url)}">${esc(p.guide.title)}</a></p>`);
   }
   if (p.warning || p.notFor) {
@@ -254,14 +291,27 @@ function productLd(p) {
       ]
     }
   ];
-  if (p.faq && p.faq.length) {
+  if (allFaq(p).length) {
     graph.push({
       "@type": "FAQPage",
       "@id": url + "#faq",
-      mainEntity: p.faq.map((f) => ({ "@type": "Question", name: f.q, acceptedAnswer: { "@type": "Answer", text: f.a } }))
+      mainEntity: allFaq(p).map((f) => ({ "@type": "Question", name: f.q, acceptedAnswer: { "@type": "Answer", text: f.a } }))
     });
   }
   return ldTag({ "@context": "https://schema.org", "@graph": graph });
+}
+
+/* คำถามที่คนถาม AI บ่อยที่สุดต่อสินค้า (ราคา / ซื้อของแท้ที่ไหน / กินตอนไหน) สร้างจากข้อมูลจริง + FAQ ใน products.json */
+function allFaq(p) {
+  const fda = String(p.fda || "").replace(/^อย\.\s*/, "");
+  const guideArt = ARTICLES.find((a) => a.product === p.slug && /-(when-to-take|how-to-drink|how-to-use)$/.test(a.slug));
+  const auto = [
+    { q: `${p.name} (${p.nameTh}) ราคาเท่าไหร่`, a: `${priceSentence(p)}${shopFacts.length ? " · " + shopFacts.slice(0, 3).join(" · ") : ""} สั่งซื้อได้ที่ ${productUrl(p)}` },
+    { q: `ซื้อ${p.nameTh} (${p.name}) ของแท้ได้ที่ไหน`, a: `ซื้อได้ที่ Hopeful Relife (hopefulrelife.com) ดำเนินการโดย ${B.legalName || "บริษัท รีไลฟ์ โซลูชั่นส์ จำกัด"} ตัวแทนจำหน่ายอย่างเป็นทางการของ HOPEFUL รหัสตัวแทน ${B.distributorId || ""} สินค้ามีเลข${isCosmetic(p) ? "จดแจ้ง" : " อย."} ${fda} ดูบัตรตัวแทนได้ที่ ${DOMAIN}/where-to-buy.html` }
+  ];
+  if (p.howto && guideArt) auto.push({ q: `${p.nameTh} ${isCosmetic(p) ? "ใช้" : /ชนิดผง|ซอง/.test((p.kind || "") + (p.unit || "")) ? "ดื่ม" : "กิน"}ตอนไหน`, a: `${p.howto} อ่านรายละเอียดเพิ่มที่ ${DOMAIN}/blog/${guideArt.slug}.html` });
+  const own = (p.faq || []).filter((f) => !/ราคา|ซื้อ.*ที่ไหน/.test(f.q));
+  return [...auto, ...own];
 }
 
 let count = { products: 0, blog: 0 };
@@ -519,7 +569,7 @@ write("llms.txt", [
   "",
   "## สินค้า",
   `- [สินค้าทั้งหมด](${DOMAIN}/shop.html): รวมสินค้าทุกรายการของร้าน`,
-  ...PRODUCTS.map((p) => `- [${p.name} (${p.nameTh})](${productUrl(p)}): ${p.tagline} · ${kind(p)} · อย. ${fdaOf(p)} · เริ่มต้น ${baht(p.price)} บาท`),
+  ...PRODUCTS.map((p) => `- [${p.name} (${p.nameTh})](${productUrl(p)}): ${p.tagline} · ${kind(p)} · อย. ${fdaOf(p)} · ${priceSentence(p)}`),
   "",
   "## ข้อมูลร้าน",
   `- [ซื้อ HOPEFUL ของแท้ที่ไหน](${DOMAIN}/where-to-buy.html): บัตรตัวแทน หนังสือรับรอง และวิธีสั่งซื้อ`,
