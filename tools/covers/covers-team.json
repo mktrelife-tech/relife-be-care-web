@@ -134,5 +134,82 @@
   "l2": "ส่งกี่วัน?",
   "color": "magenta pink",
   "scene": "presenter holding a smartphone showing a generic shopping checkout screen (no readable text), a closed brown delivery parcel box on the table next to the product boxes"
+ },
+ {
+  "slug": "beta-oil-review",
+  "ref": "beta-oil-when-to-take",
+  "products": [
+   "beta-oil"
+  ],
+  "l1": "เบต้าออยล์",
+  "l2": "ดีไหม? ใครควรกิน",
+  "color": "golden yellow and deep green",
+  "scene": "presenter seated at the table holding a small clipboard checklist with three green tick marks (no readable text on it) in one hand and giving a friendly confident smile; the product box stands upright on the table in front of him with a few natural ingredient props; NO blister packs and NO loose capsules anywhere in the image; do NOT copy any icon or emblem from the style reference"
+ },
+ {
+  "slug": "beta-life-review",
+  "ref": "beta-life-when-to-take",
+  "products": [
+   "beta-life"
+  ],
+  "l1": "เบต้าไลฟ์",
+  "l2": "ดีไหม? ใครควรกิน",
+  "color": "brown and gold",
+  "scene": "presenter seated at the table holding a small clipboard checklist with three green tick marks (no readable text on it) in one hand and giving a friendly confident smile; the product box stands upright on the table in front of him with a few natural ingredient props; NO blister packs and NO loose capsules anywhere in the image; do NOT copy any icon or emblem from the style reference"
+ },
+ {
+  "slug": "beta-liv-pro-plus-review",
+  "ref": "beta-liv-pro-plus-when-to-take",
+  "products": [
+   "beta-liv-pro-plus"
+  ],
+  "l1": "เบต้าลีฟ โปร พลัส",
+  "l2": "ดีไหม? ใครควรกิน",
+  "color": "deep red",
+  "scene": "presenter seated at the table holding a small clipboard checklist with three green tick marks (no readable text on it) in one hand and giving a friendly confident smile; the product box stands upright on the table in front of him with a few natural ingredient props; NO blister packs and NO loose capsules anywhere in the image; do NOT copy any icon or emblem from the style reference"
+ },
+ {
+  "slug": "beta-cal-pro-plus-review",
+  "ref": "beta-cal-pro-plus-when-to-take",
+  "products": [
+   "beta-cal-pro-plus"
+  ],
+  "l1": "เบต้าแคล โปร พลัส",
+  "l2": "ดีไหม? ใครควรกิน",
+  "color": "royal blue",
+  "scene": "presenter seated at the table holding a small clipboard checklist with three green tick marks (no readable text on it) in one hand and giving a friendly confident smile; the product box stands upright on the table in front of him with a few natural ingredient props; NO blister packs and NO loose capsules anywhere in the image; do NOT copy any icon or emblem from the style reference"
+ },
+ {
+  "slug": "betaherb-review",
+  "ref": "betaherb-when-to-take",
+  "products": [
+   "betaherb-3d"
+  ],
+  "l1": "เบต้าเฮิร์บ",
+  "l2": "ดีไหม? ใครควรกิน",
+  "color": "purple",
+  "scene": "presenter seated at the table holding a small clipboard checklist with three green tick marks (no readable text on it) in one hand and giving a friendly confident smile; the product box stands upright on the table in front of him with a few natural ingredient props; NO blister packs and NO loose capsules anywhere in the image; do NOT copy any icon or emblem from the style reference"
+ },
+ {
+  "slug": "lab-farm-review",
+  "ref": "lab-farm-when-to-take",
+  "products": [
+   "lab-farm-3d"
+  ],
+  "l1": "แล็บฟาร์ม",
+  "l2": "ดีไหม? ใครควรกิน",
+  "color": "green",
+  "scene": "presenter seated at the table holding a small clipboard checklist with three green tick marks (no readable text on it) in one hand and giving a friendly confident smile; the product box stands upright on the table in front of him with a few natural ingredient props; NO blister packs and NO loose capsules anywhere in the image; do NOT copy any icon or emblem from the style reference"
+ },
+ {
+  "slug": "betax-plus-review",
+  "ref": "betax-plus-when-to-take",
+  "products": [
+   "betax-plus"
+  ],
+  "l1": "เบต้าเอ็กซ์ พลัส",
+  "l2": "ดีไหม? ใครควรกิน",
+  "color": "emerald green and teal",
+  "scene": "presenter seated at the table holding a small clipboard checklist with three green tick marks (no readable text on it) in one hand and giving a friendly confident smile; the product box stands upright on the table in front of him with a few natural ingredient props; NO blister packs and NO loose capsules anywhere in the image; do NOT copy any icon or emblem from the style reference"
  }
 ]
