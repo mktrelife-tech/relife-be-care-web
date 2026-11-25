@@ -359,8 +359,29 @@ for (const p of PRODUCTS) {
   html = block(html, "ld", "\n" + productLd(p) + "\n", beforeHeadEnd);
   html = html.replace(/<span id="crumbName">[^<]*<\/span>/, () => `<span id="crumbName">${esc(p.name)}</span>`);
   html = block(html, "body", productBody(p), insideId("pdpSections"));
+  /* บทความที่เกี่ยวกับสินค้านี้ — อยู่นอก #pdpSections เพื่อไม่ให้ JS เขียนทับ (คนเห็นจริง + Google ตามลิงก์ไปบทความ) */
+  const rel = relatedArticles(p);
+  if (rel.length) html = block(html, "related", relatedHtml(p, rel), (h, w) => h.replace('<div id="site-footer">', () => w + '\n<div id="site-footer">'));
   write(f, html);
   count.products++;
+}
+
+function relatedArticles(p) {
+  const longer = PRODUCTS.map((q) => q.slug).filter((s) => s !== p.slug && s.startsWith(p.slug));
+  const mine = ARTICLES.filter((a) => {
+    if (a.product === p.slug) return true;
+    if (longer.some((s) => a.slug.startsWith(s + "-") || a.slug.includes("-" + s))) return false;
+    return a.slug.startsWith(p.slug + "-") || a.slug.includes("-vs-" + p.slug) || a.slug.includes(p.slug + "-vs-");
+  });
+  const general = ["hopeful-price-list", "hopeful-where-to-buy-genuine", "hopeful-supplement-schedule", "hopeful-who-should-not-take"]
+    .map((s) => ARTICLES.find((a) => a.slug === s)).filter(Boolean);
+  return [...new Map([...mine, ...general].map((a) => [a.slug, a])).values()].slice(0, 8);
+}
+function relatedHtml(p, rel) {
+  return `<section class="section" id="related-articles"><div class="wrap"><div class="sec-head"><span class="eyebrow">บทความ</span><h2>บทความเกี่ยวกับ ${esc(p.name)}</h2></div><div class="articles">` +
+    rel.map((a) => `<a class="article-card" href="../blog/${esc(a.slug)}.html"><div class="article-card__media"><img src="../${esc(String(a.cover || "").replace(/^\//, ""))}" alt="${esc(a.title)}" loading="lazy"></div>` +
+      `<div class="article-card__body"><span class="article-card__cat">${esc(a.category)}</span><h3>${esc(a.title)}</h3><p>${esc(clip(a.excerpt, 110))}</p></div></a>`).join("") +
+    `</div><p style="text-align:center;margin-top:20px"><a class="btn btn--ghost" href="../articles.html">ดูบทความทั้งหมด</a></p></div></section>`;
 }
 
 /* ============================================================
@@ -558,7 +579,7 @@ const shopFaqLd = { "@type": "FAQPage", "@id": DOMAIN + "/#faq", mainEntity: SHO
 const smImg = (u) => `<image:image><image:loc>${esc(u)}</image:loc></image:image>`;
 const articleBodyImgs = (a) => [...String(a.body || "").matchAll(/!\[[^\]]*\]\(([^)\s]+)\)/g)].map((m) => m[1]);
 const homeImgs = ["assets/img/hero.jpg", ...PRODUCTS.map(productImg)].filter(Boolean).map(abs);
-const pages = ["/","/shop.html", "/where-to-buy.html", "/articles.html", "/about.html", "/quiz.html", "/consult.html", "/contact.html", "/policy.html"];
+const pages = ["/","/shop.html", "/where-to-buy.html", "/articles.html", "/about.html", "/quiz.html", "/contact.html", "/policy.html"];
 const sm = [
   `<?xml version="1.0" encoding="UTF-8"?>`,
   `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">`,
