@@ -413,9 +413,8 @@
  {
   "slug": "hopeful-one-box-lasts",
   "style": "oils",
-  "product": "lab-farm",
-  "productRef": "lab-farm-3d",
-  "boxNote": "The LAB FARM box is a slim flat rectangular carton, wide and short, not deep — keep it exactly like the attached render. REAL SIZE: the product box is small — about the size of a smartphone (roughly 12 cm wide, 8 cm tall, 2.5 cm deep). Scale it correctly relative to the people, hands, cups and table: it must look smaller than a person's head and similar in size to a phone, never oversized.",
+  "product": "beta-oil",
+  "boxNote": "Keep the box's real proportions exactly as in the attached image (do not stretch it or make it deeper). REAL SIZE: the BETA OIL box is about the size of a smartphone (roughly 12 cm wide, 9 cm tall, 2.5 cm deep) — similar in height to the coffee mug, standing upright on the table near the pill organizer, slightly angled, with a soft realistic shadow.",
   "l1": "1 กล่อง",
   "l2": "กินได้กี่วัน?",
   "sub": "ตารางครบทุกตัว + 1 เดือนใช้กี่กล่อง",
@@ -425,7 +424,7 @@
    "วันละ 2 = 5 วัน",
    "1 เดือนใช้กี่กล่อง"
   ],
-  "scene": "a Thai elderly man at a sunny breakfast table placing one capsule into a weekly pill organizer, a paper wall calendar in the background"
+  "scene": "a Thai elderly man at a sunny breakfast table placing one golden softgel capsule into a clear 7-day pill organizer, a coffee mug on the table, a paper wall calendar in the background"
  },
  {
   "slug": "hopeful-order-shipping-payment",
