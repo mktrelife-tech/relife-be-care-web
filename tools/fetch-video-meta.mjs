@@ -10,7 +10,9 @@ const db = fs.existsSync(FILE) ? JSON.parse(fs.readFileSync(FILE, "utf8")) : {};
 const all = process.argv.includes("--all");
 const SITE = JSON.parse(fs.readFileSync("content/site.json", "utf8"));
 /* เฉพาะคลิปให้ความรู้ (explainerVideos + trustVideo) — คลิปรีวิวที่พูดถึงโรค ไม่เอามาเป็นข้อความ/สคีมาบนเว็บ */
-const ids = [...new Set([SITE.trustVideo, ...products.flatMap((p) => p.explainerVideos || [])].filter(Boolean))];
+const ART = JSON.parse(fs.readFileSync("content/articles.json", "utf8"));
+const artIds = (ART.articles || ART).flatMap((a) => [...String(a.body || "").matchAll(/^@\[youtube(?:-wide)?\]\(([\w-]{6,20})\)$/gm)].map((m) => m[1]));
+const ids = [...new Set([SITE.trustVideo, ...products.flatMap((p) => p.explainerVideos || []), ...artIds].filter(Boolean))];
 
 const pick = (h, re) => (h.match(re) || [])[1];
 const unesc = (s) => s && JSON.parse(`"${s}"`);

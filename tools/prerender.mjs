@@ -391,8 +391,12 @@ function mdToHtml(src) {
   return String(src || "").split(/\n{2,}/).map((blk) => {
     const im = blk.trim().match(/^!\[([^\]]*)\]\(([^)\s]+)\)$/);
     if (im) return `<figure><img src="../${esc(im[2])}" alt="${esc(im[1])}" loading="lazy">${im[1] ? `<figcaption>${esc(im[1])}</figcaption>` : ""}</figure>`;
-    const yt = blk.trim().match(/^@\[youtube\]\(([\w-]{6,20})\)$/);
-    if (yt) return `<div class="video-embed" style="aspect-ratio:9/16;max-width:320px;margin:24px auto"><iframe src="https://www.youtube-nocookie.com/embed/${yt[1]}" title="วิดีโอประกอบบทความ" loading="lazy" allowfullscreen></iframe></div>`;
+    const yt = blk.trim().match(/^@\[youtube(-wide)?\]\(([\w-]{6,20})\)$/);
+    if (yt) {
+      const v = VIDEOS[yt[2]];
+      /* static: รูปปกคลิป + ลิงก์ (Google/AI อ่านได้) — คนเห็น iframe จาก article.html ที่ render ทับ */
+      return `<figure><a href="https://www.youtube.com/watch?v=${yt[2]}"><img src="https://i.ytimg.com/vi/${yt[2]}/hqdefault.jpg" alt="${esc(v ? v.name : "วิดีโอประกอบบทความ")}" loading="lazy" style="max-width:100%;height:auto"></a>${v ? `<figcaption>${esc(v.name)}</figcaption>` : ""}</figure>`;
+    }
     blk = esc(blk.trim());
     if (!blk) return "";
     if (/^### /.test(blk)) return "<h3>" + blk.replace(/^### /, "") + "</h3>";
@@ -440,6 +444,7 @@ function articleFaq(a) {
     return { q: plain(q), a: plain(ans) };
   }).filter((f) => f.q && f.a);
 }
+function articleVideoIds(a) { return [...String(a.body || "").matchAll(/^@\[youtube(?:-wide)?\]\(([\w-]{6,20})\)$/gm)].map((m) => m[1]); }
 for (const a of ARTICLES) {
   const prod = PRODUCTS.find((x) => x.slug === a.product);
   const body =
@@ -477,6 +482,7 @@ for (const a of ARTICLES) {
           { "@type": "ListItem", position: 3, name: a.title, item: blogUrl(a) }
         ]
       },
+      ...articleVideoIds(a).map((id) => VIDEOS[id]).filter(Boolean).map(videoLd),
       ...(articleFaq(a).length ? [{
         "@type": "FAQPage",
         "@id": blogUrl(a) + "#faq",
